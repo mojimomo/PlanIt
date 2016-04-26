@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */; };
+		BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA520A31CCF417F00FFE43E /* Main.storyboard */; };
+		BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */; };
+		BEA520AA1CCF417F00FFE43E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEA520A91CCF417F00FFE43E /* Assets.xcassets */; };
+		BEA520AD1CCF417F00FFE43E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */; };
+		BEA520B81CCF417F00FFE43E /* PlanItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA520B71CCF417F00FFE43E /* PlanItTests.swift */; };
+		BEA520C31CCF417F00FFE43E /* PlanItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA520C21CCF417F00FFE43E /* PlanItUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BEA520B41CCF417F00FFE43E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEA520941CCF417F00FFE43E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEA5209B1CCF417F00FFE43E;
+			remoteInfo = PlanIt;
+		};
+		BEA520BF1CCF417F00FFE43E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEA520941CCF417F00FFE43E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEA5209B1CCF417F00FFE43E;
+			remoteInfo = PlanIt;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BEA5209C1CCF417F00FFE43E /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BEA520A41CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BEA520A71CCF417F00FFE43E /* PlanIt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlanIt.xcdatamodel; sourceTree = "<group>"; };
+		BEA520A91CCF417F00FFE43E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BEA520AC1CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BEA520AE1CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEA520B31CCF417F00FFE43E /* PlanItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEA520B71CCF417F00FFE43E /* PlanItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItTests.swift; sourceTree = "<group>"; };
+		BEA520B91CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEA520BE1CCF417F00FFE43E /* PlanItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEA520C21CCF417F00FFE43E /* PlanItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItUITests.swift; sourceTree = "<group>"; };
+		BEA520C41CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BEA520991CCF417F00FFE43E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEA520B01CCF417F00FFE43E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEA520BB1CCF417F00FFE43E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE802AEE1CCF4B2B0092F2DE /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BE802AEF1CCF4B2B0092F2DE /* BusinessModel */,
+				BE802AF01CCF4B2B0092F2DE /* imageFile */,
+				BE802AF11CCF4B2B0092F2DE /* Tools */,
+				BE802AF21CCF4B2B0092F2DE /* UI */,
+				BE802AF31CCF4B2B0092F2DE /* Venders */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		BE802AEF1CCF4B2B0092F2DE /* BusinessModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BusinessModel;
+			sourceTree = "<group>";
+		};
+		BE802AF01CCF4B2B0092F2DE /* imageFile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = imageFile;
+			sourceTree = "<group>";
+		};
+		BE802AF11CCF4B2B0092F2DE /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		BE802AF21CCF4B2B0092F2DE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		BE802AF31CCF4B2B0092F2DE /* Venders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Venders;
+			sourceTree = "<group>";
+		};
+		BEA520931CCF417F00FFE43E = {
+			isa = PBXGroup;
+			children = (
+				BEA5209E1CCF417F00FFE43E /* PlanIt */,
+				BEA520B61CCF417F00FFE43E /* PlanItTests */,
+				BEA520C11CCF417F00FFE43E /* PlanItUITests */,
+				BEA5209D1CCF417F00FFE43E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BEA5209D1CCF417F00FFE43E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEA5209C1CCF417F00FFE43E /* PlanIt.app */,
+				BEA520B31CCF417F00FFE43E /* PlanItTests.xctest */,
+				BEA520BE1CCF417F00FFE43E /* PlanItUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEA5209E1CCF417F00FFE43E /* PlanIt */ = {
+			isa = PBXGroup;
+			children = (
+				BE802AEE1CCF4B2B0092F2DE /* Classes */,
+				BEA520D01CCF418B00FFE43E /* Support Files */,
+			);
+			path = PlanIt;
+			sourceTree = "<group>";
+		};
+		BEA520B61CCF417F00FFE43E /* PlanItTests */ = {
+			isa = PBXGroup;
+			children = (
+				BEA520B71CCF417F00FFE43E /* PlanItTests.swift */,
+				BEA520B91CCF417F00FFE43E /* Info.plist */,
+			);
+			path = PlanItTests;
+			sourceTree = "<group>";
+		};
+		BEA520C11CCF417F00FFE43E /* PlanItUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BEA520C21CCF417F00FFE43E /* PlanItUITests.swift */,
+				BEA520C41CCF417F00FFE43E /* Info.plist */,
+			);
+			path = PlanItUITests;
+			sourceTree = "<group>";
+		};
+		BEA520D01CCF418B00FFE43E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */,
+				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
+				BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */,
+				BEA520A91CCF417F00FFE43E /* Assets.xcassets */,
+				BEA520AE1CCF417F00FFE43E /* Info.plist */,
+				BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BEA5209B1CCF417F00FFE43E /* PlanIt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEA520C71CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanIt" */;
+			buildPhases = (
+				BEA520981CCF417F00FFE43E /* Sources */,
+				BEA520991CCF417F00FFE43E /* Frameworks */,
+				BEA5209A1CCF417F00FFE43E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlanIt;
+			productName = PlanIt;
+			productReference = BEA5209C1CCF417F00FFE43E /* PlanIt.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BEA520B21CCF417F00FFE43E /* PlanItTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEA520CA1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanItTests" */;
+			buildPhases = (
+				BEA520AF1CCF417F00FFE43E /* Sources */,
+				BEA520B01CCF417F00FFE43E /* Frameworks */,
+				BEA520B11CCF417F00FFE43E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BEA520B51CCF417F00FFE43E /* PBXTargetDependency */,
+			);
+			name = PlanItTests;
+			productName = PlanItTests;
+			productReference = BEA520B31CCF417F00FFE43E /* PlanItTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BEA520BD1CCF417F00FFE43E /* PlanItUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEA520CD1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanItUITests" */;
+			buildPhases = (
+				BEA520BA1CCF417F00FFE43E /* Sources */,
+				BEA520BB1CCF417F00FFE43E /* Frameworks */,
+				BEA520BC1CCF417F00FFE43E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BEA520C01CCF417F00FFE43E /* PBXTargetDependency */,
+			);
+			name = PlanItUITests;
+			productName = PlanItUITests;
+			productReference = BEA520BE1CCF417F00FFE43E /* PlanItUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEA520941CCF417F00FFE43E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = Ken;
+				TargetAttributes = {
+					BEA5209B1CCF417F00FFE43E = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					BEA520B21CCF417F00FFE43E = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = BEA5209B1CCF417F00FFE43E;
+					};
+					BEA520BD1CCF417F00FFE43E = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = BEA5209B1CCF417F00FFE43E;
+					};
+				};
+			};
+			buildConfigurationList = BEA520971CCF417F00FFE43E /* Build configuration list for PBXProject "PlanIt" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BEA520931CCF417F00FFE43E;
+			productRefGroup = BEA5209D1CCF417F00FFE43E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEA5209B1CCF417F00FFE43E /* PlanIt */,
+				BEA520B21CCF417F00FFE43E /* PlanItTests */,
+				BEA520BD1CCF417F00FFE43E /* PlanItUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BEA5209A1CCF417F00FFE43E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEA520AD1CCF417F00FFE43E /* LaunchScreen.storyboard in Resources */,
+				BEA520AA1CCF417F00FFE43E /* Assets.xcassets in Resources */,
+				BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEA520B11CCF417F00FFE43E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEA520BC1CCF417F00FFE43E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BEA520981CCF417F00FFE43E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
+				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEA520AF1CCF417F00FFE43E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEA520B81CCF417F00FFE43E /* PlanItTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEA520BA1CCF417F00FFE43E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEA520C31CCF417F00FFE43E /* PlanItUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BEA520B51CCF417F00FFE43E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEA5209B1CCF417F00FFE43E /* PlanIt */;
+			targetProxy = BEA520B41CCF417F00FFE43E /* PBXContainerItemProxy */;
+		};
+		BEA520C01CCF417F00FFE43E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEA5209B1CCF417F00FFE43E /* PlanIt */;
+			targetProxy = BEA520BF1CCF417F00FFE43E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BEA520A31CCF417F00FFE43E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEA520A41CCF417F00FFE43E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEA520AC1CCF417F00FFE43E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BEA520C51CCF417F00FFE43E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BEA520C61CCF417F00FFE43E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEA520C81CCF417F00FFE43E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PlanIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanIt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BEA520C91CCF417F00FFE43E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PlanIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanIt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BEA520CB1CCF417F00FFE43E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PlanItTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlanIt.app/PlanIt";
+			};
+			name = Debug;
+		};
+		BEA520CC1CCF417F00FFE43E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PlanItTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlanIt.app/PlanIt";
+			};
+			name = Release;
+		};
+		BEA520CE1CCF417F00FFE43E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PlanItUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = PlanIt;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		BEA520CF1CCF417F00FFE43E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PlanItUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = PlanIt;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BEA520971CCF417F00FFE43E /* Build configuration list for PBXProject "PlanIt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEA520C51CCF417F00FFE43E /* Debug */,
+				BEA520C61CCF417F00FFE43E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEA520C71CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanIt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEA520C81CCF417F00FFE43E /* Debug */,
+				BEA520C91CCF417F00FFE43E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEA520CA1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanItTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEA520CB1CCF417F00FFE43E /* Debug */,
+				BEA520CC1CCF417F00FFE43E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEA520CD1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanItUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEA520CE1CCF417F00FFE43E /* Debug */,
+				BEA520CF1CCF417F00FFE43E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BEA520A71CCF417F00FFE43E /* PlanIt.xcdatamodel */,
+			);
+			currentVersion = BEA520A71CCF417F00FFE43E /* PlanIt.xcdatamodel */;
+			path = PlanIt.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = BEA520941CCF417F00FFE43E /* Project object */;
+}
