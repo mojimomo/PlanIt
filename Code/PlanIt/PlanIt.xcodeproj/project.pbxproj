@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
+		BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */; };
 		BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */; };
 		BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA520A31CCF417F00FFE43E /* Main.storyboard */; };
 		BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
+		BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		BEA5209C1CCF417F00FFE43E /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEA520A41CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 		BE802AEF1CCF4B2B0092F2DE /* BusinessModel(业务模型) */ = {
 			isa = PBXGroup;
 			children = (
+				BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */,
+				BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */,
 			);
 			name = "BusinessModel(业务模型)";
 			path = BusinessModel;
@@ -418,6 +424,8 @@
 			files = (
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
+				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
+				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +568,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -572,7 +580,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
