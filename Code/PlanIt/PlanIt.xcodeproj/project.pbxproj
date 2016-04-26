@@ -77,48 +77,152 @@
 		BE802AEE1CCF4B2B0092F2DE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				BE802AEF1CCF4B2B0092F2DE /* BusinessModel */,
-				BE802AF01CCF4B2B0092F2DE /* imageFile */,
-				BE802AF11CCF4B2B0092F2DE /* Tools */,
-				BE802AF21CCF4B2B0092F2DE /* UI */,
-				BE802AF31CCF4B2B0092F2DE /* Venders */,
+				BE802AEF1CCF4B2B0092F2DE /* BusinessModel(业务模型) */,
+				BE802AF21CCF4B2B0092F2DE /* UI(界面) */,
+				BE802B001CCF56AB0092F2DE /* Extension(扩展) */,
+				BE802AF01CCF4B2B0092F2DE /* imageFile(大图片) */,
+				BE802AF11CCF4B2B0092F2DE /* Tools(工具) */,
+				BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		BE802AEF1CCF4B2B0092F2DE /* BusinessModel */ = {
+		BE802AEF1CCF4B2B0092F2DE /* BusinessModel(业务模型) */ = {
 			isa = PBXGroup;
 			children = (
 			);
+			name = "BusinessModel(业务模型)";
 			path = BusinessModel;
 			sourceTree = "<group>";
 		};
-		BE802AF01CCF4B2B0092F2DE /* imageFile */ = {
+		BE802AF01CCF4B2B0092F2DE /* imageFile(大图片) */ = {
 			isa = PBXGroup;
 			children = (
 			);
+			name = "imageFile(大图片)";
 			path = imageFile;
 			sourceTree = "<group>";
 		};
-		BE802AF11CCF4B2B0092F2DE /* Tools */ = {
+		BE802AF11CCF4B2B0092F2DE /* Tools(工具) */ = {
 			isa = PBXGroup;
 			children = (
 			);
+			name = "Tools(工具)";
 			path = Tools;
 			sourceTree = "<group>";
 		};
-		BE802AF21CCF4B2B0092F2DE /* UI */ = {
+		BE802AF21CCF4B2B0092F2DE /* UI(界面) */ = {
 			isa = PBXGroup;
 			children = (
+				BE802AF61CCF55540092F2DE /* ChangeProject(编辑项目) */,
+				BE802AF71CCF55540092F2DE /* ComletedProjects(完成项目列表) */,
+				BE802AF81CCF55540092F2DE /* extension(扩展) */,
+				BE802AF91CCF55540092F2DE /* History(添加历史) */,
+				BE802AFA1CCF55540092F2DE /* Main(公共) */,
+				BE802AFB1CCF55540092F2DE /* NewProject(新建项目) */,
+				BE802AFC1CCF55540092F2DE /* Options(设置) */,
+				BE802AFD1CCF55540092F2DE /* Other(其他) */,
+				BE802AFE1CCF55540092F2DE /* Projects(项目列表) */,
+				BE802AFF1CCF55540092F2DE /* Statistics(统计) */,
 			);
+			name = "UI(界面)";
 			path = UI;
 			sourceTree = "<group>";
 		};
-		BE802AF31CCF4B2B0092F2DE /* Venders */ = {
+		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
 			);
+			name = "Venders(第三方库)";
 			path = Venders;
+			sourceTree = "<group>";
+		};
+		BE802AF61CCF55540092F2DE /* ChangeProject(编辑项目) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "ChangeProject(编辑项目)";
+			path = ChangeProject;
+			sourceTree = "<group>";
+		};
+		BE802AF71CCF55540092F2DE /* ComletedProjects(完成项目列表) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "ComletedProjects(完成项目列表)";
+			path = ComletedProjects;
+			sourceTree = "<group>";
+		};
+		BE802AF81CCF55540092F2DE /* extension(扩展) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "extension(扩展)";
+			path = extension;
+			sourceTree = "<group>";
+		};
+		BE802AF91CCF55540092F2DE /* History(添加历史) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "History(添加历史)";
+			path = History;
+			sourceTree = "<group>";
+		};
+		BE802AFA1CCF55540092F2DE /* Main(公共) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Main(公共)";
+			path = Main;
+			sourceTree = "<group>";
+		};
+		BE802AFB1CCF55540092F2DE /* NewProject(新建项目) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "NewProject(新建项目)";
+			path = NewProject;
+			sourceTree = "<group>";
+		};
+		BE802AFC1CCF55540092F2DE /* Options(设置) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Options(设置)";
+			path = Options;
+			sourceTree = "<group>";
+		};
+		BE802AFD1CCF55540092F2DE /* Other(其他) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Other(其他)";
+			path = Other;
+			sourceTree = "<group>";
+		};
+		BE802AFE1CCF55540092F2DE /* Projects(项目列表) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Projects(项目列表)";
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		BE802AFF1CCF55540092F2DE /* Statistics(统计) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Statistics(统计)";
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		BE802B001CCF56AB0092F2DE /* Extension(扩展) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Extension(扩展)";
+			path = Venders/Extension;
 			sourceTree = "<group>";
 		};
 		BEA520931CCF417F00FFE43E = {
