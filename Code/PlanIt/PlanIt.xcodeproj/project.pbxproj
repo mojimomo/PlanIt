@@ -17,9 +17,9 @@
 		BEA520B81CCF417F00FFE43E /* PlanItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA520B71CCF417F00FFE43E /* PlanItTests.swift */; };
 		BEA520C31CCF417F00FFE43E /* PlanItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA520C21CCF417F00FFE43E /* PlanItUITests.swift */; };
 		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
-		BED9DB391CD87DA3007043AA /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB351CD87DA3007043AA /* SQLiteDB.swift */; };
-		BED9DB3A1CD87DA3007043AA /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB361CD87DA3007043AA /* String-Extras.swift */; };
-		BED9DB3B1CD87DA3007043AA /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB371CD87DA3007043AA /* SQLTable.swift */; };
+		BED9DB511CD88A5B007043AA /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB4E1CD88A5B007043AA /* SQLiteDB.swift */; };
+		BED9DB521CD88A5B007043AA /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB4F1CD88A5B007043AA /* SQLTable.swift */; };
+		BED9DB531CD88A5B007043AA /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB501CD88A5B007043AA /* String-Extras.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,10 +56,11 @@
 		BEA520C21CCF417F00FFE43E /* PlanItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItUITests.swift; sourceTree = "<group>"; };
 		BEA520C41CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
-		BED9DB351CD87DA3007043AA /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLiteDB.swift; path = "/Users/Ken/Project/SQLiteDB-master/Frameworks/SQLiteDB-Swift/../../SQLiteDB.swift"; sourceTree = "<absolute>"; };
-		BED9DB361CD87DA3007043AA /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String-Extras.swift"; path = "/Users/Ken/Project/SQLiteDB-master/Frameworks/SQLiteDB-Swift/../../String-Extras.swift"; sourceTree = "<absolute>"; };
-		BED9DB371CD87DA3007043AA /* SQLTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLTable.swift; path = "/Users/Ken/Project/SQLiteDB-master/Frameworks/SQLiteDB-Swift/../../SQLTable.swift"; sourceTree = "<absolute>"; };
 		BED9DB3C1CD881DF007043AA /* data.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = data.db; sourceTree = "<group>"; };
+		BED9DB4E1CD88A5B007043AA /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteDB.swift; sourceTree = "<group>"; };
+		BED9DB4F1CD88A5B007043AA /* SQLTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTable.swift; sourceTree = "<group>"; };
+		BED9DB501CD88A5B007043AA /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String-Extras.swift"; sourceTree = "<group>"; };
+		BED9DB5B1CD88C63007043AA /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +149,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
-				BED9DB381CD87DA3007043AA /* SQLiteDB-Swift */,
+				BED9DB441CD88978007043AA /* SQLiteDB */,
 			);
 			name = "Venders(第三方库)";
 			path = Venders;
@@ -293,6 +294,7 @@
 		BEA520D01CCF418B00FFE43E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				BED9DB5B1CD88C63007043AA /* PlanIt-Bridging-Header.h */,
 				BED9DB3C1CD881DF007043AA /* data.db */,
 				BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */,
 				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
@@ -313,16 +315,15 @@
 			path = "../../../../SQLiteDB-master/Examples/iOS";
 			sourceTree = "<group>";
 		};
-		BED9DB381CD87DA3007043AA /* SQLiteDB-Swift */ = {
+		BED9DB441CD88978007043AA /* SQLiteDB */ = {
 			isa = PBXGroup;
 			children = (
-				BED9DB351CD87DA3007043AA /* SQLiteDB.swift */,
-				BED9DB361CD87DA3007043AA /* String-Extras.swift */,
-				BED9DB371CD87DA3007043AA /* SQLTable.swift */,
+				BED9DB4E1CD88A5B007043AA /* SQLiteDB.swift */,
+				BED9DB4F1CD88A5B007043AA /* SQLTable.swift */,
+				BED9DB501CD88A5B007043AA /* String-Extras.swift */,
 			);
-			name = "SQLiteDB-Swift";
-			path = "/Users/Ken/Project/SQLiteDB-master/Examples/iOS/../../Frameworks/SQLiteDB-Swift";
-			sourceTree = "<absolute>";
+			path = SQLiteDB;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -456,12 +457,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
-				BED9DB3B1CD87DA3007043AA /* SQLTable.swift in Sources */,
-				BED9DB3A1CD87DA3007043AA /* String-Extras.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
-				BED9DB391CD87DA3007043AA /* SQLiteDB.swift in Sources */,
+				BED9DB511CD88A5B007043AA /* SQLiteDB.swift in Sources */,
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
+				BED9DB531CD88A5B007043AA /* String-Extras.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
+				BED9DB521CD88A5B007043AA /* SQLTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +604,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -612,6 +614,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -619,6 +623,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -628,6 +633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 			};
 			name = Release;
 		};
