@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
 		BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */; };
+		BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */; };
+		BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09321CD9C373008AABCD /* ProcessModel.swift */; };
 		BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */; };
 		BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA520A31CCF417F00FFE43E /* Main.storyboard */; };
 		BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */; };
@@ -42,6 +44,8 @@
 /* Begin PBXFileReference section */
 		BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagMapModel.swift; sourceTree = "<group>"; };
+		BE6E09321CD9C373008AABCD /* ProcessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessModel.swift; sourceTree = "<group>"; };
 		BEA5209C1CCF417F00FFE43E /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEA520A41CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 			children = (
 				BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */,
 				BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */,
+				BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */,
+				BE6E09321CD9C373008AABCD /* ProcessModel.swift */,
 			);
 			name = "BusinessModel(业务模型)";
 			path = BusinessModel;
@@ -458,11 +464,13 @@
 			files = (
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
+				BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */,
 				BED9DB511CD88A5B007043AA /* SQLiteDB.swift in Sources */,
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
 				BED9DB531CD88A5B007043AA /* String-Extras.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
 				BED9DB521CD88A5B007043AA /* SQLTable.swift in Sources */,
+				BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

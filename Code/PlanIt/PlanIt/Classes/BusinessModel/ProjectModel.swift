@@ -33,11 +33,11 @@ struct ProjectIsFinished {
 }
 
 //项目model
-class Project{
+class Project: SQLTable{
     //项目编号
     var id: Int = -1
     //项目名称
-    var name: String?
+    var name: String? = ""
     //项目类型
     var type: Int = ProjectType.NoRecord
     //项目开始时间
@@ -45,9 +45,9 @@ class Project{
     //项目结束时间
     var endTime = NSDate()
     //任务单位
-    var unit: String?
+    var unit: String? = ""
     //任务总量
-    var Total: Int = -1
+    var total: Int = -1
     //是否完成
     var isFinished: Int = ProjectIsFinished.NoSet
     //完成量
@@ -58,5 +58,13 @@ class Project{
     var Tags = [Tag]()
     //备注
     var remark: String?
+    
+    init() {
+        super.init(tableName:"Project")
+    }
+    
+    required convenience init(tableName:String) {
+        self.init()
+    }
  }
 
