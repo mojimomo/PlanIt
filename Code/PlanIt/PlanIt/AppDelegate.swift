@@ -9,12 +9,14 @@
 import UIKit
 import CoreData
 
+//SQLLite数据库初始化
+let db = SQLiteDB.sharedInstance()
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    //SQLLite数据库初始化
-	let db = SQLiteDB.sharedInstance()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

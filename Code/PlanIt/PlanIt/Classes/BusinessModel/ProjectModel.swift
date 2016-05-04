@@ -54,10 +54,8 @@ class Project: SQLTable{
     var complete: Int = -1
     //剩余量
     var rest: Int = -1
-    //Tag表
-    var Tags = [Tag]()
     //备注
-    var remark: String?
+    //var remark: String?
     
     init() {
         super.init(tableName:"Project")
