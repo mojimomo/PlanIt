@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ProjectViewController: UITableViewController {
-
+class ProjectTableViewController: UITableViewController {
+    @IBOutlet var projectTableView: UITableView!
     @IBOutlet weak var projectName: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

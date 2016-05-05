@@ -21,7 +21,7 @@ class ProjectTableViewCell: UITableViewCell {
     @IBOutlet weak var statusImage: UIImageView!
     @IBOutlet weak var tagImage: UIImageView!
     
-    func updateUI(){
+    func updateUI(){        
         projectName?.text = nil
         projectStatus?.text = nil
         projectTag?.text = nil
