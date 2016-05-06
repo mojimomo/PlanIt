@@ -28,7 +28,6 @@ class ProjectTableViewCell: UITableViewCell {
         
         if let project = self.project{
             projectName?.text = project.name
-            projectStatus?.text = "\(project.rest)"
-        }
+            projectStatus?.text = "\(project.rest)"        }
     }
 }

@@ -18,10 +18,10 @@ class Process: SQLTable {
     var recordTime = NSDate()
     //完成工作量
     var done: Double? = -1
+    
     init() {
         super.init(tableName:"TagMap")
     }
-    
     required convenience init(tableName:String) {
         self.init()
     }

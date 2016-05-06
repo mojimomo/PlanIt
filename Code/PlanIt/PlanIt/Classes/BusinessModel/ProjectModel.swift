@@ -54,6 +54,8 @@ class Project: SQLTable{
     var complete: Int = -1
     //剩余量
     var rest: Int = -1
+    //标签
+    var tags = [Tag]()
     //备注
     //var remark: String?
     
