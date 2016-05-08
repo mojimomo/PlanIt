@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */; };
+		BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */; };
+		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
+		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
 		BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */; };
 		BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */; };
@@ -24,6 +28,7 @@
 		BED9DB511CD88A5B007043AA /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB4E1CD88A5B007043AA /* SQLiteDB.swift */; };
 		BED9DB521CD88A5B007043AA /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB4F1CD88A5B007043AA /* SQLTable.swift */; };
 		BED9DB531CD88A5B007043AA /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9DB501CD88A5B007043AA /* String-Extras.swift */; };
+		BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2F0A21CDC885800E21264 /* PieChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = "<group>"; };
+		BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYDrawerController.swift; path = KYDrawerController/Classes/KYDrawerController.swift; sourceTree = "<group>"; };
+		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
+		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
+		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
 		BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagMapModel.swift; sourceTree = "<group>"; };
@@ -68,7 +78,7 @@
 		BED9DB4E1CD88A5B007043AA /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteDB.swift; sourceTree = "<group>"; };
 		BED9DB4F1CD88A5B007043AA /* SQLTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTable.swift; sourceTree = "<group>"; };
 		BED9DB501CD88A5B007043AA /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String-Extras.swift"; sourceTree = "<group>"; };
-		BED9DB5B1CD88C63007043AA /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = "<group>"; };
+		BEF2F0A21CDC885800E21264 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +107,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE279CEB1CDF1AE700D4FCFB /* KYDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */,
+				BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */,
+				BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */,
+			);
+			name = KYDrawerController;
+			sourceTree = "<group>";
+		};
 		BE802AEE1CCF4B2B0092F2DE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +177,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE279CEB1CDF1AE700D4FCFB /* KYDrawerController */,
 				BED9DB441CD88978007043AA /* SQLiteDB */,
 			);
 			name = "Venders(第三方库)";
@@ -182,6 +203,7 @@
 		BE802AFA1CCF55540092F2DE /* Main(公共) */ = {
 			isa = PBXGroup;
 			children = (
+				BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */,
 			);
 			name = "Main(公共)";
 			path = Main;
@@ -216,6 +238,7 @@
 			children = (
 				BE6E09341CD9D45E008AABCD /* ProjectTableViewController.swift */,
 				BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */,
+				BEF2F0A21CDC885800E21264 /* PieChartView.swift */,
 			);
 			name = "Projects(项目列表)";
 			path = Projects;
@@ -288,7 +311,7 @@
 		BEA520D01CCF418B00FFE43E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				BED9DB5B1CD88C63007043AA /* PlanIt-Bridging-Header.h */,
+				BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */,
 				BED9DB3C1CD881DF007043AA /* data.db */,
 				BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */,
 				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
@@ -450,16 +473,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectTableViewController.swift in Sources */,
+				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
+				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
 				BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */,
 				BED9DB511CD88A5B007043AA /* SQLiteDB.swift in Sources */,
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
+				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
 				BED9DB531CD88A5B007043AA /* String-Extras.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
 				BED9DB521CD88A5B007043AA /* SQLTable.swift in Sources */,
+				BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */,
 				BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
