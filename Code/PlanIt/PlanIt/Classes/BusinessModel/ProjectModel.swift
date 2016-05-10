@@ -41,9 +41,9 @@ class Project: SQLTable{
     //项目类型
     var type: Int = ProjectType.NoRecord
     //项目开始时间
-    var beginTime = NSDate()
+    var beginTime: String?
     //项目结束时间
-    var endTime = NSDate()
+    var endTime: String?
     //任务单位
     var unit: String? = ""
     //任务总量

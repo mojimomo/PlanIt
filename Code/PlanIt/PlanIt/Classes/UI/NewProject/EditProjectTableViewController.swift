@@ -11,15 +11,23 @@ import UIKit
 class EditProjectTableViewController: UITableViewController {
 
     @IBOutlet weak var projectNameLabel: UITextField!
-    @IBOutlet weak var beginTimeLabel: UILabel!
-    @IBOutlet weak var endTimeLabel: UILabel!
+
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var recordSwitch: UISwitch!
-    
+    @IBOutlet weak var beginTimeLabel: UILabel!
+    @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var taskUnitCell: UITableViewCell!
     @IBOutlet weak var taskTotalCell: UITableViewCell!
     @IBOutlet weak var checkProjectCell: UITableViewCell!
 
+    var project = Project(){
+        didSet{
+            beginTimeLabel?.text = project.beginTime
+            endTimeLabel?.text = project.endTime
+            updateUI()
+        }
+    }
+    
     //是否打开记录进度
     var recordIsOpen = true
     
@@ -32,6 +40,58 @@ class EditProjectTableViewController: UITableViewController {
         updateUI()
     }
     
+    @IBAction func editBeginTime(sender: AnyObject) {
+        if IS_IOS8{
+            let datePicker = UIDatePicker()
+            datePicker.datePickerMode = .Date
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+            alerController.view.addSubview(datePicker)
+            
+            let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+                let dateFormat = NSDateFormatter()
+                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                let dateString = dateFormat.stringFromDate(datePicker.date)
+                self.project.beginTime = dateString
+                self.beginTimeLabel?.text = dateString
+            })
+            
+            let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+                
+            })
+            alerController.addAction(alerActionOK)
+            alerController.addAction(alerActionCancel)
+            self.presentViewController(alerController, animated: true, completion: { () -> Void in
+                
+            })
+        }
+    }
+    
+    @IBAction func editEndTime(sender: AnyObject) {
+        if IS_IOS8{
+            let datePicker = UIDatePicker()
+            datePicker.datePickerMode = .Date
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+            alerController.view.addSubview(datePicker)
+            
+            let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+                let dateFormat = NSDateFormatter()
+                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                let dateString = dateFormat.stringFromDate(datePicker.date)
+                self.project.endTime = dateString
+                self.endTimeLabel?.text = dateString
+            })
+            
+            let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+                
+            })
+            alerController.addAction(alerActionOK)
+            alerController.addAction(alerActionCancel)
+            self.presentViewController(alerController, animated: true, completion: { () -> Void in
+                
+            })
+        }
+    }
+
     //隐藏某cell
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         //创建3个NSIndexPath对应相应的cell位置
