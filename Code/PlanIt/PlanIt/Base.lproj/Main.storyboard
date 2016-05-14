@@ -20,7 +20,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="Project" rowHeight="69" id="5R4-h6-Zsr" customClass="ProjectTableViewCell" customModule="PlanIt" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="69" id="5R4-h6-Zsr" customClass="ProjectTableViewCell" customModule="PlanIt" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="122" width="600" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5R4-h6-Zsr" id="Mwh-KG-77K">
@@ -203,7 +203,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="新增" id="sB4-WW-Q57">
                             <connections>
-                                <segue destination="z9z-wq-QO9" kind="show" id="Q8x-AC-VN3"/>
+                                <segue destination="z9z-wq-QO9" kind="show" identifier="addProject" id="Q8x-AC-VN3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -512,6 +512,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bqb-mj-AcY">
                                                     <rect key="frame" x="543" y="8" width="51" height="27"/>
+                                                    <connections>
+                                                        <action selector="changeIsPunch:" destination="z9z-wq-QO9" eventType="valueChanged" id="AvQ-J7-Iwm"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -542,6 +545,9 @@
                                                     <state key="normal" title="删除项目">
                                                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="finishEdit:" destination="z9z-wq-QO9" eventType="touchUpInside" id="cNr-r9-6a5"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -566,16 +572,20 @@
                         <outlet property="beginTimeLabel" destination="KHb-Um-z69" id="IsN-yY-mXT"/>
                         <outlet property="checkProjectCell" destination="SpX-D9-IOu" id="O88-1e-uP1"/>
                         <outlet property="endTimeLabel" destination="gok-Nc-RGs" id="1uo-f7-F9Y"/>
+                        <outlet property="finishEditButton" destination="4od-3R-tDV" id="Au6-HI-qEI"/>
                         <outlet property="projectNameLabel" destination="IdS-En-F3b" id="LVd-Yu-Lk9"/>
+                        <outlet property="punchSwitch" destination="bqb-mj-AcY" id="nyC-i0-gTO"/>
                         <outlet property="recordSwitch" destination="Nh4-vr-Wjk" id="pZd-wo-Z3Y"/>
                         <outlet property="tagLabel" destination="Zsn-IN-f6a" id="e0K-ro-4mf"/>
                         <outlet property="taskTotalCell" destination="9cX-hT-GHh" id="UOI-CO-1pJ"/>
                         <outlet property="taskUnitCell" destination="VcJ-W7-yqP" id="qAK-Pu-HWz"/>
+                        <outlet property="totalTextField" destination="oj8-3p-9B7" id="gZl-uF-Nge"/>
+                        <outlet property="unitTextField" destination="tMs-3G-JeZ" id="EkI-0q-lyu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="df7-7m-YWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2152" y="870"/>
+            <point key="canvasLocation" x="2146" y="870"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LTI-y5-MgP">
@@ -715,7 +725,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wms-qJ-EFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1458" y="65"/>
+            <point key="canvasLocation" x="1462" y="63"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Y0w-oD-3WE">

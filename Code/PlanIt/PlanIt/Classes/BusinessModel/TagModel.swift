@@ -13,7 +13,7 @@ class Tag: SQLTable{
     //标签序号
     var id: Int = -1
     //标签名称
-    var name: String? = ""
+    var name = ""
     
     init() {
         super.init(tableName:"tasks")

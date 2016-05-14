@@ -135,10 +135,10 @@
 		BE802AEF1CCF4B2B0092F2DE /* BusinessModel(业务模型) */ = {
 			isa = PBXGroup;
 			children = (
-				BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */,
-				BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */,
-				BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */,
 				BE6E09321CD9C373008AABCD /* ProcessModel.swift */,
+				BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */,
+				BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */,
+				BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */,
 			);
 			name = "BusinessModel(业务模型)";
 			path = BusinessModel;
@@ -314,13 +314,13 @@
 		BEA520D01CCF418B00FFE43E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */,
-				BED9DB3C1CD881DF007043AA /* data.db */,
-				BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */,
-				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
 				BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */,
 				BEA520A91CCF417F00FFE43E /* Assets.xcassets */,
+				BED9DB3C1CD881DF007043AA /* data.db */,
 				BEA520AE1CCF417F00FFE43E /* Info.plist */,
+				BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */,
+				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
+				BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */,
 				BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */,
 			);
 			name = "Support Files";

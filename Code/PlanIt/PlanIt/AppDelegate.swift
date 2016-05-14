@@ -10,8 +10,7 @@ import UIKit
 import CoreData
 
 
-//SQLLite数据库初始化
-let db = SQLiteDB.sharedInstance()
+
 //判断系统是否iOS8.0以上
 let IS_IOS8 = (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0
 
@@ -20,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    //SQLLite数据库初始化
+    let db = SQLiteDB.sharedInstance()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         return true
