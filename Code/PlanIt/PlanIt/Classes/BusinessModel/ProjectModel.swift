@@ -33,7 +33,7 @@ struct ProjectIsFinished {
 }
 
 //项目model
-class Project{
+class Project: NSObject {
     //项目编号
     var id: Int = -1
     //项目名称
@@ -79,9 +79,26 @@ class Project{
     private var beginTimeDate = NSDate()
     private var endTimeDate = NSDate()
     
-    init() {
+    override init() {
+        super.init()
     }
     
+    init(dict : [String : AnyObject]) {
+        super.init()        
+        //setValuesForKeysWithDictionary(dict)
+        id = dict["id"]!.integerValue
+        name = String(dict["name"])
+        type = dict["type"]!.integerValue
+        beginTime = String(dict["beginTime"])
+        endTime = String(dict["endTime"])
+        unit = String(dict["unit"])
+        total = dict["total"]!.doubleValue
+        isFinished = dict["isFinished"]!.integerValue
+        complete = dict["complete"]!.doubleValue
+        rest = dict["rest"]!.doubleValue
+    }
+
+    // MARK:- 数据操作
     //新建项目设置总量
     func setNewProjectTotal(total: Double){
         self.total = total
@@ -133,6 +150,71 @@ class Project{
             }
         }
         return false
-    }    
+    }
+ 
+    // MARK:- 和数据库之间的操作
+    /// 加载所有的数据
+    func loadAllData() -> [Project]{
+        var projects : [Project] = [Project]()
+        
+        // 1.获取查询语句
+        let querySQL = "SELECT * FROM t_project;"
+        
+        // 2.执行查询语句
+        guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {
+            print("查询所有Project数据失败")
+            return projects
+        }
+        
+        // 3.遍历数组
+        for dict in array {
+            let p = Project(dict: dict)
+            projects.append(p)
+        }
+        return projects
+    }
+
+
+    func insertProject() -> Bool{
+        // 1.获取插入的SQL语句
+        let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, isFinished, complete, rest) VALUES ('\(name)', '\(type)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(isFinished)', '\(complete)', '\(rest)');"
+        
+        // 2.执行SQL语句
+        if SQLiteManager.shareIntance.execSQL(insertSQL) {
+            print("插入新项目成功")
+            return true
+        }else{
+            print("插入新项目失败")
+            return false
+        }
+    }
+    
+    func updateProject() -> Bool{
+        // 1.获取修改的SQL语句
+        let updateSQL = "UPDATE t_project SET name = '\(name)', type = '\(type)', beginTime = '\(beginTime)', endTime = '\(endTime)', unit = '\(unit)', total = '\(total)', isFinished ='\(isFinished)', complete = '\(complete)', rest = '\(rest)'WHERE id = '\(id)';"
+        
+        // 2.执行SQL语句
+        if SQLiteManager.shareIntance.execSQL(updateSQL) {
+            print("修改项目成功")
+            return true
+        }else{
+            print("修改项目失败")
+            return false
+        }
+    }
+
+    func deleteProject() -> Bool{
+        // 1.获取删除的SQL语句
+        let deleteSQL = "DELETE FROM t_project WHERE id = '\(id)';"
+        
+        // 2.执行SQL语句
+        if SQLiteManager.shareIntance.execSQL(deleteSQL) {
+            print("删除项目成功")
+            return true
+        }else{
+            print("删除项目失败")
+            return false
+        }
+    }
  }
 

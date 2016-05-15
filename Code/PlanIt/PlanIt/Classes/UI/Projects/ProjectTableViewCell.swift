@@ -9,25 +9,54 @@
 import UIKit
 
 class ProjectTableViewCell: UITableViewCell {
+    @IBOutlet weak var pieChartView: UIView!
+    @IBOutlet weak var projectNameLabel: UILabel!
+    @IBOutlet weak var projectStatusLabel: UILabel!
+    @IBOutlet weak var projectTagLabel: UILabel!
+    @IBOutlet weak var statusImageView: UIImageView!
+    @IBOutlet weak var tagImageView: UIImageView!
+    
     var project: Project?{
         didSet{
             updateUI()
         }
     }
-    @IBOutlet weak var pieChartView: UIView!
-    @IBOutlet weak var projectName: UILabel!
-    @IBOutlet weak var projectStatus: UILabel!
-    @IBOutlet weak var projectTag: UILabel!
-    @IBOutlet weak var statusImage: UIImageView!
-    @IBOutlet weak var tagImage: UIImageView!
+
+    var projectName: String{
+        set{
+            projectNameLabel?.text = newValue
+        }
+        get{
+            return (projectNameLabel?.text)!
+        }
+    }
     
-    func updateUI(){        
-        projectName?.text = nil
-        projectStatus?.text = nil
-        projectTag?.text = nil
+    var projectStatus: String{
+        set{
+            projectStatusLabel?.text = newValue
+        }
+        get{
+            return (projectStatusLabel?.text)!
+        }
+    }
+    
+    var projectTag: String{
+        set{
+            projectTagLabel?.text = newValue
+        }
+        get{
+            return (projectTagLabel?.text)!
+        }
+    }
+    
+    func updateUI(){
+        projectName = ""
+        projectStatus = ""
+        projectTag = ""
         
         if let project = self.project{
-            projectName?.text = project.name
-            projectStatus?.text = "\(project.rest)"        }
+            projectName = project.name
+            projectStatus = "\(project.rest)"
+        }
     }
 }

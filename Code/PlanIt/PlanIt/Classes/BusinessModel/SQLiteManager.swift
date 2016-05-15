@@ -11,9 +11,15 @@ import UIKit
 class SQLiteManager: NSObject {
     // let修饰常量是线程安全
     static let shareIntance : SQLiteManager = SQLiteManager()
+    let dbName = "db.sqlite3"
     
     /// 数据库句柄
     var db : COpaquePointer = nil
+    
+    override init() {
+        super.init()
+        openDB(dbName)
+    }
     
     /// 提供一个函数,让别人可以打开一个数据库
     func openDB(dbName : String) {
@@ -23,7 +29,7 @@ class SQLiteManager: NSObject {
             return
         }
         path = (path as NSString).stringByAppendingPathComponent(dbName)
-        print(path)
+        print("数据库路径: \(path)")
         
         // 2.打开数据库:如果有数据库则打开,如果没有则创建
         // 参数三:数据库句柄(类似于游戏手柄).
@@ -41,16 +47,59 @@ class SQLiteManager: NSObject {
     
     /// 创建一张表
     func createTable() {
-        // 1.获取创建表的SQL语句
-        let createTableSQL = "CREATE TABLE IF NOT EXISTS t_person ( \n" +
-            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \n" +
-            "name TEXT, \n" +
-            "age INTEGER\n" +
+        //创建t_project表格
+        // 获取创建表的SQL语句
+        let createProjectTableSQL = "CREATE TABLE IF NOT EXISTS t_project ( \n" +
+            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
+            "name TEXT NOT NULL, \n" +
+            "type INTEGER NOT NULL, \n" +
+            "beginTime TEXT  NOT NULL, \n" +
+            "endTime  TEXT  NOT NULL, \n" +
+            "unit TEXT, \n" +
+            "total DOUBLE, \n" +
+            "isFinished INTEGER, \n" +
+            "complete DOUBLE, \n" +
+            "rest DOUBLE \n" +
         ");"
+        // 执行SQL语句
+        if execSQL(createProjectTableSQL) {
+            print("创建t_project表成功")
+        }
         
-        // 2.执行SQL语句
-        if execSQL(createTableSQL) {
-            print("创建表成功")
+        //创建t_process表格
+        // 获取创建表的SQL语句
+        let createProcessTableSQL = "CREATE TABLE IF NOT EXISTS t_process ( \n" +
+            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
+            "recordTime TEXT NOT NULL, \n" +
+            "projectID INTEGER NOT NULL, \n" +
+            "done double\n" +
+        ");"
+        // 执行SQL语句
+        if execSQL(createProcessTableSQL) {
+            print("创建t_process表成功")
+        }
+
+        //创建t_tag表格
+        // 获取创建表的SQL语句
+        let createTagTableSQL = "CREATE TABLE IF NOT EXISTS t_tag ( \n" +
+            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
+            "name TEXT NOT NULL \n" +
+        ");"
+        // 执行SQL语句
+        if execSQL(createTagTableSQL) {
+            print("创建t_tag表成功")
+        }
+        
+        //创建t_tag表格
+        // 获取创建表的SQL语句
+        let createTagMapTableSQL = "CREATE TABLE IF NOT EXISTS t_tagmap ( \n" +
+            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
+            "projectID INTEGER NOT NULL, \n" +
+            "tagID INTEGER NOT NULL \n" +
+        ");"
+        // 执行SQL语句
+        if execSQL(createTagMapTableSQL) {
+            print("创建t_tagmap表成功")
         }
     }
     

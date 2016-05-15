@@ -181,12 +181,12 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="pieChartView" destination="Ow5-xQ-7c9" id="nDy-y1-ahN"/>
-                                    <outlet property="projectName" destination="HRx-a8-3ym" id="KoZ-1E-oRH"/>
-                                    <outlet property="projectStatus" destination="5jc-FD-3eN" id="baR-sW-aNb"/>
-                                    <outlet property="projectTag" destination="TIZ-NA-RQ3" id="w1t-WJ-8OS"/>
-                                    <outlet property="statusImage" destination="OuW-pz-ycI" id="5MU-cu-tdZ"/>
-                                    <outlet property="tagImage" destination="dUg-hx-vfB" id="IDZ-eo-WCJ"/>
+                                    <outlet property="pieChartView" destination="Ow5-xQ-7c9" id="pAa-cl-Sqg"/>
+                                    <outlet property="projectNameLabel" destination="HRx-a8-3ym" id="P1M-AY-je1"/>
+                                    <outlet property="projectStatusLabel" destination="5jc-FD-3eN" id="Pcu-hi-SVn"/>
+                                    <outlet property="projectTagLabel" destination="TIZ-NA-RQ3" id="nNH-IG-jFK"/>
+                                    <outlet property="statusImageView" destination="OuW-pz-ycI" id="ixj-FQ-qR0"/>
+                                    <outlet property="tagImageView" destination="dUg-hx-vfB" id="IFl-CC-mq6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

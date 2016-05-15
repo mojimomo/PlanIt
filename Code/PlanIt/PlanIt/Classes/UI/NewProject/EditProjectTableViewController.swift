@@ -251,16 +251,19 @@ class EditProjectTableViewController: UITableViewController {
                 return
             }
             if  projectTotal != 0{
-                project.total = projectTotal
+                project.setNewProjectTotal(projectTotal)
             }else{
                 callAlert("提交错误",message: "项目任务总量不能为0!")
                 return
             }
         }
         if project.check(){
-            
+            if(project.insertProject()){
+                callAlert("提交成功",message: "新建项目成功!")
+                return
+            }
         }
-
+        callAlert("提交失败",message: "新建项目失败!")
     }
    
     //删除项目
