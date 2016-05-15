@@ -9,7 +9,7 @@
 import Foundation
 
 //TagMapModel
-class TagMap: SQLTable {
+class TagMap{
     //标签映射序号
     var id: Int = -1
     //标签序号
@@ -18,10 +18,5 @@ class TagMap: SQLTable {
     var projectID: Int = -1
     
     init() {
-        super.init(tableName:"TagMap")
-    }
-    
-    required convenience init(tableName:String) {
-        self.init()
     }
 }

@@ -39,7 +39,6 @@ class ProjectTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //读取数据按照id顺序排序
-        projects = Project().allRows("id ASC")
         self.tableView.reloadData()
     }
     

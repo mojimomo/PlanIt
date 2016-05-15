@@ -33,7 +33,7 @@ struct ProjectIsFinished {
 }
 
 //项目model
-class Project: SQLTable{
+class Project{
     //项目编号
     var id: Int = -1
     //项目名称
@@ -80,7 +80,6 @@ class Project: SQLTable{
     private var endTimeDate = NSDate()
     
     init() {
-        super.init(tableName:"Project")
     }
     
     //新建项目设置总量
@@ -121,12 +120,12 @@ class Project: SQLTable{
     }
     
     //判断project数据是否有缺漏
-    func isEmpyt() -> Bool {
+    func check() -> Bool {
         //判断项目前面3个属性是否为空
         if  name != "" &&  beginTime !=  "" && endTime != "" {
             if type == ProjectType.Normal ||  type == ProjectType.Punch {
-                if unit != "" && total != -1 && isFinished != ProjectIsFinished.NoSet
-                    && complete != -1 && rest != -1{
+                if unit != "" && total != 0 && isFinished != ProjectIsFinished.NoSet
+                    && complete != 0 && rest != 0{
                     return true
                 }
             }else if type == ProjectType.NoRecord{
@@ -134,10 +133,6 @@ class Project: SQLTable{
             }
         }
         return false
-    }
-    
-    required convenience init(tableName:String) {
-        self.init()
-    }
+    }    
  }
 

@@ -9,17 +9,13 @@
 import Foundation
 
 //TagModel
-class Tag: SQLTable{
+class Tag{
     //标签序号
     var id: Int = -1
     //标签名称
     var name = ""
     
     init() {
-        super.init(tableName:"tasks")
     }
     
-    required convenience init(tableName:String) {
-        self.init()
-    }
 }

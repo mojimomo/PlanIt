@@ -25,9 +25,53 @@ class EditProjectTableViewController: UITableViewController {
     @IBOutlet weak var unitTextField: UITextField!
     @IBOutlet weak var totalTextField: UITextField!
     @IBOutlet weak var finishEditButton: UIButton!
-
+    //按钮文字
     var finishEditButtonText = ""
-    
+    //项目名称
+    var projectName:String{
+        get{
+            return (projectNameLabel?.text)!
+        }
+        set{
+            projectNameLabel?.text = newValue
+        }
+    }
+    //项目开始时间
+    var projectBeginTime:String{
+        get{
+            return (beginTimeLabel?.text)!
+        }
+        set{
+            beginTimeLabel?.text = newValue
+        }
+    }
+    //项目结束时间
+    var projectEndTime:String{
+        get{
+            return (endTimeLabel?.text)!
+        }
+        set{
+            endTimeLabel?.text = newValue
+        }
+    }
+    //项目单位
+    var projectUnit:String{
+        get{
+            return (unitTextField?.text)!
+        }
+        set{
+            unitTextField?.text = newValue
+        }
+    }
+    //项目总量
+    var projectTotal:Double{
+        get{
+            return Double((totalTextField?.text)!)!
+        }
+        set{
+            totalTextField?.text = "\(newValue)"
+        }
+    }
     private struct storyBoard {
         static let addFinishEditButton = "新增项目"
         static let deleteFinishEditButton = "删除项目"
@@ -52,15 +96,15 @@ class EditProjectTableViewController: UITableViewController {
     //当前项目
     var project = Project(){
         didSet{
-            projectNameLabel?.text = project.name
-            beginTimeLabel?.text = project.beginTime
-            endTimeLabel?.text = project.endTime
+            projectName = project.name
+            projectBeginTime = project.beginTime
+            projectEndTime = project.endTime
             projectType = project.type
-            unitTextField?.text = project.unit
-            totalTextField?.text = "\(project.total)"
+            projectUnit = project.unit
+            projectTotal = project.total
             updateUI()
         }
-    }
+    }   
     
 
     //项目类别
@@ -115,8 +159,7 @@ class EditProjectTableViewController: UITableViewController {
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
                 let dateString = dateFormat.stringFromDate(datePicker.date)
-                self.project.beginTime = dateString
-                self.beginTimeLabel?.text = dateString
+                self.projectBeginTime = dateString
             })
    
             //创建UIAlertAction 取消按钮
@@ -149,8 +192,7 @@ class EditProjectTableViewController: UITableViewController {
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
                 let dateString = dateFormat.stringFromDate(datePicker.date)
-                self.project.endTime = dateString
-                self.endTimeLabel?.text = dateString
+                self.projectEndTime = dateString
             })
             
              //创建UIAlertAction 取消按钮
@@ -183,23 +225,42 @@ class EditProjectTableViewController: UITableViewController {
     //MARK: - Func
     //新增项目
     private func addNewProject(){
-        if projectNameLabel?.text != nil && projectNameLabel?.text != ""{
-            self.project.name = (projectNameLabel?.text)!
+        if projectName != ""{
+            project.name = projectName
         }else{
-            callAlert("错误",message: "项目名称不能为空!")
+            callAlert("提交错误",message: "项目名称不能为空!")
             return
         }
         
-        if beginTimeLabel?.text != nil && beginTimeLabel?.text != ""
-            && endTimeLabel?.text != nil && endTimeLabel?.text != ""{
-                if self.project.setNewProjectTime((beginTimeLabel?.text)!, endTime: (endTimeLabel?.text)!) == false{
-                    callAlert("错误",message: "开始结束时间不正确!")
+        if projectBeginTime != "" && projectEndTime != ""{
+                if project.setNewProjectTime(projectBeginTime, endTime: projectEndTime) == false{
+                    callAlert("提交错误",message: "开始结束时间不正确!")
                     return
                 }
         }else{
-            callAlert("错误",message: "时间不能为空!")
+            callAlert("提交错误",message: "时间不能为空!")
             return
         }
+        switch projectType{
+        case ProjectType.NoRecord: break
+        default:
+            if projectUnit != ""{
+                project.unit = projectUnit
+            }else{
+                callAlert("提交错误",message: "项目任务单位不能为空!")
+                return
+            }
+            if  projectTotal != 0{
+                project.total = projectTotal
+            }else{
+                callAlert("提交错误",message: "项目任务总量不能为0!")
+                return
+            }
+        }
+        if project.check(){
+            
+        }
+
     }
    
     //删除项目
@@ -248,6 +309,8 @@ class EditProjectTableViewController: UITableViewController {
         
         //设置按钮标题
         finishEditButton?.setTitle(finishEditButtonText, forState: .Normal)
+        projectTotal = 0
+        projectType = ProjectType.Normal
         
         //初始化代码
         let nowDate = NSDate()

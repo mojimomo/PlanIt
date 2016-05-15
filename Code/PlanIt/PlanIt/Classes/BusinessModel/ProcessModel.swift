@@ -9,7 +9,7 @@
 import Foundation
 
 //ProcessModel
-class Process: SQLTable {
+class Process{
     //进度序号
     var id: Int = -1
     //项目序号
@@ -20,9 +20,5 @@ class Process: SQLTable {
     var done: Double? = -1
     
     init() {
-        super.init(tableName:"TagMap")
-    }
-    required convenience init(tableName:String) {
-        self.init()
     }
 }
