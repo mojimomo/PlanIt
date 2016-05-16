@@ -15,13 +15,13 @@ class ProjectTableViewCell: UITableViewCell {
     @IBOutlet weak var projectTagLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var tagImageView: UIImageView!
-    
+    //当前项目
     var project: Project?{
         didSet{
             updateUI()
         }
     }
-
+    //当前项目名称
     var projectName: String{
         set{
             projectNameLabel?.text = newValue
@@ -30,16 +30,16 @@ class ProjectTableViewCell: UITableViewCell {
             return (projectNameLabel?.text)!
         }
     }
-    
+    //当前项目状态
     var projectStatus: String{
-        set{
+        set{	
             projectStatusLabel?.text = newValue
         }
         get{
             return (projectStatusLabel?.text)!
         }
     }
-    
+    //当前项目tag
     var projectTag: String{
         set{
             projectTagLabel?.text = newValue
@@ -48,7 +48,7 @@ class ProjectTableViewCell: UITableViewCell {
             return (projectTagLabel?.text)!
         }
     }
-    
+    //更新界面
     func updateUI(){
         projectName = ""
         projectStatus = ""
@@ -57,6 +57,7 @@ class ProjectTableViewCell: UITableViewCell {
         if let project = self.project{
             projectName = project.name
             projectStatus = "\(project.rest)"
+            projectTag = project.tagString
         }
     }
 }

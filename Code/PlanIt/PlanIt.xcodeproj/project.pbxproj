@@ -13,6 +13,7 @@
 		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
 		BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */; };
+		BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE68E5481CE9B658006A1750 /* TagsViewController.swift */; };
 		BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */; };
 		BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09321CD9C373008AABCD /* ProcessModel.swift */; };
 		BE6E09351CD9D45E008AABCD /* ProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09341CD9D45E008AABCD /* ProjectTableViewController.swift */; };
@@ -55,6 +56,7 @@
 		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
 		BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		BE68E5481CE9B658006A1750 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagMapModel.swift; sourceTree = "<group>"; };
 		BE6E09321CD9C373008AABCD /* ProcessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessModel.swift; sourceTree = "<group>"; };
 		BE6E09341CD9D45E008AABCD /* ProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +77,6 @@
 		BEA520C41CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEB033EC1CE058B4001128D3 /* EditProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProjectTableViewController.swift; sourceTree = "<group>"; };
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
-		BED9DB3C1CD881DF007043AA /* data.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = data.db; sourceTree = "<group>"; };
 		BEF2F0A21CDC885800E21264 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +114,15 @@
 				BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */,
 			);
 			name = KYDrawerController;
+			sourceTree = "<group>";
+		};
+		BE68E5471CE9B5E6006A1750 /* Tag(标签) */ = {
+			isa = PBXGroup;
+			children = (
+				BE68E5481CE9B658006A1750 /* TagsViewController.swift */,
+			);
+			name = "Tag(标签)";
+			path = Tag;
 			sourceTree = "<group>";
 		};
 		BE802AEE1CCF4B2B0092F2DE /* Classes */ = {
@@ -160,6 +170,7 @@
 		BE802AF21CCF4B2B0092F2DE /* UI(界面) */ = {
 			isa = PBXGroup;
 			children = (
+				BE68E5471CE9B5E6006A1750 /* Tag(标签) */,
 				BE802AF81CCF55540092F2DE /* extension(扩展) */,
 				BE802AF91CCF55540092F2DE /* History(添加历史) */,
 				BE802AFA1CCF55540092F2DE /* Main(公共) */,
@@ -312,7 +323,6 @@
 			children = (
 				BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */,
 				BEA520A91CCF417F00FFE43E /* Assets.xcassets */,
-				BED9DB3C1CD881DF007043AA /* data.db */,
 				BEA520AE1CCF417F00FFE43E /* Info.plist */,
 				BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */,
 				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
@@ -463,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */,
+				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectTableViewController.swift in Sources */,
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,
@@ -620,7 +631,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -639,7 +650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

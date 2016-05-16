@@ -35,7 +35,11 @@ struct ProjectIsFinished {
 //项目model
 class Project: NSObject {
     //项目编号
-    var id: Int = -1
+    var id: Int = -1{
+        didSet{
+            freshenTags()
+        }
+    }
     //项目名称
     var name = ""
     //项目类型
@@ -73,7 +77,9 @@ class Project: NSObject {
     //剩余量
     var rest: Double = 0.0
     //标签
-    //var tags = [Tag]()
+    var tags = [Tag]()
+    //标签字符串
+    var tagString = ""
     //备注
     //var remark: String?
     private var beginTimeDate = NSDate()
@@ -152,6 +158,18 @@ class Project: NSObject {
         return false
     }
  
+    //刷新tags
+    func freshenTags(){
+        //如果id不等于默认值
+        if id != -1{
+            tags = TagMap().searchTagFromProject(self)
+            for tag in tags{
+                tagString = tagString + tag.name + " "
+            }
+        }
+    }
+    
+    
     // MARK:- 和数据库之间的操作
     /// 加载所有的数据
     func loadAllData() -> [Project]{
@@ -174,8 +192,31 @@ class Project: NSObject {
         return projects
     }
 
+    /// 加载所有的数据
+    func loadData(id: Int) -> Project?{
+        var projects : [Project] = [Project]()
+        
+        // 1.获取查询语句
+        let querySQL = "SELECT * FROM t_project WHERE id = '\(id)';"
+        
+        // 2.执行查询语句
+        guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {
+            print("查询所有Project数据失败")
+            return nil
+        }
+        
+        // 3.遍历数组
+        for dict in array {
+            let p = Project(dict: dict)
+            projects.append(p)
+        }
+        return projects[0]
+    }
 
     func insertProject() -> Bool{
+        //保存映射关系
+        saveTags()
+        
         // 1.获取插入的SQL语句
         let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, isFinished, complete, rest) VALUES ('\(name)', '\(type)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(isFinished)', '\(complete)', '\(rest)');"
         
@@ -190,6 +231,12 @@ class Project: NSObject {
     }
     
     func updateProject() -> Bool{
+        //删除之前的映射关系
+        deleteTags()
+        
+        //保存映射关系
+        saveTags()
+        
         // 1.获取修改的SQL语句
         let updateSQL = "UPDATE t_project SET name = '\(name)', type = '\(type)', beginTime = '\(beginTime)', endTime = '\(endTime)', unit = '\(unit)', total = '\(total)', isFinished ='\(isFinished)', complete = '\(complete)', rest = '\(rest)'WHERE id = '\(id)';"
         
@@ -204,6 +251,9 @@ class Project: NSObject {
     }
 
     func deleteProject() -> Bool{
+        //删除之前的映射关系
+        deleteTags()
+        
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_project WHERE id = '\(id)';"
         
@@ -215,6 +265,20 @@ class Project: NSObject {
             print("删除项目失败")
             return false
         }
+    }
+    
+    //保存映射关系
+    func saveTags(){
+        //保存现有的映射关系
+        for tag in tags{
+            let tagMap = TagMap(tagID: tag.id, projectID: self.id)
+            tagMap.insertTagMap()
+        }
+    }
+    
+    //删除之前映射关系
+    func deleteTags(){
+        TagMap().deleteTagMapWithProject(self)
     }
  }
 

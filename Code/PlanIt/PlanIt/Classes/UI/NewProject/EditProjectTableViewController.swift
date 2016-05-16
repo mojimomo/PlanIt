@@ -268,7 +268,21 @@ class EditProjectTableViewController: UITableViewController {
    
     //删除项目
     private func deleteProject(){
-    
+        let alerController = UIAlertController(title: "是否确定删除该项目？", message: nil, preferredStyle: .ActionSheet)
+        //创建UIAlertAction 确定按钮
+        let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            self.project.deleteProject()
+        })
+        //创建UIAlertAction 取消按钮
+        let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+        })
+        //添加动作
+        alerController.addAction(alerActionOK)
+        alerController.addAction(alerActionCancel)
+        //显示alert
+        self.presentViewController(alerController, animated: true, completion: { () -> Void in
+            
+        })
     }
     
     //更新界面
