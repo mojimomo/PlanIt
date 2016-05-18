@@ -41,6 +41,8 @@ class ProjectTableViewController: UITableViewController {
         //读取数据按照id顺序排序
         projects = Project().loadAllData()
         self.tableView.reloadData()
+        //设置naviagtioncontroller的空间颜色为白色
+        self.navigationController?.view.tintColor = UIColor.whiteColor()
     }
     
     // MARK: - UITableViewDataSource

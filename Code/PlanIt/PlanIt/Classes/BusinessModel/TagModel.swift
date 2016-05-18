@@ -15,8 +15,18 @@ class Tag: NSObject{
     //标签名称
     var name = ""
     
+    var isSelected = false
+    var isLocked = false
+    var textContent = ""
+    
     override init() {
         super.init()
+    }
+    
+    init(name : String) {
+        super.init()
+        self.name = name
+        self.textContent = name
     }
     
     init(dict : [String : AnyObject]) {
@@ -24,6 +34,7 @@ class Tag: NSObject{
         //setValuesForKeysWithDictionary(dict)
         id = dict["id"]!.integerValue
         name = String(dict["name"])
+        textContent = name
     }
     
     // MARK:- 和数据库之间的操作

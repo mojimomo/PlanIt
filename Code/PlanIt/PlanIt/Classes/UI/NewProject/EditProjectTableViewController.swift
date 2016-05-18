@@ -12,7 +12,7 @@ enum editProjectTableState{
     case Add, Edit
 }
 
-class EditProjectTableViewController: UITableViewController {
+class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     @IBOutlet weak var projectNameLabel: UITextField!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var recordSwitch: UISwitch!
@@ -320,11 +320,22 @@ class EditProjectTableViewController: UITableViewController {
         }
     }
     
+    //点击某个单元格触发的方法
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //设置单元格打勾
+        let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
+        if indexPath == tagCellPath{
+            let tags = Tag().loadAllData()
+            RRTagController.displayTagController(parentController: self, tags: tags, blockFinish: { (selectedTags, unSelectedTags) -> () in
+                }) { () -> () in
+            }
+        }
+
+    }
+    
     //MARK: - View Controller Lifecle
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //设置按钮标题
+        super.viewWillAppear(animated)        //设置按钮标题
         finishEditButton?.setTitle(finishEditButtonText, forState: .Normal)
         projectTotal = 0
         projectType = ProjectType.Normal
@@ -338,5 +349,21 @@ class EditProjectTableViewController: UITableViewController {
         endTimeLabel?.text = dateString
     }
     
-
+    // MARK: - prepareForSegue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let ivc = segue.destinationViewController as? TagsViewController {
+            if let identifier = segue.identifier{
+                switch identifier{
+                case "tags":
+                    ivc.title = "选择标签"
+                    ivc.DateSource = self
+                default: break
+                }
+            }
+        }
+    }
+    
+    func projectForTagsView(sneder: TagsViewController) -> Project? {
+        return project
+    }
 }

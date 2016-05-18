@@ -15,7 +15,15 @@ class Process: NSObject {
     //项目序号
     var projectID: Int = -1
     //记录时间
-    var recordTime = ""
+    var recordTime = ""{
+        didSet{
+            if recordTime != ""{
+                let dateFormat = NSDateFormatter()
+                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                recordTimeDate = dateFormat.dateFromString(recordTime)!
+            }
+        }
+    }
     //完成工作量
     var done: Double? = -1
     //记录时间

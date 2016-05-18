@@ -8,8 +8,12 @@
 
 import UIKit
 
-class ProjectTableViewCell: UITableViewCell {
-    @IBOutlet weak var pieChartView: UIView!
+class ProjectTableViewCell: UITableViewCell , PieChartDataSource{
+    @IBOutlet weak var pieChartView: PieChartView!{
+        didSet{
+            pieChartView.dataSource = self
+        }
+    }
     @IBOutlet weak var projectNameLabel: UILabel!
     @IBOutlet weak var projectStatusLabel: UILabel!
     @IBOutlet weak var projectTagLabel: UILabel!
@@ -48,16 +52,25 @@ class ProjectTableViewCell: UITableViewCell {
             return (projectTagLabel?.text)!
         }
     }
+    //项目完成百分比
+    var projectPercent = 0.0
+    
     //更新界面
     func updateUI(){
         projectName = ""
         projectStatus = ""
         projectTag = ""
+        projectPercent = 0.0
         
         if let project = self.project{
             projectName = project.name
             projectStatus = "\(project.rest)"
             projectTag = project.tagString
+            projectPercent = project.percent
         }
+    }
+    
+    func percentForPieChartView(sneder: PieChartView) -> Double? {
+        return projectPercent
     }
 }

@@ -75,11 +75,21 @@ class Project: NSObject {
     //完成量
     var complete: Double = 0.0
     //剩余量
-    var rest: Double = 0.0
+    var rest: Double = 0.0{
+        didSet{
+            if type != ProjectType.NoRecord{
+                if total != 0{
+                    percent = rest * 100 / total
+                }
+            }
+        }
+    }
     //标签
     var tags = [Tag]()
     //标签字符串
     var tagString = ""
+    //百分比
+    var percent = 0.0
     //备注
     //var remark: String?
     private var beginTimeDate = NSDate()
