@@ -25,6 +25,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     @IBOutlet weak var unitTextField: UITextField!
     @IBOutlet weak var totalTextField: UITextField!
     @IBOutlet weak var finishEditButton: UIButton!
+
     //按钮文字
     var finishEditButtonText = ""
     //项目名称
@@ -326,7 +327,15 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
         if indexPath == tagCellPath{
             let tags = Tag().loadAllData()
+            for tag in tags{
+                for selectedTag in project.tags{
+                    if tag.name == selectedTag.name{
+                        tag.isSelected = true
+                    }
+                }
+            }
             RRTagController.displayTagController(parentController: self, tags: tags, blockFinish: { (selectedTags, unSelectedTags) -> () in
+                    self.project.tags = selectedTags
                 }) { () -> () in
             }
         }

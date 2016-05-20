@@ -37,7 +37,7 @@ class Process: NSObject {
         super.init()
         //setValuesForKeysWithDictionary(dict)
         id = dict["id"]!.integerValue
-        recordTime = String(dict["recordTime"])
+        recordTime = String(dict["recordTime"]!)
         projectID = dict["projectID"]!.integerValue
         done = dict["done"]!.doubleValue
     }

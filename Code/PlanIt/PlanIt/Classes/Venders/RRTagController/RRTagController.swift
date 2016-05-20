@@ -38,14 +38,14 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
             self._totalTagsSelected += newValue
             self._totalTagsSelected = (self._totalTagsSelected < 0) ? 0 : self._totalTagsSelected
-            self.navigationBarItem = UINavigationItem(title: "Tags")
+            self.navigationBarItem = UINavigationItem(title: "选择标签")
             self.navigationBarItem.leftBarButtonItem = self.leftButton
-            if (self._totalTagsSelected == 0) {
-                self.navigationBarItem.rightBarButtonItem = nil
-            }
-            else {
-                self.navigationBarItem.rightBarButtonItem = self.rigthButton
-            }
+//            if (self._totalTagsSelected == 0) {
+//                self.navigationBarItem.rightBarButtonItem = nil
+//            }
+//            else {
+            self.navigationBarItem.rightBarButtonItem = self.rigthButton
+//            }
             self.navigationBar.pushNavigationItem(self.navigationBarItem, animated: false)
         }
     }
@@ -82,7 +82,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         buttonCancel.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).CGColor
         buttonCancel.layer.borderWidth = 2
         buttonCancel.backgroundColor = UIColor.whiteColor()
-        buttonCancel.setTitle("Cancel", forState: UIControlState.Normal)
+        buttonCancel.setTitle("取消", forState: UIControlState.Normal)
         buttonCancel.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         buttonCancel.titleLabel?.font = UIFont.boldSystemFontOfSize(17)
         buttonCancel.layer.cornerRadius = 15
@@ -92,7 +92,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         buttonAccept.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).CGColor
         buttonAccept.layer.borderWidth = 2
         buttonAccept.backgroundColor = UIColor.whiteColor()
-        buttonAccept.setTitle("Create", forState: UIControlState.Normal)
+        buttonAccept.setTitle("创建", forState: UIControlState.Normal)
         buttonAccept.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         buttonAccept.titleLabel?.font = UIFont.boldSystemFontOfSize(17)
         buttonAccept.layer.cornerRadius = 15
@@ -106,7 +106,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 64))
         
-        self.navigationBarItem = UINavigationItem(title: "Tags")
+        self.navigationBarItem = UINavigationItem(title: "选择标签")
         self.navigationBarItem.leftBarButtonItem = self.leftButton
         
         navigationBar.pushNavigationItem(self.navigationBarItem, animated: true)
@@ -155,6 +155,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         if strlen(contentTag) > 0 {
             let newTag = Tag(name: contentTag)
             tags.insert(newTag, atIndex: tags.count)
+            newTag.insertTag()
             collectionTag.reloadData()            
         }
         cancelEditTag()
@@ -238,8 +239,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
 
-        leftButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Done, target: self, action: "cancelTagController")
-        rigthButton = UIBarButtonItem(title: "OK", style: UIBarButtonItemStyle.Done, target: self, action: "finishTagController")
+        leftButton = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: self, action: "cancelTagController")
+        rigthButton = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: "finishTagController")
         
         totalTagsSelected = 0
         self.view.addSubview(collectionTag)

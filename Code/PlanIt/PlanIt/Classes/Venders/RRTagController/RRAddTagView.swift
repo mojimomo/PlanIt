@@ -32,7 +32,7 @@ class RRAddTagView: UIView, UITextViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        title.text = "Create a new tag."
+        title.text = "创建一个标签"
         self.addSubview(title)
         self.addSubview(textEdit)
         self.backgroundColor = UIColor.whiteColor()

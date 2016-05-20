@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class ProjectTableViewCell: UITableViewCell , PieChartDataSource{
+@IBDesignable
+class ProjectTableViewCell: RoundTableviewCell , PieChartDataSource{
     @IBOutlet weak var pieChartView: PieChartView!{
         didSet{
             pieChartView.dataSource = self
@@ -19,6 +19,7 @@ class ProjectTableViewCell: UITableViewCell , PieChartDataSource{
     @IBOutlet weak var projectTagLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var tagImageView: UIImageView!
+    
     //当前项目
     var project: Project?{
         didSet{
@@ -68,9 +69,11 @@ class ProjectTableViewCell: UITableViewCell , PieChartDataSource{
             projectTag = project.tagString
             projectPercent = project.percent
         }
+        setNeedsDisplay()
     }
     
     func percentForPieChartView(sneder: PieChartView) -> Double? {
         return projectPercent
     }
+    
 }

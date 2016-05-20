@@ -103,11 +103,11 @@ class Project: NSObject {
         super.init()        
         //setValuesForKeysWithDictionary(dict)
         id = dict["id"]!.integerValue
-        name = String(dict["name"])
+        name = String(dict["name"]!)
         type = dict["type"]!.integerValue
-        beginTime = String(dict["beginTime"])
-        endTime = String(dict["endTime"])
-        unit = String(dict["unit"])
+        beginTime = String(dict["beginTime"]!)
+        endTime = String(dict["endTime"]!)
+        unit = String(dict["unit"]!)
         total = dict["total"]!.doubleValue
         isFinished = dict["isFinished"]!.integerValue
         complete = dict["complete"]!.doubleValue

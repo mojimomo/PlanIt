@@ -33,7 +33,7 @@ class Tag: NSObject{
         super.init()
         //setValuesForKeysWithDictionary(dict)
         id = dict["id"]!.integerValue
-        name = String(dict["name"])
+        name = String(dict["name"]!)
         textContent = name
     }
     

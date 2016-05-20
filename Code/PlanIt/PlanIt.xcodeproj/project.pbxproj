@@ -11,6 +11,8 @@
 		BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */; };
 		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
 		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
+		BE4F02391CEF365F00126237 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4F02361CEF365F00126237 /* Info.plist */; };
+		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
 		BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */; };
 		BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE68E5481CE9B658006A1750 /* TagsViewController.swift */; };
@@ -57,6 +59,9 @@
 		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
+		BE4F02361CEF365F00126237 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE4F02371CEF365F00126237 /* RoundTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundTableviewCell.h; sourceTree = "<group>"; };
+		BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableviewCell.swift; sourceTree = "<group>"; };
 		BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		BE68E5481CE9B658006A1750 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +125,16 @@
 				BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */,
 			);
 			name = KYDrawerController;
+			sourceTree = "<group>";
+		};
+		BE4F02351CEF365F00126237 /* RoundTableviewCell */ = {
+			isa = PBXGroup;
+			children = (
+				BE4F02361CEF365F00126237 /* Info.plist */,
+				BE4F02371CEF365F00126237 /* RoundTableviewCell.h */,
+				BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */,
+			);
+			path = RoundTableviewCell;
 			sourceTree = "<group>";
 		};
 		BE68E5471CE9B5E6006A1750 /* Tag(标签) */ = {
@@ -203,6 +218,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE4F02351CEF365F00126237 /* RoundTableviewCell */,
 				BE7DF7FB1CEC922000DB1CBB /* RRTagController */,
 				BE279CEB1CDF1AE700D4FCFB /* KYDrawerController */,
 			);
@@ -462,6 +478,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4F02391CEF365F00126237 /* Info.plist in Resources */,
 				BEA520AD1CCF417F00FFE43E /* LaunchScreen.storyboard in Resources */,
 				BEA520AA1CCF417F00FFE43E /* Assets.xcassets in Resources */,
 				BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */,
@@ -491,6 +508,7 @@
 			files = (
 				BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */,
 				BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */,
+				BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectTableViewController.swift in Sources */,
