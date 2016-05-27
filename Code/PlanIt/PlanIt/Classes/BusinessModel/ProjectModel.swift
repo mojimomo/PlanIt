@@ -92,9 +92,9 @@ class Project: NSObject {
     var percent = 0.0
     //备注
     //var remark: String?
-    private var beginTimeDate = NSDate()
-    private var endTimeDate = NSDate()
-    
+    var beginTimeDate = NSDate()
+    var endTimeDate = NSDate()
+
     override init() {
         super.init()
     }
@@ -109,9 +109,16 @@ class Project: NSObject {
         endTime = String(dict["endTime"]!)
         unit = String(dict["unit"]!)
         total = dict["total"]!.doubleValue
-        isFinished = dict["isFinished"]!.integerValue
         complete = dict["complete"]!.doubleValue
         rest = dict["rest"]!.doubleValue
+        
+        //计算是否完成
+        setNewProjectTime(beginTime, endTime: endTime)
+        if complete == total{
+            isFinished = ProjectIsFinished.Finished
+        }else if complete < total{
+            isFinished = ProjectIsFinished.NotFinished
+        }
     }
 
     // MARK:- 数据操作
@@ -228,7 +235,7 @@ class Project: NSObject {
         saveTags()
         
         // 1.获取插入的SQL语句
-        let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, isFinished, complete, rest) VALUES ('\(name)', '\(type)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(isFinished)', '\(complete)', '\(rest)');"
+        let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, complete, rest) VALUES ('\(name)', '\(type)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(complete)', '\(rest)');"
         
         // 2.执行SQL语句
         if SQLiteManager.shareIntance.execSQL(insertSQL) {
@@ -248,7 +255,7 @@ class Project: NSObject {
         saveTags()
         
         // 1.获取修改的SQL语句
-        let updateSQL = "UPDATE t_project SET name = '\(name)', type = '\(type)', beginTime = '\(beginTime)', endTime = '\(endTime)', unit = '\(unit)', total = '\(total)', isFinished ='\(isFinished)', complete = '\(complete)', rest = '\(rest)'WHERE id = '\(id)';"
+        let updateSQL = "UPDATE t_project SET name = '\(name)', type = '\(type)', beginTime = '\(beginTime)', endTime = '\(endTime)', unit = '\(unit)', total = '\(total)',  complete = '\(complete)', rest = '\(rest)'WHERE id = '\(id)';"
         
         // 2.执行SQL语句
         if SQLiteManager.shareIntance.execSQL(updateSQL) {

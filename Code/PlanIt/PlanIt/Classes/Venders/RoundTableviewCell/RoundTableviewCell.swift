@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 public class RoundTableviewCell: UITableViewCell {
 
-    @IBInspectable public var cornerRadius: CGFloat = 25 {
+    @IBInspectable public var cornerRadius: CGFloat = 15 {
         didSet {
         }
     }
@@ -89,12 +89,12 @@ public class RoundTableviewCell: UITableViewCell {
                 }
         }
         
-        self.layer.masksToBounds = false
-        self.layer.shadowPath = pathRef
-        self.layer.shadowOffset = CGSizeMake(0.5, 0.5)
-        self.layer.shadowColor = UIColor.lightGrayColor().CGColor
-        self.layer.shadowOpacity = 0.7
-        self.layer.shadowRadius = 4
+//        self.layer.masksToBounds = false
+//        self.layer.shadowPath = pathRef
+//        self.layer.shadowOffset = CGSizeMake(0.5, 0.5)
+//        self.layer.shadowColor = UIColor.lightGrayColor().CGColor
+//        self.layer.shadowOpacity = 0.7
+//        self.layer.shadowRadius = 4
 
         shapeLayer.path = pathRef
         self.contentView.layer.insertSublayer(shapeLayer, atIndex: 0)

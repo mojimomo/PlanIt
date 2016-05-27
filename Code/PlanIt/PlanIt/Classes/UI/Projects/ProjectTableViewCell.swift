@@ -8,17 +8,15 @@
 
 import UIKit
 @IBDesignable
-class ProjectTableViewCell: RoundTableviewCell , PieChartDataSource{
-    @IBOutlet weak var pieChartView: PieChartView!{
-        didSet{
-            pieChartView.dataSource = self
-        }
-    }
+class ProjectTableViewCell: RoundTableviewCell {
+    @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var projectNameLabel: UILabel!
     @IBOutlet weak var projectStatusLabel: UILabel!
     @IBOutlet weak var projectTagLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var tagImageView: UIImageView!
+    @IBOutlet weak var projectNameButton: UIButton!
+    @IBOutlet weak var addProcessButton: UIButton!
     
     //当前项目
     var project: Project?{
@@ -55,7 +53,7 @@ class ProjectTableViewCell: RoundTableviewCell , PieChartDataSource{
     }
     //项目完成百分比
     var projectPercent = 0.0
-    
+
     //更新界面
     func updateUI(){
         projectName = ""
@@ -71,9 +69,4 @@ class ProjectTableViewCell: RoundTableviewCell , PieChartDataSource{
         }
         setNeedsDisplay()
     }
-    
-    func percentForPieChartView(sneder: PieChartView) -> Double? {
-        return projectPercent
-    }
-    
 }

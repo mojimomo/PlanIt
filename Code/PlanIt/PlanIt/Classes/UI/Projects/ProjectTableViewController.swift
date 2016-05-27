@@ -17,7 +17,7 @@ class ProjectTableViewController: UITableViewController {
         }
     }
     var projects = [Project]()
-    
+    var cellMargin : CGFloat = 10.0
     private struct Storyboard{
         static let CellReusIdentifier = "ProjectCell"
     }
@@ -30,15 +30,15 @@ class ProjectTableViewController: UITableViewController {
             drawer.setDrawerState( .Opened, animated: true)
         }
         
-        
     }
+
     
     //MARK: - View Controller Lifecle
     override func viewDidLoad() {
         //不显示分割线
         self.tableView.separatorStyle = .None
-        self.tableView.sectionFooterHeight = 5
-        self.tableView.sectionHeaderHeight = 5
+        self.tableView.sectionFooterHeight = 10
+        self.tableView.sectionHeaderHeight = 10
         super.viewDidLoad()
     }
     
@@ -60,16 +60,49 @@ class ProjectTableViewController: UITableViewController {
     //确定行数
     override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
         return 1
+    }   
+
+    // MARK: - 跳转动作
+    //新增项目
+    func addProcess(sender: UIButton){
+        print("addProcess tag = \(sender.tag)")
+    }
+    
+    //单个项目页面
+    func getMoreInfor(sender: UIButton){
+        print("getMoreInfor tag = \(sender.tag)")
+        let statisticsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Statistics") as! StatisticsViewController
+        statisticsViewController.view.backgroundColor = tableViewBackgroundColor
+        statisticsViewController.project = projects[sender.tag]
+        self.navigationController?.pushViewController(statisticsViewController, animated: true)
+        
+        
     }
     
     //配置cell内容
     override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
-        
-//        cell.backgroundColor = UIColor.whiteColor()
+
         //配置cell
         cell.project = projects[indexPath.section]
+        
+        //新增进度按钮
+        let addProcessButton = UIButton(frame: CGRectMake(cell.frame.width - cell.frame.height - self.cellMargin , 0, cell.frame.height , cell.frame.height))
+        addProcessButton.tag = indexPath.section
+        addProcessButton.setImage(UIImage(named:"checked"), forState: .Normal)
+        addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
+        cell.addSubview(addProcessButton)
+        
+        //单个项目页面按钮
+        let getMoreInfor = UIButton(frame: CGRectMake(0, 0, cell.frame.width - cell.frame.height - self.cellMargin, cell.frame.height))
+        getMoreInfor.tag = indexPath.section
+        getMoreInfor.setBackgroundImage(.None, forState: .Normal)
+        getMoreInfor.setBackgroundImage(.None, forState: .Highlighted)
+        getMoreInfor.addTarget(self, action: "getMoreInfor:", forControlEvents: .TouchUpInside)
+        cell.addSubview(getMoreInfor)
+        //cell.bringSubviewToFront(addProcessButton)
+//        cell.backgroundColor = UIColor.whiteColor()
 //        //设置cell圆角
 //        cell.layer.cornerRadius = 25
 //        //阴影颜色
@@ -94,9 +127,8 @@ class ProjectTableViewController: UITableViewController {
 //        cell.layer.shadowRadius = 4
         
         return cell
-    }
-    
-    
+    }    
+  
     // MARK: - prepareForSegue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let ivc = segue.destinationViewController as? EditProjectTableViewController {

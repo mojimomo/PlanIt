@@ -16,7 +16,7 @@ class PieChartView: UIView {
     //数据源
     weak var dataSource: PieChartDataSource?
     //饼图宽
-    var lineWidth: CGFloat = 5{
+    var lineWidth: CGFloat = 18{
         didSet{
             setNeedsDisplay()
         }
@@ -47,7 +47,7 @@ class PieChartView: UIView {
         let percent = dataSource?.percentForPieChartView(self) ?? 0.0
         percentLabel.text = "\(percent)%"
         percentLabel.textAlignment = .Center
-        percentLabel.font = UIFont.boldSystemFontOfSize(10)
+        percentLabel.font = UIFont.boldSystemFontOfSize(24)
         self.addSubview(percentLabel)
         
         //设置背景为白色

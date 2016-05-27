@@ -57,7 +57,6 @@ class SQLiteManager: NSObject {
             "endTime  TEXT  NOT NULL, \n" +
             "unit TEXT, \n" +
             "total DOUBLE, \n" +
-            "isFinished INTEGER, \n" +
             "complete DOUBLE, \n" +
             "rest DOUBLE \n" +
         ");"
