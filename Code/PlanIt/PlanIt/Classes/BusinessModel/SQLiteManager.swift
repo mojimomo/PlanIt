@@ -72,12 +72,26 @@ class SQLiteManager: NSObject {
             "recordTime TEXT NOT NULL, \n" +
             "projectID INTEGER NOT NULL, \n" +
             "done double\n" +
+            "remark TEXT, \n" +
         ");"
         // 执行SQL语句
         if execSQL(createProcessTableSQL) {
             print("创建t_process表成功")
         }
 
+        //创建t_processdate表格
+        // 获取创建表的SQL语句
+        let createProcessDateTableSQL = "CREATE TABLE IF NOT EXISTS t_processdate ( \n" +
+            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
+            "recordTime TEXT NOT NULL, \n" +
+            "projectID INTEGER NOT NULL, \n" +
+            "done double\n" +
+        ");"
+        // 执行SQL语句
+        if execSQL(createProcessDateTableSQL) {
+            print("创建t_processdate表成功")
+        }
+        
         //创建t_tag表格
         // 获取创建表的SQL语句
         let createTagTableSQL = "CREATE TABLE IF NOT EXISTS t_tag ( \n" +

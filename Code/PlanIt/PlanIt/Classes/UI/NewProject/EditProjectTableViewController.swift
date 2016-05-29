@@ -226,12 +226,16 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     //MARK: - Func
     //新增项目
     private func addNewProject(){
-        if projectName != ""{
-            project.name = projectName
-        }else{
+        if projectName == "" {
             callAlert("提交错误",message: "项目名称不能为空!")
             return
+        }else if projectName.characters.count > 12 {
+            callAlert("提交错误",message: "项目名称不能超过12!")
+            return
+        }else{
+            project.name = projectName
         }
+
         
         if projectBeginTime != "" && projectEndTime != ""{
                 if project.setNewProjectTime(projectBeginTime, endTime: projectEndTime) == false{
@@ -245,11 +249,14 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         switch projectType{
         case ProjectType.NoRecord: break
         default:
-            if projectUnit != ""{
-                project.unit = projectUnit
-            }else{
+            if projectUnit == ""{
                 callAlert("提交错误",message: "项目任务单位不能为空!")
                 return
+            }else if project.unit.characters.count > 10 {
+                callAlert("提交错误",message: "项目任务单位不能超过10!")
+                return
+            }else{
+                project.unit = projectUnit
             }
             if  projectTotal != 0{
                 project.setNewProjectTotal(projectTotal)

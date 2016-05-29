@@ -19,15 +19,17 @@ class Process: NSObject {
         didSet{
             if recordTime != ""{
                 let dateFormat = NSDateFormatter()
-                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
                 recordTimeDate = dateFormat.dateFromString(recordTime)!
             }
         }
     }
     //完成工作量
-    var done: Double? = -1
+    var done: Double = -1
     //记录时间
     var recordTimeDate = NSDate()
+    //备注
+    var remark = ""
     
     override init() {
         super.init()
@@ -40,6 +42,7 @@ class Process: NSObject {
         recordTime = String(dict["recordTime"]!)
         projectID = dict["projectID"]!.integerValue
         done = dict["done"]!.doubleValue
+        remark = String(dict["remark"]!)
     }
     
     // MARK:- 和数据库之间的操作
@@ -88,7 +91,7 @@ class Process: NSObject {
     //添加新的进程
     func insertProcess() -> Bool{
         // 1.获取插入的SQL语句
-        let insertSQL = "INSERT INTO t_process (projectID, recordTime, done) VALUES ('\(projectID)', '\(recordTime)', '\(done)');"
+        let insertSQL = "INSERT INTO t_process (projectID, recordTime, done, remark) VALUES ('\(projectID)', '\(recordTime)', '\(done)', '\(remark)');"
         
         // 2.执行SQL语句
         if SQLiteManager.shareIntance.execSQL(insertSQL) {

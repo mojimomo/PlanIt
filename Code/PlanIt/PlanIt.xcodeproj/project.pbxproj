@@ -20,6 +20,7 @@
 		BE28D4B01CF17B1600976490 /* PNLineChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A51CF17B1600976490 /* PNLineChartData.swift */; };
 		BE28D4B11CF17B1600976490 /* PNValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A61CF17B1600976490 /* PNValue.swift */; };
 		BE28D4B21CF17B1600976490 /* view.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A71CF17B1600976490 /* view.swift */; };
+		BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */; };
 		BE4F02391CEF365F00126237 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4F02361CEF365F00126237 /* Info.plist */; };
 		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
@@ -45,6 +46,10 @@
 		BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3221CF57870002A20FE /* CloseButton.swift */; };
 		BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3251CF57870002A20FE /* TagListView.swift */; };
 		BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3261CF57870002A20FE /* TagView.swift */; };
+		BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC3061CFABE2400D8C4C8 /* ScrollableGraphView.swift */; };
+		BECFC3091CFAC11400D8C4C8 /* UIColor+colorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC3081CFAC11400D8C4C8 /* UIColor+colorFromHex.swift */; };
+		BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */; };
+		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
 		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
 		BEF016A11CF03453004DC646 /* JKBlurPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF016A01CF03453004DC646 /* JKBlurPopup.swift */; };
 		BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2F0A21CDC885800E21264 /* PieChartView.swift */; };
@@ -83,6 +88,7 @@
 		BE28D4A51CF17B1600976490 /* PNLineChartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNLineChartData.swift; sourceTree = "<group>"; };
 		BE28D4A61CF17B1600976490 /* PNValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNValue.swift; sourceTree = "<group>"; };
 		BE28D4A71CF17B1600976490 /* view.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = view.swift; sourceTree = "<group>"; };
+		BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessesTableViewController.swift; path = ../Statistics/ProcessesTableViewController.swift; sourceTree = "<group>"; };
 		BE4F02361CEF365F00126237 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE4F02371CEF365F00126237 /* RoundTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundTableviewCell.h; sourceTree = "<group>"; };
 		BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableviewCell.swift; sourceTree = "<group>"; };
@@ -116,6 +122,10 @@
 		BEB8B3241CF57870002A20FE /* TagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagListView.h; sourceTree = "<group>"; };
 		BEB8B3251CF57870002A20FE /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		BEB8B3261CF57870002A20FE /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		BECFC3061CFABE2400D8C4C8 /* ScrollableGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableGraphView.swift; sourceTree = "<group>"; };
+		BECFC3081CFAC11400D8C4C8 /* UIColor+colorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+colorFromHex.swift"; path = "../../UI/Statistics/UIColor+colorFromHex.swift"; sourceTree = "<group>"; };
+		BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessTableViewCell.swift; sourceTree = "<group>"; };
+		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
 		BEF016A01CF03453004DC646 /* JKBlurPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKBlurPopup.swift; sourceTree = "<group>"; };
 		BEF2F0A21CDC885800E21264 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = ../Projects/PieChartView.swift; sourceTree = "<group>"; };
@@ -236,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				BE6E09321CD9C373008AABCD /* ProcessModel.swift */,
+				BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */,
 				BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */,
 				BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */,
 				BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */,
@@ -281,6 +292,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BECFC3051CFABE2400D8C4C8 /* GraphView */,
 				BEB8B3211CF57870002A20FE /* TagListView */,
 				BE28D4991CF17B1600976490 /* PNChartSwift */,
 				BEF0169F1CF03453004DC646 /* JKBlurPopup */,
@@ -303,6 +315,8 @@
 		BE802AF91CCF55540092F2DE /* History(添加历史) */ = {
 			isa = PBXGroup;
 			children = (
+				BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */,
+				BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */,
 			);
 			name = "History(添加历史)";
 			path = History;
@@ -365,6 +379,7 @@
 		BE802B001CCF56AB0092F2DE /* Extension(扩展) */ = {
 			isa = PBXGroup;
 			children = (
+				BECFC3081CFAC11400D8C4C8 /* UIColor+colorFromHex.swift */,
 			);
 			name = "Extension(扩展)";
 			path = Venders/Extension;
@@ -441,6 +456,14 @@
 				BEB8B3261CF57870002A20FE /* TagView.swift */,
 			);
 			path = TagListView;
+			sourceTree = "<group>";
+		};
+		BECFC3051CFABE2400D8C4C8 /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				BECFC3061CFABE2400D8C4C8 /* ScrollableGraphView.swift */,
+			);
+			path = GraphView;
 			sourceTree = "<group>";
 		};
 		BED9DB331CD87D05007043AA /* Frameworks */ = {
@@ -603,10 +626,12 @@
 				BE28D4AD1CF17B1600976490 /* PNChartDelegate.swift in Sources */,
 				BE28D4AC1CF17B1600976490 /* PNChartConfig.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
+				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectTableViewController.swift in Sources */,
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
+				BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */,
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
 				BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */,
@@ -615,13 +640,16 @@
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
 				BE28D4AB1CF17B1600976490 /* PNBarChart.swift in Sources */,
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
+				BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */,
 				BE28D4AF1CF17B1600976490 /* PNLineChart.swift in Sources */,
+				BECFC3091CFAC11400D8C4C8 /* UIColor+colorFromHex.swift in Sources */,
 				BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
 				BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
 				BEF016A11CF03453004DC646 /* JKBlurPopup.swift in Sources */,
 				BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */,
+				BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */,
 				BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */,
 				BE28D4B21CF17B1600976490 /* view.swift in Sources */,
 				BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */,

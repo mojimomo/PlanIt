@@ -35,11 +35,7 @@ struct ProjectIsFinished {
 //项目model
 class Project: NSObject {
     //项目编号
-    var id: Int = -1{
-        didSet{
-            freshenTags()
-        }
-    }
+    var id: Int = -1
     //项目名称
     var name = ""
     //项目类型
@@ -111,6 +107,9 @@ class Project: NSObject {
         total = dict["total"]!.doubleValue
         complete = dict["complete"]!.doubleValue
         rest = dict["rest"]!.doubleValue
+        
+        //刷新tag
+        freshenTags()
         
         //计算是否完成
         setNewProjectTime(beginTime, endTime: endTime)
@@ -230,17 +229,46 @@ class Project: NSObject {
         return projects[0]
     }
 
+    /// 加载所有的数据
+    func selectID() -> Int?{
+        var projects : [Project] = [Project]()
+        
+        // 1.获取查询语句
+        let querySQL = "SELECT * FROM t_project WHERE name = '\(name)';"
+        
+        // 2.执行查询语句
+        guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {
+            print("查询所有Project数据失败")
+            return nil
+        }
+        
+        // 3.遍历数组
+        for dict in array {
+            let p = Project(dict: dict)
+            projects.append(p)
+        }
+        return projects[0].id
+    }
+    
     func insertProject() -> Bool{
-        //保存映射关系
-        saveTags()
         
         // 1.获取插入的SQL语句
         let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, complete, rest) VALUES ('\(name)', '\(type)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(complete)', '\(rest)');"
-        
+
         // 2.执行SQL语句
         if SQLiteManager.shareIntance.execSQL(insertSQL) {
             print("插入新项目成功")
-            return true
+            
+            if let selectid = selectID(){
+                id = selectid
+                //保存映射关系
+                saveTags()
+                return true
+            }else{
+                print("保存映射失败")
+                return false
+            }
+            
         }else{
             print("插入新项目失败")
             return false

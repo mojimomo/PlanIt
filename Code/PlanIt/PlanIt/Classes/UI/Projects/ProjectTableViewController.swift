@@ -52,16 +52,6 @@ class ProjectTableViewController: UITableViewController {
         self.navigationController?.view.tintColor = UIColor.whiteColor()
     }
     
-    // MARK: - UITableViewDataSource
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return projects.count
-    }
-    
-    //确定行数
-    override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
-        return 1
-    }   
-
     // MARK: - 跳转动作
     //新增项目
     func addProcess(sender: UIButton){
@@ -76,7 +66,16 @@ class ProjectTableViewController: UITableViewController {
         statisticsViewController.project = projects[sender.tag]
         self.navigationController?.pushViewController(statisticsViewController, animated: true)
         
-        
+    }
+    
+    // MARK: - UITableViewDataSource
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return projects.count
+    }
+    
+    //确定行数
+    override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
+        return 1
     }
     
     //配置cell内容
