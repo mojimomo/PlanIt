@@ -71,15 +71,7 @@ class Project: NSObject {
     //完成量
     var complete: Double = 0.0
     //剩余量
-    var rest: Double = 0.0{
-        didSet{
-            if type != ProjectType.NoRecord{
-                if total != 0{
-                    percent = rest * 100 / total
-                }
-            }
-        }
-    }
+    var rest: Double = 0.0
     //标签
     var tags = [Tag]()
     //标签字符串
@@ -107,6 +99,11 @@ class Project: NSObject {
         total = dict["total"]!.doubleValue
         complete = dict["complete"]!.doubleValue
         rest = dict["rest"]!.doubleValue
+        if type != ProjectType.NoRecord{
+            if total != 0{
+                percent = complete * 100 / total
+            }
+        }
         
         //刷新tag
         freshenTags()
@@ -126,6 +123,25 @@ class Project: NSObject {
         self.total = total
         self.complete = 0
         self.rest = total
+    }
+    
+    func increaseDone(done: Double){
+        if type != ProjectType.NoRecord{
+            complete += done
+            rest -= done
+            percent = complete * 100 / total
+            if complete >= total{
+                isFinished = ProjectIsFinished.Finished
+                complete = total
+                rest = 0
+                percent = 100.0
+            }else if complete < 0{
+                complete = 0
+                rest = total
+                percent = 0.0
+            }
+            updateProject()
+        }
     }
     
     //新建项目设置时间
@@ -164,13 +180,14 @@ class Project: NSObject {
         if  name != "" &&  beginTime !=  "" && endTime != "" {
             if type == ProjectType.Normal ||  type == ProjectType.Punch {
                 if unit != "" && total != 0 && isFinished != ProjectIsFinished.NoSet
-                    && complete != 0 && rest != 0{
+                    && total != 0 && rest != 0{
                     return true
                 }
             }else if type == ProjectType.NoRecord{
                return true
             }
         }
+        print("Project参数不正确")
         return false
     }
  
@@ -210,8 +227,7 @@ class Project: NSObject {
 
     /// 加载所有的数据
     func loadData(id: Int) -> Project?{
-        var projects : [Project] = [Project]()
-        
+      
         // 1.获取查询语句
         let querySQL = "SELECT * FROM t_project WHERE id = '\(id)';"
         
@@ -224,9 +240,10 @@ class Project: NSObject {
         // 3.遍历数组
         for dict in array {
             let p = Project(dict: dict)
-            projects.append(p)
+            return p
         }
-        return projects[0]
+        
+        return nil
     }
 
     /// 加载所有的数据
@@ -294,7 +311,7 @@ class Project: NSObject {
             return false
         }
     }
-
+   
     func deleteProject() -> Bool{
         //删除之前的映射关系
         deleteTags()

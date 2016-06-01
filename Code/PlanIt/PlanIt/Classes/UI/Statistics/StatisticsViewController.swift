@@ -9,39 +9,7 @@
 import UIKit
 
 class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate {
-    var project = Project(){
-        didSet{
-            //根据project初始化程序
-            processDates = ProcessDate().loadData(project.id)
-            projectName = project.name
-            projectPercent = project.percent
-            for tag in project.tags{
-                tagListView.addTag(tag.name)
-            }
-            //根据不同项目完成度
-            switch project.isFinished {
-            case ProjectIsFinished.NotBegined:
-                prompLabel?.text = "距离项目开始"
-                let restString = compareCurrentTime(project.beginTimeDate)
-                surplusLabel?.text = restString
-                progressView.setProgress(0 , animated: false)
-            case ProjectIsFinished.NotFinished:
-                prompLabel?.text = "距离项目截止"
-                let restString = compareCurrentTime(project.endTimeDate)
-                surplusLabel?.text = restString
-                let timePercent = percentFromCurrentTime(project.beginTimeDate, endDate: project.endTimeDate)
-                progressView.setProgress(Float(timePercent), animated: false)
-            case ProjectIsFinished.Finished:
-                surplusLabel?.text = "已完成"
-                progressView.setProgress(1 , animated: false)
-            default:break
-            }
-            endTimeLabel.text = "截止：\(project.endTime)"
-            drawLineChart()
-            updateUI()
-        }
-    }
-    
+    var project = Project()
     let lineChartBound: CGFloat = 10
     var projectPercent = 0.0
     var processDates = [ProcessDate]()
@@ -117,6 +85,42 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     
     func updateUI(){
         self.view.setNeedsDisplay()
+        self.pieChartView.setNeedsDisplay()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if let currentProject = Project().loadData(project.id){
+            project = currentProject
+            //根据project初始化程序
+            processDates = ProcessDate().loadData(project.id)
+            projectName = project.name
+            projectPercent = project.percent
+            for tag in project.tags{
+                tagListView.addTag(tag.name)
+            }
+            //根据不同项目完成度
+            switch project.isFinished {
+            case ProjectIsFinished.NotBegined:
+                prompLabel?.text = "距离项目开始"
+                let restString = compareCurrentTime(project.beginTimeDate)
+                surplusLabel?.text = restString
+                progressView.setProgress(0 , animated: false)
+            case ProjectIsFinished.NotFinished:
+                prompLabel?.text = "距离项目截止"
+                let restString = compareCurrentTime(project.endTimeDate)
+                surplusLabel?.text = restString
+                let timePercent = percentFromCurrentTime(project.beginTimeDate, endDate: project.endTimeDate)
+                progressView.setProgress(Float(timePercent), animated: false)
+            case ProjectIsFinished.Finished:
+                surplusLabel?.text = "已完成"
+                progressView.setProgress(1 , animated: false)
+            default:break
+            }
+            endTimeLabel.text = "截止：\(project.endTime)"
+            drawLineChart()
+            updateUI()
+        }
+
     }
     
     override func viewDidLoad()
@@ -232,6 +236,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     func openHistory(){
         let historyViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Processes") as!
             ProcessesTableViewController
+        historyViewController.project = project
         historyViewController.view.backgroundColor = self.view.backgroundColor
         self.navigationController?.pushViewController(historyViewController, animated: true)
     }

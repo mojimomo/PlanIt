@@ -246,6 +246,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
             callAlert("提交错误",message: "时间不能为空!")
             return
         }
+        project.type = projectType
         switch projectType{
         case ProjectType.NoRecord: break
         default:

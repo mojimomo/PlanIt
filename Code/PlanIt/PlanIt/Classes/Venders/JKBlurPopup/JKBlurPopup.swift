@@ -48,7 +48,7 @@ class JKBlurPopup: UIView {
         self.frame = target.frame
         let btnHide = UIButton(type: .Custom)
         btnHide.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
-        btnHide.addTarget(self, action: Selector("hideKeyboardDismiss:"), forControlEvents: .TouchUpInside)
+        btnHide.addTarget(self, action: Selector("hideKeyboardDismiss"), forControlEvents: .TouchUpInside)
         self.addSubview(btnHide)
         
         self.target = target
@@ -62,11 +62,18 @@ class JKBlurPopup: UIView {
         self.alpha = 0
         self.contentView.alpha = 0
         self.contentView.clipsToBounds = true
-        // 设置阴影
-        self.layer.shadowOffset = CGSizeMake(3, 3);
-        self.layer.shadowRadius = 5.0;
-        self.layer.shadowColor = UIColor.blackColor().CGColor
-        self.layer.shadowOpacity = 0.3
+        
+        //设置圆角
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 20/2
+        self.contentView.layer.borderColor = UIColor.grayColor().CGColor
+        self.contentView.layer.borderWidth = 1
+        
+//        // 设置阴影
+//        self.layer.shadowOffset = CGSizeMake(3, 3);
+//        self.layer.shadowRadius = 5.0;
+//        self.layer.shadowColor = UIColor.blackColor().CGColor
+//        self.layer.shadowOpacity = 0.3
         
         
         self.contentView.backgroundColor = UIColor.whiteColor()

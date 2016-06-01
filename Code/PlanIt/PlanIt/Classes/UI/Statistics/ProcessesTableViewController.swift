@@ -15,11 +15,24 @@ class ProcessesTableViewController: UITableViewController {
         }
     }
     var processes = [Process]()
-
+    var isEditingMod = false
+    @IBOutlet var processTableView: UITableView!
+    
+    @IBAction func finishEdit(sender: AnyObject) {
+        isEditingMod = !isEditingMod
+        self.processTableView.setEditing(isEditingMod, animated: true)
+    }
     
     private struct Storyboard{
-        static let CellReusIdentifier = "ProjectCell"
+        static let CellReusIdentifier = "ProcessCell"
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let editBarButton = UIBarButtonItem(image: UIImage(named: "edit"), style: .Done, target: self, action: "finishEdit:")
+        self.navigationItem.rightBarButtonItem = editBarButton
+    }   
+
     
     // MARK: - UITableViewDataSource
     //确定行数
@@ -34,5 +47,17 @@ class ProcessesTableViewController: UITableViewController {
         //配置cell
         cell.process = processes[indexPath.section]
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if isEditingMod == true{
+            let process =  processes[indexPath.row]
+            process.deleteProcess()
+            project.increaseDone(-process.done)
+            ProcessDate().chengeData(process.projectID, timeDate: process.recordTimeDate, changeValue: -process.done)
+            processes.removeAtIndex(indexPath.row)
+            processTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+        }
     }
 }

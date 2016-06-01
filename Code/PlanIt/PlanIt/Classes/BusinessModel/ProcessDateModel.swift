@@ -51,7 +51,7 @@ class ProcessDate: NSObject {
         
         // 2.执行查询语句
         guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {
-            print("查询所有Project数据失败")
+            print("查询所有processdate数据失败")
             return processDates
         }
         
@@ -65,23 +65,22 @@ class ProcessDate: NSObject {
     
     //检查记录是否存在
     func checkIsExist(projectID: Int, timeString: String) -> ProcessDate?{
-        var processDates : [ProcessDate] = [ProcessDate]()
-        
         // 1.获取查询语句
-        let querySQL = "SELECT * FROM t_processdate WHERE projectID = \(projectID), recordTime = \(timeString) ;"
+        let querySQL = "SELECT * FROM t_processdate WHERE projectID = \(projectID) and recordTime = \(timeString) ;"
         
         // 2.执行查询语句
         guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {
-            print("查询所有Project数据失败")
+            print("查询ID为\(projectID)的所有processdate数据失败")
             return nil
         }
         
         // 3.遍历数组
         for dict in array {
             let p = ProcessDate(dict: dict)
-            processDates.append(p)
+             return p
         }
-        return processDates[0]
+        
+        return nil
     }
 
     //新插入数据
@@ -91,10 +90,10 @@ class ProcessDate: NSObject {
         
         // 2.执行SQL语句
         if SQLiteManager.shareIntance.execSQL(insertSQL) {
-            print("插入新项目成功")
+            print("插入新进程数据成功")
             return true
         }else{
-            print("插入新项目失败")
+            print("插入新进程数据失败")
             return false
         }
     }

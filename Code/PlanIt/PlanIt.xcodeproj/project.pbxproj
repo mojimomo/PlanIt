@@ -51,6 +51,7 @@
 		BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */; };
 		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
 		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
+		BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */; };
 		BEF016A11CF03453004DC646 /* JKBlurPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF016A01CF03453004DC646 /* JKBlurPopup.swift */; };
 		BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2F0A21CDC885800E21264 /* PieChartView.swift */; };
 /* End PBXBuildFile section */
@@ -127,6 +128,7 @@
 		BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessTableViewCell.swift; sourceTree = "<group>"; };
 		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
+		BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessView.swift; sourceTree = "<group>"; };
 		BEF016A01CF03453004DC646 /* JKBlurPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKBlurPopup.swift; sourceTree = "<group>"; };
 		BEF2F0A21CDC885800E21264 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = ../Projects/PieChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -362,6 +364,7 @@
 			children = (
 				BE6E09341CD9D45E008AABCD /* ProjectTableViewController.swift */,
 				BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */,
+				BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */,
 			);
 			name = "Projects(项目列表)";
 			path = Projects;
@@ -618,6 +621,7 @@
 				BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */,
 				BE28D4AE1CF17B1600976490 /* PNChartLabel.swift in Sources */,
 				BE28D4B01CF17B1600976490 /* PNLineChartData.swift in Sources */,
+				BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */,
 				BE28D4AA1CF17B1600976490 /* PNBar.swift in Sources */,
 				BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */,
 				BE28D4B11CF17B1600976490 /* PNValue.swift in Sources */,

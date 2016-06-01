@@ -13,6 +13,7 @@ protocol PieChartDataSource: class {
 }
 
 class PieChartView: UIView {
+
     //数据源
     weak var dataSource: PieChartDataSource?
     //饼图宽
@@ -42,6 +43,11 @@ class PieChartView: UIView {
     
     //画图
     override func drawRect(rect: CGRect) {
+        //清除所有空间
+        for object in self.subviews{
+            object.removeFromSuperview()
+        }
+        
         //百分比label
         let percentLabel = UILabel(frame: rect)
         let percent = dataSource?.percentForPieChartView(self) ?? 0.0

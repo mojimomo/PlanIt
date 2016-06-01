@@ -35,27 +35,47 @@ class ProjectTableViewController: UITableViewController {
     
     //MARK: - View Controller Lifecle
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         //不显示分割线
         self.tableView.separatorStyle = .None
         self.tableView.sectionFooterHeight = 10
         self.tableView.sectionHeaderHeight = 10
-        super.viewDidLoad()
+        //设置naviagtioncontroller的空间颜色为白色
+        self.navigationController?.view.tintColor = UIColor.whiteColor()
+        self.tableView.backgroundColor = tableViewBackgroundColor
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         //读取数据按照id顺序排序
         projects = Project().loadAllData()
-        self.tableView.backgroundColor = tableViewBackgroundColor
+        //更新表格
         self.tableView.reloadData()
-        //设置naviagtioncontroller的空间颜色为白色
-        self.navigationController?.view.tintColor = UIColor.whiteColor()
+
     }
     
     // MARK: - 跳转动作
-    //新增项目
+    //新增进程
     func addProcess(sender: UIButton){
         print("addProcess tag = \(sender.tag)")
+        if projects[sender.tag].type == ProjectType.Punch{
+            let process = Process()
+            process.projectID = projects[sender.tag].id
+            let currentTime = NSDate()
+            let dateFormat = NSDateFormatter()
+            dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+            process.recordTime = dateFormat.stringFromDate(currentTime)
+            process.done = 1.0
+            process.insertProcess()
+            ProcessDate().chengeData(projects[sender.tag].id, timeDate: currentTime, changeValue: 1.0)
+            projects[sender.tag].increaseDone(1.0)
+        }else{
+            let popup = AddProcessView()
+            popup.showInView(self.view)
+
+        }
     }
     
     //单个项目页面
@@ -86,12 +106,14 @@ class ProjectTableViewController: UITableViewController {
         //配置cell
         cell.project = projects[indexPath.section]
         
-        //新增进度按钮
-        let addProcessButton = UIButton(frame: CGRectMake(cell.frame.width - cell.frame.height - self.cellMargin , 0, cell.frame.height , cell.frame.height))
-        addProcessButton.tag = indexPath.section
-        addProcessButton.setImage(UIImage(named:"checked"), forState: .Normal)
-        addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
-        cell.addSubview(addProcessButton)
+        if projects[indexPath.section].isFinished == ProjectIsFinished.NotFinished{
+            //新增进度按钮
+            let addProcessButton = UIButton(frame: CGRectMake(cell.frame.width - cell.frame.height - self.cellMargin , 0, cell.frame.height , cell.frame.height))
+            addProcessButton.tag = indexPath.section
+            addProcessButton.setImage(UIImage(named:"checked"), forState: .Normal)
+            addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
+            cell.addSubview(addProcessButton)
+        }
         
         //单个项目页面按钮
         let getMoreInfor = UIButton(frame: CGRectMake(0, 0, cell.frame.width - cell.frame.height - self.cellMargin, cell.frame.height))
