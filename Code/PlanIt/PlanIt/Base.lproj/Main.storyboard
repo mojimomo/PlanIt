@@ -94,7 +94,7 @@
                         <barButtonItem key="rightBarButtonItem" title="新增" systemItem="add" id="sB4-WW-Q57">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="z9z-wq-QO9" kind="show" identifier="addProject" id="Q8x-AC-VN3"/>
+                                <action selector="addProject:" destination="7rf-IV-wHQ" id="zEb-2K-kAl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -118,7 +118,7 @@
         <!--Edit Project Table View Controller-->
         <scene sceneID="okG-gs-EUp">
             <objects>
-                <tableViewController id="z9z-wq-QO9" customClass="EditProjectTableViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditProject" id="z9z-wq-QO9" customClass="EditProjectTableViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="mzd-qC-12h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,7 +127,7 @@
                             <tableViewSection id="YqE-hy-8AK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="F4e-xe-aFA">
-                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="35" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F4e-xe-aFA" id="vq5-Bi-IdL">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -161,7 +161,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="DKY-XD-fZn">
-                                        <rect key="frame" x="0.0" y="143" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="79" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DKY-XD-fZn" id="txv-Ei-3kh">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -205,7 +205,7 @@
                             <tableViewSection id="Ms8-s9-mmu" colorLabel="IBBuiltInLabel-Gray">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eHg-eS-nwq">
-                                        <rect key="frame" x="0.0" y="223" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="159" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eHg-eS-nwq" id="4W9-Rc-zwf">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -251,7 +251,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TI4-IO-Rx1">
-                                        <rect key="frame" x="0.0" y="267" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="203" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TI4-IO-Rx1" id="BJ1-UF-o4b">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -301,7 +301,7 @@
                             <tableViewSection id="KrZ-EG-20O" colorLabel="IBBuiltInLabel-Gray">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tTb-Ys-p6R">
-                                        <rect key="frame" x="0.0" y="347" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="283" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tTb-Ys-p6R" id="V7g-8I-CFE">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -333,7 +333,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VcJ-W7-yqP">
-                                        <rect key="frame" x="0.0" y="391" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="327" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VcJ-W7-yqP" id="N2n-2e-g4p">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -366,7 +366,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9cX-hT-GHh">
-                                        <rect key="frame" x="0.0" y="435" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="371" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9cX-hT-GHh" id="bl9-iK-0ah">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -399,7 +399,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="SpX-D9-IOu">
-                                        <rect key="frame" x="0.0" y="479" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="415" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SpX-D9-IOu" id="e9R-GT-Izu">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -435,7 +435,7 @@
                             <tableViewSection id="61R-IN-bme" colorLabel="IBBuiltInLabel-Gray">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2CH-OF-gL7">
-                                        <rect key="frame" x="0.0" y="559" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="495" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2CH-OF-gL7" id="GwF-Nm-EFO">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -489,7 +489,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="df7-7m-YWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2146" y="870"/>
+            <point key="canvasLocation" x="2163" y="878"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="CVD-G7-9hU">

@@ -8,6 +8,15 @@
 
 import UIKit
 class AddProcessView: JKBlurPopup {
+
+    var doneLabel: UILabel?
+    var doneTextField: UITextField?
+    var acceptButton: UIButton?
+    var closeButton: UIButton?
+    
+    var margin: CGFloat = 10
+    var viewConstraints = [NSLayoutConstraint]()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -17,14 +26,17 @@ class AddProcessView: JKBlurPopup {
         //setJKCorner(15)
         // 自定义背景模糊效果
         //setJKBlurEffect(.Light)
+        doneLabel = UILabel(frame: CGRectMake(0 + margin, 0 + margin, 300, 30))
+        doneLabel?.text = "完成量"
+        doneLabel?.textColor = UIColor.greenColor()
         
-        let close = UIButton(type: .Custom)
-        close.setTitle("点我关闭", forState: .Normal)
-        close.setTitleColor(UIColor.greenColor(), forState: .Normal)
-        close.frame = CGRectMake(0, 185, 300, 30)
-        close.addTarget(self, action: "btnClose:", forControlEvents: .TouchUpInside)
-        contentView.addSubview(close)
+        contentView.addSubview(doneLabel!)
         
+        closeButton = UIButton(frame: CGRectMake(0, 185, 300, 30))
+        closeButton?.setTitle("点我关闭", forState: .Normal)
+        closeButton?.setTitleColor(UIColor.greenColor(), forState: .Normal)
+        closeButton?.addTarget(self, action: "btnClose:", forControlEvents: .TouchUpInside)
+        contentView.addSubview(closeButton!)        
         
         print(contentView.frame)
     }

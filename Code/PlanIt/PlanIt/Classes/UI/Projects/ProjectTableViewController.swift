@@ -9,7 +9,7 @@
 import UIKit
 @IBDesignable
 
-class ProjectTableViewController: UITableViewController {
+class ProjectTableViewController: UITableViewController , UIPopoverPresentationControllerDelegate{
     @IBOutlet var projectTableView: UITableView!
     @IBOutlet weak var projectName: UILabel!
     var tableViewBackgroundColor = UIColor(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1) {
@@ -32,7 +32,26 @@ class ProjectTableViewController: UITableViewController {
         
     }
 
-    
+    @IBAction func addProject(sender: UIBarButtonItem) {
+        let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
+        addNewProjectViewController.title = "新增项目"
+        addNewProjectViewController.tableState = .Add
+        
+        addNewProjectViewController.modalPresentationStyle = .Popover
+        addNewProjectViewController.preferredContentSize = CGSizeMake(view.bounds.width * 0.8, view.bounds.height * 0.8)
+        
+        if let popController = addNewProjectViewController.popoverPresentationController {
+            let sourceView = view
+            popController.permittedArrowDirections = .Up
+            popController.sourceView = self.navigationController?.view
+            let y = sourceView.center.y + sourceView.bounds.height / 2
+            popController.sourceRect = CGRectMake(sourceView.center.x, y, 0, 0)
+            popController.delegate = self
+        }
+        
+        self.presentViewController(addNewProjectViewController, animated: true, completion: nil)
+    }
+
     //MARK: - View Controller Lifecle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,16 +80,19 @@ class ProjectTableViewController: UITableViewController {
     func addProcess(sender: UIButton){
         print("addProcess tag = \(sender.tag)")
         if projects[sender.tag].type == ProjectType.Punch{
-            let process = Process()
-            process.projectID = projects[sender.tag].id
-            let currentTime = NSDate()
-            let dateFormat = NSDateFormatter()
-            dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
-            process.recordTime = dateFormat.stringFromDate(currentTime)
-            process.done = 1.0
-            process.insertProcess()
-            ProcessDate().chengeData(projects[sender.tag].id, timeDate: currentTime, changeValue: 1.0)
-            projects[sender.tag].increaseDone(1.0)
+            if projects[sender.tag].isFinished == ProjectIsFinished.NotFinished {
+                let process = Process()
+                process.projectID = projects[sender.tag].id
+                let currentTime = NSDate()
+                let dateFormat = NSDateFormatter()
+                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+                process.recordTime = dateFormat.stringFromDate(currentTime)
+                process.done = 1.0
+                process.insertProcess()
+                ProcessDate().chengeData(projects[sender.tag].id, timeDate: currentTime, changeValue: 1.0)
+                projects[sender.tag].increaseDone(1.0)
+            }
+
         }else{
             let popup = AddProcessView()
             popup.showInView(self.view)
@@ -162,5 +184,25 @@ class ProjectTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    // MARK: Popover presentation delegate
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+    
+    func popoverPresentationController(popoverPresentationController: UIPopoverPresentationController, willRepositionPopoverToRect rect: UnsafeMutablePointer<CGRect>, inView view: AutoreleasingUnsafeMutablePointer<UIView?>) {
+        print("Will reposition popover")
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        print("Did Dismiss popover")
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        print("Should Dismiss popover")
+        print(popoverPresentationController.popoverBackgroundViewClass)
+        return true
     }
 }

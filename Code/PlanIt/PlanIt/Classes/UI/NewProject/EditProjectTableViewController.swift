@@ -25,7 +25,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     @IBOutlet weak var unitTextField: UITextField!
     @IBOutlet weak var totalTextField: UITextField!
     @IBOutlet weak var finishEditButton: UIButton!
-
+    
     //按钮文字
     var finishEditButtonText = ""
     //项目名称
