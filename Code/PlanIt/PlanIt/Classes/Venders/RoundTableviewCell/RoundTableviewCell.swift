@@ -11,12 +11,12 @@ import UIKit
 @IBDesignable
 public class RoundTableviewCell: UITableViewCell {
 
-    @IBInspectable public var cornerRadius: CGFloat = 15 {
+    @IBInspectable public var cornerRadius: CGFloat = 22 {
         didSet {
         }
     }
     
-    @IBInspectable public var roundBackgroundColor: UIColor = UIColor(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1) {
+    @IBInspectable public var roundBackgroundColor: UIColor = UIColor(red: 237.0/255.0, green: 237.0/255.0, blue: 236.0/255.0, alpha: 1.0) {
         didSet {
         }
     }
@@ -36,7 +36,7 @@ public class RoundTableviewCell: UITableViewCell {
         }
     }
 
-    let Margin: CGFloat = 10
+    let Margin: CGFloat = 15
     let shapeLayer = CAShapeLayer()
     let lineLayer = CALayer()
     let roundContentView: UIView = UIView()

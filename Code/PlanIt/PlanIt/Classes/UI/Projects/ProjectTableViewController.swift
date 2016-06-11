@@ -12,12 +12,9 @@ import UIKit
 class ProjectTableViewController: UITableViewController , UIPopoverPresentationControllerDelegate{
     @IBOutlet var projectTableView: UITableView!
     @IBOutlet weak var projectName: UILabel!
-    var tableViewBackgroundColor = UIColor(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1) {
-        didSet {
-        }
-    }
+
     var projects = [Project]()
-    var cellMargin : CGFloat = 10.0
+    var cellMargin : CGFloat = 15.0
     private struct Storyboard{
         static let CellReusIdentifier = "ProjectCell"
     }
@@ -32,11 +29,12 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         
     }
 
+    //点击创建新项目
     @IBAction func addProject(sender: UIBarButtonItem) {
+        //查找故事板中EditProject
         let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
         addNewProjectViewController.title = "新增项目"
         addNewProjectViewController.tableState = .Add
-        
         addNewProjectViewController.modalPresentationStyle = .Popover
         addNewProjectViewController.preferredContentSize = CGSizeMake(view.bounds.width * 0.8, view.bounds.height * 0.8)
         
@@ -58,11 +56,16 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         
         //不显示分割线
         self.tableView.separatorStyle = .None
-        self.tableView.sectionFooterHeight = 10
-        self.tableView.sectionHeaderHeight = 10
-        //设置naviagtioncontroller的空间颜色为白色
-        self.navigationController?.view.tintColor = UIColor.whiteColor()
-        self.tableView.backgroundColor = tableViewBackgroundColor
+        //上下2个cell的边距
+        self.tableView.sectionFooterHeight = 12
+        self.tableView.sectionHeaderHeight = 12
+
+        //设计背景色
+        self.tableView.backgroundColor = allBackground
+        
+        //去除导航栏分栏线
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -78,9 +81,11 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
     // MARK: - 跳转动作
     //新增进程
     func addProcess(sender: UIButton){
-        print("addProcess tag = \(sender.tag)")
-        if projects[sender.tag].type == ProjectType.Punch{
-            if projects[sender.tag].isFinished == ProjectIsFinished.NotFinished {
+        print("添加项目编号为\(sender.tag)进度")
+        //是否是未完成项目
+        if projects[sender.tag].isFinished == ProjectIsFinished.NotFinished{
+            //打卡项目
+            if projects[sender.tag].type == ProjectType.Punch{
                 let process = Process()
                 process.projectID = projects[sender.tag].id
                 let currentTime = NSDate()
@@ -91,21 +96,23 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
                 process.insertProcess()
                 ProcessDate().chengeData(projects[sender.tag].id, timeDate: currentTime, changeValue: 1.0)
                 projects[sender.tag].increaseDone(1.0)
+            //记录进度项目
+            }else if projects[sender.tag].type == ProjectType.Normal{
+                let popup = AddProcessView()
+                popup.showInView(self.view)
             }
-
-        }else{
-            let popup = AddProcessView()
-            popup.showInView(self.view)
-
         }
     }
     
     //单个项目页面
     func getMoreInfor(sender: UIButton){
-        print("getMoreInfor tag = \(sender.tag)")
+        print("打开项目编号为\(sender.tag)统计页面")
         let statisticsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Statistics") as! StatisticsViewController
-        statisticsViewController.view.backgroundColor = tableViewBackgroundColor
+        //设置view背景色
+        statisticsViewController.view.backgroundColor = allBackground
+        //设置每个cell的项目
         statisticsViewController.project = projects[sender.tag]
+        //压入导航栏
         self.navigationController?.pushViewController(statisticsViewController, animated: true)
         
     }
@@ -127,15 +134,33 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
 
         //配置cell
         cell.project = projects[indexPath.section]
-        
-        if projects[indexPath.section].isFinished == ProjectIsFinished.NotFinished{
+        cell.roundBackgroundColor = allBackground
+
+        //if projects[indexPath.section].isFinished == ProjectIsFinished.NotFinished{
             //新增进度按钮
-            let addProcessButton = UIButton(frame: CGRectMake(cell.frame.width - cell.frame.height - self.cellMargin , 0, cell.frame.height , cell.frame.height))
+            let addProcessFrame = CGRectMake(cell.frame.width - cell.frame.height - self.cellMargin , 0, cell.frame.height , cell.frame.height)
+            let addProcessButton = UIButton(frame: addProcessFrame)
             addProcessButton.tag = indexPath.section
-            addProcessButton.setImage(UIImage(named:"checked"), forState: .Normal)
+            
+            //根据不同任务类型使用不同的图标
+            var imageString = ""
+            switch(projects[indexPath.section].type){
+            case ProjectType.NoRecord:
+                imageString = "norecord"
+            case ProjectType.Punch:
+                imageString = "punch"
+            case ProjectType.Normal:
+                imageString = "record"
+            default:break
+            }
+            //读取图片
+            let buttonImage = UIImage(named: imageString)
+            //进行缩放
+            addProcessButton.setImage(buttonImage?.scaleToSize(CGSize(width: 30, height: 30)), forState: .Normal)
             addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
+            //添加按钮
             cell.addSubview(addProcessButton)
-        }
+        //}
         
         //单个项目页面按钮
         let getMoreInfor = UIButton(frame: CGRectMake(0, 0, cell.frame.width - cell.frame.height - self.cellMargin, cell.frame.height))
@@ -144,6 +169,8 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         getMoreInfor.setBackgroundImage(.None, forState: .Highlighted)
         getMoreInfor.addTarget(self, action: "getMoreInfor:", forControlEvents: .TouchUpInside)
         cell.addSubview(getMoreInfor)
+        
+        
         //cell.bringSubviewToFront(addProcessButton)
 //        cell.backgroundColor = UIColor.whiteColor()
 //        //设置cell圆角
@@ -204,5 +231,21 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         print("Should Dismiss popover")
         print(popoverPresentationController.popoverBackgroundViewClass)
         return true
+    }
+}
+
+
+extension UIImage{
+    func scaleToSize(size: CGSize) -> UIImage{
+        // 创建一个bitmap的context
+        // 并把它设置成为当前正在使用的context
+        UIGraphicsBeginImageContext(size)
+        // 绘制改变大小的图片
+        self.drawInRect(CGRectMake(0, 0, size.width, size.height))
+        // 从当前context中创建一个改变大小后的图片
+        let scaleImage = UIGraphicsGetImageFromCurrentImageContext()
+        // 使当前的context出堆栈
+        UIGraphicsEndImageContext()
+        return scaleImage
     }
 }

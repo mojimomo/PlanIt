@@ -21,7 +21,6 @@
 		BE28D4B11CF17B1600976490 /* PNValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A61CF17B1600976490 /* PNValue.swift */; };
 		BE28D4B21CF17B1600976490 /* view.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A71CF17B1600976490 /* view.swift */; };
 		BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */; };
-		BE4F02391CEF365F00126237 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4F02361CEF365F00126237 /* Info.plist */; };
 		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
 		BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */; };
@@ -35,6 +34,7 @@
 		BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FD1CEC922000DB1CBB /* RRTagCollectionViewCell.swift */; };
 		BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */; };
 		BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */; };
+		BE9ACE781D0BE2420097A76F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9ACE771D0BE2420097A76F /* Global.swift */; };
 		BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */; };
 		BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA520A31CCF417F00FFE43E /* Main.storyboard */; };
 		BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */; };
@@ -90,7 +90,6 @@
 		BE28D4A61CF17B1600976490 /* PNValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNValue.swift; sourceTree = "<group>"; };
 		BE28D4A71CF17B1600976490 /* view.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = view.swift; sourceTree = "<group>"; };
 		BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessesTableViewController.swift; path = ../Statistics/ProcessesTableViewController.swift; sourceTree = "<group>"; };
-		BE4F02361CEF365F00126237 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE4F02371CEF365F00126237 /* RoundTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundTableviewCell.h; sourceTree = "<group>"; };
 		BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableviewCell.swift; sourceTree = "<group>"; };
 		BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		BE7DF7FD1CEC922000DB1CBB /* RRTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagController.swift; sourceTree = "<group>"; };
 		BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		BE9ACE771D0BE2420097A76F /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		BEA5209C1CCF417F00FFE43E /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEA520A41CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -205,7 +205,6 @@
 		BE4F02351CEF365F00126237 /* RoundTableviewCell */ = {
 			isa = PBXGroup;
 			children = (
-				BE4F02361CEF365F00126237 /* Info.plist */,
 				BE4F02371CEF365F00126237 /* RoundTableviewCell.h */,
 				BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */,
 			);
@@ -328,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */,
+				BE9ACE771D0BE2420097A76F /* Global.swift */,
 			);
 			name = "Main(公共)";
 			path = Main;
@@ -590,7 +590,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE4F02391CEF365F00126237 /* Info.plist in Resources */,
 				BEA520AD1CCF417F00FFE43E /* LaunchScreen.storyboard in Resources */,
 				BEA520AA1CCF417F00FFE43E /* Assets.xcassets in Resources */,
 				BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */,
@@ -630,6 +629,7 @@
 				BE28D4AD1CF17B1600976490 /* PNChartDelegate.swift in Sources */,
 				BE28D4AC1CF17B1600976490 /* PNChartConfig.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
+				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
