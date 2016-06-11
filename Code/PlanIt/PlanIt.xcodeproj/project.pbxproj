@@ -35,6 +35,7 @@
 		BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */; };
 		BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */; };
 		BE9ACE781D0BE2420097A76F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9ACE771D0BE2420097A76F /* Global.swift */; };
+		BE9ACE7A1D0C03B30097A76F /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9ACE791D0C03B30097A76F /* PieChartView.swift */; };
 		BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */; };
 		BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA520A31CCF417F00FFE43E /* Main.storyboard */; };
 		BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */; };
@@ -53,7 +54,6 @@
 		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
 		BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */; };
 		BEF016A11CF03453004DC646 /* JKBlurPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF016A01CF03453004DC646 /* JKBlurPopup.swift */; };
-		BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2F0A21CDC885800E21264 /* PieChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +105,7 @@
 		BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagController.swift; sourceTree = "<group>"; };
 		BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
 		BE9ACE771D0BE2420097A76F /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		BE9ACE791D0C03B30097A76F /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = PlanIt/Classes/UI/Projects/PieChartView.swift; sourceTree = SOURCE_ROOT; };
 		BEA5209C1CCF417F00FFE43E /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEA520A41CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,7 +131,6 @@
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
 		BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessView.swift; sourceTree = "<group>"; };
 		BEF016A01CF03453004DC646 /* JKBlurPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKBlurPopup.swift; sourceTree = "<group>"; };
-		BEF2F0A21CDC885800E21264 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = ../Projects/PieChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,7 +353,7 @@
 		BE802AFD1CCF55540092F2DE /* Other(其他) */ = {
 			isa = PBXGroup;
 			children = (
-				BEF2F0A21CDC885800E21264 /* PieChartView.swift */,
+				BE9ACE791D0C03B30097A76F /* PieChartView.swift */,
 			);
 			name = "Other(其他)";
 			path = Other;
@@ -617,7 +617,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEF2F0A31CDC885800E21264 /* PieChartView.swift in Sources */,
+				BE9ACE7A1D0C03B30097A76F /* PieChartView.swift in Sources */,
 				BE28D4AE1CF17B1600976490 /* PNChartLabel.swift in Sources */,
 				BE28D4B01CF17B1600976490 /* PNLineChartData.swift in Sources */,
 				BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */,

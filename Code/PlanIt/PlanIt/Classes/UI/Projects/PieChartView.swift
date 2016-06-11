@@ -29,9 +29,9 @@ class PieChartView: UIView {
         }
     }
     //颜色
-    var color: UIColor = UIColor.blueColor()
+    var color: UIColor = UIColor ( red: 0.9569, green: 0.3647, blue: 0.0, alpha: 1.0 )
     //外圈颜色 默认灰色
-    var outGroundColor: UIColor = UIColor(red: 240 / 255, green: 240 / 255, blue: 250 / 255, alpha: 0.5)
+    var outGroundColor: UIColor = UIColor(red: 202.4 / 255, green: 217.9 / 255, blue: 244.7 / 255, alpha: 1.0)
     //饼图中心坐标
     var pieChartCenter: CGPoint{
         return convertPoint(center, fromView: superview)
@@ -56,8 +56,6 @@ class PieChartView: UIView {
         percentLabel.font = UIFont.boldSystemFontOfSize(24)
         self.addSubview(percentLabel)
         
-        //设置背景为白色
-        self.backgroundColor = UIColor.whiteColor()
         //画外圈园
         let pieChartPath = UIBezierPath(arcCenter: pieChartCenter, radius: pieChartRadius, startAngle: 0, endAngle: CGFloat(2*M_PI), clockwise: true)
         pieChartPath.lineWidth = lineWidth
