@@ -27,7 +27,7 @@
 		BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE68E5481CE9B658006A1750 /* TagsViewController.swift */; };
 		BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */; };
 		BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09321CD9C373008AABCD /* ProcessModel.swift */; };
-		BE6E09351CD9D45E008AABCD /* ProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09341CD9D45E008AABCD /* ProjectTableViewController.swift */; };
+		BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */; };
 		BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */; };
 		BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6EEBB61CF4220E0085A9E7 /* StatisticsViewController.swift */; };
 		BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FC1CEC922000DB1CBB /* RRAddTagView.swift */; };
@@ -97,7 +97,7 @@
 		BE68E5481CE9B658006A1750 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagMapModel.swift; sourceTree = "<group>"; };
 		BE6E09321CD9C373008AABCD /* ProcessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessModel.swift; sourceTree = "<group>"; };
-		BE6E09341CD9D45E008AABCD /* ProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewController.swift; sourceTree = "<group>"; };
+		BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		BE6EEBB61CF4220E0085A9E7 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		BE7DF7FC1CEC922000DB1CBB /* RRAddTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRAddTagView.swift; sourceTree = "<group>"; };
@@ -362,7 +362,7 @@
 		BE802AFE1CCF55540092F2DE /* Projects(项目列表) */ = {
 			isa = PBXGroup;
 			children = (
-				BE6E09341CD9D45E008AABCD /* ProjectTableViewController.swift */,
+				BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */,
 				BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */,
 				BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */,
 			);
@@ -633,7 +633,7 @@
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
-				BE6E09351CD9D45E008AABCD /* ProjectTableViewController.swift in Sources */,
+				BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */,
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
 				BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */,
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,

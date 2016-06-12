@@ -9,8 +9,13 @@
 import UIKit
 @IBDesignable
 
-class ProjectTableViewController: UITableViewController , UIPopoverPresentationControllerDelegate{
-    @IBOutlet var projectTableView: UITableView!
+class ProjectViewController: UIViewController , UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource{
+    @IBOutlet weak var projectTableView: UITableView!{
+        didSet{
+            projectTableView.delegate = self
+            projectTableView.dataSource = self
+        }
+    }
     @IBOutlet weak var projectName: UILabel!
 
     //添加项目按钮也
@@ -63,13 +68,13 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         super.viewDidLoad()
         
         //不显示分割线
-        self.tableView.separatorStyle = .None
+        self.projectTableView.separatorStyle = .None
         //上下2个cell的边距
-        self.tableView.sectionFooterHeight = 13
-        self.tableView.sectionHeaderHeight = 13
+        self.projectTableView.sectionFooterHeight = 13
+        self.projectTableView.sectionHeaderHeight = 13
 
         //设计背景色
-        self.tableView.backgroundColor = allBackground
+        self.projectTableView.backgroundColor = allBackground
         
         //去除导航栏分栏线
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
@@ -97,7 +102,7 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         //读取数据按照id顺序排序
         projects = Project().loadAllData()
         //更新表格
-        self.tableView.reloadData()
+        self.projectTableView.reloadData()
 
     }
     
@@ -150,7 +155,7 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
     }
 
     // MARK: - UITableViewDataSource
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if projects.count != 0{
             return projects.count + 1
         }
@@ -158,13 +163,13 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
     }
     
     //确定行数
-    override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
+    func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
         return 1
     }
     
     //配置cell内容
-    override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
+    func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
+        let cell = self.projectTableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
         //判断是否是最后一个统计行
         if ((projects.count != 0) && (indexPath.section == projects.count)){
             cell.projectName = ""
