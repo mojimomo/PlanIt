@@ -13,8 +13,16 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
     @IBOutlet var projectTableView: UITableView!
     @IBOutlet weak var projectName: UILabel!
 
+    //添加项目按钮也
+    var addProjectButton: UIButton?
+    //项目列表
     var projects = [Project]()
+    //cell边距
     var cellMargin : CGFloat = 15.0
+    //添加新项目底部边距
+    var addProjectButtonMargin : CGFloat = 15.0
+    //添加按钮尺寸
+    var addProjectButtonSize : CGSize = CGSize(width: 0, height: 0)
     private struct Storyboard{
         static let CellReusIdentifier = "ProjectCell"
     }
@@ -57,8 +65,8 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         //不显示分割线
         self.tableView.separatorStyle = .None
         //上下2个cell的边距
-        self.tableView.sectionFooterHeight = 12
-        self.tableView.sectionHeaderHeight = 12
+        self.tableView.sectionFooterHeight = 13
+        self.tableView.sectionHeaderHeight = 13
 
         //设计背景色
         self.tableView.backgroundColor = allBackground
@@ -66,6 +74,21 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         //去除导航栏分栏线
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
+        
+        
+        if let addImage = UIImage(named: "add"){
+            //获取导航栏高度
+            let rectNav = self.navigationController?.navigationBar.frame
+            //获取静态栏的高度
+            let rectStatus = UIApplication.sharedApplication().statusBarFrame
+            //添加按钮
+            addProjectButtonSize = addImage.size
+            addProjectButton = UIButton(frame: CGRectMake((self.view.bounds.size.width - addImage.size.width)/2 , self.view.bounds.size.height - addImage.size.height - rectNav!.size.height - rectStatus.size.height - addProjectButtonMargin, addImage.size.width, addImage.size.height))
+            addProjectButton?.setImage(addImage, forState: .Normal)
+            self.view.addSubview(addProjectButton!)
+            self.view.bringSubviewToFront(addProjectButton!)
+
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -77,6 +100,15 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         self.tableView.reloadData()
 
     }
+    
+//    override func  scrollViewDidScroll(scrollView: UIScrollView) {
+//        //获取导航栏高度
+//        let rectNav = self.navigationController?.navigationBar.frame
+//        //获取静态栏的高度
+//        let rectStatus = UIApplication.sharedApplication().statusBarFrame
+//        //设置按钮位置
+//        addProjectButton?.frame = CGRectMake((self.view.bounds.size.width - addProjectButtonSize.width)/2 , self.tableView.contentOffset.y + self.view.bounds.size.height - addProjectButtonSize.height - rectNav!.size.height - rectStatus.size.height - addProjectButtonMargin, addProjectButtonSize.width, addProjectButtonSize.height)
+//    }
     
     // MARK: - 跳转动作
     //新增进程
@@ -116,10 +148,13 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
         self.navigationController?.pushViewController(statisticsViewController, animated: true)
         
     }
-    
+
     // MARK: - UITableViewDataSource
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return projects.count
+        if projects.count != 0{
+            return projects.count + 1
+        }
+        return 0
     }
     
     //确定行数
@@ -129,14 +164,30 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
     
     //配置cell内容
     override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
-
-        //配置cell
-        cell.project = projects[indexPath.section]
-        cell.roundBackgroundColor = allBackground
-
-        //if projects[indexPath.section].isFinished == ProjectIsFinished.NotFinished{
+        //判断是否是最后一个统计行
+        if ((projects.count != 0) && (indexPath.section == projects.count)){
+            cell.projectName = ""
+            cell.roundFrontColor = allBackground
+            cell.selectedColor = allBackground
+            
+            //添加统计label
+            let countLabel = UILabel(frame: .zero)
+            countLabel.text = "\(projects.count)个项目"
+            countLabel.font = UIFont(name: "System", size: 6)
+            countLabel.textColor = UIColor.grayColor()
+            countLabel.textAlignment = .Center
+            
+            countLabel.sizeToFit()
+            countLabel.backgroundColor = UIColor.clearColor()
+            countLabel.center = CGPointMake(cell.center.x, 20)
+            cell.addSubview(countLabel)
+        }else{
+            //配置cell
+            cell.project = projects[indexPath.section]
+            cell.roundBackgroundColor = allBackground
+            
+            //if projects[indexPath.section].isFinished == ProjectIsFinished.NotFinished{
             //新增进度按钮
             let addProcessFrame = CGRectMake(cell.frame.width - cell.frame.height - self.cellMargin , 0, cell.frame.height , cell.frame.height)
             let addProcessButton = UIButton(frame: addProcessFrame)
@@ -153,22 +204,32 @@ class ProjectTableViewController: UITableViewController , UIPopoverPresentationC
                 imageString = "record"
             default:break
             }
+            
+            let processView = UIProgressView(frame: cell.frame)
+            processView.setProgress(1.0 , animated: true)
+            cell.addSubview(processView)
+            cell.backgroundView = processView
+            
             //读取图片
             let buttonImage = UIImage(named: imageString)
-            //进行缩放
-            addProcessButton.setImage(buttonImage?.scaleToSize(CGSize(width: 30, height: 30)), forState: .Normal)
+            //进行缩
+            addProcessButton.setImage(buttonImage, forState: .Normal)
             addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
             //添加按钮
             cell.addSubview(addProcessButton)
-        //}
+            //}
+            
+            //单个项目页面按钮
+            let getMoreInfor = UIButton(frame: CGRectMake(0, 0, cell.frame.width - cell.frame.height - self.cellMargin, cell.frame.height))
+            getMoreInfor.tag = indexPath.section
+            getMoreInfor.setBackgroundImage(.None, forState: .Normal)
+            getMoreInfor.setBackgroundImage(.None, forState: .Highlighted)
+            getMoreInfor.addTarget(self, action: "getMoreInfor:", forControlEvents: .TouchUpInside)
+            cell.addSubview(getMoreInfor)
+        }
         
-        //单个项目页面按钮
-        let getMoreInfor = UIButton(frame: CGRectMake(0, 0, cell.frame.width - cell.frame.height - self.cellMargin, cell.frame.height))
-        getMoreInfor.tag = indexPath.section
-        getMoreInfor.setBackgroundImage(.None, forState: .Normal)
-        getMoreInfor.setBackgroundImage(.None, forState: .Highlighted)
-        getMoreInfor.addTarget(self, action: "getMoreInfor:", forControlEvents: .TouchUpInside)
-        cell.addSubview(getMoreInfor)
+        
+
         
         
         //cell.bringSubviewToFront(addProcessButton)

@@ -29,7 +29,7 @@ class PieChartView: UIView {
         }
     }
     //颜色
-    var color: UIColor = UIColor ( red: 0.9569, green: 0.3647, blue: 0.0, alpha: 1.0 )
+    var color: UIColor = UIColor ( red: 0.9804, green: 0.0, blue: 0.0, alpha: 1.0 )
     //外圈颜色 默认灰色
     var outGroundColor: UIColor = UIColor(red: 202.4 / 255, green: 217.9 / 255, blue: 244.7 / 255, alpha: 1.0)
     //饼图中心坐标

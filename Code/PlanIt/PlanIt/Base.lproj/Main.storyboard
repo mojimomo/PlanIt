@@ -12,35 +12,35 @@
         <scene sceneID="tKV-CL-beP">
             <objects>
                 <tableViewController id="7rf-IV-wHQ" customClass="ProjectTableViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="40g-b7-agL">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="40g-b7-agL">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="50" id="5R4-h6-Zsr" customClass="ProjectTableViewCell" customModule="PlanIt" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="600" height="50"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="44" id="5R4-h6-Zsr" customClass="ProjectTableViewCell" customModule="PlanIt" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5R4-h6-Zsr" id="Mwh-KG-77K">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PF5-ju-W3d">
-                                            <rect key="frame" x="8" y="8" width="20" height="33.5"/>
+                                            <rect key="frame" x="8" y="8" width="20" height="27.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="Wa1-Wu-Sf9"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hQ-VI-p9f">
-                                            <rect key="frame" x="522" y="8" width="70" height="33.5"/>
+                                            <rect key="frame" x="522" y="8" width="70" height="27.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="FXO-O1-qt0"/>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mke-8K-sPI">
-                                            <rect key="frame" x="36" y="8" width="478" height="33.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="36" y="8" width="478" height="27.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -85,7 +85,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="项目" id="7YK-Dm-7a9">
-                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="84B-mB-PS7">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="84B-mB-PS7">
                             <connections>
                                 <action selector="CallMenu:" destination="7rf-IV-wHQ" id="lqj-qW-56F"/>
                             </connections>
@@ -629,6 +629,7 @@
                         <color key="tintColor" red="0.88235294119999996" green="0.20000000000000001" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                             <color key="textColor" red="0.88235294117647056" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
@@ -682,16 +683,16 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.77777777777777779" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tagSelectedBackgroundColor">
-                                                <color key="value" red="0.97254901959999995" green="0.46666666670000001" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="tagHighlightedBackgroundColor">
                                                 <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="tagHighlightedBackgroundColor">
+                                                <color key="value" red="0.71464646464646464" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                <color key="value" red="0.97254901959999995" green="0.46666666670000001" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.9761140819964349" green="0.10853060203560684" blue="0.19920865531464194" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
@@ -712,7 +713,7 @@
                                     </view>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CNQ-UT-ZBX">
                                         <rect key="frame" x="28" y="147" width="252" height="2"/>
-                                        <color key="tintColor" red="0.97254901959999995" green="0.46666666670000001" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="152" id="R4d-fs-C3a"/>
                                         </constraints>
@@ -1006,4 +1007,7 @@
             <point key="canvasLocation" x="784" y="57"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu" width="17" height="17"/>
+    </resources>
 </document>

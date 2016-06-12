@@ -62,6 +62,17 @@ class ProjectTableViewCell: RoundTableviewCell {
         projectPercent = 0.0
         
         if let project = self.project{
+            //根据不同状态更改项目名称颜色
+            switch(project.isFinished){
+            case ProjectIsFinished.NotBegined:
+                projectNameLabel?.textColor = notBeginFontColor
+            case ProjectIsFinished.NotFinished:
+                projectNameLabel?.textColor = notFinishedFontColor
+            case ProjectIsFinished.Finished:
+                projectNameLabel?.textColor = FinishedFontColor
+            default:break
+            }
+            
             projectName = project.name
             projectStatus = "\(project.rest)"
             projectTag = project.tagString

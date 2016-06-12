@@ -18,3 +18,9 @@ let navigationTintColor = UIColor ( red: 0.898, green: 0.1961, blue: 0.251, alph
 let navigationFontColor = UIColor ( red: 0.898, green: 0.1961, blue: 0.251, alpha: 1.0 )
 //背景色
 let allBackground = UIColor ( red: 0.9294, green: 0.9294, blue: 0.9255, alpha: 1.0 )
+//推迟字体颜色
+let FinishedFontColor = UIColor ( red: 0.898, green: 0.1961, blue: 0.251, alpha: 1.0 )
+//正常字体颜色
+let notFinishedFontColor = UIColor.blackColor()
+//未开始字体颜色
+let notBeginFontColor = UIColor.blackColor()
