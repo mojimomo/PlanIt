@@ -35,12 +35,12 @@ class ProcessesTableViewController: UITableViewController {
 
     
     // MARK: - UITableViewDataSource
-    //确定行数
+    ///确定行数
     override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
         return processes.count
     }
     
-    //配置cell内容
+    ///配置cell内容
     override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {        
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProcessTableViewCell
         

@@ -8,13 +8,13 @@
 
 import Foundation
 
-//TagMapModel
+///标签映射Model
 class TagMap: NSObject{
-    //标签映射序号
+    ///标签映射序号
     var id: Int = -1
-    //标签序号
+    ///标签序号
     var tagID: Int = -1
-    //项目序号
+    ///项目序号
     var projectID: Int = -1
     
     override init() {
@@ -36,7 +36,7 @@ class TagMap: NSObject{
     }
     
     //MARK:- 数据操作
-    //通过项目查找标签
+    ///通过项目查找标签
     func searchTagFromProject(project: Project) -> [Tag]{
         var tags = [Tag]()
         var tagMaps = [TagMap]()
@@ -49,7 +49,7 @@ class TagMap: NSObject{
         return tags
     }
     
-    //通过标签查找项目
+    ///通过标签查找项目
     func searchProjectFromTag(tag: Tag) -> [Project]{
         var projects = [Project]()
         var tagMaps = [TagMap]()
@@ -104,7 +104,7 @@ class TagMap: NSObject{
         return tagMaps
     }
     
-    //添加新的标签
+    ///添加新的标签
     func insertTagMap() -> Bool{
         // 1.获取插入的SQL语句
         let insertSQL = "INSERT INTO t_tagmap (tagID, projectID) VALUES ('\(tagID)', '\(projectID)');"
@@ -119,7 +119,7 @@ class TagMap: NSObject{
         }
     }
     
-    //删除此进程
+    ///删除此进程
     func deleteTagMap() -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_tagmap WHERE id = '\(id)';"
@@ -134,7 +134,7 @@ class TagMap: NSObject{
         }
     }
 
-    //更具tag和project删除进程
+    ///更具tag和project删除进程
     func deleteTagMap(tag: Tag, project: Project) -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_tagmap WHERE tagID = '\(tag.id)' and projectID = '\(project.id)';"
@@ -149,7 +149,7 @@ class TagMap: NSObject{
         }
     }
     
-    //根据project删除进程
+    ///根据project删除进程
     func deleteTagMapWithProject(project: Project) -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_tagmap WHERE projectID = '\(project.id)';"
@@ -164,7 +164,7 @@ class TagMap: NSObject{
         }
     }
     
-    //更具tag删除进程
+    ///更具tag删除进程
     func deleteTagMapWithTag(tag: Tag) -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_tagmap WHERE tagID = '\(tag.id)' ;"

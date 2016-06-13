@@ -14,34 +14,34 @@ protocol PieChartDataSource: class {
 
 class PieChartView: UIView {
 
-    //数据源
+    ///数据源
     weak var dataSource: PieChartDataSource?
-    //饼图宽
+    ///饼图宽
     var lineWidth: CGFloat = 18{
         didSet{
             setNeedsDisplay()
         }
     }
-    //饼图缩放尺寸
+    ///饼图缩放尺寸
     var scale:CGFloat = 0.9{
         didSet{
             setNeedsDisplay()
         }
     }
-    //颜色
+    ///颜色
     var color: UIColor = UIColor ( red: 0.9804, green: 0.0, blue: 0.0, alpha: 1.0 )
-    //外圈颜色 默认灰色
+    ///外圈颜色 默认灰色
     var outGroundColor: UIColor = UIColor(red: 202.4 / 255, green: 217.9 / 255, blue: 244.7 / 255, alpha: 1.0)
-    //饼图中心坐标
+    ///饼图中心坐标
     var pieChartCenter: CGPoint{
         return convertPoint(center, fromView: superview)
     }
-    //饼图半径
+    ///饼图半径
     var pieChartRadius:CGFloat{
         return min(bounds.size.height, bounds.size.width)/2*scale
     }
     
-    //画图
+    ///画图
     override func drawRect(rect: CGRect) {
         //清除所有空间
         for object in self.subviews{

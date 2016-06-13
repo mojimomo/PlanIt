@@ -8,39 +8,41 @@
 
 import Foundation
 
-//项目类别
-struct ProjectType {
-    //未设置
-    static let NoSet = -1
-    //正常类型
-    static let Normal = 0
-    //不记录类型
-    static let NoRecord = 1
-    //签到类型
-    static let Punch = 2
+///项目类别
+enum ProjectType: Int{
+    ///未设置
+    case NoSet = -1
+    ///正常类型
+    case Normal = 0
+    ///不记录类型
+    case NoRecord = 1
+    ///签到类型
+    case Punch = 2
 }
 
-//项目是否完成
-struct ProjectIsFinished {
-    //未设置
-    static let NoSet = -1
-    //未完成
-    static let NotFinished = 0
-    //已完成
-    static let Finished = 1
-    //未开始
-    static let NotBegined = 2
+///项目是否完成
+enum ProjectIsFinished: Int{
+    ///未设置
+    case  NoSet = -1
+    ///未完成
+    case  NotFinished = 0
+    ///已完成
+    case Finished = 1
+    ///未开始
+    case NotBegined = 2
+    ///超时
+    case OverTime = 3
 }
 
-//项目model
+///项目model
 class Project: NSObject {
-    //项目编号
+    ///项目编号
     var id: Int = -1
-    //项目名称
+    ///项目名称
     var name = ""
-    //项目类型
-    var type: Int = ProjectType.NoRecord
-    //项目开始时间
+    ///项目类型
+    var type: ProjectType = .NoRecord
+    ///项目开始时间
     var beginTime = ""{
         didSet{
             if beginTime != ""{
@@ -51,7 +53,7 @@ class Project: NSObject {
         }
     }
     
-    //项目结束时间
+    ///项目结束时间
     var endTime = ""{
         didSet{
             if endTime != ""{
@@ -62,23 +64,23 @@ class Project: NSObject {
         }
     }
 
-    //任务单位
+    ///任务单位
     var unit = ""
-    //任务总量
+    ///任务总量
     var total: Double = 0.0
-    //是否完成
-    var isFinished: Int = ProjectIsFinished.NoSet
-    //完成量
+    ///是否完成
+    var isFinished: ProjectIsFinished = .NoSet
+    ///完成量
     var complete: Double = 0.0
-    //剩余量
+    ///剩余量
     var rest: Double = 0.0
-    //标签
+    ///标签
     var tags = [Tag]()
-    //标签字符串
+    ///标签字符串
     var tagString = ""
-    //百分比
+    ///百分比
     var percent = 0.0
-    //备注
+    ///备注
     //var remark: String?
     var beginTimeDate = NSDate()
     var endTimeDate = NSDate()
@@ -92,14 +94,14 @@ class Project: NSObject {
         //setValuesForKeysWithDictionary(dict)
         id = dict["id"]!.integerValue
         name = String(dict["name"]!)
-        type = dict["type"]!.integerValue
+        type = ProjectType(rawValue: dict["type"]!.integerValue)!
         beginTime = String(dict["beginTime"]!)
         endTime = String(dict["endTime"]!)
         unit = String(dict["unit"]!)
         total = dict["total"]!.doubleValue
         complete = dict["complete"]!.doubleValue
         rest = dict["rest"]!.doubleValue
-        if type != ProjectType.NoRecord{
+        if type != .NoRecord{
             if total != 0{
                 percent = complete * 100 / total
             }
@@ -111,14 +113,19 @@ class Project: NSObject {
         //计算是否完成
         setNewProjectTime(beginTime, endTime: endTime)
         if complete == total{
-            isFinished = ProjectIsFinished.Finished
+            isFinished = .Finished
         }else if complete < total{
-            isFinished = ProjectIsFinished.NotFinished
+            //计算是否超时
+            if  endTimeDate.timeIntervalSinceNow < 0{
+                isFinished = .OverTime
+            }else{
+                isFinished = .NotFinished
+            }
         }
     }
 
     // MARK:- 数据操作
-    //新建项目设置总量
+    ///新建项目设置总量
     func setNewProjectTotal(total: Double){
         self.total = total
         self.complete = 0
@@ -126,12 +133,12 @@ class Project: NSObject {
     }
     
     func increaseDone(done: Double){
-        if type != ProjectType.NoRecord{
+        if type != .NoRecord{
             complete += done
             rest -= done
             percent = complete * 100 / total
             if complete >= total{
-                isFinished = ProjectIsFinished.Finished
+                isFinished = .Finished
                 complete = total
                 rest = 0
                 percent = 100.0
@@ -144,7 +151,7 @@ class Project: NSObject {
         }
     }
     
-    //新建项目设置时间
+    ///新建项目设置时间
     func setNewProjectTime(beginTime: String, endTime: String) -> Bool{
         if beginTime != "" && endTime != ""
         {
@@ -152,38 +159,45 @@ class Project: NSObject {
             self.endTime = endTime
             let nowTimeDate = NSDate()
             //初始化项目状态
-            self.isFinished = ProjectIsFinished.NoSet
+            self.isFinished = .NoSet
             //开始时间<结束时间
             if beginTimeDate.compare(endTimeDate) == NSComparisonResult.OrderedAscending{
                 //开始时间>现在时间
                 if beginTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedDescending{
-                    self.isFinished = ProjectIsFinished.NotBegined
+                    self.isFinished = .NotBegined
                     //结束时间<现在时间
                 }else if endTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedAscending{
-                    self.isFinished = ProjectIsFinished.Finished
+                    //不记录时间项目
+                    if self.type == .NoRecord{
+                        self.isFinished = .Finished
+                    }else if complete < total{
+                        self.isFinished = .OverTime
+                    }else{
+                        self.isFinished = .Finished
+                    }
                     //结束时间>现在时间
                 }else if endTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedDescending{
-                    self.isFinished = ProjectIsFinished.NotFinished
+                    self.isFinished = .NotFinished
                 }
             }
         }
-        if self.isFinished != ProjectIsFinished.NoSet{
+        if self.isFinished != .NoSet{
             return true
         }else{
             return false
         }
     }
     
-    //判断project数据是否有缺漏
+    ///判断project数据是否有缺漏
     func check() -> Bool {
         //判断项目前面3个属性是否为空
         if  name != "" &&  beginTime !=  "" && endTime != "" {
-            if type == ProjectType.Normal ||  type == ProjectType.Punch {
-                if unit != "" && total != 0 && isFinished != ProjectIsFinished.NoSet
+            if type == .Normal ||  type == .Punch {
+                if unit != "" && total != 0 && isFinished != .NoSet
                     && total != 0 && rest != 0{
                     return true
                 }
-            }else if type == ProjectType.NoRecord{
+            }else if type == .NoRecord{
                return true
             }
         }
@@ -191,7 +205,7 @@ class Project: NSObject {
         return false
     }
  
-    //刷新tags
+    ///刷新tags
     func freshenTags(){
         //如果id不等于默认值
         if id != -1{
@@ -267,6 +281,7 @@ class Project: NSObject {
         return projects[0].id
     }
     
+    ///插入本项目
     func insertProject() -> Bool{
         
         // 1.获取插入的SQL语句
@@ -292,6 +307,7 @@ class Project: NSObject {
         }
     }
     
+    ///更新本项目
     func updateProject() -> Bool{
         //删除之前的映射关系
         deleteTags()
@@ -312,6 +328,7 @@ class Project: NSObject {
         }
     }
    
+    ///删除本项目
     func deleteProject() -> Bool{
         //删除之前的映射关系
         deleteTags()
@@ -329,7 +346,7 @@ class Project: NSObject {
         }
     }
     
-    //保存映射关系
+    ///保存映射关系
     func saveTags(){
         //保存现有的映射关系
         for tag in tags{
@@ -338,7 +355,7 @@ class Project: NSObject {
         }
     }
     
-    //删除之前映射关系
+    ///删除之前映射关系
     func deleteTags(){
         TagMap().deleteTagMapWithProject(self)
     }

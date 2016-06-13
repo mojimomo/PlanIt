@@ -8,14 +8,15 @@
 
 import Foundation
 
-//TagModel
+//标签Model
 class Tag: NSObject{
-    //标签序号
+    ///标签序号
     var id: Int = -1
-    //标签名称
+    ///标签名称
     var name = ""
-    
+    ///是否被选中
     var isSelected = false
+    ///是否被锁定
     var isLocked = false
     var textContent = ""
     
@@ -80,7 +81,7 @@ class Tag: NSObject{
         return tags[0]
     }
     
-    //添加新的标签
+    ///添加新的标签
     func insertTag() -> Bool{
         // 1.获取插入的SQL语句
         let insertSQL = "INSERT INTO t_tag (name) VALUES ('\(name)');"
@@ -95,7 +96,7 @@ class Tag: NSObject{
         }
     }
     
-    //删除此进程
+    ///删除此进程
     func deleteTag() -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_tag WHERE id = '\(id)';"

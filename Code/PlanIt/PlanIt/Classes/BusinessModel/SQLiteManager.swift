@@ -9,7 +9,7 @@
 import UIKit
 
 class SQLiteManager: NSObject {
-    // let修饰常量是线程安全
+    /// let修饰常量是线程安全
     static let shareIntance : SQLiteManager = SQLiteManager()
     let dbName = "db.sqlite3"
     

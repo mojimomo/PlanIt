@@ -10,11 +10,11 @@ import Foundation
 
 //ProcessModel
 class Process: NSObject {
-    //进度序号
+    ///进度序号
     var id: Int = -1
-    //项目序号
+    ///项目序号
     var projectID: Int = -1
-    //记录时间
+    ///记录时间
     var recordTime = ""{
         didSet{
             if recordTime != ""{
@@ -24,11 +24,11 @@ class Process: NSObject {
             }
         }
     }
-    //完成工作量
+    ///完成工作量
     var done: Double = -1
-    //记录时间
+    ///记录时间
     var recordTimeDate = NSDate()
-    //备注
+    ///备注
     var remark = ""
     
     override init() {
@@ -88,7 +88,7 @@ class Process: NSObject {
         return processes
     }
     
-    //添加新的进程
+    ///添加新的进程
     func insertProcess() -> Bool{
         // 1.获取插入的SQL语句
         let insertSQL = "INSERT INTO t_process (projectID, recordTime, done, remark) VALUES ('\(projectID)', '\(recordTime)', '\(done)', '\(remark)');"
@@ -103,7 +103,7 @@ class Process: NSObject {
         }
     }
     
-    //删除此进程
+    ///删除此进程
     func deleteProcess() -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_process WHERE id = '\(id)';"

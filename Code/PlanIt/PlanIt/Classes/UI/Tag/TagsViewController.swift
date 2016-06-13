@@ -41,13 +41,13 @@ class TagsViewController: UITableViewController {
     }
     
     // MARK: - UITableViewDataSource
-    //确定行数
+    ///确定行数
     override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
         let cnt = tags.count
         return cnt
     }
     
-    //配置cell内容
+    ///配置cell内容
     override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath)
@@ -56,7 +56,7 @@ class TagsViewController: UITableViewController {
         return cell
     }
     
-    //点击某个单元格触发的方法
+    ///点击某个单元格触发的方法
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //设置单元格打勾
         let cell = tableView.cellForRowAtIndexPath(indexPath)

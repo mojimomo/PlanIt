@@ -9,11 +9,11 @@
 import Foundation
 //ProcessDateModel
 class ProcessDate: NSObject {
-    //进度序号
+    ///进度序号
     var id: Int = -1
-    //项目序号
+    ///项目序号
     var projectID: Int = -1
-    //记录时间
+    ///记录时间
     var recordTime = ""{
         didSet{
             if recordTime != ""{
@@ -23,9 +23,9 @@ class ProcessDate: NSObject {
             }
         }
     }
-    //完成工作量
+    ///完成工作量
     var done: Double = -1
-    //记录时间
+    ///记录时间
     var recordTimeDate = NSDate()
     
     override init() {
@@ -63,7 +63,7 @@ class ProcessDate: NSObject {
         return processDates
     }
     
-    //检查记录是否存在
+    ///检查记录是否存在
     func checkIsExist(projectID: Int, timeString: String) -> ProcessDate?{
         // 1.获取查询语句
         let querySQL = "SELECT * FROM t_processdate WHERE projectID = \(projectID) and recordTime = \(timeString) ;"
@@ -83,7 +83,7 @@ class ProcessDate: NSObject {
         return nil
     }
 
-    //新插入数据
+    ///新插入数据
     func insertProcessDate() -> Bool{
         // 1.获取插入的SQL语句
         let insertSQL = "INSERT INTO t_processdate (projectID, recordTime, done) VALUES ('\(projectID)', '\(recordTime)', '\(done)');"
@@ -98,7 +98,7 @@ class ProcessDate: NSObject {
         }
     }
     
-    //更新数据
+    ///更新数据
     func updateProcessDate() -> Bool{
         
         // 1.获取修改的SQL语句
@@ -114,7 +114,7 @@ class ProcessDate: NSObject {
         }
     }
     
-    //改变数据
+    ///改变数据
     func chengeData(projectID: Int, timeDate: NSDate, changeValue: Double){
         let dateFormat = NSDateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")

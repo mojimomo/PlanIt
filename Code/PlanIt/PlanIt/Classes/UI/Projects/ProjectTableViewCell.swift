@@ -18,13 +18,13 @@ class ProjectTableViewCell: RoundTableviewCell {
     @IBOutlet weak var projectNameButton: UIButton!
     @IBOutlet weak var addProcessButton: UIButton!
     
-    //当前项目
+    ///当前项目
     var project: Project?{
         didSet{
             updateUI()
         }
     }
-    //当前项目名称
+    ///当前项目名称
     var projectName: String{
         set{
             projectNameLabel?.text = newValue
@@ -33,7 +33,7 @@ class ProjectTableViewCell: RoundTableviewCell {
             return (projectNameLabel?.text)!
         }
     }
-    //当前项目状态
+    ///当前项目状态
     var projectStatus: String{
         set{	
             projectStatusLabel?.text = newValue
@@ -42,7 +42,7 @@ class ProjectTableViewCell: RoundTableviewCell {
             return (projectStatusLabel?.text)!
         }
     }
-    //当前项目tag
+    ///当前项目tag
     var projectTag: String{
         set{
             projectTagLabel?.text = newValue
@@ -51,10 +51,10 @@ class ProjectTableViewCell: RoundTableviewCell {
             return (projectTagLabel?.text)!
         }
     }
-    //项目完成百分比
+    ///项目完成百分比
     var projectPercent = 0.0
 
-    //更新界面
+    ///更新界面
     func updateUI(){
         projectName = ""
         projectStatus = ""
@@ -64,12 +64,14 @@ class ProjectTableViewCell: RoundTableviewCell {
         if let project = self.project{
             //根据不同状态更改项目名称颜色
             switch(project.isFinished){
-            case ProjectIsFinished.NotBegined:
+            case .NotBegined:
                 projectNameLabel?.textColor = notBeginFontColor
-            case ProjectIsFinished.NotFinished:
+            case .NotFinished:
                 projectNameLabel?.textColor = notFinishedFontColor
-            case ProjectIsFinished.Finished:
+            case .Finished:
                 projectNameLabel?.textColor = FinishedFontColor
+            case .OverTime:
+                projectNameLabel?.textColor = overTimeFontColor
             default:break
             }
             

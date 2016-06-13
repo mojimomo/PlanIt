@@ -26,9 +26,9 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     @IBOutlet weak var totalTextField: UITextField!
     @IBOutlet weak var finishEditButton: UIButton!
     
-    //按钮文字
+    ///按钮文字
     var finishEditButtonText = ""
-    //项目名称
+    ///项目名称
     var projectName:String{
         get{
             return (projectNameLabel?.text)!
@@ -37,7 +37,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
             projectNameLabel?.text = newValue
         }
     }
-    //项目开始时间
+    ///项目开始时间
     var projectBeginTime:String{
         get{
             return (beginTimeLabel?.text)!
@@ -46,7 +46,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
             beginTimeLabel?.text = newValue
         }
     }
-    //项目结束时间
+    ///项目结束时间
     var projectEndTime:String{
         get{
             return (endTimeLabel?.text)!
@@ -55,7 +55,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
             endTimeLabel?.text = newValue
         }
     }
-    //项目单位
+    ///项目单位
     var projectUnit:String{
         get{
             return (unitTextField?.text)!
@@ -64,7 +64,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
             unitTextField?.text = newValue
         }
     }
-    //项目总量
+    ///项目总量
     var projectTotal:Double{
         get{
             return Double((totalTextField?.text)!)!
@@ -78,7 +78,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         static let deleteFinishEditButton = "删除项目"
     }
     
-    //当前表状态（修改状态、新增状态）
+    ///当前表状态（修改状态、新增状态）
     var tableState: editProjectTableState = .Add{
         didSet{
             //根据不同状态设置不同的UI
@@ -94,7 +94,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         
     }
     
-    //当前项目
+    ///当前项目
     var project = Project(){
         didSet{
             projectName = project.name
@@ -108,18 +108,18 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     }   
     
 
-    //项目类别
+    ///项目类别
     var projectType = ProjectType.Normal{
         didSet{
             //根据不同项目类别设置不同的状态
             switch projectType{
-            case ProjectType.Normal:
+            case .Normal:
                 recordSwitch.setOn(true, animated: false)
                 punchSwitch.setOn(false, animated: false)
-            case ProjectType.Punch:
+            case .Punch:
                 recordSwitch.setOn(true, animated: false)
                 punchSwitch.setOn(true, animated: false)
-            case ProjectType.NoRecord:
+            case .NoRecord:
                 recordSwitch.setOn(false, animated: false)
                 punchSwitch.setOn(false, animated: false)
             default: break
@@ -128,23 +128,26 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     }
 
     //MARK: - Action
+    ///是否改变项目类型
     @IBAction func changeIsRecorded(sender: UISwitch) {
         if sender.on{
-            projectType = ProjectType.Normal
+            projectType = .Normal
         }else{
-            projectType = ProjectType.NoRecord
+            projectType = .NoRecord
         }
         updateUI()
     }
     
+    ///是否改变签到任务
     @IBAction func changeIsPunch(sender: UISwitch) {
         if sender.on{
-            projectType = ProjectType.Punch
+            projectType = .Punch
         }else{
-            projectType = ProjectType.Normal
+            projectType = .Normal
         }
     }
     
+    //是否改变开始时间
     @IBAction func editBeginTime(sender: AnyObject) {
         if IS_IOS8{
             //创建datepicker控件
@@ -178,6 +181,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         }
     }
     
+    ///是否改变结束时间
     @IBAction func editEndTime(sender: AnyObject) {
         if IS_IOS8{
             //创建datepicker控件
@@ -213,7 +217,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
 
 
     
-    //完成编辑
+    ///完成编辑
     @IBAction func finishEdit(sender: AnyObject) {
         switch self.tableState{
         case .Add:
@@ -224,7 +228,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     }
  
     //MARK: - Func
-    //新增项目
+    ///新增项目
     private func addNewProject(){
         if projectName == "" {
             callAlert("提交错误",message: "项目名称不能为空!")
@@ -248,7 +252,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         }
         project.type = projectType
         switch projectType{
-        case ProjectType.NoRecord: break
+        case .NoRecord: break
         default:
             if projectUnit == ""{
                 callAlert("提交错误",message: "项目任务单位不能为空!")
@@ -275,7 +279,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         callAlert("提交失败",message: "新建项目失败!")
     }
    
-    //删除项目
+    ///删除项目
     private func deleteProject(){
         let alerController = UIAlertController(title: "是否确定删除该项目？", message: nil, preferredStyle: .ActionSheet)
         //创建UIAlertAction 确定按钮
@@ -294,13 +298,13 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         })
     }
     
-    //更新界面
+    ///更新界面
     private func updateUI(){
         self.tableView.reloadData()
         //self.tableView.setNeedsDisplay()
     }
     
-    //发起提示
+    ///发起提示
     func callAlert(title:String, message: String){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "好的", style: .Default,
@@ -310,7 +314,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     }
     
     //MARK: - Override TableView
-    //隐藏某cell
+    ///隐藏某cell
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         //创建3个NSIndexPath对应相应的cell位置
         let unitCellPath = NSIndexPath(forRow: 1, inSection: 2)
@@ -318,7 +322,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         let checkCellPath = NSIndexPath(forRow: 3, inSection: 2)
         //比较NSIndexPath
         if indexPath == unitCellPath || indexPath == totalCellPath || indexPath == checkCellPath{
-            if (projectType == ProjectType.NoRecord) {
+            if (projectType == .NoRecord) {
                 // 假设改行原来高度为0
                 return 0;
             } else {
@@ -329,7 +333,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         }
     }
     
-    //点击某个单元格触发的方法
+    ///点击某个单元格触发的方法
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //设置单元格打勾
         let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
@@ -355,7 +359,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         super.viewWillAppear(animated)        //设置按钮标题
         finishEditButton?.setTitle(finishEditButtonText, forState: .Normal)
         projectTotal = 0
-        projectType = ProjectType.Normal
+        projectType = .Normal
         
         //初始化代码
         let nowDate = NSDate()

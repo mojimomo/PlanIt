@@ -18,21 +18,21 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
     }
     @IBOutlet weak var projectName: UILabel!
 
-    //添加项目按钮也
+    ///添加项目按钮
     var addProjectButton: UIButton?
-    //项目列表
+    ///项目列表
     var projects = [Project]()
-    //cell边距
+    ///cell边距
     var cellMargin : CGFloat = 15.0
-    //添加新项目底部边距
-    var addProjectButtonMargin : CGFloat = 15.0
-    //添加按钮尺寸
+    ///添加新项目底部边距
+    var addProjectButtonMargin : CGFloat = 20.0
+    ///添加按钮尺寸
     var addProjectButtonSize : CGSize = CGSize(width: 0, height: 0)
     private struct Storyboard{
         static let CellReusIdentifier = "ProjectCell"
     }
     
-    //点击点开抽屉菜单
+    ///点击点开抽屉菜单
     @IBAction func CallMenu(sender: AnyObject) {
         //获取此页面的抽屉菜单页
         if let drawer = self.navigationController?.parentViewController as? KYDrawerController{
@@ -42,7 +42,7 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         
     }
 
-    //点击创建新项目
+    ///点击创建新项目
     @IBAction func addProject(sender: UIBarButtonItem) {
         //查找故事板中EditProject
         let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
@@ -116,13 +116,13 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
 //    }
     
     // MARK: - 跳转动作
-    //新增进程
+    ///新增进程
     func addProcess(sender: UIButton){
         print("添加项目编号为\(sender.tag)进度")
         //是否是未完成项目
-        if projects[sender.tag].isFinished == ProjectIsFinished.NotFinished{
+        if projects[sender.tag].isFinished == .NotFinished{
             //打卡项目
-            if projects[sender.tag].type == ProjectType.Punch{
+            if projects[sender.tag].type == .Punch{
                 let process = Process()
                 process.projectID = projects[sender.tag].id
                 let currentTime = NSDate()
@@ -134,14 +134,14 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
                 ProcessDate().chengeData(projects[sender.tag].id, timeDate: currentTime, changeValue: 1.0)
                 projects[sender.tag].increaseDone(1.0)
             //记录进度项目
-            }else if projects[sender.tag].type == ProjectType.Normal{
+            }else if projects[sender.tag].type == .Normal{
                 let popup = AddProcessView()
                 popup.showInView(self.view)
             }
         }
     }
     
-    //单个项目页面
+    ///单个项目页面
     func getMoreInfor(sender: UIButton){
         print("打开项目编号为\(sender.tag)统计页面")
         let statisticsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Statistics") as! StatisticsViewController
@@ -162,12 +162,12 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         return 0
     }
     
-    //确定行数
+    ///确定行数
     func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
         return 1
     }
     
-    //配置cell内容
+    ///配置cell内容
     func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         let cell = self.projectTableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
         //判断是否是最后一个统计行
@@ -192,7 +192,7 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
             cell.project = projects[indexPath.section]
             cell.roundBackgroundColor = allBackground
             
-            //if projects[indexPath.section].isFinished == ProjectIsFinished.NotFinished{
+            //if projects[indexPath.section].isFinished == .NotFinished{
             //新增进度按钮
             let addProcessFrame = CGRectMake(cell.frame.width - cell.frame.height - self.cellMargin , 0, cell.frame.height , cell.frame.height)
             let addProcessButton = UIButton(frame: addProcessFrame)
@@ -201,11 +201,11 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
             //根据不同任务类型使用不同的图标
             var imageString = ""
             switch(projects[indexPath.section].type){
-            case ProjectType.NoRecord:
+            case .NoRecord:
                 imageString = "norecord"
-            case ProjectType.Punch:
+            case .Punch:
                 imageString = "punch"
-            case ProjectType.Normal:
+            case .Normal:
                 imageString = "record"
             default:break
             }
@@ -232,10 +232,6 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
             getMoreInfor.addTarget(self, action: "getMoreInfor:", forControlEvents: .TouchUpInside)
             cell.addSubview(getMoreInfor)
         }
-        
-        
-
-        
         
         //cell.bringSubviewToFront(addProcessButton)
 //        cell.backgroundColor = UIColor.whiteColor()

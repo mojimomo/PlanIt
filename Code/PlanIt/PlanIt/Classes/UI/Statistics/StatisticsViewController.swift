@@ -100,20 +100,26 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             }
             //根据不同项目完成度
             switch project.isFinished {
-            case ProjectIsFinished.NotBegined:
+            case .NotBegined:
                 prompLabel?.text = "距离项目开始"
                 let restString = compareCurrentTime(project.beginTimeDate)
                 surplusLabel?.text = restString
                 progressView.setProgress(0 , animated: false)
-            case ProjectIsFinished.NotFinished:
+            case .NotFinished:
                 prompLabel?.text = "距离项目截止"
                 let restString = compareCurrentTime(project.endTimeDate)
                 surplusLabel?.text = restString
                 let timePercent = percentFromCurrentTime(project.beginTimeDate, endDate: project.endTimeDate)
                 progressView.setProgress(Float(timePercent), animated: false)
-            case ProjectIsFinished.Finished:
+            case .Finished:
                 surplusLabel?.text = "已完成"
                 progressView.setProgress(1 , animated: false)
+            case .OverTime:
+                prompLabel?.text = "超出项目截止"
+                let restString = compareCurrentTime(project.endTimeDate)
+                surplusLabel?.text = restString
+                let timePercent = percentFromCurrentTime(project.beginTimeDate, endDate: project.endTimeDate)
+                progressView.setProgress(Float(timePercent), animated: false)
             default:break
             }
             endTimeLabel.text = "截止：\(project.endTime)"
@@ -188,7 +194,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //判断是否是负
         if timeInterval < 0{
             timeInterval = -timeInterval
-            prompLabel?.text = "超出项目截止"
         }
         
         //判断时间
