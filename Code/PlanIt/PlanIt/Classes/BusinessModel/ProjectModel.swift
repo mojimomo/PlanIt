@@ -132,13 +132,28 @@ class Project: NSObject {
         self.rest = total
     }
     
+    ///修改项目总量
+    func editProjectTotal(total: Double) -> Bool{
+        if total < complete{
+            return false
+        }else if total == complete{
+            self.total = total
+            self.rest = 0
+            self.isFinished = .Finished
+            return true
+        }else{
+            self.total = total
+            self.rest = total - complete
+            return true
+        }
+    }
+    
     func increaseDone(done: Double){
         if type != .NoRecord{
             complete += done
             rest -= done
             percent = complete * 100 / total
             if complete >= total{
-                isFinished = .Finished
                 complete = total
                 rest = 0
                 percent = 100.0
@@ -194,7 +209,7 @@ class Project: NSObject {
         if  name != "" &&  beginTime !=  "" && endTime != "" {
             if type == .Normal ||  type == .Punch {
                 if unit != "" && total != 0 && isFinished != .NoSet
-                    && total != 0 && rest != 0{
+                    && total != 0{
                     return true
                 }
             }else if type == .NoRecord{
@@ -285,7 +300,7 @@ class Project: NSObject {
     func insertProject() -> Bool{
         
         // 1.获取插入的SQL语句
-        let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, complete, rest) VALUES ('\(name)', '\(type)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(complete)', '\(rest)');"
+        let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, complete, rest) VALUES ('\(name)', '\(type.rawValue)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(complete)', '\(rest)');"
 
         // 2.执行SQL语句
         if SQLiteManager.shareIntance.execSQL(insertSQL) {
@@ -316,7 +331,7 @@ class Project: NSObject {
         saveTags()
         
         // 1.获取修改的SQL语句
-        let updateSQL = "UPDATE t_project SET name = '\(name)', type = '\(type)', beginTime = '\(beginTime)', endTime = '\(endTime)', unit = '\(unit)', total = '\(total)',  complete = '\(complete)', rest = '\(rest)'WHERE id = '\(id)';"
+        let updateSQL = "UPDATE t_project SET name = '\(name)', type = '\(type.rawValue)', beginTime = '\(beginTime)', endTime = '\(endTime)', unit = '\(unit)', total = '\(total)',  complete = '\(complete)', rest = '\(rest)'WHERE id = '\(id)';"
         
         // 2.执行SQL语句
         if SQLiteManager.shareIntance.execSQL(updateSQL) {

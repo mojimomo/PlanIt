@@ -66,7 +66,7 @@ class ProcessDate: NSObject {
     ///检查记录是否存在
     func checkIsExist(projectID: Int, timeString: String) -> ProcessDate?{
         // 1.获取查询语句
-        let querySQL = "SELECT * FROM t_processdate WHERE projectID = \(projectID) and recordTime = \(timeString) ;"
+        let querySQL = "SELECT * FROM t_processdate WHERE projectID = '\(projectID)' AND recordTime = '\(timeString)';"
         
         // 2.执行查询语句
         guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {

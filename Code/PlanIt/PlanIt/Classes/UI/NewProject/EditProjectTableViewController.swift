@@ -79,20 +79,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     }
     
     ///当前表状态（修改状态、新增状态）
-    var tableState: editProjectTableState = .Add{
-        didSet{
-            //根据不同状态设置不同的UI
-            switch tableState{
-            case .Add:
-                finishEditButtonText = storyBoard.addFinishEditButton
-            case .Edit:
-                finishEditButtonText = storyBoard.deleteFinishEditButton
-            //default: break
-            }
-            updateUI()
-        }
-        
-    }
+    var tableState: editProjectTableState = .Add
     
     ///当前项目
     var project = Project(){
@@ -114,14 +101,14 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
             //根据不同项目类别设置不同的状态
             switch projectType{
             case .Normal:
-                recordSwitch.setOn(true, animated: false)
-                punchSwitch.setOn(false, animated: false)
+                recordSwitch?.setOn(true, animated: false)
+                punchSwitch?.setOn(false, animated: false)
             case .Punch:
-                recordSwitch.setOn(true, animated: false)
-                punchSwitch.setOn(true, animated: false)
+                recordSwitch?.setOn(true, animated: false)
+                punchSwitch?.setOn(true, animated: false)
             case .NoRecord:
-                recordSwitch.setOn(false, animated: false)
-                punchSwitch.setOn(false, animated: false)
+                recordSwitch?.setOn(false, animated: false)
+                punchSwitch?.setOn(false, animated: false)
             default: break
             }
         }
@@ -223,12 +210,39 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         case .Add:
             addNewProject()
         case .Edit:
-            deleteProject()
+            finishEditProject()
         }
     }
  
+    ///返回上个页面
+    func back(){
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            
+        }
+    }
+    
+    ///删除项目
+    func deleteProject(){
+        let alerController = UIAlertController(title: "是否确定删除该项目？", message: nil, preferredStyle: .ActionSheet)
+        //创建UIAlertAction 确定按钮
+        let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            self.project.deleteProject()
+            self.back()
+        })
+        //创建UIAlertAction 取消按钮
+        let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+        })
+        //添加动作
+        alerController.addAction(alerActionOK)
+        alerController.addAction(alerActionCancel)
+        //显示alert
+        self.presentViewController(alerController, animated: true, completion: { () -> Void in
+            
+        })
+    }
+    
     //MARK: - Func
-    ///新增项目
+    ///完成新增项目
     private func addNewProject(){
         if projectName == "" {
             callAlert("提交错误",message: "项目名称不能为空!")
@@ -272,31 +286,68 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         }
         if project.check(){
             if(project.insertProject()){
-                callAlert("提交成功",message: "新建项目成功!")
+                callAlertAndBack("提交成功",message: "新建项目成功!")
                 return
             }
         }
         callAlert("提交失败",message: "新建项目失败!")
     }
    
-    ///删除项目
-    private func deleteProject(){
-        let alerController = UIAlertController(title: "是否确定删除该项目？", message: nil, preferredStyle: .ActionSheet)
-        //创建UIAlertAction 确定按钮
-        let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
-            self.project.deleteProject()
-        })
-        //创建UIAlertAction 取消按钮
-        let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
-        })
-        //添加动作
-        alerController.addAction(alerActionOK)
-        alerController.addAction(alerActionCancel)
-        //显示alert
-        self.presentViewController(alerController, animated: true, completion: { () -> Void in
-            
-        })
+    ///完成修改项目
+    private func finishEditProject(){
+        if projectName == "" {
+            callAlert("修改错误",message: "项目名称不能为空!")
+            return
+        }else if projectName.characters.count > 12 {
+            callAlert("修改错误",message: "项目名称不能超过12!")
+            return
+        }else{
+            project.name = projectName
+        }
+        
+        
+        if projectBeginTime != "" && projectEndTime != ""{
+            if project.setNewProjectTime(projectBeginTime, endTime: projectEndTime) == false{
+                callAlert("修改错误",message: "开始结束时间不正确!")
+                return
+            }
+        }else{
+            callAlert("修改错误",message: "时间不能为空!")
+            return
+        }
+        project.type = projectType
+        switch projectType{
+        case .NoRecord: break
+        default:
+            if projectUnit == ""{
+                callAlert("修改错误",message: "项目任务单位不能为空!")
+                return
+            }else if project.unit.characters.count > 10 {
+                callAlert("修改错误",message: "项目任务单位不能超过10!")
+                return
+            }else{
+                project.unit = projectUnit
+            }
+            if  projectTotal != 0{
+                if !project.editProjectTotal(projectTotal) {
+                    callAlert("修改错误",message: "项目任务总量不能小于已完成量!")
+                    return
+                }
+                project.setNewProjectTime(projectBeginTime, endTime: projectEndTime)
+            }else{
+                callAlert("修改错误",message: "项目任务总量不能为0!")
+                return
+            }
+        }
+        if project.check(){
+            if(project.updateProject()){
+                callAlertAndBack("修改成功",message: "修改项目成功!")
+                return
+            }
+        }
+        callAlert("修改失败",message: "新建项目失败!")
     }
+
     
     ///更新界面
     private func updateUI(){
@@ -309,6 +360,17 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "好的", style: .Default,
             handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    ///发起提示确定返回
+    func callAlertAndBack(title:String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "好的", style: .Default,
+            handler: {(UIAlertAction) -> Void in
+            self.back()
+            })
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
@@ -355,12 +417,32 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     }
     
     //MARK: - View Controller Lifecle
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)        //设置按钮标题
-        finishEditButton?.setTitle(finishEditButtonText, forState: .Normal)
-        projectTotal = 0
-        projectType = .Normal
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        switch tableState{
+        case .Add:
+            //添加新增项目按钮
+            let addButton = UIBarButtonItem(title: "新增",style: .Done, target: self, action: "finishEdit:")
+            //let addButton = UIBarButtonItem(image: UIImage(named: "add"), style: .Done, target: self, action: "finishEdit:")
+            self.navigationItem.rightBarButtonItem = addButton
+            
+            //新增返回按钮
+            let backButton = UIBarButtonItem(title: "返回",style: .Done, target: self, action: "back")
+            //let backButton = UIBarButtonItem(image: UIImage(named: "add"), style: .Done, target: self, action: "back")
+            self.navigationItem.leftBarButtonItem = backButton
+        case .Edit:
+            //添加新增项目按钮
+            let addButton = UIBarButtonItem(title: "修改",style: .Done, target: self, action: "finishEdit:")
+            //let addButton = UIBarButtonItem(image: UIImage(named: "add"), style: .Done, target: self, action: "finishEdit:")
+            self.navigationItem.rightBarButtonItem = addButton
+            
+            //新增返回按钮
+            let backButton = UIBarButtonItem(title: "删除",style: .Done, target: self, action: "deleteProject")
+            //let backButton = UIBarButtonItem(image: UIImage(named: "add"), style: .Done, target: self, action: "back")
+            self.navigationItem.leftBarButtonItem = backButton
+            //default: break
+        }
+
         //初始化代码
         let nowDate = NSDate()
         let dateFormat = NSDateFormatter()
@@ -368,6 +450,26 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         let dateString = dateFormat.stringFromDate(nowDate)
         beginTimeLabel?.text = dateString
         endTimeLabel?.text = dateString
+        projectTotal = 0
+        projectType = .Normal
+        
+        // corner radius
+        self.navigationController?.view.layer.cornerRadius = 10
+        
+        // border
+        self.navigationController?.view.layer.borderWidth = 1.0
+        self.navigationController?.view.layer.borderColor = UIColor.blackColor().CGColor
+//
+//        // shadow
+//        blueView.layer.shadowColor = UIColor.blackColor().CGColor
+//        blueView.layer.shadowOffset = CGSize(width: 3, height: 3)
+//        blueView.layer.shadowOpacity = 0.7
+//        blueView.layer.shadowRadius = 4.0
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)        //设置按钮标题
+        finishEditButton?.setTitle(finishEditButtonText, forState: .Normal)
     }
     
     // MARK: - prepareForSegue

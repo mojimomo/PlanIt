@@ -71,13 +71,13 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         }
     }
     
-    //曲线图
+    ///曲线图
     var graphView = ScrollableGraphView()
     var currentGraphType = GraphType.Dark
     var graphConstraints = [NSLayoutConstraint]()
     var label = UILabel()
     var labelConstraints = [NSLayoutConstraint]()
-    //曲线图数据
+    ///曲线图数据
     let numberOfDataItems = 29
     lazy var data: [Double] = self.generateRandomData(self.numberOfDataItems, max: 50)
     lazy var labels: [String] = self.generateSequentialLabels(self.numberOfDataItems, text: "FEB")
@@ -95,6 +95,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             processDates = ProcessDate().loadData(project.id)
             projectName = project.name
             projectPercent = project.percent
+            tagListView.removeAllTags()
             for tag in project.tags{
                 tagListView.addTag(tag.name)
             }
@@ -141,7 +142,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //编辑项目按钮
         let editButton = UIButton(frame:CGRectMake(0, 0, 24, 24))
         editButton.setImage(UIImage(named: "edit"), forState: .Normal)
-        editButton.addTarget(self,action:Selector("openHistory"),forControlEvents:.TouchUpInside)
+        editButton.addTarget(self,action:Selector("editProject"),forControlEvents:.TouchUpInside)
         let editBarButton = UIBarButtonItem(customView: editButton)
         
         //按钮间的空隙
@@ -185,7 +186,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
     
      //MARK: Func
-    //与现在时间比较
+    ///与现在时间比较
     func compareCurrentTime(compareDate: NSDate) -> String{
         var timeInterval = compareDate.timeIntervalSinceNow
         var result = ""
@@ -218,7 +219,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         return result
     }
     
-    //计算时间百分比
+    ///计算时间百分比
     func percentFromCurrentTime(beginDate: NSDate, endDate: NSDate) -> Double{
         let timeEnd = endDate.timeIntervalSince1970
         let timeBegin = beginDate.timeIntervalSince1970
@@ -228,7 +229,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         return percent
     }
     
-    //画直线图
+    ///画直线图
     func drawLineChart(){
         graphView = ScrollableGraphView(frame: lineChartViewFrame)
         graphView = createDarkGraph(lineChartViewFrame)
@@ -237,13 +238,32 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.view.addSubview(graphView)
     }
     
-    //打开历史页面
+    ///打开历史页面
     func openHistory(){
         let historyViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Processes") as!
             ProcessesTableViewController
         historyViewController.project = project
         historyViewController.view.backgroundColor = self.view.backgroundColor
         self.navigationController?.pushViewController(historyViewController, animated: true)
+    }
+    
+    func editProject(){
+        let editProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
+        editProjectViewController.title = "修改项目"
+        editProjectViewController.tableState = .Edit
+        editProjectViewController.view.backgroundColor = allBackground
+        editProjectViewController.modalTransitionStyle = .CoverVertical
+        let navController = UINavigationController.init(rootViewController: editProjectViewController)
+        //设计背景色
+        navController.navigationBar.backgroundColor = allBackground
+        //去除导航栏分栏线
+        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navController.navigationBar.shadowImage = UIImage()
+        navController.navigationBar.tintColor = navigationTintColor
+        let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
+        navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+        self.navigationController?.presentViewController(navController, animated: true, completion: nil)
+        editProjectViewController.project = self.project
     }
     
     //MARK: GraphView Func
@@ -385,7 +405,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.view.addConstraints(graphConstraints)
     }
     
-    // 添加和更新图切换标签在屏幕的右上角
+    /// 添加和更新图切换标签在屏幕的右上角
     private func addLabel(withText text: String) {
         
         label.removeFromSuperview()
@@ -426,7 +446,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         return label
     }
     
-    // 数据生成
+    /// 数据生成
     private func generateRandomData(numberOfItems: Int, max: Double) -> [Double] {
         var data = [Double]()
         for _ in 0 ..< numberOfItems {

@@ -72,7 +72,7 @@ class Process: NSObject {
         var processes : [Process] = [Process]()
         
         // 1.获取查询语句
-        let querySQL = "SELECT * FROM t_process WHERE projectID = \(projectID);"
+        let querySQL = "SELECT * FROM t_process WHERE projectID = '\(projectID)';"
         
         // 2.执行查询语句
         guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {

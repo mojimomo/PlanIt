@@ -7,19 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AA8C566706EFBEE8F482108 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */; };
 		BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */; };
 		BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */; };
 		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
 		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
-		BE28D4AA1CF17B1600976490 /* PNBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D49D1CF17B1600976490 /* PNBar.swift */; };
-		BE28D4AB1CF17B1600976490 /* PNBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D49E1CF17B1600976490 /* PNBarChart.swift */; };
-		BE28D4AC1CF17B1600976490 /* PNChartConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D49F1CF17B1600976490 /* PNChartConfig.swift */; };
-		BE28D4AD1CF17B1600976490 /* PNChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A01CF17B1600976490 /* PNChartDelegate.swift */; };
-		BE28D4AE1CF17B1600976490 /* PNChartLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A31CF17B1600976490 /* PNChartLabel.swift */; };
-		BE28D4AF1CF17B1600976490 /* PNLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A41CF17B1600976490 /* PNLineChart.swift */; };
-		BE28D4B01CF17B1600976490 /* PNLineChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A51CF17B1600976490 /* PNLineChartData.swift */; };
-		BE28D4B11CF17B1600976490 /* PNValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A61CF17B1600976490 /* PNValue.swift */; };
-		BE28D4B21CF17B1600976490 /* view.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28D4A71CF17B1600976490 /* view.swift */; };
 		BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */; };
 		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
@@ -53,7 +45,6 @@
 		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
 		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
 		BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */; };
-		BEF016A11CF03453004DC646 /* JKBlurPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF016A01CF03453004DC646 /* JKBlurPopup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,21 +65,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09589BE40F48A418B19A9511 /* Pods-PlanIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.release.xcconfig"; sourceTree = "<group>"; };
+		5F835661849BEA352693A738 /* Pods-PlanIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.debug.xcconfig"; sourceTree = "<group>"; };
+		75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYDrawerController.swift; path = KYDrawerController/Classes/KYDrawerController.swift; sourceTree = "<group>"; };
 		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
-		BE28D49D1CF17B1600976490 /* PNBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNBar.swift; sourceTree = "<group>"; };
-		BE28D49E1CF17B1600976490 /* PNBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNBarChart.swift; sourceTree = "<group>"; };
-		BE28D49F1CF17B1600976490 /* PNChartConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNChartConfig.swift; sourceTree = "<group>"; };
-		BE28D4A01CF17B1600976490 /* PNChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNChartDelegate.swift; sourceTree = "<group>"; };
-		BE28D4A11CF17B1600976490 /* PNChartSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartSwift.h; sourceTree = "<group>"; };
-		BE28D4A31CF17B1600976490 /* PNChartLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNChartLabel.swift; sourceTree = "<group>"; };
-		BE28D4A41CF17B1600976490 /* PNLineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNLineChart.swift; sourceTree = "<group>"; };
-		BE28D4A51CF17B1600976490 /* PNLineChartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNLineChartData.swift; sourceTree = "<group>"; };
-		BE28D4A61CF17B1600976490 /* PNValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNValue.swift; sourceTree = "<group>"; };
-		BE28D4A71CF17B1600976490 /* view.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = view.swift; sourceTree = "<group>"; };
 		BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessesTableViewController.swift; path = ../Statistics/ProcessesTableViewController.swift; sourceTree = "<group>"; };
 		BE4F02371CEF365F00126237 /* RoundTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundTableviewCell.h; sourceTree = "<group>"; };
 		BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableviewCell.swift; sourceTree = "<group>"; };
@@ -130,7 +114,6 @@
 		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
 		BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessView.swift; sourceTree = "<group>"; };
-		BEF016A01CF03453004DC646 /* JKBlurPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKBlurPopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */,
+				0AA8C566706EFBEE8F482108 /* Pods_PlanIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +143,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18781393FD6AEC8657ECC396 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5F835661849BEA352693A738 /* Pods-PlanIt.debug.xcconfig */,
+				09589BE40F48A418B19A9511 /* Pods-PlanIt.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		200B3328E0DC1CA2BA07C039 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BE279CEB1CDF1AE700D4FCFB /* KYDrawerController */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,39 +168,6 @@
 				BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */,
 			);
 			name = KYDrawerController;
-			sourceTree = "<group>";
-		};
-		BE28D4991CF17B1600976490 /* PNChartSwift */ = {
-			isa = PBXGroup;
-			children = (
-				BE28D49C1CF17B1600976490 /* PNBarChart */,
-				BE28D49F1CF17B1600976490 /* PNChartConfig.swift */,
-				BE28D4A01CF17B1600976490 /* PNChartDelegate.swift */,
-				BE28D4A11CF17B1600976490 /* PNChartSwift.h */,
-				BE28D4A21CF17B1600976490 /* PNLineChart */,
-				BE28D4A61CF17B1600976490 /* PNValue.swift */,
-				BE28D4A71CF17B1600976490 /* view.swift */,
-			);
-			path = PNChartSwift;
-			sourceTree = "<group>";
-		};
-		BE28D49C1CF17B1600976490 /* PNBarChart */ = {
-			isa = PBXGroup;
-			children = (
-				BE28D49D1CF17B1600976490 /* PNBar.swift */,
-				BE28D49E1CF17B1600976490 /* PNBarChart.swift */,
-			);
-			path = PNBarChart;
-			sourceTree = "<group>";
-		};
-		BE28D4A21CF17B1600976490 /* PNLineChart */ = {
-			isa = PBXGroup;
-			children = (
-				BE28D4A31CF17B1600976490 /* PNChartLabel.swift */,
-				BE28D4A41CF17B1600976490 /* PNLineChart.swift */,
-				BE28D4A51CF17B1600976490 /* PNLineChartData.swift */,
-			);
-			path = PNLineChart;
 			sourceTree = "<group>";
 		};
 		BE4F02351CEF365F00126237 /* RoundTableviewCell */ = {
@@ -295,8 +263,6 @@
 			children = (
 				BECFC3051CFABE2400D8C4C8 /* GraphView */,
 				BEB8B3211CF57870002A20FE /* TagListView */,
-				BE28D4991CF17B1600976490 /* PNChartSwift */,
-				BEF0169F1CF03453004DC646 /* JKBlurPopup */,
 				BE4F02351CEF365F00126237 /* RoundTableviewCell */,
 				BE7DF7FB1CEC922000DB1CBB /* RRTagController */,
 				BE279CEB1CDF1AE700D4FCFB /* KYDrawerController */,
@@ -395,6 +361,8 @@
 				BEA520B61CCF417F00FFE43E /* PlanItTests */,
 				BEA520C11CCF417F00FFE43E /* PlanItUITests */,
 				BEA5209D1CCF417F00FFE43E /* Products */,
+				18781393FD6AEC8657ECC396 /* Pods */,
+				200B3328E0DC1CA2BA07C039 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -444,8 +412,8 @@
 				BEA520AE1CCF417F00FFE43E /* Info.plist */,
 				BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */,
 				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
-				BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */,
 				BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */,
+				BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -478,14 +446,6 @@
 			path = "../../../../SQLiteDB-master/Examples/iOS";
 			sourceTree = "<group>";
 		};
-		BEF0169F1CF03453004DC646 /* JKBlurPopup */ = {
-			isa = PBXGroup;
-			children = (
-				BEF016A01CF03453004DC646 /* JKBlurPopup.swift */,
-			);
-			path = JKBlurPopup;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -493,9 +453,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEA520C71CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanIt" */;
 			buildPhases = (
+				2EB76F99291F69F55CE99C78 /* 📦 Check Pods Manifest.lock */,
 				BEA520981CCF417F00FFE43E /* Sources */,
 				BEA520991CCF417F00FFE43E /* Frameworks */,
 				BEA5209A1CCF417F00FFE43E /* Resources */,
+				A7800D7C50F66A735A2BC7C2 /* 📦 Embed Pods Frameworks */,
+				A49993F4E05FCD16247DA550 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -612,22 +575,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2EB76F99291F69F55CE99C78 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A49993F4E05FCD16247DA550 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7800D7C50F66A735A2BC7C2 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BEA520981CCF417F00FFE43E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BE9ACE7A1D0C03B30097A76F /* PieChartView.swift in Sources */,
-				BE28D4AE1CF17B1600976490 /* PNChartLabel.swift in Sources */,
-				BE28D4B01CF17B1600976490 /* PNLineChartData.swift in Sources */,
 				BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */,
-				BE28D4AA1CF17B1600976490 /* PNBar.swift in Sources */,
 				BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */,
-				BE28D4B11CF17B1600976490 /* PNValue.swift in Sources */,
 				BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */,
 				BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */,
-				BE28D4AD1CF17B1600976490 /* PNChartDelegate.swift in Sources */,
-				BE28D4AC1CF17B1600976490 /* PNChartConfig.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
 				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
@@ -642,20 +647,16 @@
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
 				BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */,
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
-				BE28D4AB1CF17B1600976490 /* PNBarChart.swift in Sources */,
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
 				BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */,
-				BE28D4AF1CF17B1600976490 /* PNLineChart.swift in Sources */,
 				BECFC3091CFAC11400D8C4C8 /* UIColor+colorFromHex.swift in Sources */,
 				BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
 				BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
-				BEF016A11CF03453004DC646 /* JKBlurPopup.swift in Sources */,
 				BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */,
 				BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */,
 				BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */,
-				BE28D4B21CF17B1600976490 /* view.swift in Sources */,
 				BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */,
 				BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */,
 			);
@@ -797,6 +798,7 @@
 		};
 		BEA520C81CCF417F00FFE43E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F835661849BEA352693A738 /* Pods-PlanIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -816,6 +818,7 @@
 		};
 		BEA520C91CCF417F00FFE43E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09589BE40F48A418B19A9511 /* Pods-PlanIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
