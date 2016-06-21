@@ -8,7 +8,7 @@
 
 import UIKit
 @IBDesignable
-class ProjectTableViewCell: RoundTableviewCell {
+class ProjectTableViewCell: RoundTableviewCell{
     @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var projectNameLabel: UILabel!
     @IBOutlet weak var projectStatusLabel: UILabel!
@@ -81,5 +81,7 @@ class ProjectTableViewCell: RoundTableviewCell {
             projectPercent = project.percent
         }
         setNeedsDisplay()
+        
     }
+
 }

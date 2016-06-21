@@ -26,6 +26,7 @@
 		BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FD1CEC922000DB1CBB /* RRTagCollectionViewCell.swift */; };
 		BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */; };
 		BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */; };
+		BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE977A801D17B87200D6899C /* CellBackgroundView.swift */; };
 		BE9ACE781D0BE2420097A76F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9ACE771D0BE2420097A76F /* Global.swift */; };
 		BE9ACE7A1D0C03B30097A76F /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9ACE791D0C03B30097A76F /* PieChartView.swift */; };
 		BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		BECFC3091CFAC11400D8C4C8 /* UIColor+colorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC3081CFAC11400D8C4C8 /* UIColor+colorFromHex.swift */; };
 		BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */; };
 		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
+		BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */; };
 		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
 		BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */; };
 /* End PBXBuildFile section */
@@ -88,6 +90,7 @@
 		BE7DF7FD1CEC922000DB1CBB /* RRTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagController.swift; sourceTree = "<group>"; };
 		BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		BE977A801D17B87200D6899C /* CellBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellBackgroundView.swift; sourceTree = "<group>"; };
 		BE9ACE771D0BE2420097A76F /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		BE9ACE791D0C03B30097A76F /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = PlanIt/Classes/UI/Projects/PieChartView.swift; sourceTree = SOURCE_ROOT; };
 		BEA5209C1CCF417F00FFE43E /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +115,7 @@
 		BECFC3081CFAC11400D8C4C8 /* UIColor+colorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+colorFromHex.swift"; path = "../../UI/Statistics/UIColor+colorFromHex.swift"; sourceTree = "<group>"; };
 		BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessTableViewCell.swift; sourceTree = "<group>"; };
 		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
+		BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessTableViewController.swift; sourceTree = "<group>"; };
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
 		BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -331,6 +335,8 @@
 				BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */,
 				BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */,
 				BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */,
+				BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */,
+				BE977A801D17B87200D6899C /* CellBackgroundView.swift */,
 			);
 			name = "Projects(项目列表)";
 			path = Projects;
@@ -636,6 +642,7 @@
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
 				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
+				BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */,
@@ -649,6 +656,7 @@
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
 				BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */,
+				BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */,
 				BECFC3091CFAC11400D8C4C8 /* UIColor+colorFromHex.swift in Sources */,
 				BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,

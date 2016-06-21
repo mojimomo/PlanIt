@@ -49,7 +49,6 @@ class TagsViewController: UITableViewController {
     
     ///配置cell内容
     override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath)
         //配置cell
         cell.textLabel?.text = tags[indexPath.row].name
@@ -58,14 +57,14 @@ class TagsViewController: UITableViewController {
     
     ///点击某个单元格触发的方法
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //设置单元格打勾
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        if selectTags[indexPath.row] == true{
-            cell?.accessoryType = .None
-            selectTags[indexPath.row] = false
-        }else if selectTags[indexPath.row] == false{
-            cell?.accessoryType = .Checkmark
-            selectTags[indexPath.row] = true
-        }
+//        //设置单元格打勾
+//        let cell = tableView.cellForRowAtIndexPath(indexPath)
+//        if selectTags[indexPath.row] == true{
+//            cell?.accessoryType = .None
+//            selectTags[indexPath.row] = false
+//        }else if selectTags[indexPath.row] == false{
+//            cell?.accessoryType = .Checkmark
+//            selectTags[indexPath.row] = true
+//        }
     }
 }

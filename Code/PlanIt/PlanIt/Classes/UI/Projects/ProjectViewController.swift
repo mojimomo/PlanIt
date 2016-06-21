@@ -158,18 +158,18 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
 
         //读取数据按照id顺序排序
         projects = Project().loadAllData()
-        //更新表格
-        projectTableView.reloadData()
         
         //添加统计label
         let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
         countLabel.text = "\(projects.count)个项目"
         countLabel.font = UIFont(name: "System", size: 6)
-        countLabel.textColor = UIColor.grayColor()
+        countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
         countLabel.textAlignment = .Center
         countLabel.backgroundColor = UIColor.clearColor()
         projectTableView.tableFooterView = countLabel
         
+        //更新表格
+        projectTableView.reloadData()
 
     }
     
@@ -186,9 +186,9 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
     ///新增进程
     func addProcess(sender: UIButton){
         if let indexPath = self.projectTableView.indexPathForCell(sender.superview as! ProjectTableViewCell){
-            print("添加项目编号为\(indexPath.section)进度")
             //是否是未完成项目
-            if projects[indexPath.section].isFinished == .NotFinished{
+            if projects[indexPath.section].isFinished == .NotFinished || projects[indexPath.section].isFinished == .OverTime{
+                 print("添加项目编号为\(indexPath.section)打卡进度")
                 //打卡项目
                 if projects[indexPath.section].type == .Punch{
                     let process = Process()
@@ -203,11 +203,18 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
                     projects[indexPath.section].increaseDone(1.0)
                     //记录进度项目
                 }else if projects[indexPath.section].type == .Normal{
-                    
+                     print("打开项目编号为\(indexPath.section)进度页面")
+                    let addProcessViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addProcess") as! AddProcessTableViewController
+                    //设置view背景色
+                    addProcessViewController.view.backgroundColor = allBackground
+                    //设置每个cell的项目
+                    addProcessViewController.project = projects[indexPath.section]
+                    addProcessViewController.title = "添加进度-\(projects[indexPath.section].name)"
+                    //压入导航栏
+                    self.navigationController?.pushViewController(addProcessViewController, animated: true)
                 }
             }
         }
-
     }
     
     ///添加新项目
@@ -315,6 +322,8 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
                 //配置cell
                 cell.project = projects[indexPath.section]
                 cell.roundBackgroundColor = allBackground
+                cell.needPercent = true
+                cell.percent = projects[indexPath.section].percent
                 
                 //if projects[indexPath.section].isFinished == .NotFinished{
                 //新增进度按钮

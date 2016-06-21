@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 @IBDesignable
 public class RoundTableviewCell: UITableViewCell {
 
@@ -35,11 +34,15 @@ public class RoundTableviewCell: UITableViewCell {
         didSet {
         }
     }
-
+    
     let Margin: CGFloat = 15
     let shapeLayer = CAShapeLayer()
     let lineLayer = CALayer()
     let roundContentView: UIView = UIView()
+    var needShawdow = false
+    var needPercent = false
+    var percentColor = UIColor ( red: 0.7686, green: 0.7569, blue: 0.7216, alpha: 1.0 )
+    var percent = 0.0
     
     override public func awakeFromNib() {
         super.awakeFromNib()
@@ -89,13 +92,6 @@ public class RoundTableviewCell: UITableViewCell {
                 }
         }
         
-//        self.layer.masksToBounds = false
-//        self.layer.shadowPath = pathRef
-//        self.layer.shadowOffset = CGSizeMake(0.5, 0.5)
-//        self.layer.shadowColor = UIColor.lightGrayColor().CGColor
-//        self.layer.shadowOpacity = 0.7
-//        self.layer.shadowRadius = 4
-
         shapeLayer.path = pathRef
         self.contentView.layer.insertSublayer(shapeLayer, atIndex: 0)
         if selected || highlighted {
@@ -103,6 +99,42 @@ public class RoundTableviewCell: UITableViewCell {
         } else {
             shapeLayer.fillColor = roundFrontColor.CGColor
         }
+        
+        if needPercent && percent != 0{
+            var percentRef: CGMutablePathRef = CGPathCreateMutable()
+            if let tableview = getTableview(),
+                let indexPath = tableview.indexPathForCell(self){
+                    if indexPath.row == 0 && tableview.numberOfRowsInSection(indexPath.section) == 1 {
+                        percentRef = CreateBothCornerPathForPercent()
+                    }
+            }
+            
+            let percentLayer = CAShapeLayer()
+            percentLayer.path = percentRef
+            self.contentView.layer.insertSublayer(percentLayer, atIndex: 1)
+            if selected || highlighted {
+                percentLayer.fillColor = percentColor.CGColor
+            } else {
+                percentLayer.fillColor = percentColor.CGColor
+            }
+        }
+
+
+        if needShawdow {
+            self.layer.masksToBounds = false
+            self.layer.shadowPath = pathRef
+            self.layer.shadowOffset = CGSizeMake(0.5, 0.5)
+            self.layer.shadowColor = UIColor.lightGrayColor().CGColor
+            self.layer.shadowOpacity = 0.7
+            self.layer.shadowRadius = 4
+            self.shapeLayer.masksToBounds = false
+            self.shapeLayer.shadowPath = pathRef
+            self.shapeLayer.shadowOffset = CGSizeMake(0.5, 0.5)
+            self.shapeLayer.shadowColor = UIColor.lightGrayColor().CGColor
+            self.shapeLayer.shadowOpacity = 0.7
+            self.shapeLayer.shadowRadius = 4
+        }
+
         
         if (addLine == true) {
             let lineHeight: CGFloat = (0.5 / UIScreen.mainScreen().scale)
@@ -156,6 +188,7 @@ extension RoundTableviewCell {
         return pathRef
     }
     
+    
     func CreateBothCornerPath() -> CGMutablePathRef {
         let pathRef: CGMutablePathRef = CGPathCreateMutable()
         
@@ -183,6 +216,25 @@ extension RoundTableviewCell {
         CGPathAddLineToPoint(pathRef, nil, width - Margin, height)
         CGPathAddLineToPoint(pathRef, nil, Margin, height)
         CGPathAddLineToPoint(pathRef, nil, Margin, 0)
+        return pathRef
+    }
+    
+    
+    func CreateBothCornerPathForPercent() -> CGMutablePathRef {
+        let pathRef: CGMutablePathRef = CGPathCreateMutable()
+        
+        let height = self.frame.height
+        let width = self.frame.width
+        let outWidth = (width - Margin * 2 - cornerRadius * 2) * CGFloat(1 - percent / 100)
+        CGPathMoveToPoint(pathRef, nil, Margin, height - cornerRadius)
+        CGPathAddLineToPoint(pathRef, nil, Margin, cornerRadius)
+        CGPathAddArc(pathRef, nil, Margin + cornerRadius, cornerRadius, cornerRadius, CGFloat(M_PI), CGFloat(3/2.0 * M_PI), false)
+        CGPathAddLineToPoint(pathRef, nil, width - Margin - cornerRadius - outWidth, 0)
+        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius - outWidth,cornerRadius, cornerRadius, CGFloat(3/2 * M_PI), CGFloat(2.0 * M_PI), false)
+        CGPathAddLineToPoint(pathRef, nil, width - Margin - outWidth, height - cornerRadius)
+        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius - outWidth, height - cornerRadius, cornerRadius, 0, CGFloat(1/2.0 * M_PI), false)
+        CGPathAddLineToPoint(pathRef, nil, Margin + cornerRadius, height)
+        CGPathAddArc(pathRef, nil, Margin + cornerRadius, height - cornerRadius, cornerRadius, CGFloat(1/2 * M_PI), CGFloat(M_PI), false)
         return pathRef
     }
 }

@@ -29,8 +29,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     ///按钮文字
     var finishEditButtonText = ""
     ///项目名称
-    var projectName:String{
-        get{
+    var projectName:String{        get{
             return (projectNameLabel?.text)!
         }
         set{
@@ -135,7 +134,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     }
     
     //是否改变开始时间
-    @IBAction func editBeginTime(sender: AnyObject) {
+    func editBeginTime() {
         if IS_IOS8{
             //创建datepicker控件
             let datePicker = UIDatePicker()
@@ -169,7 +168,7 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
     }
     
     ///是否改变结束时间
-    @IBAction func editEndTime(sender: AnyObject) {
+    func editEndTime() {
         if IS_IOS8{
             //创建datepicker控件
             let datePicker = UIDatePicker()
@@ -394,26 +393,35 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }
+
     
     ///点击某个单元格触发的方法
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //设置单元格打勾
+        let beginTimeCellPath = NSIndexPath(forRow: 0, inSection: 1)
+        let endTimeCellPath = NSIndexPath(forRow: 1, inSection: 1)
         let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
-        if indexPath == tagCellPath{
-            let tags = Tag().loadAllData()
-            for tag in tags{
-                for selectedTag in project.tags{
-                    if tag.name == selectedTag.name{
-                        tag.isSelected = true
+        switch indexPath{
+        case beginTimeCellPath:
+            editBeginTime()
+        case endTimeCellPath:
+            editEndTime()
+        case tagCellPath:
+            if indexPath == tagCellPath{
+                let tags = Tag().loadAllData()
+                for tag in tags{
+                    for selectedTag in project.tags{
+                        if tag.name == selectedTag.name{
+                            tag.isSelected = true
+                        }
                     }
                 }
-            }
-            RRTagController.displayTagController(parentController: self, tags: tags, blockFinish: { (selectedTags, unSelectedTags) -> () in
+                RRTagController.displayTagController(parentController: self, tags: tags, blockFinish: { (selectedTags, unSelectedTags) -> () in
                     self.project.tags = selectedTags
-                }) { () -> () in
+                    }) { () -> () in
+                }
             }
+        default:break
         }
-
     }
     
     //MARK: - View Controller Lifecle
