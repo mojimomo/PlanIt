@@ -131,6 +131,7 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         
         
         if let addImage = UIImage(named: "add"){
+            let addImageClick = UIImage(named: "addclick")
             //获取导航栏高度
             let rectNav = self.navigationController?.navigationBar.frame
             //获取静态栏的高度
@@ -139,6 +140,7 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
             addProjectButtonSize = addImage.size
             addProjectButton = UIButton(frame: CGRectMake((self.view.bounds.size.width - addImage.size.width)/2 , self.view.bounds.size.height - addImage.size.height - rectNav!.size.height - rectStatus.size.height - addProjectButtonMargin, addImage.size.width, addImage.size.height))
             addProjectButton?.setImage(addImage, forState: .Normal)
+            addProjectButton?.setImage(addImageClick, forState: .Highlighted)
             addProjectButton?.addTarget(self, action: "addNewProject", forControlEvents: .TouchUpInside)
             
             //阴影 颜色#9C4E50
@@ -158,15 +160,16 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
 
         //读取数据按照id顺序排序
         projects = Project().loadAllData()
-        
-        //添加统计label
-        let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
-        countLabel.text = "\(projects.count)个项目"
-        countLabel.font = UIFont(name: "System", size: 6)
-        countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
-        countLabel.textAlignment = .Center
-        countLabel.backgroundColor = UIColor.clearColor()
-        projectTableView.tableFooterView = countLabel
+        if projects.count != 0{
+            //添加统计label
+            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
+            countLabel.text = "\(projects.count)个项目"
+            countLabel.font = UIFont(name: "System", size: 6)
+            countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
+            countLabel.textAlignment = .Center
+            countLabel.backgroundColor = UIColor.clearColor()
+            projectTableView.tableFooterView = countLabel
+        }
         
         //更新表格
         projectTableView.reloadData()
@@ -205,13 +208,22 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
                 }else if projects[indexPath.section].type == .Normal{
                      print("打开项目编号为\(indexPath.section)进度页面")
                     let addProcessViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addProcess") as! AddProcessTableViewController
-                    //设置view背景色
-                    addProcessViewController.view.backgroundColor = allBackground
                     //设置每个cell的项目
                     addProcessViewController.project = projects[indexPath.section]
                     addProcessViewController.title = "添加进度-\(projects[indexPath.section].name)"
                     //压入导航栏
-                    self.navigationController?.pushViewController(addProcessViewController, animated: true)
+                    addProcessViewController.view.backgroundColor = allBackground
+                    addProcessViewController.modalTransitionStyle = .CoverVertical
+                    let navController = UINavigationController.init(rootViewController: addProcessViewController)
+                    //设计背景色
+                    navController.navigationBar.backgroundColor = allBackground
+                    //去除导航栏分栏线
+                    navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+                    navController.navigationBar.shadowImage = UIImage()
+                    navController.navigationBar.tintColor = navigationTintColor
+                    let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
+                    navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+                    self.navigationController?.presentViewController(navController, animated: true, completion: nil)
                 }
             }
         }
@@ -312,6 +324,11 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
             //菜单表格
         case tableViewTag.MuneTable:
             let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+            if indexPath.row == 0{
+                let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 5, width: 40, height: 40))
+                isShowAllSwitch.on = false
+                cell.addSubview(isShowAllSwitch)
+            }
             cell.textLabel?.text = self.texts[indexPath.row]
             return cell
             
@@ -333,13 +350,17 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
                 
                 //根据不同任务类型使用不同的图标
                 var imageString = ""
+                var selectString = ""
                 switch(projects[indexPath.section].type){
                 case .NoRecord:
                     imageString = "norecord"
+                    selectString = "norecordclick"
                 case .Punch:
                     imageString = "punch"
+                    selectString = "punchclick"
                 case .Normal:
                     imageString = "record"
+                    selectString = "recordclick"
                 default:break
                 }
                 
@@ -350,8 +371,10 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
                 
                 //读取图片
                 let buttonImage = UIImage(named: imageString)
+                let buttonSelectedIamge = UIImage(named: selectString)
                 //进行缩
                 addProcessButton.setImage(buttonImage, forState: .Normal)
+                addProcessButton.setImage(buttonSelectedIamge, forState: .Highlighted)
                 addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
                 
                 //添加按钮

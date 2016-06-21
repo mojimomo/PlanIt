@@ -395,12 +395,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="今天" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U9b-PL-gyX">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="今天" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U9b-PL-gyX">
                                                     <rect key="frame" x="78" y="8" width="514" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HB-7l-56o">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HB-7l-56o">
                                                     <rect key="frame" x="8" y="8" width="70" height="27.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="vmY-nu-PUT"/>
@@ -462,10 +462,15 @@
                             <outlet property="delegate" destination="qh9-Oj-hfp" id="5TS-Zl-Gix"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="currentProcessTextField" destination="U9b-PL-gyX" id="zRg-mz-FqH"/>
+                        <outlet property="doneTextField" destination="F3p-Qh-xKE" id="Bmz-3P-fNo"/>
+                        <outlet property="remarkTextField" destination="dg6-BS-00P" id="fRq-U9-yqH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s7Q-2f-o8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3606" y="1614"/>
+            <point key="canvasLocation" x="2198" y="63"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="CVD-G7-9hU">
@@ -632,7 +637,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiQ-RG-UBS">
                                                     <rect key="frame" x="38" y="8" width="476" height="27.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -680,12 +685,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="项目" id="kK9-Xh-z2k">
-                        <barButtonItem key="leftBarButtonItem" title="Tag" id="fdp-07-0Sj">
+                        <barButtonItem key="leftBarButtonItem" image="tag" id="fdp-07-0Sj">
                             <connections>
                                 <segue destination="eDm-jg-sII" kind="show" identifier="tag" id="10S-38-yso"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="menu" id="8Py-4L-30H">
+                        <barButtonItem key="rightBarButtonItem" image="more" id="8Py-4L-30H">
                             <connections>
                                 <action selector="callMenu:" destination="Vrd-B6-D5V" id="XHh-yJ-Hd6"/>
                             </connections>
@@ -1090,6 +1095,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu" width="17" height="17"/>
+        <image name="more" width="22" height="5"/>
+        <image name="tag" width="19" height="19"/>
     </resources>
 </document>

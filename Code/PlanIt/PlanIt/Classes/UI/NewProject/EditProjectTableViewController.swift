@@ -430,23 +430,19 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         switch tableState{
         case .Add:
             //添加新增项目按钮
-            let addButton = UIBarButtonItem(title: "新增",style: .Done, target: self, action: "finishEdit:")
-            //let addButton = UIBarButtonItem(image: UIImage(named: "add"), style: .Done, target: self, action: "finishEdit:")
+         let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishEdit:")
             self.navigationItem.rightBarButtonItem = addButton
             
             //新增返回按钮
-            let backButton = UIBarButtonItem(title: "返回",style: .Done, target: self, action: "back")
-            //let backButton = UIBarButtonItem(image: UIImage(named: "add"), style: .Done, target: self, action: "back")
+            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "back")
             self.navigationItem.leftBarButtonItem = backButton
         case .Edit:
             //添加新增项目按钮
-            let addButton = UIBarButtonItem(title: "修改",style: .Done, target: self, action: "finishEdit:")
-            //let addButton = UIBarButtonItem(image: UIImage(named: "add"), style: .Done, target: self, action: "finishEdit:")
+            let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishEdit:")
             self.navigationItem.rightBarButtonItem = addButton
             
-            //新增返回按钮
-            let backButton = UIBarButtonItem(title: "删除",style: .Done, target: self, action: "deleteProject")
-            //let backButton = UIBarButtonItem(image: UIImage(named: "add"), style: .Done, target: self, action: "back")
+            //新增删除按钮
+            let backButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: "deleteProject")
             self.navigationItem.leftBarButtonItem = backButton
             //default: break
         }
