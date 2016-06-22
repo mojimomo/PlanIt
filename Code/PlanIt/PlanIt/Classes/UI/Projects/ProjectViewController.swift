@@ -275,8 +275,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func loadData(){
         //读取原始数据
         if selectTag != nil{
+            title = selectTag?.name
             projects = TagMap().searchProjectFromTag(selectTag!)
         }else{
+            title = "所有项目"
             projects = Project().loadAllData()
         }
 
@@ -412,6 +414,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     imageString = "record"
                     selectString = "recordclick"
                 default:break
+                }
+                
+                if projects[indexPath.section].isFinished == .Finished{
+                    imageString = "finish"
+                    selectString = ""
                 }
                 
                 let processView = UIProgressView(frame: cell.frame)

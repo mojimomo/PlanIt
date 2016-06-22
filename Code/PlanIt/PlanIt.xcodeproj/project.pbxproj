@@ -46,7 +46,6 @@
 		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
 		BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */; };
 		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
-		BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +116,6 @@
 		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
 		BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessTableViewController.swift; sourceTree = "<group>"; };
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
-		BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,7 +332,6 @@
 			children = (
 				BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */,
 				BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */,
-				BEE8E1711CFC2CC4005EC05C /* AddProcessView.swift */,
 				BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */,
 				BE977A801D17B87200D6899C /* CellBackgroundView.swift */,
 			);
@@ -635,7 +632,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE9ACE7A1D0C03B30097A76F /* PieChartView.swift in Sources */,
-				BEE8E1721CFC2CC4005EC05C /* AddProcessView.swift in Sources */,
 				BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */,
 				BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */,
 				BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */,
