@@ -349,7 +349,10 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="课" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F3p-Qh-xKE">
                                                     <rect key="frame" x="78" y="8" width="514" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    <connections>
+                                                        <action selector="editDoneDidEnd:" destination="qh9-Oj-hfp" eventType="editingDidEnd" id="mlP-iX-uew"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCX-C2-Ihy">
                                                     <rect key="frame" x="8" y="8" width="70" height="27"/>
@@ -687,7 +690,7 @@
                     <navigationItem key="navigationItem" title="项目" id="kK9-Xh-z2k">
                         <barButtonItem key="leftBarButtonItem" image="tag" id="fdp-07-0Sj">
                             <connections>
-                                <segue destination="eDm-jg-sII" kind="show" identifier="tag" id="10S-38-yso"/>
+                                <segue destination="eDm-jg-sII" kind="show" identifier="showTags" id="10S-38-yso"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="more" id="8Py-4L-30H">

@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol TagsViewDataSource: class {
-    func projectForTagsView(sneder: TagsViewController) -> Project?
+protocol TagsViewDelegate: class {
+    func passSelectedTag(selectedTag: Tag?)
 }
 
 class TagsViewController: UITableViewController {
     var tags = [Tag]()
     var selectTags = [Bool]()
     var isEditingMod = false
-    var DateSource:TagsViewDataSource?
+    var delegate:TagsViewDelegate?
     
     private struct Storyboard{
         static let CellReusIdentifier = "TagCell"
@@ -35,7 +35,9 @@ class TagsViewController: UITableViewController {
     // MARK: - viewlife
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.tintColor = UIColor.blackColor()
+        //self.view.tintColor = UIColor.blackColor()
+        self.view.backgroundColor = allBackground
+        self.title = "标签"
         tags = Tag().loadAllData()
         selectTags = [Bool](count: tags.count, repeatedValue: false)
     }
@@ -43,7 +45,7 @@ class TagsViewController: UITableViewController {
     // MARK: - UITableViewDataSource
     ///确定行数
     override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
-        let cnt = tags.count
+        let cnt = tags.count + 1
         return cnt
     }
     
@@ -51,12 +53,22 @@ class TagsViewController: UITableViewController {
     override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath)
         //配置cell
-        cell.textLabel?.text = tags[indexPath.row].name
+        if indexPath.row == 0{
+            cell.textLabel?.text = "全部项目"
+        }else{
+            cell.textLabel?.text = tags[indexPath.row - 1].name
+        }
         return cell
     }
     
     ///点击某个单元格触发的方法
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 0{
+            delegate?.passSelectedTag(nil)
+        }else{
+            delegate?.passSelectedTag(tags[indexPath.row - 1])
+        }
+        self.navigationController?.popViewControllerAnimated(true)
 //        //设置单元格打勾
 //        let cell = tableView.cellForRowAtIndexPath(indexPath)
 //        if selectTags[indexPath.row] == true{

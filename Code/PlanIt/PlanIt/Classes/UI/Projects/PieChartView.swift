@@ -51,7 +51,8 @@ class PieChartView: UIView {
         //百分比label
         let percentLabel = UILabel(frame: rect)
         let percent = dataSource?.percentForPieChartView(self) ?? 0.0
-        percentLabel.text = "\(percent)%"
+        let string = String(format: "%.1f%%", percent)
+        percentLabel.text = string
         percentLabel.textAlignment = .Center
         percentLabel.font = UIFont.boldSystemFontOfSize(24)
         self.addSubview(percentLabel)

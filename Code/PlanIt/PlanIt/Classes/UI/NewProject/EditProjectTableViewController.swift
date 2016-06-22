@@ -12,7 +12,7 @@ enum editProjectTableState{
     case Add, Edit
 }
 
-class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
+class EditProjectTableViewController: UITableViewController {
     @IBOutlet weak var projectNameLabel: UITextField!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var recordSwitch: UISwitch!
@@ -481,9 +481,8 @@ class EditProjectTableViewController: UITableViewController ,TagsViewDataSource{
         if let ivc = segue.destinationViewController as? TagsViewController {
             if let identifier = segue.identifier{
                 switch identifier{
-                case "tags":
+                case "showTags":
                     ivc.title = "选择标签"
-                    ivc.DateSource = self
                 default: break
                 }
             }

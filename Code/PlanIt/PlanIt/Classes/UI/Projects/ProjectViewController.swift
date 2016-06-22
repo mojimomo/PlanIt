@@ -9,9 +9,7 @@
 import UIKit
 import Popover
 
-@IBDesignable
-
-class ProjectViewController: UIViewController , UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource{
+class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tagsBarButton: UIBarButtonItem!
     @IBOutlet weak var projectTableView: UITableView!{
@@ -28,22 +26,24 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         static let TagsTable = 1
         static let ProjectsTable = 2
     }
-    
+    private var selectTag : Tag?
     private var popover: Popover!
-    
-    private var texts = ["Edit", "Delete", "Report"]
-    
+    private var texts = ["显示未开始", "已完成", "设置"]
     private var popoverOptions: [PopoverOption] = [
         .Type(.Down),
         .CornerRadius(0.0),
         .ArrowSize(CGSize(width: 0.0, height: 0.0)),
         .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
-    
+    ///显示未开始项目
+    private var isShowNotBegin = false
+    ///显示未开始项目
+    private var isShowFinished = false
     ///添加项目按钮
     var addProjectButton: UIButton?
     ///项目列表
     var projects = [Project]()
+    var orginProjects = [Project]()
     ///cell边距
     var cellMargin : CGFloat = 15.0
     ///添加新项目底部边距
@@ -54,7 +54,7 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         static let CellReusIdentifier = "ProjectCell"
     }
     
-    //呼出标签栏
+    ///呼出标签栏
     @IBAction func callTag(sender: UIBarButtonItem) {
         //获取静态栏的高度
 
@@ -112,6 +112,13 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         self.presentViewController(addNewProjectViewController, animated: true, completion: nil)
     }
 
+    //点击是否显示未开始
+    func showNotBegin(){
+        isShowNotBegin = !isShowNotBegin
+        loadData()
+        self.projectTableView.reloadData()
+    }
+    
     //MARK: - View Controller Lifecle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +166,7 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         super.viewWillAppear(animated)
 
         //读取数据按照id顺序排序
-        projects = Project().loadAllData()
+        loadData()
         if projects.count != 0{
             //添加统计label
             let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
@@ -169,6 +176,8 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
             countLabel.textAlignment = .Center
             countLabel.backgroundColor = UIColor.clearColor()
             projectTableView.tableFooterView = countLabel
+        }else{
+            projectTableView.tableFooterView = nil
         }
         
         //更新表格
@@ -262,8 +271,42 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         }
     }
 
+    ///加载所有数据
+    func loadData(){
+        //读取原始数据
+        if selectTag != nil{
+            projects = TagMap().searchProjectFromTag(selectTag!)
+        }else{
+            projects = Project().loadAllData()
+        }
+
+        var index = 0
+        for project in projects {
+            //不显示未开始
+            if !isShowNotBegin {
+                if project.isFinished == .NotBegined {
+                    projects.removeAtIndex(index)
+                    continue
+                }
+            }
+            //显示结束
+            if isShowFinished {
+                if project.isFinished != .Finished {
+                    projects.removeAtIndex(index)
+                    continue
+                }
+            }else{
+                if project.isFinished == .Finished {
+                    projects.removeAtIndex(index)
+                    continue
+                }
+            }
+            index++
+        }
+    }
+    
     // MARK: - UITableViewDataSource
-    //确认节数
+    ///确认节数
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         //表格类型
         switch tableView.tag {
@@ -324,12 +367,19 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
             //菜单表格
         case tableViewTag.MuneTable:
             let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+            cell.textLabel?.text = self.texts[indexPath.row]
             if indexPath.row == 0{
                 let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 5, width: 40, height: 40))
-                isShowAllSwitch.on = false
+                isShowAllSwitch.on = isShowNotBegin
+                isShowAllSwitch.addTarget(self, action: "showNotBegin", forControlEvents: .ValueChanged)
                 cell.addSubview(isShowAllSwitch)
             }
-            cell.textLabel?.text = self.texts[indexPath.row]
+            if indexPath.row == 1{
+                cell.accessoryType = .DisclosureIndicator
+                if isShowFinished {
+                    cell.textLabel?.text = "未完成"
+                }
+            }
             return cell
             
             //项目表格
@@ -405,6 +455,11 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         switch tableView.tag {
             //菜单表格
         case tableViewTag.MuneTable:
+            if indexPath.row == 1 {
+                isShowFinished = !isShowFinished
+                loadData()
+                self.projectTableView.reloadData()
+            }
              self.popover.dismiss()
             //项目表格
         case tableViewTag.ProjectsTable:
@@ -428,9 +483,17 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
                 default: break
                 }
             }
+        }else if let ivc = segue.destinationViewController as? TagsViewController {
+            if let identifier = segue.identifier{
+                switch identifier{
+                case "showTags":
+                    ivc.title = "标签"
+                    ivc.delegate = self
+                  default: break
+                }
+            }
         }
     }
-    
     // MARK: Popover presentation delegate
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -445,25 +508,16 @@ class ProjectViewController: UIViewController , UIPopoverPresentationControllerD
         print("Did Dismiss popover")
     }
     
-    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+    func opoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
         print("Should Dismiss popover")
         print(popoverPresentationController.popoverBackgroundViewClass)
         return true
     }
-}
-
-
-extension UIImage{
-    func scaleToSize(size: CGSize) -> UIImage{
-        // 创建一个bitmap的context
-        // 并把它设置成为当前正在使用的context
-        UIGraphicsBeginImageContext(size)
-        // 绘制改变大小的图片
-        self.drawInRect(CGRectMake(0, 0, size.width, size.height))
-        // 从当前context中创建一个改变大小后的图片
-        let scaleImage = UIGraphicsGetImageFromCurrentImageContext()
-        // 使当前的context出堆栈
-        UIGraphicsEndImageContext()
-        return scaleImage
+        
+    // MARK: TagsView delegate
+    func passSelectedTag(selectedTag: Tag?){
+        selectTag = selectedTag
+        return
     }
+    
 }

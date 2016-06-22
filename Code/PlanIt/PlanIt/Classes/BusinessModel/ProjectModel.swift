@@ -78,7 +78,7 @@ class Project: NSObject {
     var tags = [Tag]()
     ///标签字符串
     var tagString = ""
-    ///百分比
+    ///百分比 0 - 100
     var percent = 0.0
     ///备注
     //var remark: String?
@@ -101,25 +101,42 @@ class Project: NSObject {
         total = dict["total"]!.doubleValue
         complete = dict["complete"]!.doubleValue
         rest = dict["rest"]!.doubleValue
-        if type != .NoRecord{
-            if total != 0{
-                percent = complete * 100 / total
-            }
-        }
         
         //刷新tag
         freshenTags()
         
         //计算是否完成
         setNewProjectTime(beginTime, endTime: endTime)
-        if complete == total{
-            isFinished = .Finished
-        }else if complete < total{
-            //计算是否超时
-            if  endTimeDate.timeIntervalSinceNow < 0{
-                isFinished = .OverTime
+        if type != .NoRecord{
+            if complete == total{
+                isFinished = .Finished
+            }else if complete < total{
+                //计算是否超时
+                if  endTimeDate.timeIntervalSinceNow < 0{
+                    isFinished = .OverTime
+                }else{
+                    isFinished = .NotFinished
+                }
+            }
+        }
+        
+        
+        //计算百分比
+        if type != .NoRecord{
+            if total != 0{
+                percent = complete * 100 / total
+            }
+        }else{
+            if isFinished == .OverTime || isFinished == .Finished{
+                percent = 100
+            }else if isFinished == .NotBegined {
+                percent = 0
             }else{
-                isFinished = .NotFinished
+                let timeEnd = endTimeDate.timeIntervalSince1970
+                let timeBegin = beginTimeDate.timeIntervalSince1970
+                let currentDate = NSDate()
+                let timecurrent = currentDate.timeIntervalSince1970
+                percent = (timecurrent - timeBegin)/(timeEnd - timeBegin)
             }
         }
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 protocol BackgroundViewDataSource: class {
-    func percentForCellBackgroundView(sneder: CellBackgroundView) -> Double?
+    func percentForCellBackgroundView(sender: CellBackgroundView) -> Double?
 }
 
 class CellBackgroundView: UIView {
