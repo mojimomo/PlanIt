@@ -29,7 +29,8 @@ class EditProjectTableViewController: UITableViewController {
     ///按钮文字
     var finishEditButtonText = ""
     ///项目名称
-    var projectName:String{        get{
+    var projectName:String{
+        get{
             return (projectNameLabel?.text)!
         }
         set{
@@ -352,27 +353,9 @@ class EditProjectTableViewController: UITableViewController {
     private func updateUI(){
         self.tableView.reloadData()
         //self.tableView.setNeedsDisplay()
-    }
-    
-    ///发起提示
-    func callAlert(title:String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "好的", style: .Default,
-            handler: nil)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    ///发起提示确定返回
-    func callAlertAndBack(title:String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "好的", style: .Default,
-            handler: {(UIAlertAction) -> Void in
-            self.back()
-            })
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
+    }   
+
+
     
     //MARK: - Override TableView
     ///隐藏某cell
@@ -402,7 +385,9 @@ class EditProjectTableViewController: UITableViewController {
         let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
         switch indexPath{
         case beginTimeCellPath:
-            editBeginTime()
+            if tableState != .Edit{
+                editBeginTime()
+            }
         case endTimeCellPath:
             editEndTime()
         case tagCellPath:
@@ -454,7 +439,6 @@ class EditProjectTableViewController: UITableViewController {
         let dateString = dateFormat.stringFromDate(nowDate)
         beginTimeLabel?.text = dateString
         endTimeLabel?.text = dateString
-        projectTotal = 0
         projectType = .Normal
         
         // corner radius
@@ -474,6 +458,10 @@ class EditProjectTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)        //设置按钮标题
         finishEditButton?.setTitle(finishEditButtonText, forState: .Normal)
+        if tableState == .Edit{
+            recordSwitch.enabled = false
+            punchSwitch.enabled = false
+        }
     }
     
     // MARK: - prepareForSegue
@@ -491,5 +479,29 @@ class EditProjectTableViewController: UITableViewController {
     
     func projectForTagsView(sneder: TagsViewController) -> Project? {
         return project
+    }
+}
+
+extension UIViewController{
+    ///发起提示
+    func callAlert(title:String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "好的", style: .Default,
+            handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    ///发起提示确定返回
+    func callAlertAndBack(title:String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "好的", style: .Default,
+            handler: {(UIAlertAction) -> Void in
+                self.dismissViewControllerAnimated(true) { () -> Void in
+                    
+                }
+        })
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

@@ -54,7 +54,7 @@ class TagsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath)
         //配置cell
         if indexPath.row == 0{
-            cell.textLabel?.text = "全部项目"
+            cell.textLabel?.text = "显示全部"
         }else{
             cell.textLabel?.text = tags[indexPath.row - 1].name
         }

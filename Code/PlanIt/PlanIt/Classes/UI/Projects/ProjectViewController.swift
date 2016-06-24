@@ -112,10 +112,65 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.presentViewController(addNewProjectViewController, animated: true, completion: nil)
     }
 
+    // MARK: - Func
     //点击是否显示未开始
     func showNotBegin(){
         isShowNotBegin = !isShowNotBegin
         loadData()
+        self.projectTableView.reloadData()
+    }
+    
+    ///加载所有数据
+    func loadData(){
+        //读取原始数据
+        if selectTag != nil{
+            title = selectTag?.name
+            projects = TagMap().searchProjectFromTag(selectTag!)
+        }else{
+            title = "所有项目"
+            projects = Project().loadAllData()
+        }
+        
+        var index = 0
+        for project in projects {
+            //不显示未开始
+            if !isShowNotBegin {
+                if project.isFinished == .NotBegined {
+                    projects.removeAtIndex(index)
+                    continue
+                }
+            }
+            //显示结束
+            if isShowFinished {
+                if project.isFinished != .Finished {
+                    projects.removeAtIndex(index)
+                    continue
+                }
+            }else{
+                if project.isFinished == .Finished {
+                    projects.removeAtIndex(index)
+                    continue
+                }
+            }
+            index++
+        }
+        
+        //添加统计label
+        if projects.count != 0{
+            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
+            countLabel.text = "\(projects.count)个项目"
+            countLabel.font = UIFont(name: "System", size: 6)
+            countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
+            countLabel.textAlignment = .Center
+            countLabel.backgroundColor = UIColor.clearColor()
+            projectTableView.tableFooterView = countLabel
+        }else{
+            projectTableView.tableFooterView = nil
+        }
+    }
+    
+    ///更新表格
+    func updateTable(){
         self.projectTableView.reloadData()
     }
     
@@ -201,6 +256,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     process.insertProcess()
                     ProcessDate().chengeData(projects[indexPath.section].id, timeDate: currentTime, changeValue: 1.0)
                     projects[indexPath.section].increaseDone(1.0)
+                    //更新图标
+                    loadData()
+                    updateTable()
+                    
                     //记录进度项目
                 }else if projects[indexPath.section].type == .Normal{
                      print("打开项目编号为\(indexPath.section)进度页面")
@@ -212,8 +271,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     addProcessViewController.view.backgroundColor = allBackground
                     addProcessViewController.modalTransitionStyle = .CoverVertical
                     let navController = UINavigationController.init(rootViewController: addProcessViewController)
-                    //设计背景色
-                    navController.navigationBar.backgroundColor = allBackground
+                    //状态栏和导航栏不透明
+                    navController.navigationBar.translucent = false
+                    //设置导航栏颜色
+                    navController.navigationBar.barTintColor = navigationBackground
                     //去除导航栏分栏线
                     navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
                     navController.navigationBar.shadowImage = UIImage()
@@ -221,7 +282,35 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
                     navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
                     self.navigationController?.presentViewController(navController, animated: true, completion: nil)
+                    //不记录项目
+                }else if projects[indexPath.section].type == .NoRecord{
+                    print("项目编号为\(indexPath.section)完成项目")
+                    projects[indexPath.section].finishDone()
+                    //更新图标
+                    loadData()
+                    updateTable()
                 }
+            //项目完成
+            }else if projects[indexPath.section].isFinished == .Finished{
+                let alerController = UIAlertController(title: "是否确定删除该项目？", message: nil, preferredStyle: .ActionSheet)
+                //创建UIAlertAction 确定按钮
+                let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+                    self.projects[indexPath.section].deleteProject()
+                    //更新图标
+                    self.loadData()
+                    self.updateTable()
+                })
+                //创建UIAlertAction 取消按钮
+                let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+                })
+                //添加动作
+                alerController.addAction(alerActionOK)
+                alerController.addAction(alerActionCancel)
+                //显示alert
+                self.presentViewController(alerController, animated: true, completion: { () -> Void in
+                    
+                })
+
             }
         }
     }
@@ -231,12 +320,14 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
         addNewProjectViewController.title = "新增项目"
         addNewProjectViewController.tableState = .Add
+        //设置view颜色
         addNewProjectViewController.view.backgroundColor = allBackground
         addNewProjectViewController.modalTransitionStyle = .CoverVertical
         let navController = UINavigationController.init(rootViewController: addNewProjectViewController)
+        //状态栏和导航栏不透明
         navController.navigationBar.translucent = false
-        //设计背景色
-        navController.navigationBar.backgroundColor = allBackground
+        //设置导航栏颜色
+        navController.navigationBar.barTintColor = navigationBackground
         //去除导航栏分栏线
         navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navController.navigationBar.shadowImage = UIImage()
@@ -244,70 +335,47 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
         navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
         self.navigationController?.presentViewController(navController, animated: true, completion: nil)
+         //UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
     }
     
     ///单个项目页面
     func getMoreInfor(sender: UIButton){
         if let indexPath = self.projectTableView.indexPathForCell(sender.superview as! ProjectTableViewCell){
-            print("打开项目编号为\(indexPath.section)统计页面")
-            let statisticsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Statistics") as! StatisticsViewController
-            //设置view背景色
-            statisticsViewController.view.backgroundColor = allBackground
-            //设置每个cell的项目
-            statisticsViewController.project = projects[indexPath.section]
-            //压入导航栏
-            self.navigationController?.pushViewController(statisticsViewController, animated: true)
-        }
-    }
-
-    ///加载所有数据
-    func loadData(){
-        //读取原始数据
-        if selectTag != nil{
-            title = selectTag?.name
-            projects = TagMap().searchProjectFromTag(selectTag!)
-        }else{
-            title = "所有项目"
-            projects = Project().loadAllData()
-        }
-
-        var index = 0
-        for project in projects {
-            //不显示未开始
-            if !isShowNotBegin {
-                if project.isFinished == .NotBegined {
-                    projects.removeAtIndex(index)
-                    continue
-                }
-            }
-            //显示结束
-            if isShowFinished {
-                if project.isFinished != .Finished {
-                    projects.removeAtIndex(index)
-                    continue
-                }
+            if projects[indexPath.section].type != .NoRecord {
+                print("打开项目编号为\(indexPath.section)统计页面")
+                let statisticsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Statistics") as! StatisticsViewController
+                //设置view背景色
+                statisticsViewController.view.backgroundColor = allBackground
+                //设置每个cell的项目
+                statisticsViewController.project = projects[indexPath.section]
+                //压入导航栏
+                self.navigationController?.pushViewController(statisticsViewController, animated: true)
             }else{
-                if project.isFinished == .Finished {
-                    projects.removeAtIndex(index)
-                    continue
-                }
+                print("打开项目编号为\(indexPath.section)编辑页面")
+                let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
+                addNewProjectViewController.title = projects[indexPath.section].name
+                addNewProjectViewController.tableState = .Edit
+                addNewProjectViewController.view.backgroundColor = allBackground
+                addNewProjectViewController.modalTransitionStyle = .CoverVertical
+                let navController = UINavigationController.init(rootViewController: addNewProjectViewController)
+                //状态栏和导航栏不透明
+                navController.navigationBar.translucent = false
+                //设置导航栏颜色
+                navController.navigationBar.barTintColor = navigationBackground
+                //去除导航栏分栏线
+                navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+                navController.navigationBar.shadowImage = UIImage()
+                navController.navigationBar.tintColor = navigationTintColor
+                let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
+                navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+                self.navigationController?.presentViewController(navController, animated: true, completion: nil)
+                addNewProjectViewController.project = projects[indexPath.section]
             }
-            index++
-        }
-        
-        //添加统计label
-        if projects.count != 0{
-            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
-            countLabel.text = "\(projects.count)个项目"
-            countLabel.font = UIFont(name: "System", size: 6)
-            countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
-            countLabel.textAlignment = .Center
-            countLabel.backgroundColor = UIColor.clearColor()
-            projectTableView.tableFooterView = countLabel
-        }else{
-            projectTableView.tableFooterView = nil
+
         }
     }
+
+
     
     // MARK: - UITableViewDataSource
     ///确认节数
@@ -503,7 +571,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
         }
     }
-    // MARK: Popover presentation delegate
+    // MARK: - Popover presentation delegate
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
@@ -523,7 +591,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         return true
     }
         
-    // MARK: TagsView delegate
+    // MARK: - TagsView delegate
     func passSelectedTag(selectedTag: Tag?){
         selectTag = selectedTag
         return

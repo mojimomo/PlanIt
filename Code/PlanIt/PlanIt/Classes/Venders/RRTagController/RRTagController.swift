@@ -279,13 +279,4 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             tagController.blockFinih = blockFinish
             parentController.presentViewController(tagController, animated: true, completion: nil)
     }
-    
-    //发起提示
-    func callAlert(title:String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "好的", style: .Default,
-            handler: nil)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
 }
