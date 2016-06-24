@@ -167,18 +167,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
         //读取数据按照id顺序排序
         loadData()
-        if projects.count != 0{
-            //添加统计label
-            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
-            countLabel.text = "\(projects.count)个项目"
-            countLabel.font = UIFont(name: "System", size: 6)
-            countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
-            countLabel.textAlignment = .Center
-            countLabel.backgroundColor = UIColor.clearColor()
-            projectTableView.tableFooterView = countLabel
-        }else{
-            projectTableView.tableFooterView = nil
-        }
         
         //更新表格
         projectTableView.reloadData()
@@ -246,6 +234,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         addNewProjectViewController.view.backgroundColor = allBackground
         addNewProjectViewController.modalTransitionStyle = .CoverVertical
         let navController = UINavigationController.init(rootViewController: addNewProjectViewController)
+        navController.navigationBar.translucent = false
         //设计背景色
         navController.navigationBar.backgroundColor = allBackground
         //去除导航栏分栏线
@@ -304,6 +293,19 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }
             }
             index++
+        }
+        
+        //添加统计label
+        if projects.count != 0{
+            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
+            countLabel.text = "\(projects.count)个项目"
+            countLabel.font = UIFont(name: "System", size: 6)
+            countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
+            countLabel.textAlignment = .Center
+            countLabel.backgroundColor = UIColor.clearColor()
+            projectTableView.tableFooterView = countLabel
+        }else{
+            projectTableView.tableFooterView = nil
         }
     }
     

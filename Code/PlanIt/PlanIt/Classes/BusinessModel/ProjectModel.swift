@@ -106,20 +106,7 @@ class Project: NSObject {
         freshenTags()
         
         //计算是否完成
-        setNewProjectTime(beginTime, endTime: endTime)
-        if type != .NoRecord{
-            if complete == total{
-                isFinished = .Finished
-            }else if complete < total{
-                //计算是否超时
-                if  endTimeDate.timeIntervalSinceNow < 0{
-                    isFinished = .OverTime
-                }else{
-                    isFinished = .NotFinished
-                }
-            }
-        }
-        
+        setNewProjectTime(beginTime, endTime: endTime)       
         
         //计算百分比
         if type != .NoRecord{
@@ -189,16 +176,15 @@ class Project: NSObject {
         {
             self.beginTime = beginTime
             self.endTime = endTime
-            let nowTimeDate = NSDate()
             //初始化项目状态
             self.isFinished = .NoSet
             //开始时间<结束时间
             if beginTimeDate.compare(endTimeDate) == NSComparisonResult.OrderedAscending{
                 //开始时间>现在时间
-                if beginTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedDescending{
+                if beginTimeDate.timeIntervalSinceNow > 0{
                     self.isFinished = .NotBegined
                     //结束时间<现在时间
-                }else if endTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedAscending{
+                }else if endTimeDate.timeIntervalSinceNow < 0{
                     //不记录时间项目
                     if self.type == .NoRecord{
                         self.isFinished = .Finished
@@ -208,7 +194,7 @@ class Project: NSObject {
                         self.isFinished = .Finished
                     }
                     //结束时间>现在时间
-                }else if endTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedDescending{
+                }else if endTimeDate.timeIntervalSinceNow > 0{
                     self.isFinished = .NotFinished
                 }
             }

@@ -62,8 +62,7 @@ class Tag: NSObject{
     
     /// 加载所有的数据
     func loadData(id: Int) -> Tag?{
-        var tags : [Tag] = [Tag]()
-        
+       
         // 1.获取查询语句
         let querySQL = "SELECT * FROM t_tag WHERE id = '\(id)';"
         
@@ -76,9 +75,9 @@ class Tag: NSObject{
         // 3.遍历数组
         for dict in array {
             let p = Tag(dict: dict)
-            tags.append(p)
+            return p
         }
-        return tags[0]
+        return nil
     }
     
     ///添加新的标签

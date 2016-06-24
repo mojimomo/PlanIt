@@ -688,14 +688,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="项目" id="kK9-Xh-z2k">
-                        <barButtonItem key="leftBarButtonItem" image="tag" id="fdp-07-0Sj">
-                            <connections>
-                                <segue destination="eDm-jg-sII" kind="show" identifier="showTags" id="10S-38-yso"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="more" id="8Py-4L-30H">
+                        <barButtonItem key="leftBarButtonItem" image="more" id="8Py-4L-30H">
                             <connections>
                                 <action selector="callMenu:" destination="Vrd-B6-D5V" id="XHh-yJ-Hd6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="tag" id="fdp-07-0Sj">
+                            <connections>
+                                <segue destination="eDm-jg-sII" kind="show" identifier="showTags" id="10S-38-yso"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -706,7 +706,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbO-Wf-tXk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1506" y="870"/>
+            <point key="canvasLocation" x="1498" y="870"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="U0u-NU-nWJ">
