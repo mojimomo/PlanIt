@@ -48,6 +48,8 @@ class Project: NSObject {
             if beginTime != ""{
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                dateFormat.dateStyle = .LongStyle
                 beginTimeDate = dateFormat.dateFromString(beginTime)!
             }
         }
@@ -59,6 +61,8 @@ class Project: NSObject {
             if endTime != ""{
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                dateFormat.dateStyle = .LongStyle
                 endTimeDate = dateFormat.dateFromString(endTime)!
             }
         }
@@ -107,19 +111,6 @@ class Project: NSObject {
         
         //计算是否完成
         setNewProjectTime(beginTime, endTime: endTime)
-        if type != .NoRecord{
-            if complete == total{
-                isFinished = .Finished
-            }else if complete < total{
-                //计算是否超时
-                if  endTimeDate.timeIntervalSinceNow < 0{
-                    isFinished = .OverTime
-                }else{
-                    isFinished = .NotFinished
-                }
-            }
-        }
-        
         
         //计算百分比
         if type != .NoRecord{
@@ -127,17 +118,17 @@ class Project: NSObject {
                 percent = complete * 100 / total
             }
         }else{
-            if isFinished == .OverTime || isFinished == .Finished{
-                percent = 100
-            }else if isFinished == .NotBegined {
-                percent = 0
-            }else{
-                let timeEnd = endTimeDate.timeIntervalSince1970
-                let timeBegin = beginTimeDate.timeIntervalSince1970
-                let currentDate = NSDate()
-                let timecurrent = currentDate.timeIntervalSince1970
-                percent = (timecurrent - timeBegin)/(timeEnd - timeBegin)
-            }
+//            if isFinished == .OverTime || isFinished == .Finished{
+//                percent = 100
+//            }else if isFinished == .NotBegined {
+//                percent = 0
+//            }else{
+//                let timeEnd = endTimeDate.timeIntervalSince1970
+//                let timeBegin = beginTimeDate.timeIntervalSince1970
+//                let currentDate = NSDate()
+//                let timecurrent = currentDate.timeIntervalSince1970
+//                percent = (timecurrent - timeBegin)/(timeEnd - timeBegin)
+//            }
         }
     }
 
@@ -165,6 +156,7 @@ class Project: NSObject {
         }
     }
     
+    ///变化完成量
     func increaseDone(done: Double){
         if type != .NoRecord{
             complete += done
@@ -183,37 +175,64 @@ class Project: NSObject {
         }
     }
     
+    ///不记录时间项目完成
+    func finishDone(){
+        if type == .NoRecord{
+            complete += 1
+            updateProject()
+        }
+    }
+    
     ///新建项目设置时间
     func setNewProjectTime(beginTime: String, endTime: String) -> Bool{
         if beginTime != "" && endTime != ""
         {
             self.beginTime = beginTime
             self.endTime = endTime
-            let nowTimeDate = NSDate()
             //初始化项目状态
-            self.isFinished = .NoSet
+            isFinished = .NoSet
             //开始时间<结束时间
             if beginTimeDate.compare(endTimeDate) == NSComparisonResult.OrderedAscending{
                 //开始时间>现在时间
-                if beginTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedDescending{
-                    self.isFinished = .NotBegined
+                if beginTimeDate.timeIntervalSinceNow > 0{
+                    isFinished = .NotBegined
                     //结束时间<现在时间
-                }else if endTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedAscending{
+                }else if endTimeDate.timeIntervalSinceNow < 0{
                     //不记录时间项目
-                    if self.type == .NoRecord{
-                        self.isFinished = .Finished
-                    }else if complete < total{
-                        self.isFinished = .OverTime
-                    }else{
-                        self.isFinished = .Finished
+                    switch type{
+                    case .NoRecord:
+                        if complete == 1{
+                            isFinished = .Finished
+                        }else{
+                            isFinished = .OverTime
+                        }
+                    default:
+                        if complete < total{
+                            isFinished = .OverTime
+                        }else{
+                           isFinished = .Finished
+                        }
                     }
                     //结束时间>现在时间
-                }else if endTimeDate.compare(nowTimeDate) == NSComparisonResult.OrderedDescending{
-                    self.isFinished = .NotFinished
+                }else if endTimeDate.timeIntervalSinceNow > 0{
+                    switch type{
+                    case .NoRecord:
+                        if complete == 1{
+                            isFinished = .Finished
+                        }else{
+                            isFinished = .NotFinished
+                        }
+                    default:
+                        if complete < total{
+                            isFinished = .NotFinished
+                        }else{
+                            isFinished = .Finished
+                        }
+                    }
                 }
             }
         }
-        if self.isFinished != .NoSet{
+        if isFinished != .NoSet{
             return true
         }else{
             return false

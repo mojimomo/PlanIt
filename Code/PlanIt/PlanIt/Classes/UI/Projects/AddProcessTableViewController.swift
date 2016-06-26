@@ -27,11 +27,12 @@ class AddProcessTableViewController: UITableViewController {
     }
     
     @IBAction func editDoneDidEnd(sender: UITextField) {
-        if Double(doneTextField.text!)! > project.rest{
-            doneTextField.text = "\(project.rest)"
+        if doneTextField.text != ""{
+            if Double(doneTextField.text!)! > project.rest{
+                doneTextField.text = "\(project.rest)"
+            }
+            currentProcessTextField.text = "\(project.complete +  Double(doneTextField.text!)!) / \(project.total)"
         }
-        
-         currentProcessTextField.text = "\(project.complete +  Double(doneTextField.text!)!) / \(project.total)"
     }
     
     func finishEdit(){
@@ -41,6 +42,8 @@ class AddProcessTableViewController: UITableViewController {
             let currentTime = NSDate()
             let dateFormat = NSDateFormatter()
             dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+            dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+            dateFormat.dateStyle = .LongStyle
             process.recordTime = dateFormat.stringFromDate(currentTime)
             process.done = Double(doneTextField.text!)!
             process.remark = doneTextField.text!

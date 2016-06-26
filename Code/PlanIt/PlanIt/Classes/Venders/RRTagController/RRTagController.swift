@@ -26,7 +26,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     var blockFinih: ((selectedTags: Array<Tag>, unSelectedTags: Array<Tag>) -> ())!
     var blockCancel: (() -> ())!
-
+    var isEditMod = false
+    var editTags = [Tag]()
     var totalTagsSelected: Int {
         get {
             return self._totalTagsSelected
@@ -110,7 +111,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         self.navigationBarItem.leftBarButtonItem = self.leftButton
         
         navigationBar.pushNavigationItem(self.navigationBarItem, animated: true)
-        navigationBar.tintColor = colorSelectedTag
+        navigationBar.tintColor = navigationTintColor
+        navigationBar.backgroundColor = navigationBackground
         return navigationBar
     }()
     
@@ -168,57 +170,124 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tags.count + 1
+        if isEditMod{
+            return editTags.count
+        }else{
+            return tags.count + 1
+        }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            if indexPath.row < tags.count {
-                return RRTagCollectionViewCell.contentHeight(tags[indexPath.row].textContent)
+            if isEditMod{
+                return RRTagCollectionViewCell.contentHeight(editTags[indexPath.row].textContent)
+            }else{
+                if indexPath.row < tags.count {
+                    return RRTagCollectionViewCell.contentHeight(tags[indexPath.row].textContent)
+                }
+                return CGSizeMake(40, 40)
             }
-            return CGSizeMake(40, 40)
+
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let selectedCell: RRTagCollectionViewCell? = collectionView.cellForItemAtIndexPath(indexPath) as? RRTagCollectionViewCell
-        
-        if indexPath.row < tags.count {
-            _ = tags[indexPath.row]
-            if tags[indexPath.row].isSelected == false {
-                tags[indexPath.row].isSelected = true
-                selectedCell?.animateSelection(tags[indexPath.row].isSelected)
-                totalTagsSelected = 1
+        if isEditMod{
+            if editTags[indexPath.row].isSelected == false {
+                editTags[indexPath.row].isSelected = true
+                selectedCell?.animateSelection(editTags[indexPath.row].isSelected)
             }
             else {
-                tags[indexPath.row].isSelected = false
-                selectedCell?.animateSelection(tags[indexPath.row].isSelected)
-                totalTagsSelected = -1
+                editTags[indexPath.row].isSelected = false
+                selectedCell?.animateSelection(editTags[indexPath.row].isSelected)
+            }
+        }else{
+            if indexPath.row < tags.count {
+                _ = tags[indexPath.row]
+                if tags[indexPath.row].isSelected == false {
+                    tags[indexPath.row].isSelected = true
+                    selectedCell?.animateSelection(tags[indexPath.row].isSelected)
+                    totalTagsSelected = 1
+                }
+                else {
+                    tags[indexPath.row].isSelected = false
+                    selectedCell?.animateSelection(tags[indexPath.row].isSelected)
+                    totalTagsSelected = -1
+                }
+            }
+            else {
+                //            addTagView.textEdit.text = nil
+                //            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4,
+                //                options: UIViewAnimationOptions(), animations: { () -> Void in
+                //                self.collectionTag.alpha = 0.3
+                //                self.addTagView.frame.origin.y = 64
+                //                }, completion: { (anim: Bool) -> Void in
+                //                    self.addTagView.textEdit.becomeFirstResponder()
+                //                    print("")
+                //            })
+                let alerController = UIAlertController(title: "创建标签", message: "请输入新的标签", preferredStyle: .Alert)
+                
+                //创建UIAlertAction 确定按钮
+                let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+                    let textField = (alerController.textFields?.first)! as? UITextField
+                    if textField != nil{
+                        if textField?.text != ""{
+                            let spaceSet = NSCharacterSet.whitespaceCharacterSet()
+                            let contentTag = textField?.text!.stringByTrimmingCharactersInSet(spaceSet)
+                            if strlen(contentTag!) > 0 {
+                                let newTag = Tag(name: contentTag!)
+                                self.tags.insert(newTag, atIndex: self.tags.count)
+                                newTag.insertTag()
+                                self.collectionTag.reloadData()
+                            }
+                        }else{
+                            self.callAlert("创建失败", message: "标签不能为空！")
+                        }
+                    }
+                })
+                
+                //创建UIAlertAction 取消按钮
+                let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+                    
+                })
+                alerController.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+                    textField.textAlignment = .Center
+                    textField.placeholder = "例如: 编程, 健身"
+                })
+                //添加动作
+                alerController.addAction(alerActionOK)
+                alerController.addAction(alerActionCancel)
+                //显示alert
+                self.presentViewController(alerController, animated: true, completion: { () -> Void in
+                    
+                })
             }
         }
-        else {
-            addTagView.textEdit.text = nil
-            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4,
-                options: UIViewAnimationOptions(), animations: { () -> Void in
-                self.collectionTag.alpha = 0.3
-                self.addTagView.frame.origin.y = 64
-                }, completion: { (anim: Bool) -> Void in
-                    self.addTagView.textEdit.becomeFirstResponder()
-                    print("")
-            })
-        }
-    }
+     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell: RRTagCollectionViewCell? = collectionView.dequeueReusableCellWithReuseIdentifier(RRTagCollectionViewCellIdentifier, forIndexPath: indexPath) as? RRTagCollectionViewCell
         
-        if indexPath.row < tags.count {
-            let currentTag = tags[indexPath.row]
-            cell?.initContent(currentTag)
+        if isEditMod{
+            let cell: RRTagCollectionViewCell? = collectionView.dequeueReusableCellWithReuseIdentifier(RRTagCollectionViewCellIdentifier, forIndexPath: indexPath) as? RRTagCollectionViewCell
+
+            let currentTag = editTags[indexPath.row]
+                cell?.initContent(currentTag)
+
+            return cell!
+            
+        }else{
+            let cell: RRTagCollectionViewCell? = collectionView.dequeueReusableCellWithReuseIdentifier(RRTagCollectionViewCellIdentifier, forIndexPath: indexPath) as? RRTagCollectionViewCell
+            
+            if indexPath.row < tags.count {
+                let currentTag = tags[indexPath.row]
+                cell?.initContent(currentTag)
+            }
+            else {
+                cell?.initAddButtonContent()
+            }
+            return cell!
         }
-        else {
-            cell?.initAddButtonContent()
-        }
-        return cell!
+
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -241,6 +310,48 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         heightKeyboard = 0
     }
     
+    func handleCancelEditMod(){
+        isEditMod = false
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: self, action: "cancelTagController")
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: "finishTagController")
+        tags = Tag().loadAllData()
+        collectionTag.reloadData()
+    }
+    
+    func handleDelete(){
+        if isEditMod{
+            let alerController = UIAlertController(title: "是否确定删除所选标签？", message: nil, preferredStyle: .ActionSheet)
+            //创建UIAlertAction 确定按钮
+            let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+                for tag in self.editTags{
+                    if tag.isSelected == true{
+                        tag.deleteTag()
+                    }
+                }
+                self.collectionTag.reloadData()
+            })
+            //创建UIAlertAction 取消按钮
+            let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+            })
+            //添加动作
+            alerController.addAction(alerActionOK)
+            alerController.addAction(alerActionCancel)
+            //显示alert
+            self.presentViewController(alerController, animated: true, completion: { () -> Void in
+                
+            })
+
+        }
+    }
+    
+    func handleLongPress(){
+        isEditMod = true
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: self, action: "handleCancelEditMod")
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(title: "删除", style: UIBarButtonItemStyle.Done, target: self, action: "handleDelete")
+        editTags = Tag().loadAllData()
+        collectionTag.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
@@ -250,11 +361,17 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         
         totalTagsSelected = 0
         self.view.addSubview(collectionTag)
-        self.view.addSubview(addTagView)
-        self.view.addSubview(controlPanelEdition)
+        //self.view.addSubview(addTagView)
+        //self.view.addSubview(controlPanelEdition)
         self.view.addSubview(navigationBar)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil)
+        
+        //创建长按选项
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleLongPress")
+        longPressGestureRecognizer.minimumPressDuration = 1
+        self.view.addGestureRecognizer(longPressGestureRecognizer)
+        
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil)
     }
     
     class func displayTagController(parentController parentController: UIViewController, tagsString: [String]?,
@@ -278,14 +395,5 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             tagController.blockCancel = blockCancel
             tagController.blockFinih = blockFinish
             parentController.presentViewController(tagController, animated: true, completion: nil)
-    }
-    
-    //发起提示
-    func callAlert(title:String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "好的", style: .Default,
-            handler: nil)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

@@ -20,6 +20,8 @@ class Process: NSObject {
             if recordTime != ""{
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                dateFormat.dateStyle = .LongStyle
                 recordTimeDate = dateFormat.dateFromString(recordTime)!
             }
         }

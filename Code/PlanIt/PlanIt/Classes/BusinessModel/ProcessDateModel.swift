@@ -19,6 +19,8 @@ class ProcessDate: NSObject {
             if recordTime != ""{
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                dateFormat.dateStyle = .LongStyle
                 recordTimeDate = dateFormat.dateFromString(recordTime)!
             }
         }
@@ -118,6 +120,8 @@ class ProcessDate: NSObject {
     func chengeData(projectID: Int, timeDate: NSDate, changeValue: Double){
         let dateFormat = NSDateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        dateFormat.dateStyle = .LongStyle
         let timeString = dateFormat.stringFromDate(timeDate)
         
         if let processDate = checkIsExist(projectID, timeString: timeString){
