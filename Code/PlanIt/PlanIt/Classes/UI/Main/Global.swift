@@ -15,7 +15,7 @@ let navigationBackground = UIColor ( red: 0.9294, green: 0.9294, blue: 0.9255, a
 ///导航栏控件颜色
 let navigationTintColor = UIColor ( red: 0.898, green: 0.1961, blue: 0.251, alpha: 1.0 )
 ///导航栏字体颜色
-let navigationFontColor = UIColor ( red: 0.898, green: 0.1961, blue: 0.251, alpha: 1.0 )
+let navigationFontColor = UIColor.darkGrayColor()
 ///背景色
 let allBackground = UIColor ( red: 0.9294, green: 0.9294, blue: 0.9255, alpha: 1.0 )
 ///推迟字体颜色

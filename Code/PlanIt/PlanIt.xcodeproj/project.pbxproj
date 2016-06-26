@@ -46,6 +46,7 @@
 		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
 		BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */; };
 		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
+		BEE477FE1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE477FD1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
 		BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessTableViewController.swift; sourceTree = "<group>"; };
 		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
+		BEE477FD1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTagsViewControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				BE68E5481CE9B658006A1750 /* TagsViewController.swift */,
+				BEE477FD1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift */,
 			);
 			name = "Tag(标签)";
 			path = Tag;
@@ -645,6 +648,7 @@
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
 				BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */,
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,
+				BEE477FE1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift in Sources */,
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
 				BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
