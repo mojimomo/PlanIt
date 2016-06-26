@@ -127,7 +127,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             title = selectTag?.name
             projects = TagMap().searchProjectFromTag(selectTag!)
         }else{
-            title = "所有项目"
+            title = "全部项目"
             projects = Project().loadAllData()
         }
         
@@ -251,6 +251,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     let currentTime = NSDate()
                     let dateFormat = NSDateFormatter()
                     dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+                    dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                    dateFormat.dateStyle = .LongStyle
                     process.recordTime = dateFormat.stringFromDate(currentTime)
                     process.done = 1.0
                     process.insertProcess()

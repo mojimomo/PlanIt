@@ -48,6 +48,8 @@ class Project: NSObject {
             if beginTime != ""{
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                dateFormat.dateStyle = .LongStyle
                 beginTimeDate = dateFormat.dateFromString(beginTime)!
             }
         }
@@ -59,6 +61,8 @@ class Project: NSObject {
             if endTime != ""{
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                dateFormat.dateStyle = .LongStyle
                 endTimeDate = dateFormat.dateFromString(endTime)!
             }
         }

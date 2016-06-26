@@ -71,8 +71,8 @@ class SQLiteManager: NSObject {
             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
             "recordTime TEXT NOT NULL, \n" +
             "projectID INTEGER NOT NULL, \n" +
-            "done double\n" +
-            "remark TEXT, \n" +
+            "done DOUBLE, \n" +
+            "remark TEXT \n" +
         ");"
         // 执行SQL语句
         if execSQL(createProcessTableSQL) {
@@ -85,7 +85,7 @@ class SQLiteManager: NSObject {
             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
             "recordTime TEXT NOT NULL, \n" +
             "projectID INTEGER NOT NULL, \n" +
-            "done double\n" +
+            "done DOUBLE\n" +
         ");"
         // 执行SQL语句
         if execSQL(createProcessDateTableSQL) {

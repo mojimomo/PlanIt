@@ -141,6 +141,8 @@ class EditProjectTableViewController: UITableViewController {
             let datePicker = UIDatePicker()
             //设置模式为日期模式
             datePicker.datePickerMode = .Date
+            //设置日期
+            datePicker.setDate(self.project.beginTimeDate, animated: false)
             //创建UIAlertController
             let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
             alerController.view.addSubview(datePicker)
@@ -149,8 +151,9 @@ class EditProjectTableViewController: UITableViewController {
             let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-                let dateString = dateFormat.stringFromDate(datePicker.date)
-                self.projectBeginTime = dateString
+                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                dateFormat.dateStyle = .LongStyle
+                self.projectBeginTime = dateFormat.stringFromDate(datePicker.date)
             })
    
             //创建UIAlertAction 取消按钮
@@ -175,6 +178,8 @@ class EditProjectTableViewController: UITableViewController {
             let datePicker = UIDatePicker()
             //设置模式为日期模式
             datePicker.datePickerMode = .Date
+            //设置日期
+            datePicker.setDate(self.project.endTimeDate, animated: false)
             //创建UIAlertController
             let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
             alerController.view.addSubview(datePicker)
@@ -183,6 +188,8 @@ class EditProjectTableViewController: UITableViewController {
             let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
                 let dateFormat = NSDateFormatter()
                 dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+                dateFormat.dateStyle = .LongStyle
                 let dateString = dateFormat.stringFromDate(datePicker.date)
                 self.projectEndTime = dateString
             })
@@ -286,7 +293,8 @@ class EditProjectTableViewController: UITableViewController {
         }
         if project.check(){
             if(project.insertProject()){
-                callAlertAndBack("提交成功",message: "新建项目成功!")
+                //callAlertAndBack("提交成功",message: "新建项目成功!")
+                back()
                 return
             }
         }
@@ -341,7 +349,8 @@ class EditProjectTableViewController: UITableViewController {
         }
         if project.check(){
             if(project.updateProject()){
-                callAlertAndBack("修改成功",message: "修改项目成功!")
+                //callAlertAndBack("修改成功",message: "修改项目成功!")
+                back()
                 return
             }
         }
@@ -426,19 +435,35 @@ class EditProjectTableViewController: UITableViewController {
             let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishEdit:")
             self.navigationItem.rightBarButtonItem = addButton
             
-            //新增删除按钮
-            let backButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: "deleteProject")
+            ///新增返回按钮
+            //let backButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: "deleteProject")
+            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "back")
             self.navigationItem.leftBarButtonItem = backButton
+            
+            //新增删除按钮
+            let deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: view.bounds.width , height: 44.0 ))
+            deleteButton.backgroundColor = UIColor.whiteColor()
+            deleteButton.setTitle("删除项目", forState: .Normal)
+            deleteButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+            deleteButton.addTarget(self, action: "deleteProject", forControlEvents: .TouchUpInside)
+            self.tableView.tableFooterView = deleteButton
+            
             //default: break
         }
 
         //初始化代码
         let nowDate = NSDate()
         let dateFormat = NSDateFormatter()
+        let dateComponents = NSDateComponents()
+        dateComponents.day = 7
+        let nextDate = NSCalendar.currentCalendar().dateByAddingComponents(dateComponents, toDate: nowDate, options: NSCalendarOptions.init(rawValue: 0))
         dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-        let dateString = dateFormat.stringFromDate(nowDate)
-        beginTimeLabel?.text = dateString
-        endTimeLabel?.text = dateString
+        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        dateFormat.dateStyle = .LongStyle
+        beginTimeLabel?.text = dateFormat.stringFromDate(nowDate)
+        endTimeLabel?.text = dateFormat.stringFromDate(nextDate!)
+        project.beginTime = dateFormat.stringFromDate(nowDate)
+        project.endTime = dateFormat.stringFromDate(nextDate!)
         projectType = .Normal
         
         // corner radius
