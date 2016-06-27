@@ -483,6 +483,13 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         case tableViewTag.ProjectsTable:
                 let cell = projectTableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
             
+                //复用清除之前的按钮
+                for subView in cell.subviews{
+                    if subView.tag == 1000 || subView.tag == 1001{
+                        subView.removeFromSuperview()
+                    }
+                }
+                
                 //配置cell
                 cell.project = projects[indexPath.section]
                 cell.roundBackgroundColor = allBackground
@@ -512,8 +519,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }
                 
                 if projects[indexPath.section].isFinished == .Finished{
-                    imageString = "finish"
-                    selectString = ""
+                    imageString = "filedelete"
+                    selectString = "filedeleteclick"
                 }
                 
                 let processView = UIProgressView(frame: cell.frame)
@@ -528,7 +535,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 addProcessButton.setImage(buttonImage, forState: .Normal)
                 addProcessButton.setImage(buttonSelectedIamge, forState: .Highlighted)
                 addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
-                
+                addProcessButton.tag = 1000
                 //添加按钮
                 cell.addSubview(addProcessButton)
                 //}
@@ -538,6 +545,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 getMoreInfor.setBackgroundImage(.None, forState: .Normal)
                 getMoreInfor.setBackgroundImage(.None, forState: .Highlighted)
                 getMoreInfor.addTarget(self, action: "getMoreInfor:", forControlEvents: .TouchUpInside)
+                getMoreInfor.tag = 1001
                 cell.addSubview(getMoreInfor)
                 return cell
             //标签表格

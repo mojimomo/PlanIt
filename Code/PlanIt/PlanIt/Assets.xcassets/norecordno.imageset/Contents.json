@@ -2,10 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "norecordnox1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "norecordnox2.png",
       "scale" : "2x"
     },
     {

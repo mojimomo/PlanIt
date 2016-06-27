@@ -12,6 +12,7 @@
 		BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */; };
 		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
 		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
+		BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */; };
 		BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */; };
 		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
@@ -75,6 +76,7 @@
 		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
+		BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveLoadingIndicator.swift; sourceTree = "<group>"; };
 		BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessesTableViewController.swift; path = ../Statistics/ProcessesTableViewController.swift; sourceTree = "<group>"; };
 		BE4F02371CEF365F00126237 /* RoundTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundTableviewCell.h; sourceTree = "<group>"; };
 		BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableviewCell.swift; sourceTree = "<group>"; };
@@ -174,6 +176,14 @@
 			name = KYDrawerController;
 			sourceTree = "<group>";
 		};
+		BE31C12C1D21168800A1A47B /* WaveLoadingIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */,
+			);
+			path = WaveLoadingIndicator;
+			sourceTree = "<group>";
+		};
 		BE4F02351CEF365F00126237 /* RoundTableviewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +276,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE31C12C1D21168800A1A47B /* WaveLoadingIndicator */,
 				BECFC3051CFABE2400D8C4C8 /* GraphView */,
 				BEB8B3211CF57870002A20FE /* TagListView */,
 				BE4F02351CEF365F00126237 /* RoundTableviewCell */,
@@ -659,6 +670,7 @@
 				BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */,
 				BECFC3091CFAC11400D8C4C8 /* UIColor+colorFromHex.swift in Sources */,
 				BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */,
+				BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
 				BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
