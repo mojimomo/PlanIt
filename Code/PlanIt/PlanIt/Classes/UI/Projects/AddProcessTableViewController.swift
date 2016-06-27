@@ -22,7 +22,7 @@ class AddProcessTableViewController: UITableViewController {
 
         let cancelBarButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancel")
         self.navigationItem.leftBarButtonItem = cancelBarButton
-        
+        doneTextField.placeholder = project.unit
         currentProcessTextField.text = "\(project.complete) / \(project.total)"
     }
     

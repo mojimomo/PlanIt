@@ -56,20 +56,29 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     
     ///呼出标签栏
     @IBAction func callTag(sender: UIBarButtonItem) {
-        //获取静态栏的高度
-
-        let startPoint = CGPoint(x: 0, y: 0)
-        let rectStatus = UIApplication.sharedApplication().statusBarFrame
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 135 + rectStatus.size.height))
-        tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: rectStatus.size.height))
-        tableView.tag = tableViewTag.MuneTable
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.scrollEnabled = true
-        tableView.separatorStyle = .None
-        self.popover = Popover(options: self.popoverOptions, showHandler: nil, dismissHandler: nil)
-        self.popover.show(tableView,  point: startPoint)
-    }
+        let tagsViewControl = self.storyboard?.instantiateViewControllerWithIdentifier("ShowTags") as! TagsViewController
+        tagsViewControl.title = "标签"
+        tagsViewControl.view.backgroundColor = allBackground
+        
+        //设置加载动画
+        let transition = CATransition()
+        transition.duration = 1.0
+        transition.type = kCATransitionPush //推送类型
+        transition.subtype = kCATransitionFromLeft //从左侧
+        tagsViewControl.view.layer.addAnimation(transition, forKey: "Reveal")
+        
+        let navController = UINavigationController.init(rootViewController: tagsViewControl)
+        //状态栏和导航栏不透明
+        navController.navigationBar.translucent = false
+        //设置导航栏颜色
+        navController.navigationBar.barTintColor = navigationBackground
+        //去除导航栏分栏线
+        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navController.navigationBar.shadowImage = UIImage()
+        navController.navigationBar.tintColor = navigationTintColor
+        let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
+        navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+        self.navigationController?.presentViewController(navController, animated: true, completion: nil)    }
     
     ///点击点开抽屉菜单
     @IBAction func callMenu(sender: AnyObject) {
@@ -78,7 +87,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 //            //设置菜单页状态
 //            drawer.setDrawerState( .Opened, animated: true)
 //        }
-        let startPoint = CGPoint(x: self.view.frame.width, y: 0)
+        let startPoint = CGPoint(x: self.view.frame.width / 2, y: 0)
         let rectStatus = UIApplication.sharedApplication().statusBarFrame
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 135 + rectStatus.size.height))
         tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: rectStatus.size.height))
@@ -227,7 +236,21 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         projectTableView.reloadData()
 
     }
-    
+
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        if (velocity.y > 0.0)
+//        {
+//            projectTableView.bounds = CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height-20);
+//            //向上滑动隐藏导航栏
+//            self.navigationController!.navigationBar.hidden = true
+//        }else
+//        {
+//            projectTableView.bounds = CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64)
+//            //向下滑动显示导航栏
+//            self.navigationController!.navigationBar.hidden = false
+//        }
+    }
+
 //    override func  scrollViewDidScroll(scrollView: UIScrollView) {
 //        //获取导航栏高度
 //        let rectNav = self.navigationController?.navigationBar.frame
