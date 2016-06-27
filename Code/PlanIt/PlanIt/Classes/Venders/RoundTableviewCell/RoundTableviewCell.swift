@@ -43,6 +43,8 @@ public class RoundTableviewCell: UITableViewCell {
     var needPercent = false
     var percentColor = UIColor ( red: 0.7686, green: 0.7569, blue: 0.7216, alpha: 1.0 )
     var percent = 0.0
+    var isReuse = false
+    var isPercentLayer = false
     
     override public func awakeFromNib() {
         super.awakeFromNib()
@@ -92,6 +94,16 @@ public class RoundTableviewCell: UITableViewCell {
                 }
         }
         
+        //重用释放图层
+        if isReuse{
+            self.contentView.layer.sublayers![0].removeFromSuperlayer()
+            if isPercentLayer{
+                self.contentView.layer.sublayers![0].removeFromSuperlayer()
+                isPercentLayer = false
+            }
+
+        }
+        
         shapeLayer.path = pathRef
         self.contentView.layer.insertSublayer(shapeLayer, atIndex: 0)
         if selected || highlighted {
@@ -100,6 +112,7 @@ public class RoundTableviewCell: UITableViewCell {
             shapeLayer.fillColor = roundFrontColor.CGColor
         }
         
+        //创建百分比图层
         if needPercent && percent != 0{
             var percentRef: CGMutablePathRef = CGPathCreateMutable()
             if let tableview = getTableview(),
@@ -108,7 +121,6 @@ public class RoundTableviewCell: UITableViewCell {
                         percentRef = CreateBothCornerPathForPercent()
                     }
             }
-            
             let percentLayer = CAShapeLayer()
             percentLayer.path = percentRef
             self.contentView.layer.insertSublayer(percentLayer, atIndex: 1)
@@ -117,6 +129,7 @@ public class RoundTableviewCell: UITableViewCell {
             } else {
                 percentLayer.fillColor = percentColor.CGColor
             }
+            isPercentLayer = true
         }
 
 
@@ -144,6 +157,8 @@ public class RoundTableviewCell: UITableViewCell {
         } else {
             lineLayer.removeFromSuperlayer()
         }
+        
+        isReuse = true
     }
     
     func getTableview() -> UITableView? {

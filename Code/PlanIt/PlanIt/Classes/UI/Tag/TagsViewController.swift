@@ -32,6 +32,12 @@ class TagsViewController: UITableViewController {
         self.tagsTableView.setEditing(isEditingMod, animated: true)
     }
     
+    func handleBack(){
+        self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
+    
     // MARK: - viewlife
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +46,8 @@ class TagsViewController: UITableViewController {
         self.title = "标签"
         tags = Tag().loadAllData()
         selectTags = [Bool](count: tags.count, repeatedValue: false)
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: "handleBack")        
+        self.navigationItem.leftBarButtonItem = backButton
     }
     
     // MARK: - UITableViewDataSource
@@ -68,7 +76,9 @@ class TagsViewController: UITableViewController {
         }else{
             delegate?.passSelectedTag(tags[indexPath.row - 1])
         }
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
 //        //设置单元格打勾
 //        let cell = tableView.cellForRowAtIndexPath(indexPath)
 //        if selectTags[indexPath.row] == true{

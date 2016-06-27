@@ -2,10 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "punchclick1x1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "punchclick1x2.png",
       "scale" : "2x"
     },
     {

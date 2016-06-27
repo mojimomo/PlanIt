@@ -196,7 +196,10 @@ public class Popover: UIView {
     self.containerView.addSubview(self)
 
     self.create()
-    self.transform = CGAffineTransformMakeScale(0.0, 0.0)
+    //self.transform = CGAffineTransformMakeScale(0.0, 0.0)
+    
+    self.transform = CGAffineTransformMakeTranslation(0, -100)
+    //self.transform = CGAffineTransformTranslate(self.contentView.transform, 0, -50)
     UIView.animateWithDuration(self.animationIn, delay: 0,
       usingSpringWithDamping: 0.7,
       initialSpringVelocity: 3,
@@ -220,7 +223,8 @@ public class Popover: UIView {
       UIView.animateWithDuration(self.animationOut, delay: 0,
         options: .CurveEaseInOut,
         animations: {
-          self.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
+          //self.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
+          self.transform = CGAffineTransformMakeTranslation( 0, -100)
           self.blackOverlay.alpha = 0
         }){ _ in
           self.contentView.removeFromSuperview()

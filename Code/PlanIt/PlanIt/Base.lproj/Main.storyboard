@@ -379,7 +379,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="课" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F3p-Qh-xKE">
                                                     <rect key="frame" x="78" y="8" width="514" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                                     <connections>
                                                         <action selector="editDoneDidEnd:" destination="qh9-Oj-hfp" eventType="editingDidEnd" id="mlP-iX-uew"/>
                                                     </connections>
@@ -508,9 +508,9 @@
         <!--Tags View Controller-->
         <scene sceneID="CVD-G7-9hU">
             <objects>
-                <tableViewController id="eDm-jg-sII" customClass="TagsViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ShowTags" id="eDm-jg-sII" customClass="TagsViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="FOw-XD-CGm">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -720,7 +720,7 @@
                     <navigationItem key="navigationItem" title="项目" id="kK9-Xh-z2k">
                         <barButtonItem key="leftBarButtonItem" image="tag" id="fdp-07-0Sj">
                             <connections>
-                                <segue destination="eDm-jg-sII" kind="show" identifier="showTags" id="10S-38-yso"/>
+                                <action selector="callTag:" destination="Vrd-B6-D5V" id="e0n-bq-XS9"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="more" id="8Py-4L-30H">
@@ -736,7 +736,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbO-Wf-tXk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1512" y="858"/>
+            <point key="canvasLocation" x="1502" y="852"/>
         </scene>
         <!--Statistics View Controller-->
         <scene sceneID="IOG-Op-yrA">
