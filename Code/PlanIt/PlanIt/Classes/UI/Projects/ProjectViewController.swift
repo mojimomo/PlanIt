@@ -9,7 +9,7 @@
 import UIKit
 import Popover
 
-class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate{
 
     @IBOutlet weak var tagsBarButton: UIBarButtonItem!
     @IBOutlet weak var projectTableView: UITableView!{
@@ -28,10 +28,21 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     private var selectTag : Tag?
     private var popover: Popover!
+    private var waveLoadingIndicator: WaveLoadingIndicator!
+    private var oldPercent = 0
+    private var newPercent = 0
+    private var increasePercent = 0
     private var texts = ["显示未开始", "已完成", "设置"]
     private var popoverOptions: [PopoverOption] = [
         .Type(.Down),
         .CornerRadius(0.0),
+        .ArrowSize(CGSize(width: 0.0, height: 0.0)),
+        .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
+    ]
+    
+    private var showPercentPopoverOptions: [PopoverOption] = [
+        .Type(.Down),
+        .CornerRadius(8.0),
         .ArrowSize(CGSize(width: 0.0, height: 0.0)),
         .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
@@ -261,6 +272,37 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 //    }
     
     // MARK: - 跳转动作
+    ///弹出完成百分比view    
+    func showProcessChange(oldPercent: Double, newPercent: Double){
+        self.oldPercent = Int(oldPercent)
+        self.increasePercent = Int(oldPercent)
+        self.newPercent = Int(newPercent)
+        
+        let rect = UIScreen.mainScreen().bounds
+        let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 100)
+        let showView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        showView.backgroundColor = UIColor.whiteColor()
+        waveLoadingIndicator = WaveLoadingIndicator(frame:CGRect(x: 10, y: 10, width: 180, height: 180))
+        waveLoadingIndicator.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        waveLoadingIndicator.progress = Double(self.oldPercent) / 100
+        showView.addSubview(waveLoadingIndicator)
+
+        self.popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
+        self.popover.show(showView,  point: startPoint)
+        let timeInterval = 1.0 / (newPercent - oldPercent)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "handleIncreasePercent:", userInfo: nil, repeats: true)
+    }
+    
+    func handleIncreasePercent(timer: NSTimer){
+        if self.increasePercent <= self.newPercent{
+            self.waveLoadingIndicator.progress = Double(self.increasePercent) / 100
+            self.increasePercent++
+        }else{
+            timer.invalidate()
+            self.popover.dismiss()
+        }
+    }
+    
     ///新增进程
     func addProcess(sender: UIButton){
         if let indexPath = self.projectTableView.indexPathForCell(sender.superview as! ProjectTableViewCell){
@@ -276,6 +318,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
                     dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
                     dateFormat.dateStyle = .LongStyle
+                    let old = projects[indexPath.section].percent
                     process.recordTime = dateFormat.stringFromDate(currentTime)
                     process.done = 1.0
                     process.insertProcess()
@@ -284,12 +327,15 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     //更新图标
                     loadData()
                     updateTable()
+                    let new = projects[indexPath.section].percent
+                    showProcessChange(old, newPercent: new)
                     
                     //记录进度项目
                 }else if projects[indexPath.section].type == .Normal{
                      print("打开项目编号为\(indexPath.section)进度页面")
                     let addProcessViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addProcess") as! AddProcessTableViewController
                     //设置每个cell的项目
+                    addProcessViewController.delegate = self
                     addProcessViewController.project = projects[indexPath.section]
                     addProcessViewController.title = "添加进度-\(projects[indexPath.section].name)"
                     //压入导航栏
@@ -314,6 +360,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     //更新图标
                     loadData()
                     updateTable()
+                    showProcessChange(0, newPercent: 100)
+                    
                 }
             //项目完成
             }else if projects[indexPath.section].isFinished == .Finished{
@@ -628,6 +676,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func passSelectedTag(selectedTag: Tag?){
         selectTag = selectedTag
         return
+    }
+    
+    // MARK: - addProcess delegate
+    func addProcessTableViewAct(old: Double, new: Double){
+        showProcessChange(old, newPercent: new)
     }
     
 }
