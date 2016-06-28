@@ -70,6 +70,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         let tagsViewControl = self.storyboard?.instantiateViewControllerWithIdentifier("ShowTags") as! TagsViewController
         tagsViewControl.title = "标签"
         tagsViewControl.view.backgroundColor = allBackground
+        tagsViewControl.delegate = self
         
         //设置加载动画
         let transition = CATransition()
