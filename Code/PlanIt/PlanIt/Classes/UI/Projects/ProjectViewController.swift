@@ -178,13 +178,15 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //添加统计label
         if projects.count != 0{
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70 + 70))
             let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
             countLabel.text = "\(projects.count)个项目"
             countLabel.font = UIFont(name: "System", size: 6)
             countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
             countLabel.textAlignment = .Center
             countLabel.backgroundColor = UIColor.clearColor()
-            projectTableView.tableFooterView = countLabel
+            footerView.addSubview(countLabel)
+            projectTableView.tableFooterView = footerView
         }else{
             projectTableView.tableFooterView = nil
         }
@@ -250,17 +252,19 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
 
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        if (velocity.y > 0.0)
-//        {
+        if (velocity.y > 0.0)
+        {
 //            projectTableView.bounds = CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height-20);
 //            //向上滑动隐藏导航栏
 //            self.navigationController!.navigationBar.hidden = true
-//        }else
-//        {
+            //self.addProjectButton?.hidden = true
+        }else
+        {
 //            projectTableView.bounds = CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64)
 //            //向下滑动显示导航栏
 //            self.navigationController!.navigationBar.hidden = false
-//        }
+            //self.addProjectButton?.hidden = false
+        }
     }
 
 //    override func  scrollViewDidScroll(scrollView: UIScrollView) {
