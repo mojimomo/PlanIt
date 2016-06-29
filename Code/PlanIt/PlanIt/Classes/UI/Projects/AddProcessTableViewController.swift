@@ -7,10 +7,15 @@
 //
 
 import UIKit
+protocol AddProcessDelegate: class{
+    func addProcessTableViewAct(old: Double, new: Double)
+}
 
 class AddProcessTableViewController: UITableViewController {
     var project = Project()
-    
+    var delegate: AddProcessDelegate?
+    private var oldPercent = 0.0
+    private var newPercent = 0.0
     @IBOutlet weak var doneTextField: UITextField!
     @IBOutlet weak var currentProcessTextField: UITextField!
     @IBOutlet weak var remarkTextField: UITextField!
@@ -37,6 +42,7 @@ class AddProcessTableViewController: UITableViewController {
     
     func finishEdit(){
         if doneTextField.text != "" {
+            oldPercent = project.percent
             let process = Process()
             process.projectID = project.id
             let currentTime = NSDate()
@@ -50,13 +56,16 @@ class AddProcessTableViewController: UITableViewController {
             process.insertProcess()
             ProcessDate().chengeData(project.id, timeDate: currentTime, changeValue: process.done)
             project.increaseDone(process.done)
+            newPercent = project.percent
             cancel()
         }
     }
     
     func cancel(){
         self.dismissViewControllerAnimated(true) { () -> Void in
-            
+            if self.newPercent != 0{
+               self.delegate?.addProcessTableViewAct(self.oldPercent, new: self.newPercent)
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ class ProcessesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProcessTableViewCell
         
         //配置cell
-        cell.process = processes[indexPath.section]
+        cell.process = processes[indexPath.row]
         return cell
     }
     
