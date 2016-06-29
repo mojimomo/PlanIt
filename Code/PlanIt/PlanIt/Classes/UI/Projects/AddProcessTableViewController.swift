@@ -19,6 +19,7 @@ class AddProcessTableViewController: UITableViewController {
     @IBOutlet weak var doneTextField: UITextField!
     @IBOutlet weak var currentProcessTextField: UITextField!
     @IBOutlet weak var remarkTextField: UITextField!
+    @IBOutlet weak var currentProcessLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class AddProcessTableViewController: UITableViewController {
         let cancelBarButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancel")
         self.navigationItem.leftBarButtonItem = cancelBarButton
         doneTextField.placeholder = project.unit
-        currentProcessTextField.text = "\(project.complete) / \(project.total)"
+        currentProcessLabel.text = "已经记录总量:  \(project.complete) / \(project.total)"
     }
     
     @IBAction func editDoneDidEnd(sender: UITextField) {
@@ -36,7 +37,7 @@ class AddProcessTableViewController: UITableViewController {
             if Double(doneTextField.text!)! > project.rest{
                 doneTextField.text = "\(project.rest)"
             }
-            currentProcessTextField.text = "\(project.complete +  Double(doneTextField.text!)!) / \(project.total)"
+            currentProcessLabel.text = "已经记录总量:  \(project.complete +  Double(doneTextField.text!)!) / \(project.total)"
         }
     }
     

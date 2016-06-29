@@ -372,7 +372,7 @@ class EditProjectTableViewController: UITableViewController {
         //创建3个NSIndexPath对应相应的cell位置
         let unitCellPath = NSIndexPath(forRow: 1, inSection: 2)
         let totalCellPath = NSIndexPath(forRow: 2, inSection: 2)
-        let checkCellPath = NSIndexPath(forRow: 3, inSection: 2)
+        let checkCellPath = NSIndexPath(forRow: 0, inSection: 3)
         //比较NSIndexPath
         if indexPath == unitCellPath || indexPath == totalCellPath || indexPath == checkCellPath{
             if (projectType == .NoRecord) {
