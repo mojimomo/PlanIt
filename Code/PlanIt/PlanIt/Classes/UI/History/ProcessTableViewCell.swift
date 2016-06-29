@@ -19,6 +19,7 @@ class ProcessTableViewCell: UITableViewCell {
             let doneString = String(format: "%.1f", process.done)
             doneLabel?.text = doneString
             remarksLabel?.text = process.remark
+
         }
     }
 }

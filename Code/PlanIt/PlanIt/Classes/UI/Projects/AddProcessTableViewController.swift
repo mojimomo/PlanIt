@@ -47,12 +47,12 @@ class AddProcessTableViewController: UITableViewController {
             process.projectID = project.id
             let currentTime = NSDate()
             let dateFormat = NSDateFormatter()
-            dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+            dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
             dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-            dateFormat.dateStyle = .LongStyle
-            process.recordTime = dateFormat.stringFromDate(currentTime)
+            //dateFormat.dateStyle = .LongStyle
+             process.recordTime = dateFormat.stringFromDate(currentTime)
             process.done = Double(doneTextField.text!)!
-            process.remark = doneTextField.text!
+            process.remark = remarkTextField.text!
             process.insertProcess()
             ProcessDate().chengeData(project.id, timeDate: currentTime, changeValue: process.done)
             project.increaseDone(process.done)

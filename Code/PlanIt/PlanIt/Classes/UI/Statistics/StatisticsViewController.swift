@@ -24,7 +24,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             
         }
         get{
-            return CGRectMake(0, self.view.bounds.height / 2, self.view.bounds.width, self.view.bounds.height / 2)
+            return CGRectMake(0, 0, self.view.bounds.width, self.lineChartView.bounds.height)
         }
     }
     
@@ -133,6 +133,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         //历史按钮
         let historyButton = UIButton(frame:CGRectMake(0, 0, 24, 24))
         historyButton.setImage(UIImage(named: "history"), forState: .Normal)
@@ -155,15 +156,20 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             action: nil)
         spacer.width = -10;
         
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
         //设置按钮
-        self.navigationItem.rightBarButtonItems = [spacer,editBarButton,gap,historyBarButton]
-        
+        self.navigationItem.rightBarButtonItems = [spacer, historyBarButton, gap, editBarButton]
+        self.navigationItem.leftBarButtonItem = backButtom
         //创建曲线图
 
         
         //setupConstraints()
         
         //addLabel(withText: "DARK (TAP HERE)")
+    }
+    
+    func dismiss(){
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
      // MARK: PercentForPieChart Delegate
@@ -233,9 +239,8 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     func drawLineChart(){
         graphView = ScrollableGraphView(frame: lineChartViewFrame)
         graphView = createDarkGraph(lineChartViewFrame)
-        
         graphView.setData(data, withLabels: labels)
-        self.view.addSubview(graphView)
+        self.lineChartView.addSubview(graphView)
     }
     
     ///打开历史页面
@@ -255,11 +260,13 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         editProjectViewController.view.backgroundColor = allBackground
         editProjectViewController.modalTransitionStyle = .CoverVertical
         let navController = UINavigationController.init(rootViewController: editProjectViewController)
+        //状态栏和导航栏不透明
+        navController.navigationBar.translucent = false
         //设计背景色
-        navController.navigationBar.backgroundColor = allBackground
+        navController.navigationBar.barTintColor = otherNavigationBackground
         //去除导航栏分栏线
-        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        navController.navigationBar.shadowImage = UIImage()
+//        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//        navController.navigationBar.shadowImage = UIImage()
         navController.navigationBar.tintColor = navigationTintColor
         let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
         navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
