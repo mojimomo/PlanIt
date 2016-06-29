@@ -26,6 +26,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         static let TagsTable = 1
         static let ProjectsTable = 2
     }
+    //表格高度
+    let tableViewHeight : CGFloat = 44
     private var selectTag : Tag?
     private var popover: Popover!
     private var waveLoadingIndicator: WaveLoadingIndicator!
@@ -83,13 +85,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //状态栏和导航栏不透明
         navController.navigationBar.translucent = false
         //设置导航栏颜色
-        navController.navigationBar.barTintColor = navigationBackground
+        navController.navigationBar.barTintColor = otherNavigationBackground
         //去除导航栏分栏线
-        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        navController.navigationBar.shadowImage = UIImage()
+//        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//        navController.navigationBar.shadowImage = UIImage()
         navController.navigationBar.tintColor = navigationTintColor
-        let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
-        navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+        navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         self.navigationController?.presentViewController(navController, animated: true, completion: nil)    }
     
     ///点击点开抽屉菜单
@@ -148,11 +149,16 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             title = selectTag?.name
             projects = TagMap().searchProjectFromTag(selectTag!)
         }else{
-            title = "全部项目"
             projects = Project().loadAllData()
+            if isShowFinished{
+               title = "已完成项目"
+            }else{
+                title = "全部项目"
+            }
         }
         
         var index = 0
+        
         for project in projects {
             //不显示未开始
             if !isShowNotBegin {
@@ -178,11 +184,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //添加统计label
         if projects.count != 0{
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70 + 70))
-            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: projectTableView.frame.width, height: 70))
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 70 + 100))
+            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 70))
             countLabel.text = "\(projects.count)个项目"
-            countLabel.font = UIFont(name: "System", size: 6)
-            countLabel.textColor = UIColor ( red: 0.7451, green: 0.7451, blue: 0.7451, alpha: 1.0 )
+            countLabel.font = projectCountsFont
+            countLabel.textColor = projectCountsFontColor
             countLabel.textAlignment = .Center
             countLabel.backgroundColor = UIColor.clearColor()
             footerView.addSubview(countLabel)
@@ -200,6 +206,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     //MARK: - View Controller Lifecle
     override func viewDidLoad() {
         super.viewDidLoad()
+        //设置导航栏
+        self.navigationController?.navigationBar.barTintColor = navigationBackground
+        self.navigationController?.navigationBar.tintColor = navigationTintColor
+        self.navigationController?.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         
         //不显示分割线
         self.projectTableView.separatorStyle = .None
@@ -209,11 +219,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
         //设计背景色
         self.projectTableView.backgroundColor = allBackground
-        
-        //去除导航栏分栏线
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
-        
         
         if let addImage = UIImage(named: "add"){
             let addImageClick = UIImage(named: "addclick")
@@ -243,6 +248,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        //配置导航栏
+        self.navigationController?.navigationBar.barTintColor = navigationBackground
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         //读取数据按照id顺序排序
         loadData()
         
@@ -320,12 +330,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     process.projectID = projects[indexPath.section].id
                     let currentTime = NSDate()
                     let dateFormat = NSDateFormatter()
-                    dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+                    dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
                     dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-                    dateFormat.dateStyle = .LongStyle
                     let old = projects[indexPath.section].percent
                     process.recordTime = dateFormat.stringFromDate(currentTime)
                     process.done = 1.0
+                    process.remark = "打卡"
                     process.insertProcess()
                     ProcessDate().chengeData(projects[indexPath.section].id, timeDate: currentTime, changeValue: 1.0)
                     projects[indexPath.section].increaseDone(1.0)
@@ -350,13 +360,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     //状态栏和导航栏不透明
                     navController.navigationBar.translucent = false
                     //设置导航栏颜色
-                    navController.navigationBar.barTintColor = navigationBackground
+                    navController.navigationBar.barTintColor = otherNavigationBackground
                     //去除导航栏分栏线
-                    navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-                    navController.navigationBar.shadowImage = UIImage()
+//                    navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//                    navController.navigationBar.shadowImage = UIImage()
                     navController.navigationBar.tintColor = navigationTintColor
-                    let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
-                    navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+                    navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
                     self.navigationController?.presentViewController(navController, animated: true, completion: nil)
                     //不记录项目
                 }else if projects[indexPath.section].type == .NoRecord{
@@ -405,13 +414,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //状态栏和导航栏不透明
         navController.navigationBar.translucent = false
         //设置导航栏颜色
-        navController.navigationBar.barTintColor = navigationBackground
+        navController.navigationBar.barTintColor = otherNavigationBackground
         //去除导航栏分栏线
-        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        navController.navigationBar.shadowImage = UIImage()
+//        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//        navController.navigationBar.shadowImage = UIImage()
         navController.navigationBar.tintColor = navigationTintColor
-        let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
-        navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+        navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         self.navigationController?.presentViewController(navController, animated: true, completion: nil)
          //UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
     }
@@ -426,6 +434,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 statisticsViewController.view.backgroundColor = allBackground
                 //设置每个cell的项目
                 statisticsViewController.project = projects[indexPath.section]
+                
+                //修改样式
+                self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
+                self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+                self.navigationController?.navigationBar.shadowImage = nil
+                
                 //压入导航栏
                 self.navigationController?.pushViewController(statisticsViewController, animated: true)
             }else{
@@ -439,13 +453,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 //状态栏和导航栏不透明
                 navController.navigationBar.translucent = false
                 //设置导航栏颜色
-                navController.navigationBar.barTintColor = navigationBackground
+                navController.navigationBar.barTintColor = otherNavigationBackground
                 //去除导航栏分栏线
-                navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-                navController.navigationBar.shadowImage = UIImage()
+//                navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//                navController.navigationBar.shadowImage = UIImage()
                 navController.navigationBar.tintColor = navigationTintColor
-                let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
-                navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+                navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
                 self.navigationController?.presentViewController(navController, animated: true, completion: nil)
                 addNewProjectViewController.project = projects[indexPath.section]
             }
@@ -480,13 +493,13 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         switch tableView.tag {
             //菜单表格
         case tableViewTag.MuneTable:
-            return 44
+            return tableViewHeight
             //项目表格
         case tableViewTag.ProjectsTable:
-            return 44
+            return tableViewHeight
             //标签表格
         case tableViewTag.TagsTable:
-            return 44
+            return tableViewHeight
         default:
             return 0
         }
@@ -536,9 +549,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         case tableViewTag.ProjectsTable:
                 let cell = projectTableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
             
+                let addProcessButtonTag = 1000
+                let getMoreInforTag = 1001
                 //复用清除之前的按钮
                 for subView in cell.subviews{
-                    if subView.tag == 1000 || subView.tag == 1001{
+                    if subView.tag == addProcessButtonTag || subView.tag == getMoreInforTag{
                         subView.removeFromSuperview()
                     }
                 }
@@ -588,7 +603,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 addProcessButton.setImage(buttonImage, forState: .Normal)
                 addProcessButton.setImage(buttonSelectedIamge, forState: .Highlighted)
                 addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
-                addProcessButton.tag = 1000
+                addProcessButton.tag = addProcessButtonTag
                 //添加按钮
                 cell.addSubview(addProcessButton)
                 //}
@@ -598,7 +613,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 getMoreInfor.setBackgroundImage(.None, forState: .Normal)
                 getMoreInfor.setBackgroundImage(.None, forState: .Highlighted)
                 getMoreInfor.addTarget(self, action: "getMoreInfor:", forControlEvents: .TouchUpInside)
-                getMoreInfor.tag = 1001
+                getMoreInfor.tag = getMoreInforTag
                 cell.addSubview(getMoreInfor)
                 return cell
             //标签表格

@@ -130,6 +130,10 @@ class Project: NSObject {
 //                percent = (timecurrent - timeBegin)/(timeEnd - timeBegin)
 //            }
         }
+        
+        if isFinished == .Finished{
+            percent = 0
+        }
     }
 
     // MARK:- 数据操作

@@ -15,7 +15,7 @@ public class RoundTableviewCell: UITableViewCell {
         }
     }
     
-    @IBInspectable public var roundBackgroundColor: UIColor = UIColor(red: 237.0/255.0, green: 237.0/255.0, blue: 236.0/255.0, alpha: 1.0) {
+    @IBInspectable public var roundBackgroundColor: UIColor = allBackground {
         didSet {
         }
     }
@@ -41,7 +41,7 @@ public class RoundTableviewCell: UITableViewCell {
     let roundContentView: UIView = UIView()
     var needShawdow = false
     var needPercent = false
-    var percentColor = UIColor ( red: 0.7686, green: 0.7569, blue: 0.7216, alpha: 1.0 )
+    var percentColor = cellPercentColor
     var percent = 0.0
     var isReuse = false
     var isPercentLayer = false

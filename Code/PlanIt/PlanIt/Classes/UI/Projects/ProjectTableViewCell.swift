@@ -60,7 +60,7 @@ class ProjectTableViewCell: RoundTableviewCell{
         projectStatus = ""
         projectTag = ""
         projectPercent = 0.0
-        
+
         if let project = self.project{
             //根据不同状态更改项目名称颜色
             switch(project.isFinished){
