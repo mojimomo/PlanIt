@@ -19,12 +19,13 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             self.title = projectName
         }
     }
+
     var lineChartViewFrame: CGRect{
         set{
             
         }
         get{
-            return CGRectMake(0, 0, self.view.bounds.width, self.lineChartView.bounds.height)
+            return CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height / 2 - 30)
         }
     }
     
@@ -34,12 +35,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     @IBOutlet weak var tagListView: TagListView!{
         didSet{
             tagListView.delegate = self
-            tagListView.textFont = UIFont.systemFontOfSize(15)
-            tagListView.shadowRadius = 2
-            tagListView.shadowOpacity = 0.4
+            tagListView.textFont = UIFont.systemFontOfSize(12)
+            tagListView.shadowRadius = 0
+            tagListView.shadowOpacity = 0
             tagListView.shadowColor = UIColor.blackColor()
             tagListView.shadowOffset = CGSizeMake(1, 1)
             tagListView.alignment = .Left
+            tagListView.textColor = UIColor.blackColor()
+            tagListView.selectedTextColor = UIColor.blackColor()
         }
     }
     @IBOutlet weak var endTimeLabel: UILabel!
@@ -49,6 +52,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             pieChartView.dataSource = self
             pieChartView.scale = 0.8
             pieChartView.backgroundColor = UIColor.clearColor()
+            ///颜色
+            pieChartView.color = UIColor ( red: 0.4353, green: 0.8157, blue: 0.0, alpha: 1.0 )
+            ///外圈颜色 默认灰色
+            pieChartView.outGroundColor = UIColor(red: 239.0 / 255, green: 240.0 / 255, blue: 241.0 / 255, alpha: 1.0)
         }
     }
     @IBOutlet weak var lineChartView: UIView!
@@ -72,7 +79,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     }
     
     ///曲线图
-    var graphView = ScrollableGraphView()
+    var graphView: ScrollableGraphView!
     var currentGraphType = GraphType.Dark
     var graphConstraints = [NSLayoutConstraint]()
     var label = UILabel()
@@ -87,6 +94,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.view.setNeedsDisplay()
         self.pieChartView.setNeedsDisplay()
     }
+    
     
     override func viewWillAppear(animated: Bool) {
         if let currentProject = Project().loadData(project.id){
@@ -172,14 +180,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
-     // MARK: PercentForPieChart Delegate
+     // MARK: - PercentForPieChart Delegate
     func percentForPieChartView(sneder: PieChartView) -> Double? {
         return projectPercent
     }
 
 
     
-    // MARK: TagListView Delegate
+    // MARK: - TagListView Delegate
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         print("Tag pressed: \(title), \(sender)")
         tagView.selected = !tagView.selected
@@ -191,7 +199,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     }
 
     
-     //MARK: Func
+     //MARK: - Func
     ///与现在时间比较
     func compareCurrentTime(compareDate: NSDate) -> String{
         var timeInterval = compareDate.timeIntervalSinceNow
@@ -237,10 +245,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     
     ///画直线图
     func drawLineChart(){
-        graphView = ScrollableGraphView(frame: lineChartViewFrame)
-        graphView = createDarkGraph(lineChartViewFrame)
+        if graphView == nil{
+            graphView = ScrollableGraphView(frame: lineChartViewFrame)
+            graphView = createDarkGraph(lineChartViewFrame)
+            self.lineChartView.addSubview(graphView)
+        }
+        
         graphView.setData(data, withLabels: labels)
-        self.lineChartView.addSubview(graphView)
+        self.lineChartView.insertSubview(graphView, belowSubview: label)
     }
     
     ///打开历史页面
@@ -274,7 +286,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         editProjectViewController.project = self.project
     }
     
-    //MARK: GraphView Func
+    //MARK: - GraphView Func
     func didTap(gesture: UITapGestureRecognizer) {
         
         currentGraphType.next()
@@ -303,28 +315,31 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     private func createDarkGraph(frame: CGRect) -> ScrollableGraphView {
         let graphView = ScrollableGraphView(frame: frame)
         
-        graphView.backgroundFillColor = UIColor.colorFromHex("#333333")
+        graphView.backgroundFillColor = UIColor.clearColor()
         
-        graphView.lineWidth = 1
-        graphView.lineColor = UIColor.colorFromHex("#777777")
+        graphView.lineWidth = 1.5
+        graphView.lineColor = UIColor ( red: 0.3059, green: 0.7059, blue: 0.9725, alpha: 1.0 )
+
         graphView.lineStyle = ScrollableGraphViewLineStyle.Smooth
         
         graphView.shouldFill = true
         graphView.fillType = ScrollableGraphViewFillType.Gradient
         graphView.fillColor = UIColor.colorFromHex("#555555")
         graphView.fillGradientType = ScrollableGraphViewGradientType.Linear
-        graphView.fillGradientStartColor = UIColor.colorFromHex("#555555")
-        graphView.fillGradientEndColor = UIColor.colorFromHex("#444444")
-        
+        graphView.fillGradientStartColor = UIColor ( red: 0.7188, green: 0.8874, blue: 0.9846, alpha: 1.0 )
+        graphView.fillGradientEndColor = UIColor ( red: 0.9601, green: 0.984, blue: 0.9961, alpha: 1.0 )
+
+
         graphView.dataPointSpacing = 80
         graphView.dataPointSize = 2
-        graphView.dataPointFillColor = UIColor.whiteColor()
+        graphView.dataPointFillColor = UIColor ( red: 99 / 255, green: 180 / 255 , blue: 225 / 255, alpha: 1.0 )
         
         graphView.referenceLineLabelFont = UIFont.boldSystemFontOfSize(8)
-        graphView.referenceLineColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-        graphView.referenceLineLabelColor = UIColor.whiteColor()
+        graphView.referenceLineColor = UIColor ( red: 0.8118, green: 0.9333, blue: 1.0, alpha: 1.0 )
+        graphView.referenceLineLabelColor = UIColor ( red: 0.6118, green: 0.6824, blue: 0.749, alpha: 1.0 )
+
         graphView.numberOfIntermediateReferenceLines = 5
-        graphView.dataPointLabelColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+        graphView.dataPointLabelColor = UIColor ( red: 0.6549, green: 0.7137, blue: 0.7725, alpha: 1.0 )
         
         graphView.shouldAnimateOnStartup = true
         graphView.shouldAdaptRange = true
@@ -371,7 +386,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         graphView.shouldFill = true
         graphView.fillColor = UIColor.colorFromHex("#FF0080")
         
-        graphView.shouldDrawDataPoint = false
+        graphView.shouldDrawDataPoint = true
         graphView.dataPointSpacing = 80
         graphView.dataPointLabelFont = UIFont.boldSystemFontOfSize(10)
         graphView.dataPointLabelColor = UIColor.whiteColor()

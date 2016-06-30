@@ -12,14 +12,17 @@ class ProcessTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var doneLabel: UILabel!
     @IBOutlet weak var remarksLabel: UILabel!
-    
+    var unit = ""
     var process = Process(){
         didSet{
             dateLabel?.text = process.recordTime
             let doneString = String(format: "%.1f", process.done)
-            doneLabel?.text = doneString
-            remarksLabel?.text = process.remark
-
+            doneLabel?.text = doneString + "<" + unit + ">"
+            if process.remark == ""{
+                remarksLabel?.text = "--"
+            }else{
+                remarksLabel?.text = "备注: " + process.remark
+            }
         }
     }
 }

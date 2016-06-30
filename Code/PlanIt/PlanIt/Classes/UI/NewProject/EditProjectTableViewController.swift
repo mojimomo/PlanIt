@@ -25,6 +25,7 @@ class EditProjectTableViewController: UITableViewController {
     @IBOutlet weak var unitTextField: UITextField!
     @IBOutlet weak var totalTextField: UITextField!
     @IBOutlet weak var finishEditButton: UIButton!
+    @IBOutlet weak var punchCell: UITableViewCell!
     
     ///按钮文字
     var finishEditButtonText = ""
@@ -103,12 +104,21 @@ class EditProjectTableViewController: UITableViewController {
             case .Normal:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(false, animated: false)
+                punchCell.hidden = false
+                taskUnitCell.hidden = false
+                taskTotalCell.hidden = false
             case .Punch:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(true, animated: false)
+                punchCell.hidden = false
+                taskUnitCell.hidden = false
+                taskTotalCell.hidden = false
             case .NoRecord:
                 recordSwitch?.setOn(false, animated: false)
                 punchSwitch?.setOn(false, animated: false)
+                punchCell.hidden = true
+                taskUnitCell.hidden = true
+                taskTotalCell.hidden = true
             default: break
             }
         }
@@ -367,24 +377,24 @@ class EditProjectTableViewController: UITableViewController {
 
     
     //MARK: - Override TableView
-    ///隐藏某cell
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //创建3个NSIndexPath对应相应的cell位置
-        let unitCellPath = NSIndexPath(forRow: 1, inSection: 2)
-        let totalCellPath = NSIndexPath(forRow: 2, inSection: 2)
-        let checkCellPath = NSIndexPath(forRow: 0, inSection: 3)
-        //比较NSIndexPath
-        if indexPath == unitCellPath || indexPath == totalCellPath || indexPath == checkCellPath{
-            if (projectType == .NoRecord) {
-                // 假设改行原来高度为0
-                return 0;
-            } else {
-                return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-            }
-        }else {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        }
-    }
+//    ///隐藏某cell
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        //创建3个NSIndexPath对应相应的cell位置
+//        let unitCellPath = NSIndexPath(forRow: 1, inSection: 2)
+//        let totalCellPath = NSIndexPath(forRow: 2, inSection: 2)
+//        let checkCellPath = NSIndexPath(forRow: 0, inSection: 3)
+//        //比较NSIndexPath
+//        if indexPath == unitCellPath || indexPath == totalCellPath || indexPath == checkCellPath{
+//            if (projectType == .NoRecord) {
+//                // 假设改行原来高度为0
+//                return 0;
+//            } else {
+//                return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+//            }
+//        }else {
+//            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+//        }
+//    }
 
     
     ///点击某个单元格触发的方法

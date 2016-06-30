@@ -29,7 +29,8 @@ let notFinishedFontColor = UIColor.blackColor()
 ///未开始字体颜色
 let notBeginFontColor = UIColor.colorFromHex("#E6E4E1")
 ///超时字体颜色
-let overTimeFontColor = UIColor.colorFromHex("#F5F4F2")
+let overTimeFontColor = UIColor ( red: 236 / 255, green: 74 / 255, blue:71 / 255, alpha: 1.0 )
+
 ///导航栏字体和颜色
 let navigationTitleAttribute = [ NSForegroundColorAttributeName: navigationFontColor,
                        NSFontAttributeName: UIFont(name: "PingFangSC-Semibold", size: 17.0)! ]
@@ -37,3 +38,5 @@ let navigationTitleAttribute = [ NSForegroundColorAttributeName: navigationFontC
 let projectCountsFontColor = UIColor ( red: 205 / 255, green: 205 / 255, blue:205 / 255, alpha: 1.0 )
 ///项目计算字体和颜色
 let projectCountsFont = UIFont(name: "PingFangSC-Light", size: 14)
+///未开始字体颜色
+let switchColor = UIColor.colorFromHex("#FE6158")

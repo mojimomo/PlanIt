@@ -341,6 +341,7 @@
                         <outlet property="beginTimeLabel" destination="KHb-Um-z69" id="IsN-yY-mXT"/>
                         <outlet property="endTimeLabel" destination="gok-Nc-RGs" id="1uo-f7-F9Y"/>
                         <outlet property="projectNameLabel" destination="IdS-En-F3b" id="LVd-Yu-Lk9"/>
+                        <outlet property="punchCell" destination="9Kv-Or-kmZ" id="UBA-En-kjy"/>
                         <outlet property="punchSwitch" destination="bk6-6a-fyi" id="z0h-NS-a88"/>
                         <outlet property="recordSwitch" destination="Nh4-vr-Wjk" id="pZd-wo-Z3Y"/>
                         <outlet property="tagLabel" destination="Zsn-IN-f6a" id="e0K-ro-4mf"/>
@@ -428,7 +429,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已经记录总量: 20/200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDp-gR-KI2">
                                                     <rect key="frame" x="8" y="44" width="584" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -761,10 +762,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8e8-ja-yTV">
-                                <rect key="frame" x="300" y="25" width="300" height="240"/>
+                                <rect key="frame" x="300" y="15" width="300" height="270"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcs-hp-rJP" customClass="PieChartView" customModule="PlanIt" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="20" width="270" height="270"/>
+                                        <rect key="frame" x="15" y="52.5" width="270" height="270"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="194" id="QGq-xh-WSO"/>
@@ -796,29 +797,29 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqa-q5-DLe">
-                                <rect key="frame" x="0.0" y="25" width="300" height="240"/>
+                                <rect key="frame" x="0.0" y="15" width="300" height="270"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离项目截止" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exL-J4-Unb">
-                                        <rect key="frame" x="24" y="20" width="268" height="24"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
+                                        <rect key="frame" x="24" y="52.5" width="268" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截止：2016年12月12日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAP-cj-VgG">
-                                        <rect key="frame" x="24" y="131" width="268" height="18.5"/>
+                                        <rect key="frame" x="24" y="151" width="268" height="18.5"/>
                                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYA-jv-LwE">
-                                        <rect key="frame" x="24" y="60" width="268" height="50.5"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="36"/>
+                                        <rect key="frame" x="24" y="85" width="268" height="45"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="32"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CNQ-UT-ZBX">
-                                        <rect key="frame" x="24" y="114" width="256" height="2"/>
-                                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="24" y="134" width="256" height="2"/>
+                                        <color key="tintColor" red="0.40784313725490196" green="0.76470588235294112" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="152" id="R4d-fs-C3a"/>
                                         </constraints>
@@ -829,32 +830,32 @@
                                         </variation>
                                     </progressView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdU-2l-bn6" customClass="TagListView" customModule="PlanIt" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="164" width="268" height="68"/>
+                                        <rect key="frame" x="24" y="183" width="268" height="78.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
+                                                <integer key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="0.77777777777777779" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.69019607843137254" green="0.69803921568627447" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tagSelectedBackgroundColor">
-                                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.8666666666666667" green="0.87450980392156863" blue="0.8784313725490196" alpha="0.81000000000000005" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tagHighlightedBackgroundColor">
-                                                <color key="value" red="0.71464646464646464" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.8666666666666667" green="0.87450980392156863" blue="0.8784313725490196" alpha="0.82000000000000006" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                <color key="value" red="0.9761140819964349" green="0.10853060203560684" blue="0.19920865531464194" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.89411764705882357" green="0.89803921568627454" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <integer key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
-                                                <real key="value" value="3"/>
+                                                <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
-                                                <real key="value" value="12"/>
+                                                <integer key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="marginY">
                                                 <real key="value" value="3"/>
@@ -879,8 +880,9 @@
                                     <constraint firstItem="xdU-2l-bn6" firstAttribute="height" secondItem="eqa-q5-DLe" secondAttribute="height" multiplier="0.3" id="OoI-6I-prm"/>
                                     <constraint firstItem="RAP-cj-VgG" firstAttribute="leading" secondItem="eqa-q5-DLe" secondAttribute="leadingMargin" constant="30" id="OyD-hs-LCU"/>
                                     <constraint firstItem="exL-J4-Unb" firstAttribute="leading" secondItem="eqa-q5-DLe" secondAttribute="leadingMargin" constant="30" id="QHb-L0-Axs"/>
+                                    <constraint firstItem="CNQ-UT-ZBX" firstAttribute="centerY" secondItem="eqa-q5-DLe" secondAttribute="centerY" id="QkQ-w4-1A5"/>
                                     <constraint firstItem="exL-J4-Unb" firstAttribute="top" secondItem="eqa-q5-DLe" secondAttribute="topMargin" id="Ryt-fC-HMy"/>
-                                    <constraint firstItem="gYA-jv-LwE" firstAttribute="top" secondItem="exL-J4-Unb" secondAttribute="bottom" constant="16" id="SMw-qB-FlU"/>
+                                    <constraint firstItem="gYA-jv-LwE" firstAttribute="top" secondItem="exL-J4-Unb" secondAttribute="bottom" constant="10" id="SMw-qB-FlU"/>
                                     <constraint firstItem="exL-J4-Unb" firstAttribute="top" secondItem="eqa-q5-DLe" secondAttribute="topMargin" id="TCx-Qo-QtT"/>
                                     <constraint firstItem="exL-J4-Unb" firstAttribute="leading" secondItem="xdU-2l-bn6" secondAttribute="leading" id="Tb7-9s-eyy"/>
                                     <constraint firstItem="CNQ-UT-ZBX" firstAttribute="top" secondItem="gYA-jv-LwE" secondAttribute="bottom" constant="8" symbolic="YES" id="Wcg-zg-xnV"/>
@@ -901,6 +903,7 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="9GJ-Mf-MzU"/>
                                         <exclude reference="QHb-L0-Axs"/>
                                         <exclude reference="Ryt-fC-HMy"/>
                                         <exclude reference="TCx-Qo-QtT"/>
@@ -920,28 +923,28 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nob-L2-Bdh">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="25"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="15"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="ZfT-v6-3st"/>
+                                    <constraint firstAttribute="height" constant="15" id="ZfT-v6-3st"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMw-QP-Oac">
-                                <rect key="frame" x="0.0" y="265" width="600" height="25"/>
+                                <rect key="frame" x="0.0" y="285" width="600" height="15"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="aoD-WR-tCU"/>
+                                    <constraint firstAttribute="height" constant="15" id="aoD-WR-tCU"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="AOX-o4-V0B">
-                                <rect key="frame" x="0.0" y="290" width="600" height="310"/>
+                                <rect key="frame" x="0.0" y="300" width="600" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eqa-q5-DLe" firstAttribute="height" secondItem="aH6-6T-H94" secondAttribute="height" multiplier="0.5" id="0Ox-4v-8N2"/>
-                            <constraint firstItem="eqa-q5-DLe" firstAttribute="height" secondItem="aH6-6T-H94" secondAttribute="height" multiplier="0.4" id="1hp-3e-T1f"/>
+                            <constraint firstItem="eqa-q5-DLe" firstAttribute="height" secondItem="aH6-6T-H94" secondAttribute="height" multiplier="0.44" id="1hp-3e-T1f"/>
                             <constraint firstItem="eqa-q5-DLe" firstAttribute="leading" secondItem="aH6-6T-H94" secondAttribute="leading" id="2WG-fY-fzd"/>
                             <constraint firstItem="eqa-q5-DLe" firstAttribute="top" secondItem="nob-L2-Bdh" secondAttribute="bottom" id="2c7-u7-iHV"/>
                             <constraint firstItem="8e8-ja-yTV" firstAttribute="top" secondItem="eqa-q5-DLe" secondAttribute="top" id="4Ar-lL-y8s"/>
@@ -976,11 +979,13 @@
                             <constraint firstAttribute="trailing" secondItem="8e8-ja-yTV" secondAttribute="trailing" id="i4i-9e-176"/>
                             <constraint firstItem="AOX-o4-V0B" firstAttribute="top" secondItem="8e8-ja-yTV" secondAttribute="bottom" id="kHX-NR-8us"/>
                             <constraint firstItem="CNQ-UT-ZBX" firstAttribute="width" secondItem="aH6-6T-H94" secondAttribute="width" multiplier="0.7" id="osU-hi-gVx"/>
+                            <constraint firstItem="AOX-o4-V0B" firstAttribute="height" secondItem="aH6-6T-H94" secondAttribute="height" multiplier="0.5" id="uc5-gh-73v"/>
                             <constraint firstItem="AOX-o4-V0B" firstAttribute="top" secondItem="eqa-q5-DLe" secondAttribute="bottom" id="z86-fX-bwx"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="0Ox-4v-8N2"/>
+                                <exclude reference="1hp-3e-T1f"/>
                                 <exclude reference="B7c-Bf-WFv"/>
                                 <exclude reference="Ebr-xG-StA"/>
                                 <exclude reference="XfF-5O-2ot"/>

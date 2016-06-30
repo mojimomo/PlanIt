@@ -107,7 +107,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         tableView.tag = tableViewTag.MuneTable
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.scrollEnabled = true
+        tableView.scrollEnabled = false
         tableView.separatorStyle = .None
         self.popover = Popover(options: self.popoverOptions, showHandler: nil, dismissHandler: nil)
         self.popover.show(tableView,  point: startPoint)
@@ -305,7 +305,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
         self.popover.show(showView,  point: startPoint)
         let timeInterval = 1.0 / (newPercent - oldPercent)
-        let timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "handleIncreasePercent:", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "handleIncreasePercent:", userInfo: nil, repeats: true)
     }
     
     func handleIncreasePercent(timer: NSTimer){
@@ -533,6 +533,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             cell.textLabel?.text = self.texts[indexPath.row]
             if indexPath.row == 0{
                 let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 5, width: 40, height: 40))
+                isShowAllSwitch.onTintColor = switchColor
                 isShowAllSwitch.on = isShowNotBegin
                 isShowAllSwitch.addTarget(self, action: "showNotBegin", forControlEvents: .ValueChanged)
                 cell.addSubview(isShowAllSwitch)
@@ -575,14 +576,29 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 var selectString = ""
                 switch(projects[indexPath.section].type){
                 case .NoRecord:
-                    imageString = "norecord"
-                    selectString = "norecordclick"
+                    if projects[indexPath.section].isFinished == .NotBegined{
+                        imageString = "norecordno"
+                        selectString = "norecordno"
+                    }else{
+                        imageString = "norecord"
+                        selectString = "norecordclick"
+                    }
                 case .Punch:
-                    imageString = "punch"
-                    selectString = "punchclick"
+                    if projects[indexPath.section].isFinished == .NotBegined{
+                        imageString = "punchno"
+                        selectString = "punchno"
+                    }else{
+                        imageString = "punch"
+                        selectString = "punchclick"
+                    }
                 case .Normal:
-                    imageString = "record"
-                    selectString = "recordclick"
+                    if projects[indexPath.section].isFinished == .NotBegined{
+                        imageString = "recordno"
+                        selectString = "recordno"
+                    }else{
+                        imageString = "record"
+                        selectString = "recordclick"
+                    }
                 default:break
                 }
                 
