@@ -43,6 +43,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             tagListView.alignment = .Left
             tagListView.textColor = UIColor.blackColor()
             tagListView.selectedTextColor = UIColor.blackColor()
+            tagListView.textFont = tagFontinstatistics!
         }
     }
     @IBOutlet weak var endTimeLabel: UILabel!

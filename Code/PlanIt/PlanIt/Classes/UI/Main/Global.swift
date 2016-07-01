@@ -38,5 +38,9 @@ let navigationTitleAttribute = [ NSForegroundColorAttributeName: navigationFontC
 let projectCountsFontColor = UIColor ( red: 205 / 255, green: 205 / 255, blue:205 / 255, alpha: 1.0 )
 ///项目计算字体和颜色
 let projectCountsFont = UIFont(name: "PingFangSC-Light", size: 14)
+///tag字体和颜色
+let tagFont = UIFont(name: "PingFangSC-Light", size: 16)
+///tag字体和颜色
+let tagFontinstatistics = UIFont(name: "PingFangSC-Light", size: 12)
 ///未开始字体颜色
 let switchColor = UIColor.colorFromHex("#FE6158")

@@ -8,7 +8,7 @@
 
 import UIKit
 protocol AddProcessDelegate: class{
-    func addProcessTableViewAct(old: Double, new: Double)
+    func addProcessTableViewAct(old: Double, new: Double, name: String)
 }
 
 class AddProcessTableViewController: UITableViewController {
@@ -65,7 +65,7 @@ class AddProcessTableViewController: UITableViewController {
     func cancel(){
         self.dismissViewControllerAnimated(true) { () -> Void in
             if self.newPercent != 0{
-               self.delegate?.addProcessTableViewAct(self.oldPercent, new: self.newPercent)
+               self.delegate?.addProcessTableViewAct(self.oldPercent, new: self.newPercent, name: self.project.name)
             }
         }
     }

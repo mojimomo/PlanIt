@@ -40,7 +40,8 @@ class PieChartView: UIView {
     var pieChartRadius:CGFloat{
         return min(bounds.size.height, bounds.size.width)/2*scale
     }
-    
+    ///是否需要圆角
+    var isCorner = true
     ///画图
     override func drawRect(rect: CGRect) {
         //清除所有空间
@@ -62,6 +63,18 @@ class PieChartView: UIView {
         pieChartPath.lineWidth = lineWidth
         outGroundColor.set()
         pieChartPath.stroke()
+        
+//        let beginCentre = CGPoint(x: pieChartCenter.x, y: pieChartCenter.y - (pieChartRadius + lineWidth / 4))
+//        let beginPath = UIBezierPath(arcCenter: beginCentre, radius: lineWidth / 2, startAngle: 0, endAngle: CGFloat(2*M_PI), clockwise: true)
+//        color.set()
+//        beginPath.fill()
+//        
+//        let sinX = (pieChartRadius + lineWidth / 2) * CGFloat(sin( 2 * M_PI * 3 / 4 + 2 * M_PI * percent / 100))
+//        let sinY = (pieChartRadius + lineWidth / 2) * CGFloat(cos( 2 * M_PI * 3 / 4 + 2 * M_PI * percent / 100))
+//        let endCentre = CGPoint(x: sinX, y: sinY)
+//        let endPath = UIBezierPath(arcCenter: endCentre, radius: lineWidth / 2, startAngle: 0, endAngle: CGFloat(2*M_PI), clockwise: true)
+//        color.set()
+//        endPath.fill()
         
         //百分比园
         let percentPath = UIBezierPath(arcCenter: pieChartCenter, radius: pieChartRadius, startAngle: CGFloat(2 * M_PI * 3 / 4), endAngle: CGFloat( 2 * M_PI * 3 / 4 + 2 * M_PI * percent / 100), clockwise: true)

@@ -18,11 +18,18 @@ public enum PopoverOption {
   case OverlayBlur(UIBlurEffectStyle)
   case Type(PopoverType)
   case Color(UIColor)
+  case Animation(PopoverAnimation)
 }
 
 @objc public enum PopoverType: Int {
     case Up
     case Down
+}
+
+public enum PopoverAnimation: Int{
+    case Scale
+    case Translation
+    case None
 }
 
 public class Popover: UIView {
@@ -37,7 +44,8 @@ public class Popover: UIView {
   public var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
   public var overlayBlur: UIBlurEffect?
   public var popoverColor: UIColor = UIColor.whiteColor()
-
+    public var popoverAnimation: PopoverAnimation = .Translation
+    
   // custom closure
   private var didShowHandler: (() -> ())?
   private var didDismissHandler: (() -> ())?
@@ -90,6 +98,8 @@ public class Popover: UIView {
           self.popoverType = value
         case let .Color(value):
           self.popoverColor = value
+        case let .Animation(value):
+          self.popoverAnimation = value
         }
       }
     }
@@ -196,10 +206,15 @@ public class Popover: UIView {
     self.containerView.addSubview(self)
 
     self.create()
-    //self.transform = CGAffineTransformMakeScale(0.0, 0.0)
+    switch self.popoverAnimation {
+    case .Scale:
+        self.transform = CGAffineTransformMakeScale(0.0, 0.0)
+    case .None:
+         break
+    case .Translation:
+         self.transform = CGAffineTransformMakeTranslation(0, -100)
+    }
     
-    self.transform = CGAffineTransformMakeTranslation(0, -100)
-    //self.transform = CGAffineTransformTranslate(self.contentView.transform, 0, -50)
     UIView.animateWithDuration(self.animationIn, delay: 0,
       usingSpringWithDamping: 0.7,
       initialSpringVelocity: 3,
@@ -223,8 +238,14 @@ public class Popover: UIView {
       UIView.animateWithDuration(self.animationOut, delay: 0,
         options: .CurveEaseInOut,
         animations: {
-          //self.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
-          self.transform = CGAffineTransformMakeTranslation( 0, -100)
+            switch self.popoverAnimation {
+            case .Scale:
+                self.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
+            case .None:
+                break
+            case .Translation:
+                 self.transform = CGAffineTransformMakeTranslation( 0, -100)
+            }
           self.blackOverlay.alpha = 0
         }){ _ in
           self.contentView.removeFromSuperview()

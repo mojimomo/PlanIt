@@ -840,16 +840,16 @@
                                                 <integer key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="0.69019607843137254" green="0.69803921568627447" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.8784313725490196" green="0.8666666666666667" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tagSelectedBackgroundColor">
-                                                <color key="value" red="0.8666666666666667" green="0.87450980392156863" blue="0.8784313725490196" alpha="0.81000000000000005" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.94901960784313721" green="0.94509803921568625" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tagHighlightedBackgroundColor">
-                                                <color key="value" red="0.8666666666666667" green="0.87450980392156863" blue="0.8784313725490196" alpha="0.82000000000000006" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                <color key="value" red="0.89411764705882357" green="0.89803921568627454" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.94901960784313721" green="0.94509803921568625" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <integer key="value" value="1"/>
