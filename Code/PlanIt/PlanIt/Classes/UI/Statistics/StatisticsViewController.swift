@@ -9,11 +9,16 @@
 import UIKit
 
 class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate {
+    ///统计页面当前项目
     var project = Project()
-    let lineChartBound: CGFloat = 10
-    var projectPercent = 0.0
+    ///此项目的所有进度数据
     var processDates = [ProcessDate]()
-    var processDatesDict = []
+    ///chart数据
+    lazy var chartData = [Double]()
+    ///chart标签
+    lazy var chartLabel = [String]()
+    
+    var processDatesDicts = [[String : Int]]()
     var projectName = ""{
         didSet{
             self.title = projectName
@@ -46,17 +51,29 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             tagListView.textFont = tagFontinstatistics!
         }
     }
+    @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var inforView: UIView!
-    @IBOutlet weak var pieChartView: PieChartView!{
+    @IBOutlet weak var pieChartView: KDCircularProgress!{
         didSet{
-            pieChartView.dataSource = self
-            pieChartView.scale = 0.8
-            pieChartView.backgroundColor = UIColor.clearColor()
-            ///颜色
-            pieChartView.color = UIColor ( red: 0.4353, green: 0.8157, blue: 0.0, alpha: 1.0 )
-            ///外圈颜色 默认灰色
-            pieChartView.outGroundColor = UIColor(red: 239.0 / 255, green: 240.0 / 255, blue: 241.0 / 255, alpha: 1.0)
+//            pieChartView.dataSource = self
+//            pieChartView.scale = 0.8
+//            pieChartView.backgroundColor = UIColor.clearColor()
+//            ///颜色
+//            pieChartView.color = UIColor ( red: 0.4353, green: 0.8157, blue: 0.0, alpha: 1.0 )
+//            ///外圈颜色 默认灰色
+//            pieChartView.outGroundColor = UIColor(red: 239.0 / 255, green: 240.0 / 255, blue: 241.0 / 255, alpha: 1.0)
+            pieChartView.startAngle = -90
+            pieChartView.progressThickness = 0.5
+            pieChartView.trackThickness = 0.5
+            pieChartView.clockwise = true
+            pieChartView.gradientRotateSpeed = 2
+            pieChartView.roundedCorners = true
+            pieChartView.glowMode = .NoGlow
+            pieChartView.glowAmount = 0.9
+            pieChartView.setColors(UIColor ( red: 0.4902, green: 0.9098, blue: 0.0627, alpha: 1.0 ) ,UIColor ( red: 0.4, green: 0.7294, blue: 0.0471, alpha: 1.0 ))
+            pieChartView.trackColor = UIColor ( red: 0.9412, green: 0.9412, blue: 0.9412, alpha: 1.0 )
+ 
         }
     }
     @IBOutlet weak var lineChartView: UIView!
@@ -87,8 +104,8 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     var labelConstraints = [NSLayoutConstraint]()
     ///曲线图数据
     let numberOfDataItems = 29
-    lazy var data: [Double] = self.generateRandomData(self.numberOfDataItems, max: 50)
-    lazy var labels: [String] = self.generateSequentialLabels(self.numberOfDataItems, text: "FEB")
+    //lazy var data: [Double] = self.generateRandomData(self.numberOfDataItems, max: 50)
+    //lazy var labels: [String] = self.generateSequentialLabels(self.numberOfDataItems, text: "FEB")
     
     
     func updateUI(){
@@ -103,7 +120,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             //根据project初始化程序
             processDates = ProcessDate().loadData(project.id)
             projectName = project.name
-            projectPercent = project.percent
             tagListView.removeAllTags()
             for tag in project.tags{
                 tagListView.addTag(tag.name)
@@ -112,27 +128,38 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             switch project.isFinished {
             case .NotBegined:
                 prompLabel?.text = "距离项目开始"
-                let restString = compareCurrentTime(project.beginTimeDate)
+                let restString = project.beginTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
                 progressView.setProgress(0 , animated: false)
             case .NotFinished:
                 prompLabel?.text = "距离项目截止"
-                let restString = compareCurrentTime(project.endTimeDate)
+                let restString = project.endTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
-                let timePercent = percentFromCurrentTime(project.beginTimeDate, endDate: project.endTimeDate)
+                let timePercent = project.beginTimeDate.percentFromCurrentTime(project.endTimeDate)
                 progressView.setProgress(Float(timePercent), animated: false)
             case .Finished:
                 surplusLabel?.text = "已完成"
                 progressView.setProgress(1 , animated: false)
             case .OverTime:
                 prompLabel?.text = "超出项目截止"
-                let restString = compareCurrentTime(project.endTimeDate)
+                let restString = project.endTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
-                let timePercent = percentFromCurrentTime(project.beginTimeDate, endDate: project.endTimeDate)
+                let timePercent = project.beginTimeDate.percentFromCurrentTime(project.endTimeDate)
                 progressView.setProgress(Float(timePercent), animated: false)
             default:break
             }
+//            pieChartView.animateFromAngle(0, toAngle: Double(project.percent) / 100 * 360, duration: 2) { completed in
+//                if completed {
+//                    print("animation stopped, completed")
+//                } else {
+//                    print("animation stopped, was interrupted")
+//                }
+//            }
+            pieChartView.angle = Double(project.percent) / 100 * 360
+            percentLabel.text = "\(Int(project.percent))%"
+            percentLabel.sizeToFit()
             endTimeLabel.text = "截止：\(project.endTime)"
+            loadProcessDate()
             drawLineChart()
             updateUI()
         }
@@ -183,7 +210,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     
      // MARK: - PercentForPieChart Delegate
     func percentForPieChartView(sneder: PieChartView) -> Double? {
-        return projectPercent
+        return 0
     }
 
 
@@ -201,49 +228,34 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
     
      //MARK: - Func
-    ///与现在时间比较
-    func compareCurrentTime(compareDate: NSDate) -> String{
-        var timeInterval = compareDate.timeIntervalSinceNow
-        var result = ""
-        var tmp = 0
+    ///读取进度数据
+    func loadProcessDate(){
+        processDates = ProcessDate().loadData(project.id)
         
-        //判断是否是负
-        if timeInterval < 0{
-            timeInterval = -timeInterval
+        let beginDate = project.beginTimeDate
+        let endDate = project.endTimeDate
+        let days = beginDate.daysToEndDate(endDate)
+        var date = beginDate
+        for var day = 0; day < days ; day++ {
+            for processDate in processDates{
+                if processDate.recordTimeDate == date {
+                    //processDatesDicts.append([processDate.recordTime : Int(processDate.done)])
+                    chartData.append(processDate.done)
+                    chartLabel.append(processDate.recordTime)
+                    break
+                }else if processDate ==  processDates.last{
+                    //processDatesDicts.append([date.FormatToStringYYYYMMDD() : 0])
+                    chartData.append(0)
+                    chartLabel.append(date.FormatToStringMMMMDD())
+                }
+            }
+            date = date.increase1Day()!
         }
-        
-        //判断时间
-        if timeInterval < 60{
-            result += "1分钟内"
-        }else if timeInterval / 60 < 60 {
-            tmp = Int(timeInterval / 60 )
-            result += "\(tmp)分"
-        }else if timeInterval / 60 / 60 < 24 {
-            tmp = Int(timeInterval / 60 / 24)
-            result += "\(tmp)小时"
-        }else if timeInterval / 60 / 60 / 24 < 30 {
-            tmp = Int(timeInterval / 60 / 60 / 24 )
-            result += "\(tmp)天"
-        }else if timeInterval / 60 / 60 / 24 / 30 < 12 {
-            tmp = Int(timeInterval / 60 / 60 / 24 / 30 )
-            result += "\(tmp)月"
-        }else{
-            tmp = Int(timeInterval / 60 / 60 / 24 / 30 / 12)
-            result += "\(tmp)年"
-        }
-        return result
     }
     
-    ///计算时间百分比
-    func percentFromCurrentTime(beginDate: NSDate, endDate: NSDate) -> Double{
-        let timeEnd = endDate.timeIntervalSince1970
-        let timeBegin = beginDate.timeIntervalSince1970
-        let currentDate = NSDate()
-        let timecurrent = currentDate.timeIntervalSince1970
-        let percent = (timecurrent - timeBegin)/(timeEnd - timeBegin)
-        return percent
-    }
     
+
+
     ///画直线图
     func drawLineChart(){
         if graphView == nil{
@@ -252,7 +264,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             self.lineChartView.addSubview(graphView)
         }
         
-        graphView.setData(data, withLabels: labels)
+        graphView.setData(chartData, withLabels: chartLabel)
         self.lineChartView.insertSubview(graphView, belowSubview: label)
     }
     
@@ -307,7 +319,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             graphView = createPinkMountainGraph(lineChartViewFrame)
         }
         
-        graphView.setData(data, withLabels: labels)
+        //graphView.setData(data, withLabels: labels)
         self.view.insertSubview(graphView, belowSubview: label)
         
         setupConstraints()
@@ -492,5 +504,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         }
         return labels
     }
-
 }
+
+
+    

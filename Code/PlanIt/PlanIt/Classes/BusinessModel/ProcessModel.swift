@@ -18,10 +18,7 @@ class Process: NSObject {
     var recordTime = ""{
         didSet{
             if recordTime != ""{
-                let dateFormat = NSDateFormatter()
-                dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
-                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-                recordTimeDate = dateFormat.dateFromString(recordTime)!
+                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()!
             }
         }
     }

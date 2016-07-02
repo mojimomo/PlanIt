@@ -13,6 +13,11 @@
 		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
 		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
 		BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */; };
+		BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */; };
+		BE3B754F1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B754E1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift */; };
+		BE3B75561D27B47B00F7AEC3 /* UIViewController+mojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B75551D27B47B00F7AEC3 /* UIViewController+mojiView.swift */; };
+		BE3B75581D27B4D200F7AEC3 /* NSDate+mojiDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B75571D27B4D200F7AEC3 /* NSDate+mojiDate.swift */; };
+		BE3B755A1D27B4FC00F7AEC3 /* String+mojiString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B75591D27B4FC00F7AEC3 /* String+mojiString.swift */; };
 		BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */; };
 		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
@@ -42,7 +47,6 @@
 		BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3251CF57870002A20FE /* TagListView.swift */; };
 		BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3261CF57870002A20FE /* TagView.swift */; };
 		BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC3061CFABE2400D8C4C8 /* ScrollableGraphView.swift */; };
-		BECFC3091CFAC11400D8C4C8 /* UIColor+colorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC3081CFAC11400D8C4C8 /* UIColor+colorFromHex.swift */; };
 		BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */; };
 		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
 		BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */; };
@@ -77,6 +81,11 @@
 		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
 		BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveLoadingIndicator.swift; sourceTree = "<group>"; };
+		BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
+		BE3B754E1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+colorFromHex.swift"; path = "PlanIt/Classes/Extension/UIColor+colorFromHex.swift"; sourceTree = SOURCE_ROOT; };
+		BE3B75551D27B47B00F7AEC3 /* UIViewController+mojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+mojiView.swift"; path = "PlanIt/Classes/Extension/UIViewController+mojiView.swift"; sourceTree = SOURCE_ROOT; };
+		BE3B75571D27B4D200F7AEC3 /* NSDate+mojiDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+mojiDate.swift"; path = "PlanIt/Classes/Extension/NSDate+mojiDate.swift"; sourceTree = SOURCE_ROOT; };
+		BE3B75591D27B4FC00F7AEC3 /* String+mojiString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+mojiString.swift"; path = "PlanIt/Classes/Extension/String+mojiString.swift"; sourceTree = SOURCE_ROOT; };
 		BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessesTableViewController.swift; path = ../Statistics/ProcessesTableViewController.swift; sourceTree = "<group>"; };
 		BE4F02371CEF365F00126237 /* RoundTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundTableviewCell.h; sourceTree = "<group>"; };
 		BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableviewCell.swift; sourceTree = "<group>"; };
@@ -114,7 +123,6 @@
 		BEB8B3251CF57870002A20FE /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		BEB8B3261CF57870002A20FE /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		BECFC3061CFABE2400D8C4C8 /* ScrollableGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableGraphView.swift; sourceTree = "<group>"; };
-		BECFC3081CFAC11400D8C4C8 /* UIColor+colorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+colorFromHex.swift"; path = "../../UI/Statistics/UIColor+colorFromHex.swift"; sourceTree = "<group>"; };
 		BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessTableViewCell.swift; sourceTree = "<group>"; };
 		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
 		BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessTableViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +190,14 @@
 				BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */,
 			);
 			path = WaveLoadingIndicator;
+			sourceTree = "<group>";
+		};
+		BE3B754B1D278B3900F7AEC3 /* KDCircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */,
+			);
+			path = KDCircularProgress;
 			sourceTree = "<group>";
 		};
 		BE4F02351CEF365F00126237 /* RoundTableviewCell */ = {
@@ -260,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				BE68E5471CE9B5E6006A1750 /* Tag(标签) */,
-				BE802AF81CCF55540092F2DE /* extension(扩展) */,
 				BE802AF91CCF55540092F2DE /* History(添加历史) */,
 				BE802AFA1CCF55540092F2DE /* Main(公共) */,
 				BE802AFB1CCF55540092F2DE /* EditProject(修改项目) */,
@@ -276,6 +291,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE3B754B1D278B3900F7AEC3 /* KDCircularProgress */,
 				BE31C12C1D21168800A1A47B /* WaveLoadingIndicator */,
 				BECFC3051CFABE2400D8C4C8 /* GraphView */,
 				BEB8B3211CF57870002A20FE /* TagListView */,
@@ -285,14 +301,6 @@
 			);
 			name = "Venders(第三方库)";
 			path = Venders;
-			sourceTree = "<group>";
-		};
-		BE802AF81CCF55540092F2DE /* extension(扩展) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "extension(扩展)";
-			path = extension;
 			sourceTree = "<group>";
 		};
 		BE802AF91CCF55540092F2DE /* History(添加历史) */ = {
@@ -365,7 +373,10 @@
 		BE802B001CCF56AB0092F2DE /* Extension(扩展) */ = {
 			isa = PBXGroup;
 			children = (
-				BECFC3081CFAC11400D8C4C8 /* UIColor+colorFromHex.swift */,
+				BE3B754E1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift */,
+				BE3B75551D27B47B00F7AEC3 /* UIViewController+mojiView.swift */,
+				BE3B75571D27B4D200F7AEC3 /* NSDate+mojiDate.swift */,
+				BE3B75591D27B4FC00F7AEC3 /* String+mojiString.swift */,
 			);
 			name = "Extension(扩展)";
 			path = Venders/Extension;
@@ -651,7 +662,9 @@
 				BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
 				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
+				BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */,
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
+				BE3B75561D27B47B00F7AEC3 /* UIViewController+mojiView.swift in Sources */,
 				BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
@@ -668,10 +681,11 @@
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
 				BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */,
 				BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */,
-				BECFC3091CFAC11400D8C4C8 /* UIColor+colorFromHex.swift in Sources */,
 				BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */,
+				BE3B755A1D27B4FC00F7AEC3 /* String+mojiString.swift in Sources */,
 				BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
+				BE3B754F1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift in Sources */,
 				BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
 				BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */,
@@ -679,6 +693,7 @@
 				BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */,
 				BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */,
 				BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */,
+				BE3B75581D27B4D200F7AEC3 /* NSDate+mojiDate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

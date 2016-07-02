@@ -44,3 +44,6 @@ let tagFont = UIFont(name: "PingFangSC-Light", size: 16)
 let tagFontinstatistics = UIFont(name: "PingFangSC-Light", size: 12)
 ///未开始字体颜色
 let switchColor = UIColor.colorFromHex("#FE6158")
+
+
+
