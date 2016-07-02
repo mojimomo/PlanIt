@@ -15,7 +15,7 @@ class ProcessTableViewCell: UITableViewCell {
     var unit = ""
     var process = Process(){
         didSet{
-            dateLabel?.text = process.recordTime
+            dateLabel?.text = process.day
             let doneString = String(format: "%.1f", process.done)
             doneLabel?.text = doneString + "<" + unit + ">"
             if process.remark == ""{

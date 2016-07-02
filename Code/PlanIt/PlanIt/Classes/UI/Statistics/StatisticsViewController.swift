@@ -230,6 +230,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
      //MARK: - Func
     ///读取进度数据
     func loadProcessDate(){
+        
+        chartData.removeAll()
+        chartLabel.removeAll()
+        
         processDates = ProcessDate().loadData(project.id)
         
         let beginDate = project.beginTimeDate
@@ -241,7 +245,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 if processDate.recordTimeDate == date {
                     //processDatesDicts.append([processDate.recordTime : Int(processDate.done)])
                     chartData.append(processDate.done)
-                    chartLabel.append(processDate.recordTime)
+                    chartLabel.append(date.FormatToStringMMMMDD())
                     break
                 }else if processDate ==  processDates.last{
                     //processDatesDicts.append([date.FormatToStringYYYYMMDD() : 0])
@@ -351,7 +355,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         graphView.referenceLineColor = UIColor ( red: 0.8118, green: 0.9333, blue: 1.0, alpha: 1.0 )
         graphView.referenceLineLabelColor = UIColor ( red: 0.6118, green: 0.6824, blue: 0.749, alpha: 1.0 )
 
-        graphView.numberOfIntermediateReferenceLines = 5
+        graphView.numberOfIntermediateReferenceLines = 3
         graphView.dataPointLabelColor = UIColor ( red: 0.6549, green: 0.7137, blue: 0.7725, alpha: 1.0 )
         
         graphView.shouldAnimateOnStartup = true

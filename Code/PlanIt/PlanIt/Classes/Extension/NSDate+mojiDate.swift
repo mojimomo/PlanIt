@@ -106,9 +106,26 @@ extension NSDate{
     }
     
     ///格式化日期到字符串 YYYY年MM月DD日HH小时MM分钟
-    func FormatToStringYYYYMMMMDDHHMM() -> String? {
+    func FormatToStringYYYYMMMMDDHHMM() -> String{
         let dateFormat = NSDateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
+        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        let strDate = dateFormat.stringFromDate(self)
+        return strDate
+    }
+    
+     ///格式化日期到字符串 YYYY年MM月
+    func FormatToStringYYYYMM() -> String{
+        let dateFormat = NSDateFormatter()
+        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMM")
+        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        let strDate = dateFormat.stringFromDate(self)
+        return strDate
+    }
+    ///格式化日期到字符串 DD日HH小时MM分钟
+    func FormatToStringDDHHMM() -> String{
+        let dateFormat = NSDateFormatter()
+        dateFormat.setLocalizedDateFormatFromTemplate("ddhhmm")
         dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
         let strDate = dateFormat.stringFromDate(self)
         return strDate

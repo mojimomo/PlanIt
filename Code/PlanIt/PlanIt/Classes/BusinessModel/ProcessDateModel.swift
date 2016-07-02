@@ -37,6 +37,7 @@ class ProcessDate: NSObject {
         recordTime = String(dict["recordTime"]!)
         projectID = dict["projectID"]!.integerValue
         done = dict["done"]!.doubleValue
+        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()!
     }
     
     // MARK:- 和数据库之间的操作
