@@ -363,6 +363,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         graphView.adaptAnimationType = ScrollableGraphViewAnimationType.Elastic
         graphView.animationDuration = 1.5
         graphView.rangeMax = 50
+        graphView.referenceLineNumberOfDecimalPlaces = 1
         graphView.shouldRangeAlwaysStartAtZero = true
         
         return graphView
