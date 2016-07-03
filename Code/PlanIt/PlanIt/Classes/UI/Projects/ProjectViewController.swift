@@ -46,7 +46,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         .Type(.Down),
         .CornerRadius(8.0),
         .ArrowSize(CGSize(width: 0.0, height: 0.0)),
-        .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
+        .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6)),
+        .Animation(.None)
     ]
     ///显示未开始项目
     private var isShowNotBegin = false
@@ -107,7 +108,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         tableView.tag = tableViewTag.MuneTable
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.scrollEnabled = true
+        tableView.scrollEnabled = false
         tableView.separatorStyle = .None
         self.popover = Popover(options: self.popoverOptions, showHandler: nil, dismissHandler: nil)
         self.popover.show(tableView,  point: startPoint)
@@ -288,24 +289,40 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     
     // MARK: - 跳转动作
     ///弹出完成百分比view    
-    func showProcessChange(oldPercent: Double, newPercent: Double){
+    func showProcessChange(oldPercent: Double, newPercent: Double, name: String){
         self.oldPercent = Int(oldPercent)
         self.increasePercent = Int(oldPercent)
         self.newPercent = Int(newPercent)
         
+        //整体通知
         let rect = UIScreen.mainScreen().bounds
-        let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 100)
-        let showView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 120)
+        let showView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 240))
         showView.backgroundColor = UIColor.whiteColor()
-        waveLoadingIndicator = WaveLoadingIndicator(frame:CGRect(x: 10, y: 10, width: 180, height: 180))
+        
+        //波浪试图
+        waveLoadingIndicator = WaveLoadingIndicator(frame:CGRect(x: 20, y: 60, width: 160, height: 160))
         waveLoadingIndicator.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        waveLoadingIndicator.progress = Double(self.oldPercent) / 100
+        waveLoadingIndicator.progress = Double(self.oldPercent) / 100        
         showView.addSubview(waveLoadingIndicator)
 
+        //分割线
+        let blackView = UIView(frame: CGRect(x: 10, y: 45, width: 180, height: 1))
+        blackView.backgroundColor = UIColor ( red: 0.8078, green: 0.8118, blue: 0.8157, alpha: 1.0 )
+        showView.addSubview(blackView)
+        
+        //标题
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        titleLabel.textAlignment = .Center
+        titleLabel.text = name
+        titleLabel.textColor = UIColor ( red: 0.2784, green: 0.2824, blue: 0.2902, alpha: 1.0 )
+        showView.addSubview(titleLabel)
+        
+        //显示
         self.popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
         self.popover.show(showView,  point: startPoint)
         let timeInterval = 1.0 / (newPercent - oldPercent)
-        let timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "handleIncreasePercent:", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "handleIncreasePercent:", userInfo: nil, repeats: true)
     }
     
     func handleIncreasePercent(timer: NSTimer){
@@ -328,6 +345,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 if projects[indexPath.section].type == .Punch{
                     let process = Process()
                     process.projectID = projects[indexPath.section].id
+                    let name = projects[indexPath.section].name
                     let currentTime = NSDate()
                     let dateFormat = NSDateFormatter()
                     dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
@@ -343,7 +361,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     loadData()
                     updateTable()
                     let new = projects[indexPath.section].percent
-                    showProcessChange(old, newPercent: new)
+                    showProcessChange(old, newPercent: new, name: name)
                     
                     //记录进度项目
                 }else if projects[indexPath.section].type == .Normal{
@@ -370,11 +388,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     //不记录项目
                 }else if projects[indexPath.section].type == .NoRecord{
                     print("项目编号为\(indexPath.section)完成项目")
+                    let name = projects[indexPath.section].name
                     projects[indexPath.section].finishDone()
                     //更新图标
                     loadData()
                     updateTable()
-                    showProcessChange(0, newPercent: 100)
+                    showProcessChange(0, newPercent: 100, name: name)
                     
                 }
             //项目完成
@@ -533,6 +552,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             cell.textLabel?.text = self.texts[indexPath.row]
             if indexPath.row == 0{
                 let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 5, width: 40, height: 40))
+                isShowAllSwitch.onTintColor = switchColor
                 isShowAllSwitch.on = isShowNotBegin
                 isShowAllSwitch.addTarget(self, action: "showNotBegin", forControlEvents: .ValueChanged)
                 cell.addSubview(isShowAllSwitch)
@@ -575,14 +595,29 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 var selectString = ""
                 switch(projects[indexPath.section].type){
                 case .NoRecord:
-                    imageString = "norecord"
-                    selectString = "norecordclick"
+                    if projects[indexPath.section].isFinished == .NotBegined{
+                        imageString = "norecordno"
+                        selectString = "norecordno"
+                    }else{
+                        imageString = "norecord"
+                        selectString = "norecordclick"
+                    }
                 case .Punch:
-                    imageString = "punch"
-                    selectString = "punchclick"
+                    if projects[indexPath.section].isFinished == .NotBegined{
+                        imageString = "punchno"
+                        selectString = "punchno"
+                    }else{
+                        imageString = "punch"
+                        selectString = "punchclick"
+                    }
                 case .Normal:
-                    imageString = "record"
-                    selectString = "recordclick"
+                    if projects[indexPath.section].isFinished == .NotBegined{
+                        imageString = "recordno"
+                        selectString = "recordno"
+                    }else{
+                        imageString = "record"
+                        selectString = "recordclick"
+                    }
                 default:break
                 }
                 
@@ -699,8 +734,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     // MARK: - addProcess delegate
-    func addProcessTableViewAct(old: Double, new: Double){
-        showProcessChange(old, newPercent: new)
+    func addProcessTableViewAct(old: Double, new: Double, name: String){
+        showProcessChange(old, newPercent: new, name: name)
     }
     
 }

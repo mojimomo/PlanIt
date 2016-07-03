@@ -17,9 +17,9 @@ class RRTagCollectionViewCell: UICollectionViewCell {
     lazy var textContent: UILabel! = {
         let textContent = UILabel(frame: CGRectZero)
         textContent.layer.masksToBounds = true
-        textContent.layer.cornerRadius = 20
-        textContent.layer.borderWidth = 2
-        textContent.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).CGColor
+        textContent.layer.cornerRadius = 4
+        textContent.layer.borderWidth = 1
+        textContent.layer.borderColor = UIColor(red:0.8549, green:0.851, blue:0.8353, alpha:1.0).CGColor
         textContent.font = UIFont.boldSystemFontOfSize(17)
         textContent.textAlignment = NSTextAlignment.Center
         return textContent
@@ -35,6 +35,7 @@ class RRTagCollectionViewCell: UICollectionViewCell {
         textContent.backgroundColor = UIColor.clearColor()
         self.textContent.layer.backgroundColor = (self.isSelect == true) ? colorSelectedTag.CGColor : colorUnselectedTag.CGColor
         self.textContent.textColor = (self.isSelect == true) ? colorTextSelectedTag : colorTextUnSelectedTag
+        self.textContent.font = tagFont
     }
     
     func initAddButtonContent() {
@@ -43,8 +44,8 @@ class RRTagCollectionViewCell: UICollectionViewCell {
         textContent.sizeToFit()
         textContent.frame.size = CGSizeMake(40, 40)
         textContent.backgroundColor = UIColor.clearColor()
-        self.textContent.layer.backgroundColor = UIColor.grayColor().CGColor
-        self.textContent.textColor = UIColor.whiteColor()
+        self.textContent.layer.backgroundColor = UIColor ( red: 0.949, green: 0.9451, blue: 0.9373, alpha: 1.0 ).CGColor
+        self.textContent.textColor = UIColor ( red: 0.902, green: 0.1765, blue: 0.2196, alpha: 1.0 )
     }
     
     func animateSelection(selection: Bool) {
@@ -55,6 +56,7 @@ class RRTagCollectionViewCell: UICollectionViewCell {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.4, options: UIViewAnimationOptions(), animations: { () -> Void in
             self.textContent.layer.backgroundColor = (self.isSelect == true) ? colorSelectedTag.CGColor : colorUnselectedTag.CGColor
             self.textContent.textColor = (self.isSelect == true) ? colorTextSelectedTag : colorTextUnSelectedTag
+            self.textContent.font = tagFont
             self.textContent.frame.size = CGSizeMake(self.textContent.frame.size.width + 20, self.textContent.frame.size.height + 20)
             self.textContent.center = CGPointMake(self.contentView.frame.size.width / 2, self.contentView.frame.size.height / 2)
         }, completion: nil)

@@ -18,10 +18,7 @@ class Process: NSObject {
     var recordTime = ""{
         didSet{
             if recordTime != ""{
-                let dateFormat = NSDateFormatter()
-                dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
-                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-                recordTimeDate = dateFormat.dateFromString(recordTime)!
+                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()!
             }
         }
     }
@@ -29,6 +26,10 @@ class Process: NSObject {
     var done: Double = -1
     ///记录时间
     var recordTimeDate = NSDate()
+    //2016年11月
+    var month = ""
+    //5日11点12分
+    var day = ""
     ///备注
     var remark = ""
     
@@ -44,6 +45,9 @@ class Process: NSObject {
         projectID = dict["projectID"]!.integerValue
         done = dict["done"]!.doubleValue
         remark = String(dict["remark"]!)
+        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()!
+        month = recordTimeDate.FormatToStringYYYYMM()
+        day = recordTimeDate.FormatToStringDDHHMM()
     }
     
     // MARK:- 和数据库之间的操作

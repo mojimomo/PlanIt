@@ -8,11 +8,11 @@
 
 import UIKit
 
-let colorUnselectedTag = UIColor.whiteColor()
-let colorSelectedTag = UIColor(red:0.22, green:0.7, blue:0.99, alpha:1)
+let colorUnselectedTag = UIColor ( red: 0.9451, green: 0.9412, blue: 0.9294, alpha: 1.0 )
+let colorSelectedTag = UIColor(red:0.8784, green:0.8667, blue:0.8549, alpha:1.0)
 
-let colorTextUnSelectedTag = UIColor(red:0.33, green:0.33, blue:0.35, alpha:1)
-let colorTextSelectedTag = UIColor.whiteColor()
+let colorTextUnSelectedTag = UIColor(red:0.2549, green:0.2667, blue:0.2784, alpha:1.0)
+let colorTextSelectedTag = UIColor(red:0.2549, green:0.2667, blue:0.2784, alpha:1.0)
 
 class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -26,7 +26,15 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     var blockFinih: ((selectedTags: Array<Tag>, unSelectedTags: Array<Tag>) -> ())!
     var blockCancel: (() -> ())!
-    var isEditMod = false
+    var isEditMod = false{
+        didSet{
+            if isEditMod {
+                self.navigationBarItem.title = "编辑标签"
+            }else{
+                self.navigationBarItem.title = "选择标签"
+            }
+        }
+    }
     var editTags = [Tag]()
     var totalTagsSelected: Int {
         get {
@@ -39,15 +47,15 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
             self._totalTagsSelected += newValue
             self._totalTagsSelected = (self._totalTagsSelected < 0) ? 0 : self._totalTagsSelected
-            self.navigationBarItem = UINavigationItem(title: "选择标签")
-            self.navigationBarItem.leftBarButtonItem = self.leftButton
+//            self.navigationBarItem = UINavigationItem(title: "选择标签")
+//            self.navigationBarItem.leftBarButtonItem = self.leftButton
 //            if (self._totalTagsSelected == 0) {
 //                self.navigationBarItem.rightBarButtonItem = nil
 //            }
 //            else {
-            self.navigationBarItem.rightBarButtonItem = self.rigthButton
+//           self.navigationBarItem.rightBarButtonItem = self.rigthButton
 //            }
-            self.navigationBar.pushNavigationItem(self.navigationBarItem, animated: false)
+//            self.navigationBar.pushNavigationItem(self.navigationBarItem, animated: false)
         }
     }
     
@@ -71,7 +79,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         addNewTagCell.contentView.addSubview(addNewTagCell.textContent)
         addNewTagCell.textContent.text = "+"
         addNewTagCell.frame.size = CGSizeMake(40, 40)
-        addNewTagCell.backgroundColor = UIColor.grayColor()
+        addNewTagCell.backgroundColor = UIColor ( red: 0.949, green: 0.9451, blue: 0.9373, alpha: 1.0 )
         return addNewTagCell
     }()
     
@@ -112,7 +120,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         
         navigationBar.pushNavigationItem(self.navigationBarItem, animated: true)
         navigationBar.tintColor = navigationTintColor
-        navigationBar.backgroundColor = navigationBackground
+        navigationBar.barTintColor = otherNavigationBackground
         return navigationBar
     }()
     
@@ -135,8 +143,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }
         
-        if selected.count > 3{
-            callAlert("提交错误", message: "所选标签不能超过3个")
+        if selected.count > 2{
+            callAlert("提交错误", message: "所选标签不能超过2个")
             return
         }
         
@@ -216,51 +224,60 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 }
             }
             else {
-                //            addTagView.textEdit.text = nil
-                //            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4,
-                //                options: UIViewAnimationOptions(), animations: { () -> Void in
-                //                self.collectionTag.alpha = 0.3
-                //                self.addTagView.frame.origin.y = 64
-                //                }, completion: { (anim: Bool) -> Void in
-                //                    self.addTagView.textEdit.becomeFirstResponder()
-                //                    print("")
-                //            })
+//                            addTagView.textEdit.text = nil
+//                            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4,
+//                                options: UIViewAnimationOptions(), animations: { () -> Void in
+//                                self.collectionTag.alpha = 0.3
+//                                self.addTagView.frame.origin.y = 64
+//                                }, completion: { (anim: Bool) -> Void in
+//                                    self.addTagView.textEdit.becomeFirstResponder()
+//                                    print("")
+//                            })
                 let alerController = UIAlertController(title: "创建标签", message: "请输入新的标签", preferredStyle: .Alert)
                 
+                //创建TextField
+                alerController.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+                    textField.textAlignment = .Center
+                    textField.placeholder = "例如: 编程, 健身"
+                })
+                
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
-                    let textField = (alerController.textFields?.first)! as? UITextField
-                    if textField != nil{
-                        if textField?.text != ""{
-                            let spaceSet = NSCharacterSet.whitespaceCharacterSet()
-                            let contentTag = textField?.text!.stringByTrimmingCharactersInSet(spaceSet)
-                            if strlen(contentTag!) > 0 {
-                                let newTag = Tag(name: contentTag!)
-                                self.tags.insert(newTag, atIndex: self.tags.count)
-                                newTag.insertTag()
-                                self.collectionTag.reloadData()
+                let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
+                    if alerController.textFields?.count > 0 {
+                        if let textField = (alerController.textFields?.first)! as? UITextField{
+                            if textField.text != "" && textField.text?.characters.count < 9{
+                                let spaceSet = NSCharacterSet.whitespaceCharacterSet()
+                                let contentTag = textField.text!.stringByTrimmingCharactersInSet(spaceSet)
+                                if strlen(contentTag) > 0 {
+                                    if (Tag.loadDataFromName(contentTag) == nil){
+                                        let newTag = Tag(name: contentTag)
+                                        newTag.insertTag()
+                                        if let tag = Tag.loadDataFromName(contentTag){
+                                            self.tags.insert(tag, atIndex: self.tags.count)
+                                            self.collectionTag.reloadData()
+                                        }
+                                    }else{
+                                        self.callAlert("创建失败", message: "该标签已存在！")
+                                    }
+                                }
+                            }else{
+                                self.callAlert("创建失败", message: "标签不能为空且不能超过8个字符！")
                             }
-                        }else{
-                            self.callAlert("创建失败", message: "标签不能为空！")
                         }
                     }
                 })
                 
                 //创建UIAlertAction 取消按钮
-                let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
-                    
-                })
-                alerController.addTextFieldWithConfigurationHandler({ (textField) -> Void in
-                    textField.textAlignment = .Center
-                    textField.placeholder = "例如: 编程, 健身"
-                })
+                let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: nil)
+
                 //添加动作
                 alerController.addAction(alerActionOK)
                 alerController.addAction(alerActionCancel)
+                
+                //解决collectlayout错误
+                alerController.view.setNeedsLayout()
                 //显示alert
-                self.presentViewController(alerController, animated: true, completion: { () -> Void in
-                    
-                })
+                self.presentViewController(alerController, animated: true, completion: nil)
             }
         }
      }
@@ -287,7 +304,6 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
             return cell!
         }
-
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -312,8 +328,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     func handleCancelEditMod(){
         isEditMod = false
-        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: self, action: "cancelTagController")
-        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: "finishTagController")
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: "cancelTagController")
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: UIBarButtonItemStyle.Done, target: self, action: "finishTagController")
         tags = Tag().loadAllData()
         collectionTag.reloadData()
     }
@@ -322,13 +338,13 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         if isEditMod{
             let alerController = UIAlertController(title: "是否确定删除所选标签？", message: nil, preferredStyle: .ActionSheet)
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
                 for tag in self.editTags{
                     if tag.isSelected == true{
                         tag.deleteTag()
                     }
                 }
-                self.collectionTag.reloadData()
+                self.handleCancelEditMod()
             })
             //创建UIAlertAction 取消按钮
             let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
@@ -346,23 +362,17 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     func handleLongPress(){
         isEditMod = true
-        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: self, action: "handleCancelEditMod")
-        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(title: "删除", style: UIBarButtonItemStyle.Done, target: self, action: "handleDelete")
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: "handleCancelEditMod")
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.Done, target: self, action: "handleDelete")
         editTags = Tag().loadAllData()
         collectionTag.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
-
-        leftButton = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: self, action: "cancelTagController")
-        rigthButton = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: "finishTagController")
         
         totalTagsSelected = 0
         self.view.addSubview(collectionTag)
-        //self.view.addSubview(addTagView)
-        //self.view.addSubview(controlPanelEdition)
         self.view.addSubview(navigationBar)
         
         //创建长按选项
@@ -372,6 +382,13 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.backgroundColor = UIColor.whiteColor()
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancelTagController")
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishTagController")
     }
     
     class func displayTagController(parentController parentController: UIViewController, tagsString: [String]?,

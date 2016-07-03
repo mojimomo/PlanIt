@@ -80,6 +80,25 @@ class Tag: NSObject{
         return nil
     }
     
+    /// 加载所有的数据
+    class func loadDataFromName(name: String) -> Tag?{
+        // 1.获取查询语句
+        let querySQL = "SELECT * FROM t_tag WHERE name = '\(name)';"
+        
+        // 2.执行查询语句
+        guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {
+            print("查询所有Project数据失败")
+            return nil
+        }
+        
+        // 3.遍历数组
+        for dict in array {
+            let p = Tag(dict: dict)
+            return p
+        }
+        return nil
+    }
+    
     ///添加新的标签
     func insertTag() -> Bool{
         // 1.获取插入的SQL语句

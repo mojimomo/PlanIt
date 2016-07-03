@@ -17,11 +17,7 @@ class ProcessDate: NSObject {
     var recordTime = ""{
         didSet{
             if recordTime != ""{
-                let dateFormat = NSDateFormatter()
-                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-                dateFormat.dateStyle = .LongStyle
-                recordTimeDate = dateFormat.dateFromString(recordTime)!
+                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()!
             }
         }
     }
@@ -29,7 +25,7 @@ class ProcessDate: NSObject {
     var done: Double = -1
     ///记录时间
     var recordTimeDate = NSDate()
-    
+
     override init() {
         super.init()
     }
@@ -41,6 +37,7 @@ class ProcessDate: NSObject {
         recordTime = String(dict["recordTime"]!)
         projectID = dict["projectID"]!.integerValue
         done = dict["done"]!.doubleValue
+        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()!
     }
     
     // MARK:- 和数据库之间的操作
@@ -118,12 +115,7 @@ class ProcessDate: NSObject {
     
     ///改变数据
     func chengeData(projectID: Int, timeDate: NSDate, changeValue: Double){
-        let dateFormat = NSDateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        dateFormat.dateStyle = .LongStyle
-        let timeString = dateFormat.stringFromDate(timeDate)
-        
+        let timeString = timeDate.FormatToStringYYYYMMDD()
         if let processDate = checkIsExist(projectID, timeString: timeString){
             processDate.done += changeValue
             processDate.updateProcessDate()

@@ -25,6 +25,7 @@ class EditProjectTableViewController: UITableViewController {
     @IBOutlet weak var unitTextField: UITextField!
     @IBOutlet weak var totalTextField: UITextField!
     @IBOutlet weak var finishEditButton: UIButton!
+    @IBOutlet weak var punchCell: UITableViewCell!
     
     ///按钮文字
     var finishEditButtonText = ""
@@ -103,12 +104,21 @@ class EditProjectTableViewController: UITableViewController {
             case .Normal:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(false, animated: false)
+                punchCell.hidden = false
+                taskUnitCell.hidden = false
+                taskTotalCell.hidden = false
             case .Punch:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(true, animated: false)
+                punchCell.hidden = false
+                taskUnitCell.hidden = false
+                taskTotalCell.hidden = false
             case .NoRecord:
                 recordSwitch?.setOn(false, animated: false)
                 punchSwitch?.setOn(false, animated: false)
+                punchCell.hidden = true
+                taskUnitCell.hidden = true
+                taskTotalCell.hidden = true
             default: break
             }
         }
@@ -149,11 +159,8 @@ class EditProjectTableViewController: UITableViewController {
             
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
-                let dateFormat = NSDateFormatter()
-                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-                dateFormat.dateStyle = .LongStyle
-                self.projectBeginTime = dateFormat.stringFromDate(datePicker.date)
+                let dateString = datePicker.date.FormatToStringYYYYMMDD()
+                self.projectBeginTime = dateString
             })
    
             //创建UIAlertAction 取消按钮
@@ -186,11 +193,7 @@ class EditProjectTableViewController: UITableViewController {
         
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
-                let dateFormat = NSDateFormatter()
-                dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-                dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-                dateFormat.dateStyle = .LongStyle
-                let dateString = dateFormat.stringFromDate(datePicker.date)
+                let dateString = datePicker.date.FormatToStringYYYYMMDD()
                 self.projectEndTime = dateString
             })
             
@@ -367,24 +370,24 @@ class EditProjectTableViewController: UITableViewController {
 
     
     //MARK: - Override TableView
-    ///隐藏某cell
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //创建3个NSIndexPath对应相应的cell位置
-        let unitCellPath = NSIndexPath(forRow: 1, inSection: 2)
-        let totalCellPath = NSIndexPath(forRow: 2, inSection: 2)
-        let checkCellPath = NSIndexPath(forRow: 0, inSection: 3)
-        //比较NSIndexPath
-        if indexPath == unitCellPath || indexPath == totalCellPath || indexPath == checkCellPath{
-            if (projectType == .NoRecord) {
-                // 假设改行原来高度为0
-                return 0;
-            } else {
-                return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-            }
-        }else {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        }
-    }
+//    ///隐藏某cell
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        //创建3个NSIndexPath对应相应的cell位置
+//        let unitCellPath = NSIndexPath(forRow: 1, inSection: 2)
+//        let totalCellPath = NSIndexPath(forRow: 2, inSection: 2)
+//        let checkCellPath = NSIndexPath(forRow: 0, inSection: 3)
+//        //比较NSIndexPath
+//        if indexPath == unitCellPath || indexPath == totalCellPath || indexPath == checkCellPath{
+//            if (projectType == .NoRecord) {
+//                // 假设改行原来高度为0
+//                return 0;
+//            } else {
+//                return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+//            }
+//        }else {
+//            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+//        }
+//    }
 
     
     ///点击某个单元格触发的方法
@@ -453,17 +456,11 @@ class EditProjectTableViewController: UITableViewController {
 
         //初始化代码
         let nowDate = NSDate()
-        let dateFormat = NSDateFormatter()
-        let dateComponents = NSDateComponents()
-        dateComponents.day = 7
-        let nextDate = NSCalendar.currentCalendar().dateByAddingComponents(dateComponents, toDate: nowDate, options: NSCalendarOptions.init(rawValue: 0))
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        dateFormat.dateStyle = .LongStyle
-        beginTimeLabel?.text = dateFormat.stringFromDate(nowDate)
-        endTimeLabel?.text = dateFormat.stringFromDate(nextDate!)
-        project.beginTime = dateFormat.stringFromDate(nowDate)
-        project.endTime = dateFormat.stringFromDate(nextDate!)
+        let nextDate = nowDate.increaseDays(7)!
+        project.beginTime = nowDate.FormatToStringYYYYMMDD()
+        project.endTime = nextDate.FormatToStringYYYYMMDD()
+        beginTimeLabel?.text = project.beginTime
+        endTimeLabel?.text = project.endTime
         projectType = .Normal
         
         // corner radius
@@ -504,29 +501,5 @@ class EditProjectTableViewController: UITableViewController {
     
     func projectForTagsView(sneder: TagsViewController) -> Project? {
         return project
-    }
-}
-
-extension UIViewController{
-    ///发起提示
-    func callAlert(title:String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "好的", style: .Default,
-            handler: nil)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    ///发起提示确定返回
-    func callAlertAndBack(title:String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "好的", style: .Default,
-            handler: {(UIAlertAction) -> Void in
-                self.dismissViewControllerAnimated(true) { () -> Void in
-                    
-                }
-        })
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

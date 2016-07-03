@@ -9,11 +9,9 @@
 import UIKit
 
 class ProcessesTableViewController: UITableViewController {
-    var project = Project(){
-        didSet{
-            processes = Process().loadData(project.id)
-        }
-    }
+    var project = Project()
+    var months = [String]()
+    var records = [Int]()
     var processes = [Process]()
     var isEditingMod = false
     @IBOutlet var processTableView: UITableView!
@@ -31,13 +29,18 @@ class ProcessesTableViewController: UITableViewController {
         super.viewDidLoad()
         let editBarButton = UIBarButtonItem(image: UIImage(named: "edit"), style: .Done, target: self, action: "finishEdit:")
         self.navigationItem.rightBarButtonItem = editBarButton
-    }   
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        loadProcess()
+    }
 
     
     // MARK: - UITableViewDataSource
     ///确定行数
     override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
-        return processes.count
+        return records[section]
     }
     
     ///配置cell内容
@@ -45,7 +48,13 @@ class ProcessesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProcessTableViewCell
         
         //配置cell
-        cell.process = processes[indexPath.row]
+        cell.unit = project.unit
+        var index = 0
+        for var group = 0; group < indexPath.section ; group++ {
+            index += records[group]
+        }
+        index += indexPath.row
+        cell.process = processes[index]
         return cell
     }
     
@@ -60,4 +69,36 @@ class ProcessesTableViewController: UITableViewController {
             
         }
     }
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return months[section]
+    }
+    
+    ///确认节数
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return months.count
+    }
+    
+    // MARK: - Func
+    func loadProcess(){
+        processes = Process().loadData(project.id)
+        for process in processes{
+            var index = 0
+            if months.count == 0{
+                months.append(process.month)
+                records.append(1)
+            }else{
+                for month in months{
+                    if process.month == month{
+                        records[index]++
+                        break
+                    }else if month == months.last {
+                        months.append(process.month)
+                        records.append(1)
+                    }
+                    index++
+                }
+            }
+        }
+    }
+
 }
