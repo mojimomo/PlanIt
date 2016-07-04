@@ -300,7 +300,7 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="打卡项目是一种特殊的记录进度项目，每次记录进度时，默认完成量+1。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60g-Df-Yyl">
-                                                    <rect key="frame" x="8" y="39" width="584" height="20.5"/>
+                                                    <rect key="frame" x="8" y="47" width="584" height="12.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                                                     <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -308,7 +308,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="60g-Df-Yyl" firstAttribute="leading" secondItem="K3A-wn-FtI" secondAttribute="trailing" constant="-80" id="1Zc-jA-Th5"/>
-                                                <constraint firstItem="60g-Df-Yyl" firstAttribute="top" secondItem="bk6-6a-fyi" secondAttribute="bottom" id="3lp-vl-iAw"/>
+                                                <constraint firstItem="60g-Df-Yyl" firstAttribute="top" secondItem="bk6-6a-fyi" secondAttribute="bottom" constant="8" id="3lp-vl-iAw"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="60g-Df-Yyl" secondAttribute="bottom" id="4P3-IY-gm1"/>
                                                 <constraint firstItem="60g-Df-Yyl" firstAttribute="trailing" secondItem="lwB-5d-szM" secondAttribute="trailingMargin" id="IqM-Vn-Ig5"/>
                                                 <constraint firstItem="K3A-wn-FtI" firstAttribute="top" secondItem="lwB-5d-szM" secondAttribute="topMargin" id="Pzu-Zy-5fu"/>
