@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0AA8C566706EFBEE8F482108 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */; };
+		BE004A5F1D2A43A400556E85 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */; };
 		BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */; };
 		BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */; };
 		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
@@ -75,6 +76,7 @@
 		09589BE40F48A418B19A9511 /* Pods-PlanIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.release.xcconfig"; sourceTree = "<group>"; };
 		5F835661849BEA352693A738 /* Pods-PlanIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.debug.xcconfig"; sourceTree = "<group>"; };
 		75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYDrawerController.swift; path = KYDrawerController/Classes/KYDrawerController.swift; sourceTree = "<group>"; };
 		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			children = (
 				BE68E5481CE9B658006A1750 /* TagsViewController.swift */,
 				BEE477FD1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift */,
+				BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */,
 			);
 			name = "Tag(标签)";
 			path = Tag;
@@ -673,6 +676,7 @@
 				BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */,
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,
 				BEE477FE1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift in Sources */,
+				BE004A5F1D2A43A400556E85 /* TagTableViewCell.swift in Sources */,
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
 				BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,

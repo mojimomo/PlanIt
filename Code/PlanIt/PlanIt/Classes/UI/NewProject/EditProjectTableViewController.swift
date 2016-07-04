@@ -397,7 +397,7 @@ class EditProjectTableViewController: UITableViewController {
         let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
         switch indexPath{
         case beginTimeCellPath:
-            if tableState != .Edit{
+            if tableState != .Edit || project.type == .NoRecord{
                 editBeginTime()
             }
         case endTimeCellPath:
@@ -450,7 +450,7 @@ class EditProjectTableViewController: UITableViewController {
             deleteButton.setTitleColor(UIColor.redColor(), forState: .Normal)
             deleteButton.addTarget(self, action: "deleteProject", forControlEvents: .TouchUpInside)
             self.tableView.tableFooterView = deleteButton
-            
+
             //default: break
         }
 
@@ -463,18 +463,10 @@ class EditProjectTableViewController: UITableViewController {
         endTimeLabel?.text = project.endTime
         projectType = .Normal
         
-        // corner radius
-        self.navigationController?.view.layer.cornerRadius = 10
-        
-        // border
-        self.navigationController?.view.layer.borderWidth = 1.0
-        self.navigationController?.view.layer.borderColor = UIColor.blackColor().CGColor
-//
-//        // shadow
-//        blueView.layer.shadowColor = UIColor.blackColor().CGColor
-//        blueView.layer.shadowOffset = CGSize(width: 3, height: 3)
-//        blueView.layer.shadowOpacity = 0.7
-//        blueView.layer.shadowRadius = 4.0
+        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
+        self.tableView.sectionFooterHeight = 25
+        self.tableView.sectionHeaderHeight = 0
+
     }
     
     override func viewWillAppear(animated: Bool) {

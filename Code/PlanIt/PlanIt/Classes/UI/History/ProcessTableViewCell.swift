@@ -17,7 +17,7 @@ class ProcessTableViewCell: UITableViewCell {
         didSet{
             dateLabel?.text = process.day
             let doneString = String(format: "%.1f", process.done)
-            doneLabel?.text = doneString + "<" + unit + ">"
+            doneLabel?.text = doneString + " " + unit
             if process.remark == ""{
                 remarksLabel?.text = "--"
             }else{

@@ -270,9 +270,9 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 //创建UIAlertAction 取消按钮
                 let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: nil)
 
-                //添加动作
-                alerController.addAction(alerActionOK)
+                //添加动作                
                 alerController.addAction(alerActionCancel)
+                alerController.addAction(alerActionOK)
                 
                 //解决collectlayout错误
                 alerController.view.setNeedsLayout()

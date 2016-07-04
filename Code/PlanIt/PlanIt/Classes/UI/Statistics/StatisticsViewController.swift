@@ -277,7 +277,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         let historyViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Processes") as!
             ProcessesTableViewController
         historyViewController.project = project
-        historyViewController.title = "历史记录"
+        historyViewController.title = "添加记录"
         historyViewController.view.backgroundColor = self.view.backgroundColor
         self.navigationController?.pushViewController(historyViewController, animated: true)
     }
