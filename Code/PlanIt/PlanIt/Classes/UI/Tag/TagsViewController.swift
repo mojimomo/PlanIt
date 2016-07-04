@@ -14,6 +14,8 @@ protocol TagsViewDelegate: class {
 
 class TagsViewController: UITableViewController {
     var tags = [Tag]()
+    var tagCounts = [Int]()
+    var tagMaps = [TagMap]()
     var selectTags = [Bool]()
     var isEditingMod = false
     var delegate:TagsViewDelegate?
@@ -38,6 +40,8 @@ class TagsViewController: UITableViewController {
         })
     }
     
+    
+    
     // MARK: - viewlife
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,37 +49,86 @@ class TagsViewController: UITableViewController {
         self.view.backgroundColor = allBackground
         self.title = "标签"
         tags = Tag().loadAllData()
+        tagMaps = TagMap().loadAllData()
+        let projects = Project().loadAllData()
+        //添加项目总素
+        tagCounts.append(projects.count)
+
+        //添加没有标签的
+        var noTagCount = 0
+        for project in projects{
+            for tagMap in tagMaps{
+                if tagMap.projectID == project.id{
+                    break
+                }else if tagMap == tagMaps.last{
+                    noTagCount++
+                }
+            }
+        }
+        tagCounts.append(noTagCount)
+        
+        //添加标签
+        for tag in tags{
+            var tagCount = 0
+            for tagMap in tagMaps{
+                if tagMap.tagID == tag.id{
+                    tagCount++
+                }
+            }
+            tagCounts.append(tagCount)
+        }
+        
         selectTags = [Bool](count: tags.count, repeatedValue: false)
         let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: "handleBack")        
         self.navigationItem.leftBarButtonItem = backButton
+        
+        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 1))
+        self.tableView.sectionFooterHeight = 0
+        self.tableView.sectionHeaderHeight = 0
     }
     
     // MARK: - UITableViewDataSource
     ///确定行数
     override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
-        let cnt = tags.count + 1
+        let cnt = tags.count + 2
         return cnt
     }
     
     ///配置cell内容
     override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath)
+         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! TagTableViewCell
         //配置cell
         if indexPath.row == 0{
-            cell.textLabel?.text = "显示全部"
+            cell.tagName = "显示全部"
+            cell.tagCounts = tagCounts[indexPath.row]
+            let sepView = UIView(frame: CGRect(x: 15, y: 43.5, width: self.tableView.bounds.width - 30, height: 0.5))
+            sepView.backgroundColor = UIColor.colorFromHex("#EFEFEF")
+            cell.addSubview(sepView)
+        }else if indexPath.row == 1{
+            cell.tagName = "无标签"
+            cell.tagCounts = tagCounts[indexPath.row]
         }else{
-            cell.textLabel?.text = tags[indexPath.row - 1].name
+            cell.tagName = tags[indexPath.row - 2].name
+            cell.tagCounts = tagCounts[indexPath.row]
         }
         return cell
     }
     
     ///点击某个单元格触发的方法
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //全部
         if indexPath.row == 0{
             delegate?.passSelectedTag(nil)
+        //无标签
+        }else if indexPath.row == 1{
+            let newTag = Tag()
+            newTag.id = -1
+            delegate?.passSelectedTag(newTag)
+        //按标签
         }else{
-            delegate?.passSelectedTag(tags[indexPath.row - 1])
+            delegate?.passSelectedTag(tags[indexPath.row - 2])
         }
+        
         self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             
         })

@@ -30,6 +30,10 @@ class AddProcessTableViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = cancelBarButton
         doneTextField.placeholder = project.unit
         currentProcessLabel.text = "已经记录总量:  \(project.complete) / \(project.total)"
+        
+        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
+        self.tableView.sectionFooterHeight = 0
+        self.tableView.sectionHeaderHeight = 25
     }
     
     @IBAction func editDoneDidEnd(sender: UITextField) {

@@ -28,6 +28,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     //表格高度
     let tableViewHeight : CGFloat = 44
+    let MenuTableViewHeight : CGFloat = 44
     private var selectTag : Tag?
     private var popover: Popover!
     private var waveLoadingIndicator: WaveLoadingIndicator!
@@ -72,7 +73,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     @IBAction func callTag(sender: UIBarButtonItem) {
         let tagsViewControl = self.storyboard?.instantiateViewControllerWithIdentifier("ShowTags") as! TagsViewController
         tagsViewControl.title = "标签"
-        tagsViewControl.view.backgroundColor = allBackground
+        tagsViewControl.view.backgroundColor = UIColor.whiteColor()
         tagsViewControl.delegate = self
         
         //设置加载动画
@@ -103,8 +104,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 //        }
         let startPoint = CGPoint(x: self.view.frame.width / 2, y: 0)
         let rectStatus = UIApplication.sharedApplication().statusBarFrame
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 135 + rectStatus.size.height))
-        tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: rectStatus.size.height))
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160 + rectStatus.size.height))
+        tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: rectStatus.size.height + 12))
         tableView.tag = tableViewTag.MuneTable
         tableView.delegate = self
         tableView.dataSource = self
@@ -147,8 +148,27 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func loadData(){
         //读取原始数据
         if selectTag != nil{
-            title = selectTag?.name
-            projects = TagMap().searchProjectFromTag(selectTag!)
+            if selectTag!.id == -1{
+                title = "无标签"
+                projects.removeAll()
+                let tagMaps = TagMap().loadAllData()
+                let allProjects = Project().loadAllData()
+                
+                //添加没有标签的
+                for project in allProjects{
+                    for tagMap in tagMaps{
+                        if tagMap.projectID == project.id{
+                            break
+                        }else if tagMap ==  tagMaps.last{
+                            projects.append(project)
+                        }
+                    }
+                }
+            }else{
+                title = selectTag?.name
+                projects = TagMap().searchProjectFromTag(selectTag!)
+            }
+
         }else{
             projects = Project().loadAllData()
             if isShowFinished{
@@ -185,8 +205,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //添加统计label
         if projects.count != 0{
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 70 + 100))
-            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 70))
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100 + 100))
+            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100))
             countLabel.text = "\(projects.count)个项目"
             countLabel.font = projectCountsFont
             countLabel.textColor = projectCountsFontColor
@@ -370,7 +390,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     //设置每个cell的项目
                     addProcessViewController.delegate = self
                     addProcessViewController.project = projects[indexPath.section]
-                    addProcessViewController.title = "添加进度-\(projects[indexPath.section].name)"
+                    addProcessViewController.title = "\(projects[indexPath.section].name)"
                     //压入导航栏
                     addProcessViewController.view.backgroundColor = allBackground
                     addProcessViewController.modalTransitionStyle = .CoverVertical
@@ -437,6 +457,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //去除导航栏分栏线
 //        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 //        navController.navigationBar.shadowImage = UIImage()
+        // Creating shadow path for better performance
+
+//        navController.navigationBar.layer.shadowColor = navigationShadowsColor.CGColor
         navController.navigationBar.tintColor = navigationTintColor
         navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         self.navigationController?.presentViewController(navController, animated: true, completion: nil)
@@ -512,7 +535,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         switch tableView.tag {
             //菜单表格
         case tableViewTag.MuneTable:
-            return tableViewHeight
+            return MenuTableViewHeight
             //项目表格
         case tableViewTag.ProjectsTable:
             return tableViewHeight
@@ -550,8 +573,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         case tableViewTag.MuneTable:
             let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
             cell.textLabel?.text = self.texts[indexPath.row]
+            cell.textLabel?.textColor = navigationFontColor
+            cell.textLabel?.font = UIFont(name: "PingFangSC-Light", size: 17.0)!
             if indexPath.row == 0{
-                let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 5, width: 40, height: 40))
+                let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 5, width: 40, height: MenuTableViewHeight))
                 isShowAllSwitch.onTintColor = switchColor
                 isShowAllSwitch.on = isShowNotBegin
                 isShowAllSwitch.addTarget(self, action: "showNotBegin", forControlEvents: .ValueChanged)

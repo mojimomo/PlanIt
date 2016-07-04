@@ -62,6 +62,27 @@ class TagMap: NSObject{
         return projects
     }
     // MARK:- 和数据库之间的操作
+    /// 加载所有的数据
+    func loadAllData() -> [TagMap]{
+        var tagMaps : [TagMap] = [TagMap]()
+        
+        // 1.获取查询语句
+        let querySQL = "SELECT * FROM t_tagmap;"
+        
+        // 2.执行查询语句
+        guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {
+            print("查询所有Project数据失败")
+            return tagMaps
+        }
+        
+        // 3.遍历数组
+        for dict in array {
+            let p = TagMap(dict: dict)
+            tagMaps.append(p)
+        }
+        return tagMaps
+    }
+    
     /// 加载某tag所有的数据
     func loadTagData(tag: Tag) -> [TagMap]{
         var tagMaps : [TagMap] = [TagMap]()

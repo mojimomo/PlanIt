@@ -29,6 +29,13 @@ class ProcessesTableViewController: UITableViewController {
         super.viewDidLoad()
         let editBarButton = UIBarButtonItem(image: UIImage(named: "edit"), style: .Done, target: self, action: "finishEdit:")
         self.navigationItem.rightBarButtonItem = editBarButton
+        
+        let backBarButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: "dissmiss")
+        self.navigationItem.leftBarButtonItem = backBarButton
+        
+        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 1))
+        self.tableView.sectionFooterHeight = 25
+        self.tableView.sectionHeaderHeight = 0
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -36,7 +43,9 @@ class ProcessesTableViewController: UITableViewController {
         loadProcess()
     }
 
-    
+    func dissmiss(){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     // MARK: - UITableViewDataSource
     ///确定行数
     override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
