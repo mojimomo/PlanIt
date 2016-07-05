@@ -42,15 +42,6 @@ class Project: NSObject {
     var name = ""
     ///项目类型
     var type: ProjectType = .NoRecord
-    ///项目开始时间
-    var beginTime = ""{
-        didSet{
-            if beginTime != ""{
-                beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDD()!
-            }
-        }
-    }
-    
     ///项目结束时间
     var endTime = ""{
         didSet{
@@ -59,7 +50,17 @@ class Project: NSObject {
             }
         }
     }
-
+    ///项目开始时间
+    var beginTime = ""{
+        didSet{
+            if beginTime != ""{
+                beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDD()!
+            }
+        }
+    }
+ 
+    ///距离结束时间 越大超时越久
+    var outTime = 0.0
     ///任务单位
     var unit = ""
     ///任务总量
@@ -126,6 +127,12 @@ class Project: NSObject {
         if isFinished == .Finished{
             percent = 0
         }
+
+        //计算到结束的时间时间
+        let timeNow = NSDate().timeIntervalSince1970
+        let timeEnd = endTimeDate.timeIntervalSince1970
+        outTime = timeNow - timeEnd
+
     }
 
     // MARK:- 数据操作

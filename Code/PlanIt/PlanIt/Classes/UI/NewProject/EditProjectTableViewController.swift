@@ -71,7 +71,7 @@ class EditProjectTableViewController: UITableViewController {
             return Double((totalTextField?.text)!)!
         }
         set{
-            totalTextField?.text = "\(newValue)"
+            totalTextField?.text = "\(Int(newValue))"
         }
     }
     private struct storyBoard {

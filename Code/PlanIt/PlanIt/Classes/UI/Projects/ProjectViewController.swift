@@ -144,6 +144,17 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.projectTableView.reloadData()
     }
     
+    ///根据超时快速排序
+    func qsortProject(input: [Project]) -> [Project]{
+        if let (pivot, rest) = input.decompose {
+            let lesser = rest.filter { $0.outTime > pivot.outTime }
+            let greater = rest.filter { $0.outTime <= pivot.outTime }
+            return qsortProject(lesser) + [pivot] + qsortProject(greater)
+        } else {
+            return []
+        }
+    }
+    
     ///加载所有数据
     func loadData(){
         //读取原始数据
@@ -202,6 +213,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
             index++
         }
+        
+        projects = qsortProject(projects)
+        
         
         //添加统计label
         if projects.count != 0{
@@ -763,4 +777,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         showProcessChange(old, newPercent: new, name: name)
     }
     
+}
+
+extension Array {
+    var decompose : (head: Element, tail: [Element])? {
+        return (count > 0) ? (self[0], Array(self[1..<count])) : nil
+    }
 }

@@ -36,6 +36,9 @@ class ProcessesTableViewController: UITableViewController {
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 1))
         self.tableView.sectionFooterHeight = 25
         self.tableView.sectionHeaderHeight = 0
+        
+        self.tableView.estimatedRowHeight = 44.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func viewWillAppear(animated: Bool) {

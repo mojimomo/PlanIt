@@ -16,10 +16,10 @@ class ProcessTableViewCell: UITableViewCell {
     var process = Process(){
         didSet{
             dateLabel?.text = process.day
-            let doneString = String(format: "%.1f", process.done)
-            doneLabel?.text = doneString + " " + unit
+            //let doneString = String(format: "%.1f", process.done)
+            doneLabel?.text = "\(Int(process.done))" + " " + unit
             if process.remark == ""{
-                remarksLabel?.text = "--"
+                remarksLabel?.text = ""
             }else{
                 remarksLabel?.text = "备注: " + process.remark
             }
