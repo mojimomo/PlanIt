@@ -240,6 +240,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         let endDate = project.endTimeDate
         let days = beginDate.daysToEndDate(endDate)
         var date = beginDate
+        if processDates.count == 0 {
+            for var day = 0; day < days ; day++ {
+                chartData.append(0)
+                chartLabel.append(date.FormatToStringMMMMDD())
+                date = date.increase1Day()!
+            }
+        }
+        
         for var day = 0; day < days ; day++ {
             for processDate in processDates{
                 if processDate.recordTimeDate == date {
