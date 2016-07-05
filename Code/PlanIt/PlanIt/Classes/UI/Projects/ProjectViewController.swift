@@ -472,7 +472,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }else if projects[indexPath.section].type == .NoRecord{
                     print("项目编号为\(indexPath.section)完成项目")
                     let name = projects[indexPath.section].name
-                    //projects[indexPath.section].finishDone()
+                    projects[indexPath.section].finishDone()
                     //更新图标
                     loadData()
                     updateTable()
