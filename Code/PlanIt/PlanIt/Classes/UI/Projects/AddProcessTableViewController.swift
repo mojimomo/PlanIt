@@ -29,7 +29,7 @@ class AddProcessTableViewController: UITableViewController {
         let cancelBarButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancel")
         self.navigationItem.leftBarButtonItem = cancelBarButton
         doneTextField.placeholder = project.unit
-        currentProcessLabel.text = "已经记录总量:  \(project.complete) / \(project.total)"
+        currentProcessLabel.text = "已记录总量:  \(Int(project.complete)) / \(Int(project.total))"
         
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
         self.tableView.sectionFooterHeight = 0
@@ -39,9 +39,9 @@ class AddProcessTableViewController: UITableViewController {
     @IBAction func editDoneDidEnd(sender: UITextField) {
         if doneTextField.text != ""{
             if Double(doneTextField.text!)! > project.rest{
-                doneTextField.text = "\(project.rest)"
+                doneTextField.text = "\(Int(project.rest))"
             }
-            currentProcessLabel.text = "已经记录总量:  \(project.complete +  Double(doneTextField.text!)!) / \(project.total)"
+            currentProcessLabel.text = "已记录总量:  \(Int(project.complete) +  Int(doneTextField.text!)!) / \(Int(project.total))"
         }
     }
     

@@ -144,6 +144,17 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.projectTableView.reloadData()
     }
     
+    ///根据超时快速排序
+    func qsortProject(input: [Project]) -> [Project]{
+        if let (pivot, rest) = input.decompose {
+            let lesser = rest.filter { $0.outTime > pivot.outTime }
+            let greater = rest.filter { $0.outTime <= pivot.outTime }
+            return qsortProject(lesser) + [pivot] + qsortProject(greater)
+        } else {
+            return []
+        }
+    }
+    
     ///加载所有数据
     func loadData(){
         //读取原始数据
@@ -202,6 +213,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
             index++
         }
+        
+        projects = qsortProject(projects)
+        
         
         //添加统计label
         if projects.count != 0{
@@ -355,6 +369,56 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         }
     }
     
+    ///弹出完成百分比view
+    func showProcessFinish(name: String){
+        self.oldPercent = Int(oldPercent)
+        self.increasePercent = Int(oldPercent)
+        self.newPercent = Int(newPercent)
+        
+        //整体通知
+        let rect = UIScreen.mainScreen().bounds
+        let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 120)
+        let showView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 240))
+        showView.backgroundColor = UIColor.whiteColor()
+        
+        //波浪试图
+        let successView = UIImageView(image: UIImage(named: "projectFinish"))
+        successView.frame = CGRect(x: 20, y: 60, width: 160, height: 160)
+        showView.addSubview(successView)
+        successView.transform = CGAffineTransformMakeScale(0.0, 0.0)
+        UIView.animateWithDuration(1 , delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 3,
+            options: .CurveEaseInOut,
+            animations: {
+                successView.transform = CGAffineTransformIdentity
+            }){ _ in
+                
+        }
+        //分割线
+        let blackView = UIView(frame: CGRect(x: 10, y: 45, width: 180, height: 1))
+        blackView.backgroundColor = UIColor ( red: 0.8078, green: 0.8118, blue: 0.8157, alpha: 1.0 )
+        showView.addSubview(blackView)
+        
+        //标题
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        titleLabel.textAlignment = .Center
+        titleLabel.text = name
+        titleLabel.textColor = UIColor ( red: 0.2784, green: 0.2824, blue: 0.2902, alpha: 1.0 )
+        showView.addSubview(titleLabel)
+        
+        //显示
+        self.popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
+        self.popover.show(showView,  point: startPoint)
+        NSTimer.scheduledTimerWithTimeInterval( 1.0, target: self, selector: "handleFinishProject:", userInfo: nil, repeats: true)
+
+    }
+
+    func handleFinishProject(timer: NSTimer){
+        timer.invalidate()
+        self.popover.dismiss()
+    }
+
     ///新增进程
     func addProcess(sender: UIButton){
         if let indexPath = self.projectTableView.indexPathForCell(sender.superview as! ProjectTableViewCell){
@@ -373,7 +437,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     let old = projects[indexPath.section].percent
                     process.recordTime = dateFormat.stringFromDate(currentTime)
                     process.done = 1.0
-                    process.remark = "打卡"
                     process.insertProcess()
                     ProcessDate().chengeData(projects[indexPath.section].id, timeDate: currentTime, changeValue: 1.0)
                     projects[indexPath.section].increaseDone(1.0)
@@ -413,8 +476,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     //更新图标
                     loadData()
                     updateTable()
-                    showProcessChange(0, newPercent: 100, name: name)
-                    
+                    showProcessFinish(name)
                 }
             //项目完成
             }else if projects[indexPath.section].isFinished == .Finished{
@@ -763,4 +825,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         showProcessChange(old, newPercent: new, name: name)
     }
     
+}
+
+extension Array {
+    var decompose : (head: Element, tail: [Element])? {
+        return (count > 0) ? (self[0], Array(self[1..<count])) : nil
+    }
 }

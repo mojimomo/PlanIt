@@ -71,7 +71,7 @@ class EditProjectTableViewController: UITableViewController {
             return Double((totalTextField?.text)!)!
         }
         set{
-            totalTextField?.text = "\(newValue)"
+            totalTextField?.text = "\(Int(newValue))"
         }
     }
     private struct storyBoard {
@@ -296,6 +296,7 @@ class EditProjectTableViewController: UITableViewController {
         }
         if project.check(){
             if(project.insertProject()){
+                project.addNotification()
                 //callAlertAndBack("提交成功",message: "新建项目成功!")
                 back()
                 return

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 ///项目类别
 enum ProjectType: Int{
@@ -42,15 +43,6 @@ class Project: NSObject {
     var name = ""
     ///项目类型
     var type: ProjectType = .NoRecord
-    ///项目开始时间
-    var beginTime = ""{
-        didSet{
-            if beginTime != ""{
-                beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDD()!
-            }
-        }
-    }
-    
     ///项目结束时间
     var endTime = ""{
         didSet{
@@ -59,7 +51,17 @@ class Project: NSObject {
             }
         }
     }
-
+    ///项目开始时间
+    var beginTime = ""{
+        didSet{
+            if beginTime != ""{
+                beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDD()!
+            }
+        }
+    }
+ 
+    ///距离结束时间 越大超时越久
+    var outTime = 0.0
     ///任务单位
     var unit = ""
     ///任务总量
@@ -126,9 +128,61 @@ class Project: NSObject {
         if isFinished == .Finished{
             percent = 0
         }
+
+        //计算到结束的时间时间
+        let timeNow = NSDate().timeIntervalSince1970
+        let timeEnd = endTimeDate.timeIntervalSince1970
+        outTime = timeNow - timeEnd
+
     }
 
     // MARK:- 数据操作
+    ///新增推送
+    func addNotification() {
+        let day = 7
+        let NotificationNumber = 1
+        // 初始化一个通知
+        let localNoti = UILocalNotification()
+        // 通知的触发时间
+        let fireDate = endTimeDate.dateByAddingTimeInterval(Double(day)*24*60*60)
+        //let fireDate = NSDate().dateByAddingTimeInterval(30)
+        localNoti.fireDate = fireDate
+        // 设置时区
+        localNoti.timeZone = NSTimeZone.defaultTimeZone()
+        // 通知上显示的主题内容
+        localNoti.alertBody = "\(name)项目还有\(day)天到期"
+        // 收到通知时播放的声音，默认消息声音
+        localNoti.soundName = UILocalNotificationDefaultSoundName
+        //待机界面的滑动动作提示
+        localNoti.alertAction = "打开应用"
+        // 应用程序图标右上角显示的消息数
+        localNoti.applicationIconBadgeNumber = NotificationNumber
+        // 通知上绑定的其他信息，为键值对
+        localNoti.userInfo = ["id": "\(id)",  "name": "\(name)"]
+        
+        // 添加通知到系统队列中，系统会在指定的时间触发
+        UIApplication.sharedApplication().scheduleLocalNotification(localNoti)
+    }
+    
+    ///删除此条推送
+    func deleteNotification() {
+        if let locals = UIApplication.sharedApplication().scheduledLocalNotifications {
+            for localNoti in locals {
+                if let dict = localNoti.userInfo {
+                    if dict.keys.contains("id") && dict["id"] is String && (dict["id"] as! String) == "\(id)" {
+                        // 取消通知
+                        UIApplication.sharedApplication().cancelLocalNotification(localNoti)
+                    }
+                }
+            }
+        }
+    }
+    
+    ///删除所有推送
+    class func deleteAllNotificication(){
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+    }
+    
     ///新建项目设置总量
     func setNewProjectTotal(total: Double){
         self.total = total
