@@ -14,6 +14,11 @@ let colorSelectedTag = UIColor(red:0.8784, green:0.8667, blue:0.8549, alpha:1.0)
 let colorTextUnSelectedTag = UIColor(red:0.2549, green:0.2667, blue:0.2784, alpha:1.0)
 let colorTextSelectedTag = UIColor(red:0.2549, green:0.2667, blue:0.2784, alpha:1.0)
 
+enum RRTagType{
+    case Normal
+    case Manage
+}
+
 class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private var tags: Array<Tag>!
@@ -23,7 +28,15 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     private var _totalTagsSelected = 0
     private let addTagView = RRAddTagView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 64))
     private var heightKeyboard: CGFloat = 0
-    
+    var type : RRTagType = .Normal{
+        didSet{
+            if type == .Normal{
+                self.navigationBarItem.title = "选择标签"
+            }else{
+                self.navigationBarItem.title = "管理标签"
+            }
+        }
+    }
     var blockFinih: ((selectedTags: Array<Tag>, unSelectedTags: Array<Tag>) -> ())!
     var blockCancel: (() -> ())!
     var isEditMod = false{
@@ -31,7 +44,12 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             if isEditMod {
                 self.navigationBarItem.title = "编辑标签"
             }else{
-                self.navigationBarItem.title = "选择标签"
+                if type == .Normal{
+                    self.navigationBarItem.title = "选择标签"
+                }else{
+                    self.navigationBarItem.title = "管理标签"
+                }
+
             }
         }
     }
@@ -211,16 +229,18 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }else{
             if indexPath.row < tags.count {
-                _ = tags[indexPath.row]
-                if tags[indexPath.row].isSelected == false {
-                    tags[indexPath.row].isSelected = true
-                    selectedCell?.animateSelection(tags[indexPath.row].isSelected)
-                    totalTagsSelected = 1
-                }
-                else {
-                    tags[indexPath.row].isSelected = false
-                    selectedCell?.animateSelection(tags[indexPath.row].isSelected)
-                    totalTagsSelected = -1
+                if type != .Manage {
+                    _ = tags[indexPath.row]
+                    if tags[indexPath.row].isSelected == false {
+                        tags[indexPath.row].isSelected = true
+                        selectedCell?.animateSelection(tags[indexPath.row].isSelected)
+                        totalTagsSelected = 1
+                    }
+                    else {
+                        tags[indexPath.row].isSelected = false
+                        selectedCell?.animateSelection(tags[indexPath.row].isSelected)
+                        totalTagsSelected = -1
+                    }
                 }
             }
             else {
@@ -389,6 +409,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancelTagController")
         self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishTagController")
+
     }
     
     class func displayTagController(parentController parentController: UIViewController, tagsString: [String]?,
@@ -412,5 +433,15 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             tagController.blockCancel = blockCancel
             tagController.blockFinih = blockFinish
             parentController.presentViewController(tagController, animated: true, completion: nil)
+    }
+    
+    class func displayTagController(parentController parentController: UIViewController, tags: [Tag]? , type: RRTagType,
+        blockFinish: (selectedTags: Array<Tag>, unSelectedTags: Array<Tag>)->(), blockCancel: ()->()) {
+            let tagController = RRTagController()
+            tagController.tags = tags
+            tagController.blockCancel = blockCancel
+            tagController.blockFinih = blockFinish
+            parentController.presentViewController(tagController, animated: true, completion: nil)
+            tagController.type = .Manage
     }
 }

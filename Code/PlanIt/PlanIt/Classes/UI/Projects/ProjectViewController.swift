@@ -97,11 +97,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     
     ///点击点开抽屉菜单
     @IBAction func callMenu(sender: AnyObject) {
-//        //获取此页面的抽屉菜单页
-//        if let drawer = self.navigationController?.parentViewController as? KYDrawerController{
-//            //设置菜单页状态
-//            drawer.setDrawerState( .Opened, animated: true)
-//        }
+        //获取此页面的抽屉菜单页
+        if let drawer = self.navigationController?.parentViewController as? KYDrawerController{
+            //设置菜单页状态
+            drawer.setDrawerState( .Opened, animated: true)
+        }
         let startPoint = CGPoint(x: self.view.frame.width / 2, y: 0)
         let rectStatus = UIApplication.sharedApplication().statusBarFrame
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160 + rectStatus.size.height))
@@ -137,6 +137,22 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
 
     // MARK: - Func
+    ///打开菜单
+    func handleCallOptions(){
+        print("打开菜单页面")
+        let muneViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Options") as! OptionsTableViewController
+        //设置view背景色
+        muneViewController.view.backgroundColor = allBackground
+        
+        //修改样式
+        self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
+        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = nil
+        
+        //压入导航栏
+        self.navigationController?.pushViewController(muneViewController, animated: true)
+    }
+    
     //点击是否显示未开始
     func showNotBegin(){
         isShowNotBegin = !isShowNotBegin
@@ -759,6 +775,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 isShowFinished = !isShowFinished
                 loadData()
                 self.projectTableView.reloadData()
+            }else if indexPath.row == 2{
+                handleCallOptions()
             }
              self.popover.dismiss()
             //项目表格

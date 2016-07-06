@@ -82,7 +82,31 @@ class Project: NSObject {
     //var remark: String?
     var beginTimeDate = NSDate()
     var endTimeDate = NSDate()
-
+    //几天后推送
+    var day : Int{
+        get{
+            if NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int! == 0{
+                NSUserDefaults.standardUserDefaults().setInteger( 3 , forKey: "daysLocalNotifiication")
+            }
+            return NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setInteger( newValue , forKey: "daysLocalNotifiication")
+        }
+    }
+    //几条推送
+    var numNotife : Int{
+        get{
+            if NSUserDefaults.standardUserDefaults().integerForKey("numsLocalNotifiication") as Int! == 0{
+                NSUserDefaults.standardUserDefaults().setInteger( 0 , forKey: "numsLocalNotifiication")
+            }
+            return NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setInteger( newValue , forKey: "numsLocalNotifiication")
+        }
+    }
+    
     override init() {
         super.init()
     }
@@ -139,8 +163,10 @@ class Project: NSObject {
     // MARK:- 数据操作
     ///新增推送
     func addNotification() {
-        let day = 7
-        let NotificationNumber = 1
+        if isFinished == .Finished{
+            return
+        }
+
         // 初始化一个通知
         let localNoti = UILocalNotification()
         // 通知的触发时间
@@ -156,10 +182,10 @@ class Project: NSObject {
         //待机界面的滑动动作提示
         localNoti.alertAction = "打开应用"
         // 应用程序图标右上角显示的消息数
-        localNoti.applicationIconBadgeNumber = NotificationNumber
+        numNotife++
+        localNoti.applicationIconBadgeNumber = numNotife
         // 通知上绑定的其他信息，为键值对
         localNoti.userInfo = ["id": "\(id)",  "name": "\(name)"]
-        
         // 添加通知到系统队列中，系统会在指定的时间触发
         UIApplication.sharedApplication().scheduleLocalNotification(localNoti)
     }
@@ -384,6 +410,8 @@ class Project: NSObject {
     
     ///插入本项目
     func insertProject() -> Bool{
+        //添加推送
+        addNotification()
         
         // 1.获取插入的SQL语句
         let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, complete, rest) VALUES ('\(name)', '\(type.rawValue)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(complete)', '\(rest)');"
@@ -410,6 +438,10 @@ class Project: NSObject {
     
     ///更新本项目
     func updateProject() -> Bool{
+        //删除推送
+        deleteNotification()
+        //添加推送
+        addNotification()
         //删除之前的映射关系
         deleteTags()
         
@@ -431,6 +463,9 @@ class Project: NSObject {
    
     ///删除本项目
     func deleteProject() -> Bool{
+        //删除推送
+        deleteNotification()
+        
         //删除之前的映射关系
         deleteTags()
         

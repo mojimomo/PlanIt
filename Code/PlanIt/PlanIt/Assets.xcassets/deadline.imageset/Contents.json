@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "开启通知icon@1x.png",
+      "filename" : "end-1@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "开启通知icon@2x.png",
+      "filename" : "end-1@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "开启通知icon@3x.png",
+      "filename" : "end-1@3x.png",
       "scale" : "3x"
     }
   ],
