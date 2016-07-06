@@ -204,7 +204,10 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
         self.navigationItem.leftBarButtonItem = backButtom
         
-        //判断是否第一次启动：
+        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
+        self.tableView.sectionFooterHeight = 25
+        self.tableView.sectionHeaderHeight = 0
+
     if((NSUserDefaults.standardUserDefaults().boolForKey("isNeedLocalNotifiication") as Bool!) == false){
             NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isNeedLocalNotifiication")
             isNeedLocalNotifiicationSwitch.setOn(false, animated: false)
