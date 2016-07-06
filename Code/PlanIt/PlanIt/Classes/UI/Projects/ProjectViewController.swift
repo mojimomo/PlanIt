@@ -180,17 +180,21 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 projects.removeAll()
                 let tagMaps = TagMap().loadAllData()
                 let allProjects = Project().loadAllData()
-                
-                //添加没有标签的
-                for project in allProjects{
-                    for tagMap in tagMaps{
-                        if tagMap.projectID == project.id{
-                            break
-                        }else if tagMap ==  tagMaps.last{
-                            projects.append(project)
+                if tagMaps.count != 0{
+                    //添加没有标签的
+                    for project in allProjects{
+                        for tagMap in tagMaps{
+                            if tagMap.projectID == project.id{
+                                break
+                            }else if tagMap ==  tagMaps.last{
+                                projects.append(project)
+                            }
                         }
                     }
+                }else{
+                    projects = allProjects
                 }
+
             }else{
                 title = selectTag?.name
                 projects = TagMap().searchProjectFromTag(selectTag!)
