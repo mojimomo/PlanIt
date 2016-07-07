@@ -141,7 +141,12 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             print("赞赏我们")
             //支付宝转账 url scheme
             let alipay = "alipayqr://platformapi/startapp?saId=10000007&qrcode=https://qr.alipay.com/apmiym1v5ya1dynlb5"
-            UIApplication.sharedApplication().openURL(NSURL(string: alipay)!)
+            if UIApplication.sharedApplication().canOpenURL(NSURL(string: alipay)!) {
+                UIApplication.sharedApplication().openURL(NSURL(string: alipay)!)
+            }
+            else {
+                self.showNotFoundAlipayAlert()
+            }
         }
         
     }
@@ -182,6 +187,13 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    //未安装支付宝弹窗提示
+    func showNotFoundAlipayAlert() {
+        let notFoundAlipayAlert = UIAlertController(title: "未安装支付宝", message: "感谢您的赞赏!但目前我们仅支持支付宝打赏。", preferredStyle: .Alert)
+        notFoundAlipayAlert.addAction(UIAlertAction(title: "好的", style: .Default) { _ in })
+        self.presentViewController(notFoundAlipayAlert, animated: true){}
     }
 
     
