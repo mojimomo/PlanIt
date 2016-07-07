@@ -112,8 +112,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         if indexPath.section == 1 && indexPath.row == 1 {
             print("意见反馈")
             //邮件视窗
-            let mailComposeViewController = configuredMailComposeViewController()
+            
             if MFMailComposeViewController.canSendMail() {
+                let mailComposeViewController = configuredMailComposeViewController()
                 self.presentViewController(mailComposeViewController, animated: true, completion: nil)
             }else{
                 self.showSendMailErrorAlert()
@@ -154,7 +155,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         //设置反馈邮件地址、主题及内容
         mailComposeVC.setToRecipients(["yale.ling.chn@gmail.com"])
         mailComposeVC.setSubject("PlanIt - 意见反馈")
-        mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(systemName),\(name)", isHTML: false)
+        mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(deviceModel)", isHTML: false)
         
         return mailComposeVC
     
@@ -185,11 +186,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
 
     
     // MARK: - 设备信息（用于邮件反馈）
-    //获取设备名称
-    let name = UIDevice.currentDevice().name
     
-    //获取设备系统名称
-    let systemName = UIDevice.currentDevice().systemName
+    //获取设备型号
+    let deviceModel = UIDevice.currentDevice().model
     
     //获取系统版本
     let systemVersion = UIDevice.currentDevice().systemVersion
