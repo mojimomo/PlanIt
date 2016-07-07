@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate {
+class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate{
     ///统计页面当前项目
     var project = Project()
     ///此项目的所有进度数据
@@ -293,20 +293,22 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     func editProject(){
         let editProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
         editProjectViewController.title = "修改项目"
+        editProjectViewController.delegate  = self
         editProjectViewController.tableState = .Edit
         editProjectViewController.view.backgroundColor = allBackground
         editProjectViewController.modalTransitionStyle = .CoverVertical
         let navController = UINavigationController.init(rootViewController: editProjectViewController)
+
         //状态栏和导航栏不透明
         navController.navigationBar.translucent = false
         //设计背景色
         navController.navigationBar.barTintColor = otherNavigationBackground
+
         //去除导航栏分栏线
 //        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
 //        navController.navigationBar.shadowImage = UIImage()
         navController.navigationBar.tintColor = navigationTintColor
-        let navigationTitleAttribute: NSDictionary = NSDictionary(object: navigationFontColor, forKey: NSForegroundColorAttributeName)
-        navController.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
+        navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         self.navigationController?.presentViewController(navController, animated: true, completion: nil)
         editProjectViewController.project = self.project
     }
@@ -516,6 +518,11 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             labels.append("\(text) \(i+1)")
         }
         return labels
+    }
+    
+    // MARK: - EditProjectTableViewDelegate
+    func goBackAct(){
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }
 

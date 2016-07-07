@@ -12,6 +12,10 @@ enum editProjectTableState{
     case Add, Edit
 }
 
+protocol EditProjectTableViewDelegate: class{
+    func goBackAct()
+}
+
 class EditProjectTableViewController: UITableViewController {
     @IBOutlet weak var projectNameLabel: UITextField!
     @IBOutlet weak var tagLabel: UILabel!
@@ -27,6 +31,7 @@ class EditProjectTableViewController: UITableViewController {
     @IBOutlet weak var finishEditButton: UIButton!
     @IBOutlet weak var punchCell: UITableViewCell!
     
+    var delegate: EditProjectTableViewDelegate?
     ///按钮文字
     var finishEditButtonText = ""
     ///项目名称
@@ -225,7 +230,7 @@ class EditProjectTableViewController: UITableViewController {
     }
  
     ///返回上个页面
-    func back(){
+    func dismiss(){
         self.dismissViewControllerAnimated(true) { () -> Void in
             
         }
@@ -237,7 +242,9 @@ class EditProjectTableViewController: UITableViewController {
         //创建UIAlertAction 确定按钮
         let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
             self.project.deleteProject()
-            self.back()
+            self.dismissViewControllerAnimated(true) { () -> Void in
+                self.delegate?.goBackAct()
+                }
         })
         //创建UIAlertAction 取消按钮
         let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
@@ -298,7 +305,7 @@ class EditProjectTableViewController: UITableViewController {
             if(project.insertProject()){
                 project.addNotification()
                 //callAlertAndBack("提交成功",message: "新建项目成功!")
-                back()
+                dismiss()
                 return
             }
         }
@@ -354,7 +361,7 @@ class EditProjectTableViewController: UITableViewController {
         if project.check(){
             if(project.updateProject()){
                 //callAlertAndBack("修改成功",message: "修改项目成功!")
-                back()
+                dismiss()
                 return
             }
         }
@@ -432,7 +439,7 @@ class EditProjectTableViewController: UITableViewController {
             self.navigationItem.rightBarButtonItem = addButton
             
             //新增返回按钮
-            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "back")
+            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "dismiss")
             self.navigationItem.leftBarButtonItem = backButton
         case .Edit:
             //添加新增项目按钮
@@ -441,7 +448,7 @@ class EditProjectTableViewController: UITableViewController {
             
             ///新增返回按钮
             //let backButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: "deleteProject")
-            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "back")
+            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "dismiss")
             self.navigationItem.leftBarButtonItem = backButton
             
             //新增删除按钮

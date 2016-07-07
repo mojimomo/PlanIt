@@ -56,15 +56,20 @@ class TagsViewController: UITableViewController {
 
         //添加没有标签的
         var noTagCount = 0
-        for project in projects{
-            for tagMap in tagMaps{
-                if tagMap.projectID == project.id{
-                    break
-                }else if tagMap == tagMaps.last{
-                    noTagCount++
+        if tagMaps.count != 0{
+            for project in projects{
+                for tagMap in tagMaps{
+                    if tagMap.projectID == project.id{
+                        break
+                    }else if tagMap == tagMaps.last{
+                        noTagCount++
+                    }
                 }
             }
+        }else{
+            noTagCount = projects.count
         }
+
         tagCounts.append(noTagCount)
         
         //添加标签

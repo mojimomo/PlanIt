@@ -31,6 +31,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     let MenuTableViewHeight : CGFloat = 44
     private var selectTag : Tag?
     private var popover: Popover!
+    private var isPopoverOver = false
     private var waveLoadingIndicator: WaveLoadingIndicator!
     private var oldPercent = 0
     private var newPercent = 0
@@ -89,19 +90,21 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //设置导航栏颜色
         navController.navigationBar.barTintColor = otherNavigationBackground
         //去除导航栏分栏线
-//        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-//        navController.navigationBar.shadowImage = UIImage()
+//        navController.navigationBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size: CGSize(width: 1, height: 1))
+//, forBarMetrics: .Default)
+//        navController.navigationBar.shadowImage = UIImage.imageWithColor(UIColor.colorFromHex("#525659"), size: CGSize(width: 0.5, height: 0.5))
+        
         navController.navigationBar.tintColor = navigationTintColor
         navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         self.navigationController?.presentViewController(navController, animated: true, completion: nil)    }
     
     ///点击点开抽屉菜单
     @IBAction func callMenu(sender: AnyObject) {
-//        //获取此页面的抽屉菜单页
-//        if let drawer = self.navigationController?.parentViewController as? KYDrawerController{
-//            //设置菜单页状态
-//            drawer.setDrawerState( .Opened, animated: true)
-//        }
+        //获取此页面的抽屉菜单页
+        if let drawer = self.navigationController?.parentViewController as? KYDrawerController{
+            //设置菜单页状态
+            drawer.setDrawerState( .Opened, animated: true)
+        }
         let startPoint = CGPoint(x: self.view.frame.width / 2, y: 0)
         let rectStatus = UIApplication.sharedApplication().statusBarFrame
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160 + rectStatus.size.height))
@@ -137,6 +140,22 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
 
     // MARK: - Func
+    ///打开菜单
+    func handleCallOptions(){
+        print("打开菜单页面")
+        let muneViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Options") as! OptionsTableViewController
+        //设置view背景色
+        muneViewController.view.backgroundColor = allBackground
+        
+        //修改样式
+        self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
+        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = nil
+        
+        //压入导航栏
+        self.navigationController?.pushViewController(muneViewController, animated: true)
+    }
+    
     //点击是否显示未开始
     func showNotBegin(){
         isShowNotBegin = !isShowNotBegin
@@ -164,17 +183,21 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 projects.removeAll()
                 let tagMaps = TagMap().loadAllData()
                 let allProjects = Project().loadAllData()
-                
-                //添加没有标签的
-                for project in allProjects{
-                    for tagMap in tagMaps{
-                        if tagMap.projectID == project.id{
-                            break
-                        }else if tagMap ==  tagMaps.last{
-                            projects.append(project)
+                if tagMaps.count != 0{
+                    //添加没有标签的
+                    for project in allProjects{
+                        for tagMap in tagMaps{
+                            if tagMap.projectID == project.id{
+                                break
+                            }else if tagMap ==  tagMaps.last{
+                                projects.append(project)
+                            }
                         }
                     }
+                }else{
+                    projects = allProjects
                 }
+
             }else{
                 title = selectTag?.name
                 projects = TagMap().searchProjectFromTag(selectTag!)
@@ -759,6 +782,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 isShowFinished = !isShowFinished
                 loadData()
                 self.projectTableView.reloadData()
+            }else if indexPath.row == 2{
+                handleCallOptions()
             }
              self.popover.dismiss()
             //项目表格
@@ -824,7 +849,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func addProcessTableViewAct(old: Double, new: Double, name: String){
         showProcessChange(old, newPercent: new, name: name)
     }
-    
 }
 
 extension Array {

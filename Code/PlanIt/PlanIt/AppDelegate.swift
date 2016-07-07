@@ -17,17 +17,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        //判断是否第一次启动   
+    if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunch") as Bool!) == false){
+            //第一次启动，播放引导页面
+            print("第一次启动")
+            //设置为非第一次启动
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunch")
+        }else{
+            print("不是第一次启动")
+        }
+        
         //注册通知
         if IS_IOS8 {
             let uns = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
             UIApplication.sharedApplication().registerUserNotificationSettings(uns)
         }
-        
+    
+    //
+    // 获取通知上绑定的信息后作相应处理...
+    UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+    NSUserDefaults.standardUserDefaults().setInteger( 0 , forKey: "numsLocalNotifiication")
         if launchOptions != nil {
             if let localNotification = launchOptions!["UIApplicationLaunchOptionsLocalNotificationKey"] as? UILocalNotification {
                 if let dict = localNotification.userInfo {
-                    // 获取通知上绑定的信息后作相应处理...
-                    UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+
                 }
             }
         }
@@ -43,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 后面作相应处理...
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-        
+        NSUserDefaults.standardUserDefaults().setInteger( 0 , forKey: "numsLocalNotifiication")
     }
     
     func applicationWillResignActive(application: UIApplication) {
