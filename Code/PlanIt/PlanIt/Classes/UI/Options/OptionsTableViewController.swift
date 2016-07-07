@@ -191,7 +191,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     
     //未安装支付宝弹窗提示
     func showNotFoundAlipayAlert() {
-        let notFoundAlipayAlert = UIAlertController(title: "未安装支付宝", message: "感谢您的赞赏!但目前我们仅支持支付宝打赏。", preferredStyle: .Alert)
+        let notFoundAlipayAlert = UIAlertController(title: "未安装支付宝", message: "感谢您的赞赏!\n但目前我们仅支持支付宝打赏。", preferredStyle: .Alert)
         notFoundAlipayAlert.addAction(UIAlertAction(title: "好的", style: .Default) { _ in })
         self.presentViewController(notFoundAlipayAlert, animated: true){}
     }
