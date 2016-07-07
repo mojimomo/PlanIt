@@ -18,10 +18,6 @@
 		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
 		BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */; };
 		BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */; };
-		BE3B754F1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B754E1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift */; };
-		BE3B75561D27B47B00F7AEC3 /* UIViewController+mojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B75551D27B47B00F7AEC3 /* UIViewController+mojiView.swift */; };
-		BE3B75581D27B4D200F7AEC3 /* NSDate+mojiDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B75571D27B4D200F7AEC3 /* NSDate+mojiDate.swift */; };
-		BE3B755A1D27B4FC00F7AEC3 /* String+mojiString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B75591D27B4FC00F7AEC3 /* String+mojiString.swift */; };
 		BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */; };
 		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
@@ -32,6 +28,11 @@
 		BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */; };
 		BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */; };
 		BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6EEBB61CF4220E0085A9E7 /* StatisticsViewController.swift */; };
+		BE79BCC61D2D38B2001512D6 /* NSDate+mojiDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79BCC21D2D38B2001512D6 /* NSDate+mojiDate.swift */; };
+		BE79BCC71D2D38B2001512D6 /* String+mojiString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79BCC31D2D38B2001512D6 /* String+mojiString.swift */; };
+		BE79BCC81D2D38B2001512D6 /* UIColor+colorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79BCC41D2D38B2001512D6 /* UIColor+colorFromHex.swift */; };
+		BE79BCC91D2D38B2001512D6 /* UIViewController+mojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79BCC51D2D38B2001512D6 /* UIViewController+mojiView.swift */; };
+		BE79BCCB1D2D38E6001512D6 /* UIImage+mojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79BCCA1D2D38E6001512D6 /* UIImage+mojiImage.swift */; };
 		BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FC1CEC922000DB1CBB /* RRAddTagView.swift */; };
 		BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FD1CEC922000DB1CBB /* RRTagCollectionViewCell.swift */; };
 		BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */; };
@@ -90,10 +91,6 @@
 		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
 		BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveLoadingIndicator.swift; sourceTree = "<group>"; };
 		BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
-		BE3B754E1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+colorFromHex.swift"; path = "PlanIt/Classes/Extension/UIColor+colorFromHex.swift"; sourceTree = SOURCE_ROOT; };
-		BE3B75551D27B47B00F7AEC3 /* UIViewController+mojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+mojiView.swift"; path = "PlanIt/Classes/Extension/UIViewController+mojiView.swift"; sourceTree = SOURCE_ROOT; };
-		BE3B75571D27B4D200F7AEC3 /* NSDate+mojiDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+mojiDate.swift"; path = "PlanIt/Classes/Extension/NSDate+mojiDate.swift"; sourceTree = SOURCE_ROOT; };
-		BE3B75591D27B4FC00F7AEC3 /* String+mojiString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+mojiString.swift"; path = "PlanIt/Classes/Extension/String+mojiString.swift"; sourceTree = SOURCE_ROOT; };
 		BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessesTableViewController.swift; path = ../Statistics/ProcessesTableViewController.swift; sourceTree = "<group>"; };
 		BE4F02371CEF365F00126237 /* RoundTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundTableviewCell.h; sourceTree = "<group>"; };
 		BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableviewCell.swift; sourceTree = "<group>"; };
@@ -105,6 +102,11 @@
 		BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		BE6E09361CD9D6FF008AABCD /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		BE6EEBB61CF4220E0085A9E7 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		BE79BCC21D2D38B2001512D6 /* NSDate+mojiDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+mojiDate.swift"; sourceTree = "<group>"; };
+		BE79BCC31D2D38B2001512D6 /* String+mojiString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+mojiString.swift"; sourceTree = "<group>"; };
+		BE79BCC41D2D38B2001512D6 /* UIColor+colorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFromHex.swift"; sourceTree = "<group>"; };
+		BE79BCC51D2D38B2001512D6 /* UIViewController+mojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+mojiView.swift"; sourceTree = "<group>"; };
+		BE79BCCA1D2D38E6001512D6 /* UIImage+mojiImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+mojiImage.swift"; sourceTree = "<group>"; };
 		BE7DF7FC1CEC922000DB1CBB /* RRAddTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRAddTagView.swift; sourceTree = "<group>"; };
 		BE7DF7FD1CEC922000DB1CBB /* RRTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagController.swift; sourceTree = "<group>"; };
@@ -239,6 +241,19 @@
 			path = Tag;
 			sourceTree = "<group>";
 		};
+		BE79BCC11D2D38B2001512D6 /* Extension(扩展) */ = {
+			isa = PBXGroup;
+			children = (
+				BE79BCC21D2D38B2001512D6 /* NSDate+mojiDate.swift */,
+				BE79BCC31D2D38B2001512D6 /* String+mojiString.swift */,
+				BE79BCC41D2D38B2001512D6 /* UIColor+colorFromHex.swift */,
+				BE79BCC51D2D38B2001512D6 /* UIViewController+mojiView.swift */,
+				BE79BCCA1D2D38E6001512D6 /* UIImage+mojiImage.swift */,
+			);
+			name = "Extension(扩展)";
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		BE7DF7FB1CEC922000DB1CBB /* RRTagController */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,9 +267,9 @@
 		BE802AEE1CCF4B2B0092F2DE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BE79BCC11D2D38B2001512D6 /* Extension(扩展) */,
 				BE802AEF1CCF4B2B0092F2DE /* BusinessModel(业务模型) */,
 				BE802AF21CCF4B2B0092F2DE /* UI(界面) */,
-				BE802B001CCF56AB0092F2DE /* Extension(扩展) */,
 				BE802AF01CCF4B2B0092F2DE /* imageFile(大图片) */,
 				BE802AF11CCF4B2B0092F2DE /* Tools(工具) */,
 				BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */,
@@ -380,18 +395,6 @@
 			);
 			name = "Statistics(统计)";
 			path = Statistics;
-			sourceTree = "<group>";
-		};
-		BE802B001CCF56AB0092F2DE /* Extension(扩展) */ = {
-			isa = PBXGroup;
-			children = (
-				BE3B754E1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift */,
-				BE3B75551D27B47B00F7AEC3 /* UIViewController+mojiView.swift */,
-				BE3B75571D27B4D200F7AEC3 /* NSDate+mojiDate.swift */,
-				BE3B75591D27B4FC00F7AEC3 /* String+mojiString.swift */,
-			);
-			name = "Extension(扩展)";
-			path = Venders/Extension;
 			sourceTree = "<group>";
 		};
 		BEA520931CCF417F00FFE43E = {
@@ -557,6 +560,7 @@
 				TargetAttributes = {
 					BEA5209B1CCF417F00FFE43E = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = CYTA756UDU;
 					};
 					BEA520B21CCF417F00FFE43E = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -676,9 +680,10 @@
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
 				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
 				BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */,
+				BE79BCC91D2D38B2001512D6 /* UIViewController+mojiView.swift in Sources */,
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
-				BE3B75561D27B47B00F7AEC3 /* UIViewController+mojiView.swift in Sources */,
 				BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */,
+				BE79BCC81D2D38B2001512D6 /* UIColor+colorFromHex.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */,
@@ -695,20 +700,20 @@
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
 				BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */,
+				BE79BCC71D2D38B2001512D6 /* String+mojiString.swift in Sources */,
+				BE79BCCB1D2D38E6001512D6 /* UIImage+mojiImage.swift in Sources */,
 				BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */,
 				BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */,
-				BE3B755A1D27B4FC00F7AEC3 /* String+mojiString.swift in Sources */,
 				BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
-				BE3B754F1D27B0D300F7AEC3 /* UIColor+colorFromHex.swift in Sources */,
 				BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
 				BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */,
 				BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */,
 				BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */,
 				BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */,
+				BE79BCC61D2D38B2001512D6 /* NSDate+mojiDate.swift in Sources */,
 				BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */,
-				BE3B75581D27B4D200F7AEC3 /* NSDate+mojiDate.swift in Sources */,
 				BE1C160A1D2CCC4600A4B4A5 /* AboutUsWebviewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -853,6 +858,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -860,7 +866,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/usr/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mojimomo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -873,6 +879,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -880,7 +887,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/usr/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mojimomo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 			};

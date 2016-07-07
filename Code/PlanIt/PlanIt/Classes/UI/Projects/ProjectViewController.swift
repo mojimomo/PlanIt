@@ -31,6 +31,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     let MenuTableViewHeight : CGFloat = 44
     private var selectTag : Tag?
     private var popover: Popover!
+    private var isPopoverOver = false
     private var waveLoadingIndicator: WaveLoadingIndicator!
     private var oldPercent = 0
     private var newPercent = 0
@@ -89,8 +90,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //设置导航栏颜色
         navController.navigationBar.barTintColor = otherNavigationBackground
         //去除导航栏分栏线
-//        navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-//        navController.navigationBar.shadowImage = UIImage()
+//        navController.navigationBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size: CGSize(width: 1, height: 1))
+//, forBarMetrics: .Default)
+//        navController.navigationBar.shadowImage = UIImage.imageWithColor(UIColor.colorFromHex("#525659"), size: CGSize(width: 0.5, height: 0.5))
+        
         navController.navigationBar.tintColor = navigationTintColor
         navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         self.navigationController?.presentViewController(navController, animated: true, completion: nil)    }
@@ -846,7 +849,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func addProcessTableViewAct(old: Double, new: Double, name: String){
         showProcessChange(old, newPercent: new, name: name)
     }
-    
 }
 
 extension Array {

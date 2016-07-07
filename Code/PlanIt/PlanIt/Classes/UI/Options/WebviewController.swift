@@ -17,6 +17,9 @@ class WebviewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
+        self.navigationItem.leftBarButtonItem = backButtom
+        
         //设置初始加载网页
         let url = NSURL(string: "https://zoomyale.gitbooks.io/1/content/")
         let request = NSURLRequest(URL: url!)
@@ -29,7 +32,9 @@ class WebviewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func dismiss(){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     /*
     // MARK: - Navigation
 

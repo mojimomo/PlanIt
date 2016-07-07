@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate {
+class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate{
     ///统计页面当前项目
     var project = Project()
     ///此项目的所有进度数据
@@ -293,6 +293,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     func editProject(){
         let editProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
         editProjectViewController.title = "修改项目"
+        editProjectViewController.delegate  = self
         editProjectViewController.tableState = .Edit
         editProjectViewController.view.backgroundColor = allBackground
         editProjectViewController.modalTransitionStyle = .CoverVertical
@@ -517,6 +518,11 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             labels.append("\(text) \(i+1)")
         }
         return labels
+    }
+    
+    // MARK: - EditProjectTableViewDelegate
+    func goBackAct(){
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }
 
