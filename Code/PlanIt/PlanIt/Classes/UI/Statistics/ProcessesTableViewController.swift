@@ -70,17 +70,34 @@ class ProcessesTableViewController: UITableViewController {
         return cell
     }
     
+    ///删除某一行
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if isEditingMod == true{
-            let process =  processes[indexPath.row]
+            var index = 0
+            for var group = 0; group < indexPath.section ; group++ {
+                index += records[group]
+            }
+            index += indexPath.row
+            //删除数据库
+            let process =  processes[index]
             process.deleteProcess()
             project.increaseDone(-process.done)
             ProcessDate().chengeData(process.projectID, timeDate: process.recordTimeDate, changeValue: -process.done)
-            processes.removeAtIndex(indexPath.row)
-            processTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            
+            //删除输出源
+            processes.removeAtIndex(index)
+            records[indexPath.section]--
+            //是否是分组最后一行
+            if records[indexPath.section] == 0{
+                records.removeAtIndex(indexPath.section)
+                months.removeAtIndex(indexPath.section)
+                processTableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation:  .Fade)
+            }else{
+                //删除表格
+                processTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
         }
     }
+    
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return months[section]
     }

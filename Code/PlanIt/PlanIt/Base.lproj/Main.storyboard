@@ -651,11 +651,13 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="7i3-Zu-ZKb" secondAttribute="bottom" id="4xY-6c-5Rd"/>
                                         <constraint firstItem="RKh-Z2-dzd" firstAttribute="height" secondItem="ewr-Fq-nJ0" secondAttribute="height" multiplier="0.5" id="74o-uM-CmE"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="wAo-Ys-7pp" secondAttribute="bottom" id="8aV-rZ-1Re"/>
+                                        <constraint firstItem="7i3-Zu-ZKb" firstAttribute="top" secondItem="wAo-Ys-7pp" secondAttribute="bottom" constant="8" id="IQ7-c2-lnW"/>
                                         <constraint firstItem="7i3-Zu-ZKb" firstAttribute="leading" secondItem="ewr-Fq-nJ0" secondAttribute="leadingMargin" constant="15" id="IUk-Qs-w5j"/>
                                         <constraint firstItem="7i3-Zu-ZKb" firstAttribute="height" secondItem="ewr-Fq-nJ0" secondAttribute="height" multiplier="0.5" id="Kg1-h6-T4q"/>
                                         <constraint firstItem="RKh-Z2-dzd" firstAttribute="leading" secondItem="wAo-Ys-7pp" secondAttribute="trailing" id="MCU-UR-QIU"/>
                                         <constraint firstItem="wAo-Ys-7pp" firstAttribute="height" secondItem="ewr-Fq-nJ0" secondAttribute="height" multiplier="0.5" id="Ozr-QY-18J"/>
                                         <constraint firstItem="RKh-Z2-dzd" firstAttribute="width" secondItem="ewr-Fq-nJ0" secondAttribute="width" multiplier="0.2" id="UoJ-hW-o70"/>
+                                        <constraint firstItem="7i3-Zu-ZKb" firstAttribute="top" secondItem="wAo-Ys-7pp" secondAttribute="bottom" id="Wi4-6N-y8u"/>
                                         <constraint firstItem="7i3-Zu-ZKb" firstAttribute="top" secondItem="wAo-Ys-7pp" secondAttribute="bottom" constant="-16.5" id="XLd-Cp-4e4"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="RKh-Z2-dzd" secondAttribute="bottom" id="bJ8-yq-BtW"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="7i3-Zu-ZKb" secondAttribute="trailing" constant="15" id="gNZ-Jr-ZTT"/>
@@ -670,7 +672,9 @@
                                             <exclude reference="8aV-rZ-1Re"/>
                                             <exclude reference="Ozr-QY-18J"/>
                                             <exclude reference="uFK-Xn-iel"/>
+                                            <exclude reference="4cw-Ij-Gml"/>
                                             <exclude reference="Kg1-h6-T4q"/>
+                                            <exclude reference="Wi4-6N-y8u"/>
                                             <exclude reference="XLd-Cp-4e4"/>
                                             <exclude reference="gmR-Aq-vnm"/>
                                             <exclude reference="74o-uM-CmE"/>
