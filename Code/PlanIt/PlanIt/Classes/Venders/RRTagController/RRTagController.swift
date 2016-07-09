@@ -31,7 +31,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     var type : RRTagType = .Normal{
         didSet{
             if type == .Normal{
-                self.navigationBarItem.title = "选择标签"
+                self.navigationBarItem.title = "标签选择"
             }else{
                 self.navigationBarItem.title = "管理标签"
             }
@@ -45,7 +45,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 self.navigationBarItem.title = "编辑标签"
             }else{
                 if type == .Normal{
-                    self.navigationBarItem.title = "选择标签"
+                    self.navigationBarItem.title = "标签选择"
                 }else{
                     self.navigationBarItem.title = "管理标签"
                 }
@@ -133,7 +133,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 64))
         
-        self.navigationBarItem = UINavigationItem(title: "选择标签")
+        self.navigationBarItem = UINavigationItem(title: "标签选择")
         self.navigationBarItem.leftBarButtonItem = self.leftButton
         
         navigationBar.pushNavigationItem(self.navigationBarItem, animated: true)

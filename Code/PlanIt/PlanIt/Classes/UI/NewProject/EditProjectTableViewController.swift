@@ -109,21 +109,33 @@ class EditProjectTableViewController: UITableViewController {
             case .Normal:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(false, animated: false)
-                punchCell.hidden = false
-                taskUnitCell.hidden = false
-                taskTotalCell.hidden = false
+//                punchCell.hidden = false
+//                taskUnitCell.hidden = false
+//                taskTotalCell.hidden = false
+                
+                punchSwitch.enabled = true
+                unitTextField.enabled = true
+                totalTextField.enabled = true
             case .Punch:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(true, animated: false)
-                punchCell.hidden = false
-                taskUnitCell.hidden = false
-                taskTotalCell.hidden = false
+//                punchCell.hidden = false
+//                taskUnitCell.hidden = false
+//                taskTotalCell.hidden = false
+                
+                punchSwitch.enabled = true
+                unitTextField.enabled = true
+                totalTextField.enabled = true
             case .NoRecord:
                 recordSwitch?.setOn(false, animated: false)
                 punchSwitch?.setOn(false, animated: false)
-                punchCell.hidden = true
-                taskUnitCell.hidden = true
-                taskTotalCell.hidden = true
+//                punchCell.hidden = true
+//                taskUnitCell.hidden = true
+//                taskTotalCell.hidden = true
+                
+                punchSwitch.enabled = false
+                unitTextField.enabled = false
+                totalTextField.enabled = false
             default: break
             }
         }
@@ -409,7 +421,9 @@ class EditProjectTableViewController: UITableViewController {
                 editBeginTime()
             }
         case endTimeCellPath:
-            editEndTime()
+            if project.isFinished != .Finished {
+                editEndTime()
+            }
         case tagCellPath:
             if indexPath == tagCellPath{
                 let tags = Tag().loadAllData()
@@ -427,6 +441,7 @@ class EditProjectTableViewController: UITableViewController {
             }
         default:break
         }
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     //MARK: - View Controller Lifecle
@@ -502,4 +517,5 @@ class EditProjectTableViewController: UITableViewController {
     func projectForTagsView(sneder: TagsViewController) -> Project? {
         return project
     }
+ 
 }

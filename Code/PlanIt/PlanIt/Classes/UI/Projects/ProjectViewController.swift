@@ -107,7 +107,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         }
         let startPoint = CGPoint(x: self.view.frame.width / 2, y: 0)
         let rectStatus = UIApplication.sharedApplication().statusBarFrame
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160 + rectStatus.size.height))
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 145 + rectStatus.size.height))
         tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: rectStatus.size.height + 12))
         tableView.tag = tableViewTag.MuneTable
         tableView.delegate = self

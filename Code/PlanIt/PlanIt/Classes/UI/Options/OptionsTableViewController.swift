@@ -148,7 +148,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 self.showNotFoundAlipayAlert()
             }
         }
-        
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     //设置意见反馈的邮箱控件
@@ -245,6 +245,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         return labels[row]
     }
     
+
     /*
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

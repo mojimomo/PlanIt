@@ -36,6 +36,10 @@ class AddProcessTableViewController: UITableViewController {
         self.tableView.sectionHeaderHeight = 25
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     @IBAction func editDoneDidEnd(sender: UITextField) {
         if doneTextField.text != ""{
             if Double(doneTextField.text!)! > project.rest{

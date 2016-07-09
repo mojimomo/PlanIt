@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //判断是否第一次启动   
-    if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunch") as Bool!) == false){
+        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunch") as Bool!) == false){
             //第一次启动，播放引导页面
             print("第一次启动")
             //设置为非第一次启动
@@ -35,8 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //
     // 获取通知上绑定的信息后作相应处理...
-    UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-    NSUserDefaults.standardUserDefaults().setInteger( 0 , forKey: "numsLocalNotifiication")
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        NSUserDefaults.standardUserDefaults().setInteger( 0 , forKey: "numsLocalNotifiication")
         if launchOptions != nil {
             if let localNotification = launchOptions!["UIApplicationLaunchOptionsLocalNotificationKey"] as? UILocalNotification {
                 if let dict = localNotification.userInfo {

@@ -27,8 +27,8 @@ class ProcessesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let editBarButton = UIBarButtonItem(image: UIImage(named: "edit"), style: .Done, target: self, action: "finishEdit:")
-        self.navigationItem.rightBarButtonItem = editBarButton
+//        let editBarButton = UIBarButtonItem(image: UIImage(named: "edit"), style: .Done, target: self, action: "finishEdit:")
+//        self.navigationItem.rightBarButtonItem = editBarButton
         
         let backBarButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: "dissmiss")
         self.navigationItem.leftBarButtonItem = backBarButton
@@ -72,7 +72,7 @@ class ProcessesTableViewController: UITableViewController {
     
     ///删除某一行
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if isEditingMod == true{
+        //if isEditingMod == true{
             var index = 0
             for var group = 0; group < indexPath.section ; group++ {
                 index += records[group]
@@ -95,11 +95,20 @@ class ProcessesTableViewController: UITableViewController {
                 //删除表格
                 processTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
-        }
+        //}
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+        
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return months[section]
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     ///确认节数
