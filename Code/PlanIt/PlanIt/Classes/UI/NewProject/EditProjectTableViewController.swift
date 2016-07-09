@@ -162,7 +162,7 @@ class EditProjectTableViewController: UITableViewController {
     }
     
     //是否改变开始时间
-    func editBeginTime() {
+    func editBeginTime(rect: CGRect) {
         if IS_IOS8{
             //创建datepicker控件
             let datePicker = UIDatePicker()
@@ -188,6 +188,12 @@ class EditProjectTableViewController: UITableViewController {
             //添加动作
             alerController.addAction(alerActionOK)
             alerController.addAction(alerActionCancel)
+            
+            if let popoverPresentationController = alerController.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.sourceRect = rect
+            }
+            
             //显示alert
             self.presentViewController(alerController, animated: true, completion: { () -> Void in
                 
@@ -196,7 +202,7 @@ class EditProjectTableViewController: UITableViewController {
     }
     
     ///是否改变结束时间
-    func editEndTime() {
+    func editEndTime(rect: CGRect) {
         if IS_IOS8{
             //创建datepicker控件
             let datePicker = UIDatePicker()
@@ -222,6 +228,12 @@ class EditProjectTableViewController: UITableViewController {
             //添加动作
             alerController.addAction(alerActionOK)
             alerController.addAction(alerActionCancel)
+            
+            if let popoverPresentationController = alerController.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.sourceRect = rect
+            }
+            
             //显示alert
             self.presentViewController(alerController, animated: true, completion: { () -> Void in
                 
@@ -418,11 +430,13 @@ class EditProjectTableViewController: UITableViewController {
         switch indexPath{
         case beginTimeCellPath:
             if tableState != .Edit || project.type == .NoRecord{
-                editBeginTime()
+                let rect = tableView.rectForRowAtIndexPath(indexPath)
+                editBeginTime(rect)
             }
         case endTimeCellPath:
             if project.isFinished != .Finished {
-                editEndTime()
+                let rect = tableView.rectForRowAtIndexPath(indexPath)
+                editEndTime(rect)
             }
         case tagCellPath:
             if indexPath == tagCellPath{

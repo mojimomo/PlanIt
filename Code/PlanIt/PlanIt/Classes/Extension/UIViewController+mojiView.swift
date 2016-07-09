@@ -14,6 +14,12 @@ extension UIViewController{
         let okAction = UIAlertAction(title: "好的", style: .Default,
             handler: nil)
         alertController.addAction(okAction)
+        
+        if let popoverPresentationController = alertController.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceRect =  CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+        }
+        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
@@ -27,6 +33,12 @@ extension UIViewController{
                 }
         })
         alertController.addAction(okAction)
+        
+        if let popoverPresentationController = alertController.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceRect =  CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+        }
+        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

@@ -94,6 +94,14 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 //添加动作
                 alerController.addAction(alerActionOK)
                 alerController.addAction(alerActionCancel)
+                
+                
+                if let popoverPresentationController = alerController.popoverPresentationController {
+                    popoverPresentationController.sourceView = self.view
+                    let rect = tableView.rectForRowAtIndexPath(indexPath)
+                    popoverPresentationController.sourceRect = rect
+                }
+                
                 //显示alert
                 self.presentViewController(alerController, animated: true, completion: { () -> Void in
                     
