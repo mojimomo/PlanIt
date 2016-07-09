@@ -149,7 +149,8 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             print("赞赏我们")
             //支付宝转账 url scheme
             let alipay = "alipayqr://platformapi/startapp?saId=10000007&qrcode=https://qr.alipay.com/apmiym1v5ya1dynlb5"
-            if UIApplication.sharedApplication().canOpenURL(NSURL(string: alipay)!) {
+            if UIApplication.sharedApplication().canOpenURL(NSURL(string: "alipay://")!) {
+                print("已安装支付宝")
                 UIApplication.sharedApplication().openURL(NSURL(string: alipay)!)
             }
             else {
@@ -168,7 +169,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         //设置反馈邮件地址、主题及内容
         mailComposeVC.setToRecipients(["yale.ling.chn@gmail.com"])
         mailComposeVC.setSubject("PlanIt - 意见反馈")
-        mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(modelName)", isHTML: false)
+        mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(modelName)", isHTML: false)
         
         return mailComposeVC
     

@@ -661,7 +661,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             cell.textLabel?.textColor = navigationFontColor
             cell.textLabel?.font = UIFont(name: "PingFangSC-Light", size: 17.0)!
             if indexPath.row == 0{
-                let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 5, width: 40, height: MenuTableViewHeight))
+                let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 13, width: 40, height: MenuTableViewHeight))
                 isShowAllSwitch.onTintColor = switchColor
                 isShowAllSwitch.on = isShowNotBegin
                 isShowAllSwitch.addTarget(self, action: "showNotBegin", forControlEvents: .ValueChanged)
@@ -670,7 +670,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             if indexPath.row == 1{
                 cell.accessoryType = .DisclosureIndicator
                 if isShowFinished {
-                    cell.textLabel?.text = "未完成"
+                    cell.textLabel?.text = "进行中"
                 }
             }
             return cell
