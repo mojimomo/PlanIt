@@ -52,9 +52,23 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         .Animation(.None)
     ]
     ///显示未开始项目
-    private var isShowNotBegin = false
+    var isShowNotBegin : Bool{
+        get{
+            return NSUserDefaults.standardUserDefaults().boolForKey("isShowNotBegin") as Bool!
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowNotBegin")
+        }
+    }
     ///显示未开始项目
-    private var isShowFinished = false
+    var isShowFinished : Bool{
+        get{
+            return NSUserDefaults.standardUserDefaults().boolForKey("isShowFinished") as Bool!
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowFinished")
+        }
+    }
     ///添加项目按钮
     var addProjectButton: UIButton?
     ///项目列表
@@ -216,7 +230,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         for project in projects {
             //不显示未开始
-            if !isShowNotBegin {
+            if isShowNotBegin {
                 if project.isFinished == .NotBegined {
                     projects.removeAtIndex(index)
                     continue
@@ -661,9 +675,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             cell.textLabel?.textColor = navigationFontColor
             cell.textLabel?.font = UIFont(name: "PingFangSC-Light", size: 17.0)!
             if indexPath.row == 0{
-                let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 60, y: 13, width: 40, height: MenuTableViewHeight))
+                let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 75, y: 15, width: 40, height: MenuTableViewHeight))
                 isShowAllSwitch.onTintColor = switchColor
-                isShowAllSwitch.on = isShowNotBegin
+                isShowAllSwitch.on = !isShowNotBegin
                 isShowAllSwitch.addTarget(self, action: "showNotBegin", forControlEvents: .ValueChanged)
                 cell.addSubview(isShowAllSwitch)
             }

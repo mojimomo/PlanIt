@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate{
+class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate {
     ///统计页面当前项目
     var project = Project()
     ///此项目的所有进度数据

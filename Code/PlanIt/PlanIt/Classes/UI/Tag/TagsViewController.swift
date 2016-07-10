@@ -40,8 +40,24 @@ class TagsViewController: UITableViewController {
         })
     }
     
-    
-    
+    ///显示未开始项目
+    var isShowNotBegin : Bool{
+        get{
+            return NSUserDefaults.standardUserDefaults().boolForKey("isShowNotBegin") as Bool!
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowNotBegin")
+        }
+    }
+    ///显示未开始项目
+    var isShowFinished : Bool{
+        get{
+            return NSUserDefaults.standardUserDefaults().boolForKey("isShowFinished") as Bool!
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowFinished")
+        }
+    }
     // MARK: - viewlife
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,18 +67,44 @@ class TagsViewController: UITableViewController {
         tags = Tag().loadAllData()
         tagMaps = TagMap().loadAllData()
         let projects = Project().loadAllData()
-        //添加项目总素
-        tagCounts.append(projects.count)
-
+        //添加项目总素        
+        var counts = 0
+        for project in projects {
+            if isShowFinished{
+                 if project.isFinished == .Finished{
+                    counts++
+                }
+            }else{
+                if project.isFinished != .Finished{
+                    counts++
+                }
+            }
+        }
+        tagCounts.append(counts)
+        
         //添加没有标签的
         var noTagCount = 0
         if tagMaps.count != 0{
             for project in projects{
-                for tagMap in tagMaps{
-                    if tagMap.projectID == project.id{
-                        break
-                    }else if tagMap == tagMaps.last{
-                        noTagCount++
+                if isShowFinished{
+                    if project.isFinished == .Finished{
+                        for tagMap in tagMaps{
+                            if tagMap.projectID == project.id{
+                                break
+                            }else if tagMap == tagMaps.last{
+                                noTagCount++
+                            }
+                        }
+                    }
+                }else{
+                    if project.isFinished != .Finished{
+                        for tagMap in tagMaps{
+                            if tagMap.projectID == project.id{
+                                break
+                            }else if tagMap == tagMaps.last{
+                                noTagCount++
+                            }
+                        }
                     }
                 }
             }
@@ -77,7 +119,21 @@ class TagsViewController: UITableViewController {
             var tagCount = 0
             for tagMap in tagMaps{
                 if tagMap.tagID == tag.id{
-                    tagCount++
+                    for project in projects{
+                        if tagMap.projectID == project.id{
+                            if isShowFinished{
+                                if project.isFinished == .Finished{
+                                    tagCount++
+                                }
+                            }else{
+                                if project.isFinished != .Finished{
+                                    tagCount++
+                                }
+                            }
+                            break
+                        }
+                    }
+                    
                 }
             }
             tagCounts.append(tagCount)

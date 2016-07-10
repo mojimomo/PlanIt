@@ -41,4 +41,25 @@ extension String{
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
         return phoneTest.evaluateWithObject(self)
     }
+    
+    /// 判断是否是座机号码
+    func validatePhone() -> Bool {
+        let phoneRegex: String = "^0(10|2[0-5789]|\\d{3})\\d{7,8}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+        return phoneTest.evaluateWithObject(self)
+    }
+    
+    /// 判断是否是Url
+    func validateUrl() -> Bool {
+        let urlRegex: String = "http(s)?:\\/\\/([\\w-]+\\.)+[\\w-]+(\\/[\\w- .\\/?%&=]*)?"
+        let urlTest = NSPredicate(format: "SELF MATCHES %@", urlRegex)
+        return urlTest.evaluateWithObject(self)
+    }
+    
+    /// 判断是否是数字
+    func validateNum() -> Bool {
+        let numRegex: String = "[0-9]+"
+        let numTest = NSPredicate(format: "SELF MATCHES %@", numRegex)
+        return numTest.evaluateWithObject(self)
+    }
 }

@@ -16,7 +16,7 @@ protocol EditProjectTableViewDelegate: class{
     func goBackAct()
 }
 
-class EditProjectTableViewController: UITableViewController {
+class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate{
     @IBOutlet weak var projectNameLabel: UITextField!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var recordSwitch: UISwitch!
@@ -30,6 +30,12 @@ class EditProjectTableViewController: UITableViewController {
     @IBOutlet weak var totalTextField: UITextField!
     @IBOutlet weak var finishEditButton: UIButton!
     @IBOutlet weak var punchCell: UITableViewCell!
+    
+    struct UITag {
+        static let projectNameLabel = 1001
+        static let unitTextField = 1002
+        static let totalTextField = 1003
+    }
     
     var delegate: EditProjectTableViewDelegate?
     ///按钮文字
@@ -109,33 +115,33 @@ class EditProjectTableViewController: UITableViewController {
             case .Normal:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(false, animated: false)
-//                punchCell.hidden = false
-//                taskUnitCell.hidden = false
-//                taskTotalCell.hidden = false
+                punchCell.hidden = false
+                taskUnitCell.hidden = false
+                taskTotalCell.hidden = false
                 
-                punchSwitch.enabled = true
-                unitTextField.enabled = true
-                totalTextField.enabled = true
+//                punchSwitch.enabled = true
+//                unitTextField.enabled = true
+//                totalTextField.enabled = true
             case .Punch:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(true, animated: false)
-//                punchCell.hidden = false
-//                taskUnitCell.hidden = false
-//                taskTotalCell.hidden = false
+                punchCell.hidden = false
+                taskUnitCell.hidden = false
+                taskTotalCell.hidden = false
                 
-                punchSwitch.enabled = true
-                unitTextField.enabled = true
-                totalTextField.enabled = true
+//                punchSwitch.enabled = true
+//                unitTextField.enabled = true
+//                totalTextField.enabled = true
             case .NoRecord:
                 recordSwitch?.setOn(false, animated: false)
                 punchSwitch?.setOn(false, animated: false)
-//                punchCell.hidden = true
-//                taskUnitCell.hidden = true
-//                taskTotalCell.hidden = true
+                punchCell.hidden = true
+                taskUnitCell.hidden = true
+                taskTotalCell.hidden = true
                 
-                punchSwitch.enabled = false
-                unitTextField.enabled = false
-                totalTextField.enabled = false
+//                punchSwitch.enabled = false
+//                unitTextField.enabled = false
+//                totalTextField.enabled = false
             default: break
             }
         }
@@ -288,9 +294,6 @@ class EditProjectTableViewController: UITableViewController {
         if projectName == "" {
             callAlert("提交错误",message: "项目名称不能为空!")
             return
-        }else if projectName.characters.count > 12 {
-            callAlert("提交错误",message: "项目名称不能超过12!")
-            return
         }else{
             project.name = projectName
         }
@@ -311,9 +314,6 @@ class EditProjectTableViewController: UITableViewController {
         default:
             if projectUnit == ""{
                 callAlert("提交错误",message: "项目任务单位不能为空!")
-                return
-            }else if project.unit.characters.count > 10 {
-                callAlert("提交错误",message: "项目任务单位不能超过10!")
                 return
             }else{
                 project.unit = projectUnit
@@ -341,9 +341,6 @@ class EditProjectTableViewController: UITableViewController {
         if projectName == "" {
             callAlert("修改错误",message: "项目名称不能为空!")
             return
-        }else if projectName.characters.count > 12 {
-            callAlert("修改错误",message: "项目名称不能超过12!")
-            return
         }else{
             project.name = projectName
         }
@@ -365,9 +362,6 @@ class EditProjectTableViewController: UITableViewController {
             if projectUnit == ""{
                 callAlert("修改错误",message: "项目任务单位不能为空!")
                 return
-            }else if project.unit.characters.count > 10 {
-                callAlert("修改错误",message: "项目任务单位不能超过10!")
-                return
             }else{
                 project.unit = projectUnit
             }
@@ -385,7 +379,9 @@ class EditProjectTableViewController: UITableViewController {
         if project.check(){
             if(project.updateProject()){
                 //callAlertAndBack("修改成功",message: "修改项目成功!")
-                dismiss()
+                self.dismissViewControllerAnimated(true) { () -> Void in
+                    self.delegate?.goBackAct()
+                }
                 return
             }
         }
@@ -401,7 +397,7 @@ class EditProjectTableViewController: UITableViewController {
 
 
     
-    //MARK: - Override TableView
+    //MARK: -  TableView Delegate
 //    ///隐藏某cell
 //    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 //        //创建3个NSIndexPath对应相应的cell位置
@@ -429,7 +425,7 @@ class EditProjectTableViewController: UITableViewController {
         let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
         switch indexPath{
         case beginTimeCellPath:
-            if tableState != .Edit || project.type == .NoRecord{
+            if (tableState != .Edit || project.type == .NoRecord) && project.isFinished != .Finished{
                 let rect = tableView.rectForRowAtIndexPath(indexPath)
                 editBeginTime(rect)
             }
@@ -461,6 +457,13 @@ class EditProjectTableViewController: UITableViewController {
     //MARK: - View Controller Lifecle
     override func viewDidLoad() {
         super.viewDidLoad()
+        projectNameLabel.delegate = self
+        projectNameLabel.tag = UITag.projectNameLabel
+        unitTextField.delegate = self
+        unitTextField.tag = UITag.unitTextField
+        totalTextField.delegate = self
+        totalTextField.tag = UITag.totalTextField
+        
         switch tableState{
         case .Add:
             //添加新增项目按钮
@@ -473,20 +476,34 @@ class EditProjectTableViewController: UITableViewController {
         case .Edit:
             //添加新增项目按钮
             let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishEdit:")
-            self.navigationItem.rightBarButtonItem = addButton
             
             ///新增返回按钮
-            //let backButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: "deleteProject")
             let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "dismiss")
-            self.navigationItem.leftBarButtonItem = backButton
             
             //新增删除按钮
-            let deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: view.bounds.width , height: 44.0 ))
-            deleteButton.backgroundColor = UIColor.whiteColor()
-            deleteButton.setTitle("删除项目", forState: .Normal)
-            deleteButton.setTitleColor(UIColor.redColor(), forState: .Normal)
-            deleteButton.addTarget(self, action: "deleteProject", forControlEvents: .TouchUpInside)
-            self.tableView.tableFooterView = deleteButton
+            let deleteButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: "deleteProject")
+            
+            //按钮间的空隙
+            let gap = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil,
+                action: nil)
+            gap.width = 15;
+            
+            //用于消除右边边空隙，要不然按钮顶不到最边上
+            let spacer = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil,
+                action: nil)
+            spacer.width = -10;
+
+            //设置按钮
+            self.navigationItem.rightBarButtonItems = [spacer, addButton, gap, deleteButton]
+            self.navigationItem.leftBarButtonItem = backButton
+            
+//            //新增删除按钮
+//            let deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: view.bounds.width , height: 44.0 ))
+//            deleteButton.backgroundColor = UIColor.whiteColor()
+//            deleteButton.setTitle("删除项目", forState: .Normal)
+//            deleteButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+//            deleteButton.addTarget(self, action: "deleteProject", forControlEvents: .TouchUpInside)
+//            self.tableView.tableFooterView = deleteButton
 
             //default: break
         }
@@ -531,5 +548,35 @@ class EditProjectTableViewController: UITableViewController {
     func projectForTagsView(sneder: TagsViewController) -> Project? {
         return project
     }
- 
+    
+    // MARK: - UITextFieldDelegate
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let oldText: NSString = textField.text!
+        let newText: NSString = oldText.stringByReplacingCharactersInRange(range, withString: string)
+
+        switch textField.tag{
+        case UITag.projectNameLabel:
+            if newText.length > 0 && newText.length <= 12{
+                return true
+            }else {
+                return false
+            }
+        case UITag.unitTextField:
+            if newText.length > 0 && newText.length <= 5{
+                return true
+            }else {
+                return false
+            }
+        case UITag.totalTextField:
+            let new = newText as String
+            if newText.length > 0 && newText.length <= 6 && new.validateNum(){
+                return true
+            }else {
+                return false
+            }
+
+        default:
+            return true
+        }
+    }
 }
