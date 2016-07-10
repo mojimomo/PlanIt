@@ -463,10 +463,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     process.insertProcess()
                     ProcessDate().chengeData(projects[indexPath.section].id, timeDate: currentTime, changeValue: 1.0)
                     projects[indexPath.section].increaseDone(1.0)
+                    let new = projects[indexPath.section].percent
                     //更新图标
                     loadData()
                     updateTable()
-                    let new = projects[indexPath.section].percent
                     showProcessChange(old, newPercent: new, name: name)
                     
                     //记录进度项目
