@@ -540,11 +540,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 var type = ""
                 switch projects[indexPath.section].type{
                 case .Normal:
-                    type = "记录"
+                    type = "记录进度"
                 case .Punch:
                     type = "打卡"
                 case .NoRecord:
-                    type = "标记"
+                    type = "标记完成"
                 default: break
                 }
                 callAlert("项目未开始",message: "修改项目开始时间以\(type)！")

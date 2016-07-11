@@ -442,7 +442,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                     let rect = tableView.rectForRowAtIndexPath(indexPath)
                     editBeginTime(rect)
                 }else{
-                    callAlert("修改错误", message: "已经有进度无法修改开始时间！")
+                    callAlert("无法修改", message: "项目已添加进度！")
                 }
             }else if tableState == .Add{
                 let rect = tableView.rectForRowAtIndexPath(indexPath)
