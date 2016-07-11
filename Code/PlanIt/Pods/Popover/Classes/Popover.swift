@@ -212,7 +212,7 @@ public class Popover: UIView {
     case .None:
          break
     case .Translation:
-         self.transform = CGAffineTransformMakeTranslation(0, -100)
+         self.transform = CGAffineTransformMakeTranslation(0, -180)
     }
     
     UIView.animateWithDuration(self.animationIn, delay: 0,
@@ -244,7 +244,7 @@ public class Popover: UIView {
             case .None:
                 break
             case .Translation:
-                 self.transform = CGAffineTransformMakeTranslation( 0, -100)
+                 self.transform = CGAffineTransformMakeTranslation( 0, -180)
             }
           self.blackOverlay.alpha = 0
         }){ _ in
