@@ -166,6 +166,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             projectType = .Normal
         }
     }
+
     @IBAction func unitDidChanged(sender: UITextField) {
         if  sender.text?.characters.count > 5 {
             sender.text = (sender.text! as NSString).substringToIndex(5)
@@ -173,8 +174,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     }
     
     @IBAction func projectNameDidChanged(sender: UITextField) {
-        if  sender.text?.characters.count > 12 {
-            sender.text = (sender.text! as NSString).substringToIndex(12)
+        if  sender.text?.characters.count > 10 {
+            sender.text = (sender.text! as NSString).substringToIndex(10)
         }
     }
     //是否改变开始时间
@@ -575,20 +576,20 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
 
         switch textField.tag{
         case UITag.projectNameLabel:
-            if newText.length > 0 && newText.length <= 12{
+            if newText.length >= 0 && newText.length <= 10{
                 return true
             }else {
                 return false
             }
         case UITag.unitTextField:
-            if newText.length > 0 && newText.length <= 5{
+            if newText.length >= 0 && newText.length <= 5{
                 return true
             }else {
                 return false
             }
         case UITag.totalTextField:
             let new = newText as String
-            if newText.length > 0 && newText.length <= 6 && new.validateNum(){
+            if newText.length >= 0 && newText.length <= 6 && new.validateNum(){
                 return true
             }else {
                 return false

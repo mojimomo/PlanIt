@@ -237,7 +237,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="unitDidChanged:" destination="z9z-wq-QO9" eventType="editingDidEnd" id="v4o-H3-cUf"/>
+                                                        <action selector="unitDidChanged:" destination="z9z-wq-QO9" eventType="editingChanged" id="xYA-rJ-aaa"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -405,7 +405,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="editDoneDidEnd:" destination="qh9-Oj-hfp" eventType="editingDidEnd" id="mlP-iX-uew"/>
+                                                        <action selector="doneDidChanged:" destination="qh9-Oj-hfp" eventType="editingChanged" id="EAs-mh-7Gw"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCX-C2-Ihy">
@@ -498,7 +498,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="remarkDidChanged:" destination="qh9-Oj-hfp" eventType="editingDidEnd" id="phf-t5-2Up"/>
+                                                        <action selector="remarkDidChanged:" destination="qh9-Oj-hfp" eventType="editingChanged" id="tkM-Um-FmM"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -844,10 +844,10 @@
                                 <rect key="frame" x="300" y="15" width="300" height="270"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcs-hp-rJP" customClass="KDCircularProgress" customModule="PlanIt" customModuleProvider="target">
-                                        <rect key="frame" x="60" y="45" width="179" height="179"/>
+                                        <rect key="frame" x="63.5" y="48.5" width="172" height="172"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tau-Cq-hUb">
-                                                <rect key="frame" x="61" y="73" width="56" height="33.5"/>
+                                                <rect key="frame" x="58" y="69.5" width="56" height="33.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="5yH-Y4-tUf"/>
                                                 </constraints>
@@ -919,7 +919,7 @@
                                 <rect key="frame" x="0.0" y="15" width="300" height="270"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离项目截止" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exL-J4-Unb">
-                                        <rect key="frame" x="24" y="45" width="268" height="24"/>
+                                        <rect key="frame" x="24" y="48.5" width="268" height="24"/>
                                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -931,8 +931,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYA-jv-LwE">
-                                        <rect key="frame" x="24" y="79" width="268" height="50.5"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="36"/>
+                                        <rect key="frame" x="24" y="82" width="268" height="48"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="34"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>

@@ -26,7 +26,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         static let remarkTextField = 1005
     }
     
-    @IBAction func editDoneDidEnd(sender: UITextField) {
+    @IBAction func doneDidChanged(sender: UITextField) {
         if doneTextField.text != ""{
             if Double(doneTextField.text!)! > project.rest{
                 doneTextField.text = "\(Int(project.rest))"
@@ -104,13 +104,13 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         switch textField.tag{
         case UITag.doneTextField:
             let new = newText as String
-            if newText.length > 0 && newText.length <= 6 && new.validateNum(){
+            if newText.length >= 0 && newText.length <= 6 && new.validateNum(){
                 return true
             }else {
                 return false
             }
         case UITag.remarkTextField:
-            if newText.length > 0 && newText.length <= 20{
+            if newText.length >= 0 && newText.length <= 20{
                 return true
             }else {
                 return false
