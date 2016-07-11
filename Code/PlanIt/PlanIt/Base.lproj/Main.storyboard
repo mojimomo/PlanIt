@@ -841,13 +841,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8e8-ja-yTV">
-                                <rect key="frame" x="300" y="15" width="300" height="270"/>
+                                <rect key="frame" x="300" y="15" width="300" height="220"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcs-hp-rJP" customClass="KDCircularProgress" customModule="PlanIt" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="52" width="270" height="270"/>
+                                        <rect key="frame" x="60" y="20" width="179" height="179"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tau-Cq-hUb">
-                                                <rect key="frame" x="107.5" y="118" width="56" height="33.5"/>
+                                                <rect key="frame" x="61" y="73" width="56" height="33.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="5yH-Y4-tUf"/>
                                                 </constraints>
@@ -879,43 +879,64 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="zcs-hp-rJP" firstAttribute="centerY" secondItem="8e8-ja-yTV" secondAttribute="centerY" id="0e3-qe-LqJ"/>
                                     <constraint firstItem="zcs-hp-rJP" firstAttribute="width" secondItem="8e8-ja-yTV" secondAttribute="width" multiplier="0.9" id="3FG-Tp-YrR"/>
                                     <constraint firstItem="zcs-hp-rJP" firstAttribute="bottom" secondItem="8e8-ja-yTV" secondAttribute="bottomMargin" id="4N6-rR-ivs"/>
                                     <constraint firstItem="zcs-hp-rJP" firstAttribute="top" secondItem="8e8-ja-yTV" secondAttribute="top" constant="101" id="AmP-Q0-Zqd"/>
                                     <constraint firstItem="zcs-hp-rJP" firstAttribute="centerX" secondItem="8e8-ja-yTV" secondAttribute="centerX" id="EiE-o0-R5P"/>
+                                    <constraint firstAttribute="height" constant="220" id="acM-0X-QTN"/>
                                     <constraint firstItem="zcs-hp-rJP" firstAttribute="leading" secondItem="8e8-ja-yTV" secondAttribute="leading" constant="53" id="tbc-j6-7MS"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="3FG-Tp-YrR"/>
                                         <exclude reference="4N6-rR-ivs"/>
                                         <exclude reference="AmP-Q0-Zqd"/>
                                         <exclude reference="tbc-j6-7MS"/>
                                     </mask>
                                 </variation>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nob-L2-Bdh">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="15"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="ZfT-v6-3st"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMw-QP-Oac">
+                                <rect key="frame" x="0.0" y="235" width="600" height="15"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="aoD-WR-tCU"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="AOX-o4-V0B">
+                                <rect key="frame" x="0.0" y="250" width="600" height="350"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqa-q5-DLe">
-                                <rect key="frame" x="0.0" y="15" width="300" height="270"/>
+                                <rect key="frame" x="0.0" y="15" width="300" height="220"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离项目截止" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exL-J4-Unb">
-                                        <rect key="frame" x="24" y="52" width="268" height="22.5"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
+                                        <rect key="frame" x="24" y="20" width="268" height="24"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截止：2016年12月12日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAP-cj-VgG">
-                                        <rect key="frame" x="24" y="151" width="268" height="18.5"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
+                                        <rect key="frame" x="24" y="121" width="268" height="17"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYA-jv-LwE">
-                                        <rect key="frame" x="24" y="85" width="268" height="45"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="32"/>
+                                        <rect key="frame" x="24" y="54" width="268" height="50.5"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="36"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CNQ-UT-ZBX">
-                                        <rect key="frame" x="24" y="134" width="256" height="2"/>
+                                        <rect key="frame" x="24" y="109" width="256" height="2"/>
                                         <color key="tintColor" red="0.40784313725490196" green="0.76470588235294112" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="152" id="R4d-fs-C3a"/>
@@ -927,7 +948,7 @@
                                         </variation>
                                     </progressView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdU-2l-bn6" customClass="TagListView" customModule="PlanIt" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="183" width="268" height="78.5"/>
+                                        <rect key="frame" x="24" y="148" width="268" height="63.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -985,12 +1006,13 @@
                                     <constraint firstItem="CNQ-UT-ZBX" firstAttribute="top" secondItem="gYA-jv-LwE" secondAttribute="bottom" constant="8" symbolic="YES" id="Wcg-zg-xnV"/>
                                     <constraint firstItem="xdU-2l-bn6" firstAttribute="trailing" secondItem="eqa-q5-DLe" secondAttribute="trailingMargin" id="cl4-sC-RGB"/>
                                     <constraint firstItem="CNQ-UT-ZBX" firstAttribute="leading" secondItem="xdU-2l-bn6" secondAttribute="leading" id="hIv-9y-szk"/>
-                                    <constraint firstItem="RAP-cj-VgG" firstAttribute="top" secondItem="CNQ-UT-ZBX" secondAttribute="bottom" constant="15" id="iQf-Ty-7cS"/>
+                                    <constraint firstAttribute="height" constant="220" id="iLP-GM-BKj"/>
+                                    <constraint firstItem="RAP-cj-VgG" firstAttribute="top" secondItem="CNQ-UT-ZBX" secondAttribute="bottom" constant="10" id="iQf-Ty-7cS"/>
                                     <constraint firstItem="gYA-jv-LwE" firstAttribute="leading" secondItem="eqa-q5-DLe" secondAttribute="leading" constant="20" symbolic="YES" id="jT0-vc-q7D"/>
                                     <constraint firstItem="xdU-2l-bn6" firstAttribute="top" secondItem="CNQ-UT-ZBX" secondAttribute="bottom" constant="19" id="ljh-dk-RkR"/>
                                     <constraint firstItem="gYA-jv-LwE" firstAttribute="trailing" secondItem="eqa-q5-DLe" secondAttribute="trailingMargin" id="mBF-jm-TJj"/>
                                     <constraint firstItem="exL-J4-Unb" firstAttribute="leading" secondItem="eqa-q5-DLe" secondAttribute="leadingMargin" id="mbE-Ek-U4d"/>
-                                    <constraint firstItem="xdU-2l-bn6" firstAttribute="top" secondItem="RAP-cj-VgG" secondAttribute="bottom" constant="14" id="n3L-KP-xxx"/>
+                                    <constraint firstItem="xdU-2l-bn6" firstAttribute="top" secondItem="RAP-cj-VgG" secondAttribute="bottom" constant="10" id="n3L-KP-xxx"/>
                                     <constraint firstItem="xdU-2l-bn6" firstAttribute="width" secondItem="eqa-q5-DLe" secondAttribute="width" id="s0b-oI-x1Z"/>
                                     <constraint firstItem="RAP-cj-VgG" firstAttribute="leading" secondItem="xdU-2l-bn6" secondAttribute="leading" id="uF7-o4-qJ1"/>
                                     <constraint firstItem="gYA-jv-LwE" firstAttribute="leading" secondItem="xdU-2l-bn6" secondAttribute="leading" id="vCQ-cf-wh1"/>
@@ -1018,24 +1040,6 @@
                                         <exclude reference="s0b-oI-x1Z"/>
                                     </mask>
                                 </variation>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nob-L2-Bdh">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="15"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="ZfT-v6-3st"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMw-QP-Oac">
-                                <rect key="frame" x="0.0" y="285" width="600" height="15"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="aoD-WR-tCU"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="AOX-o4-V0B">
-                                <rect key="frame" x="0.0" y="300" width="600" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1093,6 +1097,7 @@
                                 <exclude reference="Vpj-xv-Mfg"/>
                                 <exclude reference="fH4-zk-ru0"/>
                                 <exclude reference="kHX-NR-8us"/>
+                                <exclude reference="uc5-gh-73v"/>
                                 <exclude reference="z86-fX-bwx"/>
                                 <exclude reference="Kzt-bT-6Xb"/>
                                 <exclude reference="OQC-bB-jWW"/>

@@ -30,7 +30,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             
         }
         get{
-            return CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height / 2 - 30)
+            let staticRect = UIApplication.sharedApplication().statusBarFrame
+            let navRect =  self.navigationController?.navigationBar.frame
+            let height = self.view.bounds.height - staticRect.height - navRect!.height - 30 - 220
+            return CGRectMake(0, 0, self.view.bounds.width, height)
         }
     }
     
