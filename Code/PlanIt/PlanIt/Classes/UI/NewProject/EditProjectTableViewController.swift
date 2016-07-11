@@ -166,7 +166,17 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             projectType = .Normal
         }
     }
+    @IBAction func unitDidChanged(sender: UITextField) {
+        if  sender.text?.characters.count > 5 {
+            sender.text = (sender.text! as NSString).substringToIndex(5)
+        }
+    }
     
+    @IBAction func projectNameDidChanged(sender: UITextField) {
+        if  sender.text?.characters.count > 12 {
+            sender.text = (sender.text! as NSString).substringToIndex(12)
+        }
+    }
     //是否改变开始时间
     func editBeginTime(rect: CGRect) {
         if IS_IOS8{
@@ -425,7 +435,15 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
         switch indexPath{
         case beginTimeCellPath:
-            if (tableState != .Edit || project.type == .NoRecord) && project.isFinished != .Finished{
+            if  tableState == .Edit && project.isFinished != .Finished{
+                let processes = Process().loadData(project.id)
+                if processes.count == 0{
+                    let rect = tableView.rectForRowAtIndexPath(indexPath)
+                    editBeginTime(rect)
+                }else{
+                    callAlert("修改错误", message: "已经有进度无法修改开始时间！")
+                }
+            }else if tableState == .Add{
                 let rect = tableView.rectForRowAtIndexPath(indexPath)
                 editBeginTime(rect)
             }
@@ -463,7 +481,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         unitTextField.tag = UITag.unitTextField
         totalTextField.delegate = self
         totalTextField.tag = UITag.totalTextField
-        
+        unitTextField.autocorrectionType = .No
+        projectNameLabel.autocorrectionType = .No
         switch tableState{
         case .Add:
             //添加新增项目按钮
@@ -486,16 +505,16 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //按钮间的空隙
             let gap = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil,
                 action: nil)
-            gap.width = 15;
+            gap.width = 10;
             
             //用于消除右边边空隙，要不然按钮顶不到最边上
             let spacer = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil,
                 action: nil)
-            spacer.width = -10;
+            spacer.width = 10;
 
             //设置按钮
-            self.navigationItem.rightBarButtonItems = [spacer, addButton, gap, deleteButton]
-            self.navigationItem.leftBarButtonItem = backButton
+            self.navigationItem.leftBarButtonItems = [spacer, backButton, gap, deleteButton]
+            self.navigationItem.rightBarButtonItem = addButton
             
 //            //新增删除按钮
 //            let deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: view.bounds.width , height: 44.0 ))
@@ -579,4 +598,5 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             return true
         }
     }
+
 }

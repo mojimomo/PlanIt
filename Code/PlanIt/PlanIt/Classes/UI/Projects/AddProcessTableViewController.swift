@@ -56,6 +56,12 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         }
     }
     
+    @IBAction func remarkDidChanged(sender: UITextField) {
+        if  sender.text?.characters.count > 20 {
+            sender.text = (sender.text! as NSString).substringToIndex(20)
+        }
+    }
+    
     func cancel(){
         self.dismissViewControllerAnimated(true) { () -> Void in
             if self.newPercent != 0{

@@ -136,6 +136,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         self.navigationBarItem = UINavigationItem(title: "标签选择")
         self.navigationBarItem.leftBarButtonItem = self.leftButton
         
+        navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         navigationBar.pushNavigationItem(self.navigationBarItem, animated: true)
         navigationBar.tintColor = navigationTintColor
         navigationBar.barTintColor = otherNavigationBackground

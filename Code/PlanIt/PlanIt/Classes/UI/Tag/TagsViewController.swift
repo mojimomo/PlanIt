@@ -63,7 +63,7 @@ class TagsViewController: UITableViewController {
         super.viewDidLoad()
         //self.view.tintColor = UIColor.blackColor()
         self.view.backgroundColor = allBackground
-        self.title = "标签"
+        self.title = "标签选择"
         tags = Tag().loadAllData()
         tagMaps = TagMap().loadAllData()
         let projects = Project().loadAllData()
