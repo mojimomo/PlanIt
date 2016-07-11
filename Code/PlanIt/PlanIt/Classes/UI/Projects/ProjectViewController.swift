@@ -537,7 +537,17 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 })
 
             }else if projects[indexPath.section].isFinished == .NotBegined{
-                callAlert("项目未开始",message: "修改项目开始时间以记录/打卡/标记完成！")
+                var type = ""
+                switch projects[indexPath.section].type{
+                case .Normal:
+                    type = "记录"
+                case .Punch:
+                    type = "打卡"
+                case .NoRecord:
+                    type = "标记"
+                default: break
+                }
+                callAlert("项目未开始",message: "修改项目开始时间以\(type)！")
             }
         }
     }

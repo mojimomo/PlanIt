@@ -9,7 +9,7 @@
 import UIKit
 
 let colorUnselectedTag = UIColor ( red: 0.9451, green: 0.9412, blue: 0.9294, alpha: 1.0 )
-let colorSelectedTag = UIColor.colorFromHex("#B0B2B4")
+let colorSelectedTag = UIColor.colorFromHex("#B4B2B0")
 
 let colorTextUnSelectedTag = UIColor(red:0.2549, green:0.2667, blue:0.2784, alpha:1.0)
 let colorTextSelectedTag = UIColor(red:0.2549, green:0.2667, blue:0.2784, alpha:1.0)
