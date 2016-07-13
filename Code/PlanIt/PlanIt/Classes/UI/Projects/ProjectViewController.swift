@@ -361,9 +361,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     // MARK: - 跳转动作
     ///弹出完成百分比view    
     func showProcessChange(oldPercent: Double, newPercent: Double, name: String){
-        self.oldPercent = Int(oldPercent)
-        self.increasePercent = Int(oldPercent)
-        self.newPercent = Int(newPercent)
+        //self.oldPercent = Int(oldPercent)
+        //self.increasePercent = Int(oldPercent)
+        //self.newPercent = Int(newPercent)
         
         //整体通知
         let rect = UIScreen.mainScreen().bounds
@@ -393,7 +393,46 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
         self.popover.show(showView,  point: startPoint)
         let timeInterval = 1.0 / (newPercent - oldPercent)
-        NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "handleIncreasePercent:", userInfo: nil, repeats: true)
+        let numOfTimes = Int(newPercent - oldPercent)
+//        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
+//        dispatch_async(dispatch_get_global_queue(qos, 0)) { () -> Void in
+//            for increasePercent in Int(oldPercent)...Int(newPercent){
+//                self.waveLoadingIndicator.progress = Double(increasePercent) / 100
+//                usleep(UInt32(timeInterval * 1000) )
+//                //NSThread.sleepForTimeInterval(timeInterval)
+//            }
+//            self.popover.dismiss()
+//
+//        }
+        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
+        let queue = dispatch_get_global_queue(qos, 0)
+        dispatch_async(queue) { () -> Void in
+            for var time = 0; time < numOfTimes; time++ {
+                dispatch_async(queue, { () -> Void in
+                    self.waveLoadingIndicator.progress = (oldPercent + Double(time)) / 100
+                })
+                NSThread.sleepForTimeInterval(timeInterval)
+                print("sleep\(timeInterval)")
+            }
+            dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+                 self.popover.dismiss()
+            })
+        }
+        
+        
+//        let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+//        dispatch_source_set_timer(timer, dispatch_walltime(nil, 0), UInt64(timeInterval ) * NSEC_PER_SEC, 0)
+//        dispatch_source_set_event_handler(timer) { () -> Void in
+//            if self.increasePercent <= self.newPercent{
+//                self.waveLoadingIndicator.progress = Double(self.increasePercent) / 100
+//                self.increasePercent++
+//            }else{
+//                dispatch_resume(timer)
+//                self.popover.dismiss()
+//
+//            }
+//        }
+        //NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "handleIncreasePercent:", userInfo: nil, repeats: true)
     }
     
     func handleIncreasePercent(timer: NSTimer){

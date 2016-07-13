@@ -28,6 +28,7 @@ class ProcessesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        let editBarButton = UIBarButtonItem(image: UIImage(named: "edit"), style: .Done, target: self, action: "finishEdit:")
+//        self.navigationItem.rightBarButtonItem = ///删除某一行
         
         let backBarButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: "dissmiss")
         self.navigationItem.leftBarButtonItem = backBarButton
