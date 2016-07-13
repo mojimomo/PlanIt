@@ -372,11 +372,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         showView.backgroundColor = UIColor.whiteColor()
         
         //波浪试图
-        waveLoadingIndicator = WaveLoadingIndicator(frame:CGRect(x: 20, y: 60, width: 160, height: 160))
+        let waveLoadingIndicator = WaveLoadingIndicator(frame:CGRect(x: 20, y: 60, width: 160, height: 160))
         waveLoadingIndicator.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         waveLoadingIndicator.progress = Double(self.oldPercent) / 100        
         showView.addSubview(waveLoadingIndicator)
-
+        
         //分割线
         let blackView = UIView(frame: CGRect(x: 10, y: 45, width: 180, height: 1))
         blackView.backgroundColor = UIColor ( red: 0.8078, green: 0.8118, blue: 0.8157, alpha: 1.0 )
@@ -390,10 +390,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         showView.addSubview(titleLabel)
         
         //显示
-        self.popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
-        self.popover.show(showView,  point: startPoint)
-        let timeInterval = 1.0 / (newPercent - oldPercent)
-        let numOfTimes = Int(newPercent - oldPercent)
+        let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
+        popover.show(showView,  point: startPoint)
+        let timeInterval = 1.0 / (newPercent - oldPercent + 1)
+        let numOfTimes = Int(newPercent - oldPercent + 1)
 //        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
 //        dispatch_async(dispatch_get_global_queue(qos, 0)) { () -> Void in
 //            for increasePercent in Int(oldPercent)...Int(newPercent){
@@ -408,14 +408,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         let queue = dispatch_get_global_queue(qos, 0)
         dispatch_async(queue) { () -> Void in
             for var time = 0; time < numOfTimes; time++ {
-                dispatch_async(queue, { () -> Void in
-                    self.waveLoadingIndicator.progress = (oldPercent + Double(time)) / 100
-                })
+                waveLoadingIndicator.progress = (oldPercent + Double(time)) / 100
                 NSThread.sleepForTimeInterval(timeInterval)
                 print("sleep\(timeInterval)")
             }
             dispatch_sync( dispatch_get_main_queue(), { () -> Void in
-                 self.popover.dismiss()
+                 popover.dismiss()
             })
         }
         
