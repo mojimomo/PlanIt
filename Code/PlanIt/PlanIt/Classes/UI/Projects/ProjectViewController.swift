@@ -371,7 +371,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         let showView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 240))
         showView.backgroundColor = UIColor.whiteColor()
         
-        //波浪试图
+        //波浪视图
         let waveLoadingIndicator = WaveLoadingIndicator(frame:CGRect(x: 20, y: 60, width: 160, height: 160))
         waveLoadingIndicator.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         waveLoadingIndicator.progress = Double(self.oldPercent) / 100        
@@ -422,14 +422,14 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         let showView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 240))
         showView.backgroundColor = UIColor.whiteColor()
         
-        //波浪试图
+        //完成视图
         let successView = UIImageView(image: UIImage(named: "projectFinish"))
         successView.frame = CGRect(x: 20, y: 60, width: 160, height: 160)
         showView.addSubview(successView)
         successView.transform = CGAffineTransformMakeScale(0.0, 0.0)
         UIView.animateWithDuration(1 , delay: 0,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 3,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 0,
             options: .CurveEaseInOut,
             animations: {
                 successView.transform = CGAffineTransformIdentity
