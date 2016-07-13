@@ -394,16 +394,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         popover.show(showView,  point: startPoint)
         let timeInterval = 1.0 / (newPercent - oldPercent + 1)
         let numOfTimes = Int(newPercent - oldPercent + 1)
-//        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
-//        dispatch_async(dispatch_get_global_queue(qos, 0)) { () -> Void in
-//            for increasePercent in Int(oldPercent)...Int(newPercent){
-//                self.waveLoadingIndicator.progress = Double(increasePercent) / 100
-//                usleep(UInt32(timeInterval * 1000) )
-//                //NSThread.sleepForTimeInterval(timeInterval)
-//            }
-//            self.popover.dismiss()
-//
-//        }
+        
         let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
         let queue = dispatch_get_global_queue(qos, 0)
         dispatch_async(queue) { () -> Void in
@@ -416,32 +407,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                  popover.dismiss()
             })
         }
-        
-        
-//        let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
-//        dispatch_source_set_timer(timer, dispatch_walltime(nil, 0), UInt64(timeInterval ) * NSEC_PER_SEC, 0)
-//        dispatch_source_set_event_handler(timer) { () -> Void in
-//            if self.increasePercent <= self.newPercent{
-//                self.waveLoadingIndicator.progress = Double(self.increasePercent) / 100
-//                self.increasePercent++
-//            }else{
-//                dispatch_resume(timer)
-//                self.popover.dismiss()
-//
-//            }
-//        }
-        //NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "handleIncreasePercent:", userInfo: nil, repeats: true)
     }
-    
-    func handleIncreasePercent(timer: NSTimer){
-        if self.increasePercent <= self.newPercent{
-            self.waveLoadingIndicator.progress = Double(self.increasePercent) / 100
-            self.increasePercent++
-        }else{
-            timer.invalidate()
-            self.popover.dismiss()
-        }
-    }
+
     
     ///弹出完成百分比view
     func showProcessFinish(name: String){
@@ -482,16 +449,19 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         showView.addSubview(titleLabel)
         
         //显示
-        self.popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
-        self.popover.show(showView,  point: startPoint)
-        NSTimer.scheduledTimerWithTimeInterval( 1.0, target: self, selector: "handleFinishProject:", userInfo: nil, repeats: true)
-
+        let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
+        popover.show(showView,  point: startPoint)
+        
+        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
+        let queue = dispatch_get_global_queue(qos, 0)
+        dispatch_async(queue) { () -> Void in
+            NSThread.sleepForTimeInterval(1)
+            dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+                popover.dismiss()
+            })
+        }
     }
 
-    func handleFinishProject(timer: NSTimer){
-        timer.invalidate()
-        self.popover.dismiss()
-    }
 
     ///新增进程
     func addProcess(sender: UIButton){
