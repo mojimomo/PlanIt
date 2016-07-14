@@ -9,7 +9,7 @@
 import UIKit
 import Popover
 
-class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate{
+class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate ,UIGestureRecognizerDelegate{
 
     @IBOutlet weak var tagsBarButton: UIBarButtonItem!
     @IBOutlet weak var projectTableView: UITableView!{
@@ -159,13 +159,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func handleCallOptions(){
         print("打开菜单页面")
         let muneViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Options") as! OptionsTableViewController
-        //设置view背景色
-        muneViewController.view.backgroundColor = allBackground
-        
-        //修改样式
-        self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
-        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
-        self.navigationController?.navigationBar.shadowImage = nil
         
         //压入导航栏
         self.navigationController?.pushViewController(muneViewController, animated: true)
@@ -307,6 +300,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
         //设计背景色
         self.projectTableView.backgroundColor = allBackground
+        
+        
+        //手势代理
+        self.navigationController!.interactivePopGestureRecognizer!.delegate = self
         
         if let addImage = UIImage(named: "add"){
             let addImageClick = UIImage(named: "addclick")
@@ -934,6 +931,14 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         UIView.animateWithDuration(2) {
             self.navigationController?.navigationBarHidden = self.navigationController?.navigationBarHidden == false
         }
+    }
+    
+    // MARK: - UIGestureRecognizerDelegate
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if navigationController?.viewControllers.count >= 2 {
+            return true
+        }
+        return false
     }
 }
 

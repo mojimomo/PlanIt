@@ -245,6 +245,17 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         self.daysLabel.text = "\(day)天"
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //设置view背景色
+        self.view.backgroundColor = allBackground
+        
+        //修改样式
+        self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
+        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = nil
+    }
     // MARK: - UIPickerViewDataSource
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
