@@ -1,3 +1,0 @@
-target 'PlanIt' do
-    pod "Popover"
-end
