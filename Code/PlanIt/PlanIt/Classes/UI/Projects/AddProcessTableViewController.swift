@@ -104,7 +104,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         switch textField.tag{
         case UITag.doneTextField:
             let new = newText as String
-            if newText.length >= 0 && newText.length <= 6 && new.validateNum(){
+            if newText.length >= 0 && newText.length <= 6 && (new.validateNum() || new == ""){
                 return true
             }else {
                 return false

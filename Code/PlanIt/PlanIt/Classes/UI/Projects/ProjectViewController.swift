@@ -9,7 +9,7 @@
 import UIKit
 import Popover
 
-class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate{
+class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate{
 
     @IBOutlet weak var tagsBarButton: UIBarButtonItem!
     @IBOutlet weak var projectTableView: UITableView!{
@@ -29,6 +29,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     //表格高度
     let tableViewHeight : CGFloat = 44
     let MenuTableViewHeight : CGFloat = 60
+    private var addButtonSize : CGSize!
     private var selectTag : Tag?
     private var popover: Popover!
     private var isPopoverOver = false
@@ -178,11 +179,22 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     ///根据超时快速排序
-    func qsortProject(input: [Project]) -> [Project]{
+    func qsortProjectByOuttime(input: [Project]) -> [Project]{
         if let (pivot, rest) = input.decompose {
             let lesser = rest.filter { $0.outTime > pivot.outTime }
             let greater = rest.filter { $0.outTime <= pivot.outTime }
-            return qsortProject(lesser) + [pivot] + qsortProject(greater)
+            return qsortProjectByOuttime(lesser) + [pivot] + qsortProjectByOuttime(greater)
+        } else {
+            return []
+        }
+    }
+    
+    ///根据超时快速排序
+    func qsortProjectByBeginTime(input: [Project]) -> [Project]{
+        if let (pivot, rest) = input.decompose {
+            let lesser = rest.filter { $0.beginTimeDate.timeIntervalSince1970 < pivot.beginTimeDate.timeIntervalSince1970 }
+            let greater = rest.filter { $0.beginTimeDate.timeIntervalSince1970 >= pivot.beginTimeDate.timeIntervalSince1970 }
+            return qsortProjectByBeginTime(lesser) + [pivot] + qsortProjectByBeginTime(greater)
         } else {
             return []
         }
@@ -227,15 +239,15 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         }
         
         var index = 0
+        var notBeginedProjects = [Project]()
         
         for project in projects {
-            //不显示未开始
-            if isShowNotBegin {
-                if project.isFinished == .NotBegined {
-                    projects.removeAtIndex(index)
-                    continue
-                }
+            if project.isFinished == .NotBegined {
+                projects.removeAtIndex(index)
+                notBeginedProjects.append(project)
+                continue
             }
+
             //显示结束
             if isShowFinished {
                 if project.isFinished != .Finished {
@@ -250,9 +262,13 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
             index++
         }
+        projects = qsortProjectByOuttime(projects)
         
-        projects = qsortProject(projects)
-        
+        //显示未开始
+        if !isShowNotBegin && !isShowFinished{
+            notBeginedProjects = qsortProjectByBeginTime(notBeginedProjects)
+            projects = projects + notBeginedProjects
+        }
         
         //添加统计label
         if projects.count != 0{
@@ -275,7 +291,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.projectTableView.reloadData()
     }
     
-    //MARK: - View Controller Lifecle
+    //MARK: - View Controller Lifecye
     override func viewDidLoad() {
         super.viewDidLoad()
         //设置导航栏
@@ -300,6 +316,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let rectStatus = UIApplication.sharedApplication().statusBarFrame
             //添加按钮
             addProjectButtonSize = addImage.size
+            addButtonSize = addImage.size
             addProjectButton = UIButton(frame: CGRectMake((self.view.bounds.size.width - addImage.size.width)/2 , self.view.bounds.size.height - addImage.size.height - rectNav!.size.height - rectStatus.size.height - addProjectButtonMargin, addImage.size.width, addImage.size.height))
             addProjectButton?.setImage(addImage, forState: .Normal)
             addProjectButton?.setImage(addImageClick, forState: .Highlighted)
@@ -594,11 +611,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 statisticsViewController.view.backgroundColor = allBackground
                 //设置每个cell的项目
                 statisticsViewController.project = projects[indexPath.section]
-                
-                //修改样式
-                self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
-                self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
-                self.navigationController?.navigationBar.shadowImage = nil
+
                 
                 //压入导航栏
                 self.navigationController?.pushViewController(statisticsViewController, animated: true)
@@ -882,7 +895,49 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func addProcessTableViewAct(old: Double, new: Double, name: String){
         showProcessChange(old, newPercent: new, name: name)
     }
+    // MARK: - UIScrollViewDelegate
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        //scrollView已经有拖拽手势，直接拿到scrollView的拖拽手势
+//        let pan = scrollView.panGestureRecognizer
+//        //获取到拖拽的速度 >0 向下拖动 <0 向上拖动
+//        let velocity = pan.velocityInView(scrollView).y
+//        
+//        if velocity < -5 {
+//            
+//            //向上拖动，隐藏导航栏
+//            self.navigationController?.setNavigationBarHidden(true, animated: true)
+//
+//            //获取静态栏的高度
+//            let rectStatus = UIApplication.sharedApplication().statusBarFrame
+//            addProjectButton?.frame = CGRectMake          ((self.view.bounds.size.width - addButtonSize.width)/2 , self.view.bounds.size.height - addButtonSize.height - rectStatus.size.height - addProjectButtonMargin, addButtonSize.width, addButtonSize.height)
+//        }
+//        else if velocity > 5 {
+//            //向下拖动，显示导航栏
+//            self.navigationController?.setNavigationBarHidden(false, animated: true)
+//
+//            //获取导航栏高度
+//            let rectNav = self.navigationController?.navigationBar.frame
+//            //获取静态栏的高度
+//            let rectStatus = UIApplication.sharedApplication().statusBarFrame
+//            addProjectButton?.frame = CGRectMake          ((self.view.bounds.size.width - addButtonSize.width)/2 , self.view.bounds.size.height - addButtonSize.height - (rectNav?.size.height)! - rectStatus.size.height - addProjectButtonMargin, addButtonSize.width, addButtonSize.height)
+//            
+//        }
+//        else if velocity == 0{
+//            
+//            //停止拖拽
+//        }
+    }
+    
+    
+    
+    func toggle() {
+        UIView.animateWithDuration(2) {
+            self.navigationController?.navigationBarHidden = self.navigationController?.navigationBarHidden == false
+        }
+    }
 }
+
+
 
 extension Array {
     var decompose : (head: Element, tail: [Element])? {

@@ -511,7 +511,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //用于消除右边边空隙，要不然按钮顶不到最边上
             let spacer = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil,
                 action: nil)
-            spacer.width = 10;
+            spacer.width = 0;
 
             //设置按钮
             self.navigationItem.leftBarButtonItems = [spacer, backButton, gap, deleteButton]
@@ -589,7 +589,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             }
         case UITag.totalTextField:
             let new = newText as String
-            if newText.length >= 0 && newText.length <= 6 && new.validateNum(){
+            if newText.length >= 0 && newText.length <= 6 &&  (new.validateNum() || new == ""){
                 return true
             }else {
                 return false

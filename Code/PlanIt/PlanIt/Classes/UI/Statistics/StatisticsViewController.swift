@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate {
+class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate ,UIGestureRecognizerDelegate{
     ///统计页面当前项目
     var project = Project()
     ///此项目的所有进度数据
@@ -116,7 +116,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.pieChartView.setNeedsDisplay()
     }
     
-    
+    // MARK: - View lifecye
     override func viewWillAppear(animated: Bool) {
         if let currentProject = Project().loadData(project.id){
             project = currentProject
@@ -165,8 +165,15 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             loadProcessDate()
             drawLineChart()
             updateUI()
+            
         }
-
+        //修改样式
+        self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
+        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = nil
+        
+        //手势代理
+        self.navigationController!.interactivePopGestureRecognizer!.delegate = self
     }
     
     override func viewDidLoad()
@@ -199,8 +206,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //设置按钮
         self.navigationItem.rightBarButtonItems = [spacer, historyBarButton, gap, editBarButton]
         self.navigationItem.leftBarButtonItem = backButtom
-        //创建曲线图
-
         
         //setupConstraints()
         
@@ -526,6 +531,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     // MARK: - EditProjectTableViewDelegate
     func goBackAct(){
         self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    // MARK: - UIGestureRecognizerDelegate
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if navigationController?.viewControllers.count >= 2 {
+            return true
+        }
+        return false
     }
 }
 
