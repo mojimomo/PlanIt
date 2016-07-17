@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WebviewController: UIViewController {
+class WebviewController: UIViewController,UIWebViewDelegate {
 
     //使用指南的webview
     @IBOutlet var webView: UIWebView!
@@ -20,13 +20,28 @@ class WebviewController: UIViewController {
         let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
         self.navigationItem.leftBarButtonItem = backButtom
         
+        webView.delegate = self
+        
         //设置初始加载网页
         let url = NSURL(string: "http://zoomyale.com/myprogress/")
         let request = NSURLRequest(URL: url!)
-        
         webView.loadRequest(request)
     }
 
+    //开始加载网页
+    func webViewDidStartLoad(webView: UIWebView) {
+        print("start")
+        var indicator = WIndicator.showIndicatorAddedTo(self.navigationController!.view, animation: true)
+        
+    }
+    
+    //完成加载网页
+    func webViewDidFinishLoad(webView: UIWebView) {
+        print("finish")
+        WIndicator.removeIndicatorFrom(self.navigationController!.view, animation: true)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

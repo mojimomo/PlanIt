@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0AA8C566706EFBEE8F482108 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */; };
+		36006BE01D3BC84E00E08324 /* WActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36006BDD1D3BC84E00E08324 /* WActivityIndicator.swift */; };
+		36006BE11D3BC84E00E08324 /* WIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36006BDE1D3BC84E00E08324 /* WIndicator.swift */; };
+		36006BE21D3BC84E00E08324 /* WIndicatorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36006BDF1D3BC84E00E08324 /* WIndicatorText.swift */; };
 		BE004A5F1D2A43A400556E85 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */; };
 		BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16051D2CCC3800A4B4A5 /* OptionsTableViewController.swift */; };
 		BE1C16081D2CCC4200A4B4A5 /* WebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16071D2CCC4200A4B4A5 /* WebviewController.swift */; };
@@ -78,6 +81,10 @@
 
 /* Begin PBXFileReference section */
 		09589BE40F48A418B19A9511 /* Pods-PlanIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.release.xcconfig"; sourceTree = "<group>"; };
+		36006BD01D3BC5D800E08324 /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = "<group>"; };
+		36006BDD1D3BC84E00E08324 /* WActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WActivityIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WActivityIndicator.swift"; sourceTree = "<group>"; };
+		36006BDE1D3BC84E00E08324 /* WIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicator.swift"; sourceTree = "<group>"; };
+		36006BDF1D3BC84E00E08324 /* WIndicatorText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicatorText.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicatorText.swift"; sourceTree = "<group>"; };
 		5F835661849BEA352693A738 /* Pods-PlanIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.debug.xcconfig"; sourceTree = "<group>"; };
 		75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
@@ -180,10 +187,21 @@
 		200B3328E0DC1CA2BA07C039 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36006BDC1D3BC83700E08324 /* MBProgressHUD */,
 				BEAC77631D363300007BBB0E /* Popover.framework */,
 				75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		36006BDC1D3BC83700E08324 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				36006BDD1D3BC84E00E08324 /* WActivityIndicator.swift */,
+				36006BDE1D3BC84E00E08324 /* WIndicator.swift */,
+				36006BDF1D3BC84E00E08324 /* WIndicatorText.swift */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		BE1C16041D2CCC2500A4B4A5 /* Options(设置) */ = {
@@ -402,6 +420,7 @@
 		BEA520931CCF417F00FFE43E = {
 			isa = PBXGroup;
 			children = (
+				36006BD01D3BC5D800E08324 /* PlanIt-Bridging-Header.h */,
 				BEA5209E1CCF417F00FFE43E /* PlanIt */,
 				BEA520B61CCF417F00FFE43E /* PlanItTests */,
 				BEA520C11CCF417F00FFE43E /* PlanItUITests */,
@@ -678,6 +697,7 @@
 				BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */,
 				BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */,
 				BE1C16081D2CCC4200A4B4A5 /* WebviewController.swift in Sources */,
+				36006BE11D3BC84E00E08324 /* WIndicator.swift in Sources */,
 				BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
 				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
@@ -699,6 +719,7 @@
 				BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
 				BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */,
+				36006BE21D3BC84E00E08324 /* WIndicatorText.swift in Sources */,
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
 				BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */,
@@ -710,6 +731,7 @@
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
 				BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
+				36006BE01D3BC84E00E08324 /* WActivityIndicator.swift in Sources */,
 				BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */,
 				BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */,
 				BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */,

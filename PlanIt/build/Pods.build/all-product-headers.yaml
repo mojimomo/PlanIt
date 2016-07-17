@@ -1,0 +1,60 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/Yale/Develop/PlanIt/PlanIt/build/Debug-iphonesimulator/Pods_PlanIt.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "Pods-PlanIt-umbrella.h",
+          'external-contents': "/Users/Yale/Develop/PlanIt/PlanIt/Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "Pods_PlanIt-Swift.h",
+          'external-contents': "/Users/Yale/Develop/PlanIt/PlanIt/build/Debug-iphonesimulator/Pods_PlanIt.framework/Headers/Pods_PlanIt-Swift.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Yale/Develop/PlanIt/PlanIt/build/Debug-iphonesimulator/Pods_PlanIt.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/Yale/Develop/PlanIt/PlanIt/build/Pods.build/Debug-iphonesimulator/Pods-PlanIt.build/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Yale/Develop/PlanIt/PlanIt/build/Debug-iphonesimulator/Popover/Popover.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "Popover-Swift.h",
+          'external-contents': "/Users/Yale/Develop/PlanIt/PlanIt/build/Debug-iphonesimulator/Popover/Popover.framework/Headers/Popover-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "Popover-umbrella.h",
+          'external-contents': "/Users/Yale/Develop/PlanIt/PlanIt/Pods/Target Support Files/Popover/Popover-umbrella.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Yale/Develop/PlanIt/PlanIt/build/Debug-iphonesimulator/Popover/Popover.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/Yale/Develop/PlanIt/PlanIt/build/Pods.build/Debug-iphonesimulator/Popover.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}

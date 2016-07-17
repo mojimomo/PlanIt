@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': '/Users/Yale/Develop/PlanIt/PlanIt/build/Debug-iphonesimulator/Popover/Popover.framework/Modules'
+    'contents': [{
+      'type': 'file',
+      'name': 'module.modulemap',
+      'external-contents': '/Users/Yale/Develop/PlanIt/PlanIt/build/Pods.build/Debug-iphonesimulator/Popover.build/unextended-module.modulemap',
+    }]
+  }]
+}
