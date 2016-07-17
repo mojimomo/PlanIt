@@ -50,6 +50,10 @@ class WebviewController: UIViewController,UIWebViewDelegate {
     func dismiss(){
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        WIndicator.removeIndicatorFrom(self.navigationController!.view, animation: true)
+    }
     /*
     // MARK: - Navigation
 
