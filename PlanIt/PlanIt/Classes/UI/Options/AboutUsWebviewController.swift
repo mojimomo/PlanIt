@@ -12,7 +12,8 @@ class AboutUsWebviewController: UIViewController, UIWebViewDelegate {
     
     //关于我们的webview
     @IBOutlet var webView: UIWebView!
-
+    var indicator: WActivityIndicator!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,14 +33,16 @@ class AboutUsWebviewController: UIViewController, UIWebViewDelegate {
     //开始加载网页
     func webViewDidStartLoad(webView: UIWebView) {
         print("start")
-        var indicator = WIndicator.showIndicatorAddedTo(self.navigationController!.view, animation: true)
+        indicator = WIndicator.showIndicatorAddedTo(self.navigationController!.view, animation: true)
         
     }
     
     //完成加载网页
     func webViewDidFinishLoad(webView: UIWebView) {
         print("finish")
-        WIndicator.removeIndicatorFrom(self.navigationController!.view, animation: true)
+        if indicator != nil && self.navigationController != nil{
+            WIndicator.removeIndicatorFrom(self.navigationController!.view, animation: true)
+        }
     }
     
     
@@ -54,7 +57,9 @@ class AboutUsWebviewController: UIViewController, UIWebViewDelegate {
     }
     
     override func viewWillDisappear(animated: Bool) {
-        WIndicator.removeIndicatorFrom(self.navigationController!.view, animation: true)
+        if indicator != nil && self.navigationController != nil{
+            WIndicator.removeIndicatorFrom(self.navigationController!.view, animation: true)
+        }
     }
     /*
     // MARK: - Navigation

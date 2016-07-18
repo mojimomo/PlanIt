@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0AA8C566706EFBEE8F482108 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */; };
-		36006BE01D3BC84E00E08324 /* WActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36006BDD1D3BC84E00E08324 /* WActivityIndicator.swift */; };
-		36006BE11D3BC84E00E08324 /* WIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36006BDE1D3BC84E00E08324 /* WIndicator.swift */; };
-		36006BE21D3BC84E00E08324 /* WIndicatorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36006BDF1D3BC84E00E08324 /* WIndicatorText.swift */; };
 		BE004A5F1D2A43A400556E85 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */; };
 		BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16051D2CCC3800A4B4A5 /* OptionsTableViewController.swift */; };
 		BE1C16081D2CCC4200A4B4A5 /* WebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16071D2CCC4200A4B4A5 /* WebviewController.swift */; };
@@ -26,6 +23,9 @@
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
 		BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */; };
 		BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE68E5481CE9B658006A1750 /* TagsViewController.swift */; };
+		BE6A1A681D3CC83200E39B7B /* WActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6A1A651D3CC83200E39B7B /* WActivityIndicator.swift */; };
+		BE6A1A691D3CC83200E39B7B /* WIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6A1A661D3CC83200E39B7B /* WIndicator.swift */; };
+		BE6A1A6A1D3CC83200E39B7B /* WIndicatorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6A1A671D3CC83200E39B7B /* WIndicatorText.swift */; };
 		BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */; };
 		BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09321CD9C373008AABCD /* ProcessModel.swift */; };
 		BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */; };
@@ -81,7 +81,7 @@
 
 /* Begin PBXFileReference section */
 		09589BE40F48A418B19A9511 /* Pods-PlanIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.release.xcconfig"; sourceTree = "<group>"; };
-		36006BD01D3BC5D800E08324 /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = "<group>"; };
+		36006BD01D3BC5D800E08324 /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		36006BDD1D3BC84E00E08324 /* WActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WActivityIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WActivityIndicator.swift"; sourceTree = "<group>"; };
 		36006BDE1D3BC84E00E08324 /* WIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicator.swift"; sourceTree = "<group>"; };
 		36006BDF1D3BC84E00E08324 /* WIndicatorText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicatorText.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicatorText.swift"; sourceTree = "<group>"; };
@@ -104,6 +104,9 @@
 		BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		BE68E5481CE9B658006A1750 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
+		BE6A1A651D3CC83200E39B7B /* WActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WActivityIndicator.swift; sourceTree = "<group>"; };
+		BE6A1A661D3CC83200E39B7B /* WIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WIndicator.swift; sourceTree = "<group>"; };
+		BE6A1A671D3CC83200E39B7B /* WIndicatorText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WIndicatorText.swift; sourceTree = "<group>"; };
 		BE6E09301CD9C2B5008AABCD /* TagMapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagMapModel.swift; sourceTree = "<group>"; };
 		BE6E09321CD9C373008AABCD /* ProcessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessModel.swift; sourceTree = "<group>"; };
 		BE6E09341CD9D45E008AABCD /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +264,16 @@
 			path = Tag;
 			sourceTree = "<group>";
 		};
+		BE6A1A641D3CC83200E39B7B /* WActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				BE6A1A651D3CC83200E39B7B /* WActivityIndicator.swift */,
+				BE6A1A661D3CC83200E39B7B /* WIndicator.swift */,
+				BE6A1A671D3CC83200E39B7B /* WIndicatorText.swift */,
+			);
+			path = WActivityIndicator;
+			sourceTree = "<group>";
+		};
 		BE79BCC11D2D38B2001512D6 /* Extension(扩展) */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +359,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE6A1A641D3CC83200E39B7B /* WActivityIndicator */,
 				BE3B754B1D278B3900F7AEC3 /* KDCircularProgress */,
 				BE31C12C1D21168800A1A47B /* WaveLoadingIndicator */,
 				BECFC3051CFABE2400D8C4C8 /* GraphView */,
@@ -420,7 +434,6 @@
 		BEA520931CCF417F00FFE43E = {
 			isa = PBXGroup;
 			children = (
-				36006BD01D3BC5D800E08324 /* PlanIt-Bridging-Header.h */,
 				BEA5209E1CCF417F00FFE43E /* PlanIt */,
 				BEA520B61CCF417F00FFE43E /* PlanItTests */,
 				BEA520C11CCF417F00FFE43E /* PlanItUITests */,
@@ -477,6 +490,7 @@
 				BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */,
 				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
 				BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */,
+				36006BD01D3BC5D800E08324 /* PlanIt-Bridging-Header.h */,
 				BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */,
 			);
 			name = "Support Files";
@@ -697,7 +711,6 @@
 				BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */,
 				BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */,
 				BE1C16081D2CCC4200A4B4A5 /* WebviewController.swift in Sources */,
-				36006BE11D3BC84E00E08324 /* WIndicator.swift in Sources */,
 				BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
 				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
@@ -707,6 +720,7 @@
 				BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */,
 				BE79BCC81D2D38B2001512D6 /* UIColor+colorFromHex.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
+				BE6A1A6A1D3CC83200E39B7B /* WIndicatorText.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */,
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
@@ -719,19 +733,19 @@
 				BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
 				BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */,
-				36006BE21D3BC84E00E08324 /* WIndicatorText.swift in Sources */,
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
 				BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */,
 				BE79BCC71D2D38B2001512D6 /* String+mojiString.swift in Sources */,
+				BE6A1A691D3CC83200E39B7B /* WIndicator.swift in Sources */,
 				BE79BCCB1D2D38E6001512D6 /* UIImage+mojiImage.swift in Sources */,
 				BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */,
 				BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */,
 				BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */,
+				BE6A1A681D3CC83200E39B7B /* WActivityIndicator.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
 				BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
-				36006BE01D3BC84E00E08324 /* WActivityIndicator.swift in Sources */,
 				BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */,
 				BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */,
 				BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */,
