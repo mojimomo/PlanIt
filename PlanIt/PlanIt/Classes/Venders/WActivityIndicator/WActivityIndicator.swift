@@ -10,7 +10,7 @@ import UIKit
 
 class WActivityIndicator: UIView {
 
-    private var indicator               = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    private var indicator               = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     
     private var contentView             = UIView()
     private var bgView                  = UIView()
@@ -66,7 +66,7 @@ class WActivityIndicator: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        bgView.backgroundColor = UIColor.blackColor()
+        bgView.backgroundColor = UIColor.clearColor()
         bgView.alpha = 0.0
         bgView.layer.cornerRadius = 10.0
         bgView.layer.masksToBounds = true

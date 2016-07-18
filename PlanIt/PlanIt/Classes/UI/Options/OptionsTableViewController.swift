@@ -168,7 +168,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             //APP介绍页面
             let link = NSURL(string: "http://zoomyale.com")
             let rect = tableView.rectForRowAtIndexPath(indexPath)
-            let shareVC = UIActivityViewController(activityItems: ["我正在使用PlanIt，一款简洁好用的个人项目进度管理应用。快来下载试试：","http://zoomyale.com",link!,UIImage(named: "about")!], applicationActivities: nil)
+            let shareVC = UIActivityViewController(activityItems: ["我正在使用马克计划，一款简洁好用的个人项目进度管理应用。快来下载试试：","http://zoomyale.com",link!,UIImage(named: "about")!], applicationActivities: nil)
             if let popoverPresentationController = shareVC.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
@@ -198,8 +198,8 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         mailComposeVC.mailComposeDelegate = self
         
         //设置反馈邮件地址、主题及内容
-        mailComposeVC.setToRecipients(["yale.ling.chn@gmail.com"])
-        mailComposeVC.setSubject("PlanIt - 意见反馈")
+        mailComposeVC.setToRecipients(["markplan@foxmail.com"])
+        mailComposeVC.setSubject("马克计划 - 意见反馈")
         mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(modelName)", isHTML: false)
         
         return mailComposeVC
@@ -283,9 +283,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         self.navigationController?.navigationBar.shadowImage = nil
         
         if isAllowedNotification{
-            self.localNotifiicationLabel.text = "启用"
+            self.localNotifiicationLabel.text = "已开启"
         }else{
-            self.localNotifiicationLabel.text = "禁用"
+            self.localNotifiicationLabel.text = "已停用"
         }
     }
     // MARK: - UIPickerViewDataSource
