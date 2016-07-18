@@ -21,6 +21,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
 //        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 //        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 //    }
+    @IBOutlet weak var localNotifiicationLabel: UILabel!
     @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet var isNeedLocalNotifiicationSwitch: UISwitch!
     var isNeedLocalNotifiication = false
@@ -57,7 +58,32 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     var labels = ["1天", "2天", "3天", "4天", "5天", "6天", "7天"]
     var days = [1, 2, 3, 4, 5, 6, 7]
     
+    //是否允许推送
+    var isAllowedNotification: Bool {
+        get{
+            if IS_IOS8{
+                let setting = UIApplication.sharedApplication().currentUserNotificationSettings()
+                if setting!.hashValue != 0 {
+                    return true
+                }
+            }
+            return false
+        }
+        set{
+        
+        }
+    }
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            print("跳转设置")
+            //跳转设置g
+            let url = UIApplicationOpenSettingsURLString
+            if UIApplication.sharedApplication().canOpenURL(NSURL(string: url)!){
+                UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            }
+        }
+        
         if indexPath.section == 0 && indexPath.row == 1 {
             if IS_IOS8{
                 //创建datepicker控件
@@ -255,6 +281,12 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = nil
+        
+        if isAllowedNotification{
+            self.localNotifiicationLabel.text = "启用"
+        }else{
+            self.localNotifiicationLabel.text = "禁用"
+        }
     }
     // MARK: - UIPickerViewDataSource
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -268,8 +300,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     // MARK: - UIPickerViewDelegate
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return labels[row]
-    }
-    
+    }    
 
     /*
     override func didReceiveMemoryWarning() {
