@@ -175,7 +175,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             //APP介绍页面
             let link = NSURL(string: "http://zoomyale.com")
             let rect = tableView.rectForRowAtIndexPath(indexPath)
-            let shareVC = UIActivityViewController(activityItems: ["我正在使用马克计划，一款简洁好用的个人项目进度管理应用。快来下载试试：","http://zoomyale.com",link!,UIImage(named: "about")!], applicationActivities: nil)
+            let shareVC = UIActivityViewController(activityItems: ["我正在使用马克计划，一款简洁好用的个人项目进度管理应用。快来下载试试：","http://markplan.info",link!,UIImage(named: "about")!], applicationActivities: nil)
             if let popoverPresentationController = shareVC.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
