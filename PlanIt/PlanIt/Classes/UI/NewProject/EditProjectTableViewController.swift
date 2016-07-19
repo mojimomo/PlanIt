@@ -192,7 +192,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             alerController.view.addSubview(datePicker)
             
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
                 self.projectBeginTime = dateString
             })
@@ -215,6 +215,10 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             self.presentViewController(alerController, animated: true, completion: { () -> Void in
                 
             })
+            
+            //配置位置
+            datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 100 )
+            datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         }
     }
     
@@ -232,7 +236,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             alerController.view.addSubview(datePicker)
         
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
                 self.projectEndTime = dateString
             })
@@ -255,6 +259,10 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             self.presentViewController(alerController, animated: true, completion: { () -> Void in
                 
             })
+            
+            //配置位置
+            datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 100 )
+            datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         }
     }
 

@@ -86,17 +86,17 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         if indexPath.section == 0 && indexPath.row == 1 {
             if IS_IOS8{
+                //创建UIAlertController
+                let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+                
                 //创建datepicker控件
                 let numberPicker = UIPickerView()
                 numberPicker.dataSource = self
                 numberPicker.delegate = self
-                
-                //创建UIAlertController
-                let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
                 alerController.view.addSubview(numberPicker)
                 
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+                let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
                     self.daysLabel.text = self.labels[numberPicker.selectedRowInComponent(0)]
                     self.day = self.days[numberPicker.selectedRowInComponent(0)]
                     
@@ -121,6 +121,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 alerController.addAction(alerActionOK)
                 alerController.addAction(alerActionCancel)
                 
+                //let oldframe = numberPicker.frame
+
+                
                 
                 if let popoverPresentationController = alerController.popoverPresentationController {
                     popoverPresentationController.sourceView = self.view
@@ -132,6 +135,10 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 self.presentViewController(alerController, animated: true, completion: { () -> Void in
                     
                 })
+                
+                //配置位置
+                numberPicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 100 )
+                numberPicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             }
         }
         
@@ -300,7 +307,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     // MARK: - UIPickerViewDelegate
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return labels[row]
-    }    
+    }
 
     /*
     override func didReceiveMemoryWarning() {

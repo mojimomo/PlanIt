@@ -143,6 +143,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             case .Finished:
                 surplusLabel?.text = "已完成"
                 progressView.setProgress(1 , animated: false)
+                project.percent = 100
             case .OverTime:
                 prompLabel?.text = "超出项目截止"
                 let restString = project.endTimeDate.compareCurrentTime()
