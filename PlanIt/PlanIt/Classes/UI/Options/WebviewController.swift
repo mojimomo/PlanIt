@@ -24,7 +24,7 @@ class WebviewController: UIViewController,UIWebViewDelegate {
 
         
         //设置初始加载网页
-        let url = NSURL(string: "http://zoomyale.com/myprogress/")
+        let url = NSURL(string: "http://zoomyale.coding.me/markplan_tutorial/")
         let request = NSURLRequest(URL: url!)
         webView.loadRequest(request)
     }

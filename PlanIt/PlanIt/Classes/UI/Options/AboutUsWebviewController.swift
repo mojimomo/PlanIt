@@ -23,7 +23,7 @@ class AboutUsWebviewController: UIViewController, UIWebViewDelegate {
         webView.delegate = self
         
         //设置初始加载网页
-        let url = NSURL(string: "https://zoomyale.gitbooks.io/1/content/")
+        let url = NSURL(string: "http://zoomyale.coding.me/markplan_aboutus/")
         let request = NSURLRequest(URL: url!)
         
         webView.loadRequest(request)
