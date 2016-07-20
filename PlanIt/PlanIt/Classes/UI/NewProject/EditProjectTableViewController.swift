@@ -481,7 +481,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    //MARK: - View Controller Lifecle
+    //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         projectNameLabel.delegate = self

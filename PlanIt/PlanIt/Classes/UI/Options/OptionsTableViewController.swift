@@ -87,7 +87,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         if indexPath.section == 0 && indexPath.row == 1 {
             if IS_IOS8{
                 //创建UIAlertController
-                let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+                let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
                 
                 //创建datepicker控件
                 let numberPicker = UIPickerView()
@@ -276,8 +276,20 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
         
         self.daysLabel.text = "\(day)天"
+        //对back to app进行观察
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:  "applicationDidBecomeActive:",name: UIApplicationDidBecomeActiveNotification,object: nil)
     }
     
+    //观察是否back to app进行刷新数据
+    func applicationDidBecomeActive(notification: NSNotification){
+        if isAllowedNotification{
+            self.localNotifiicationLabel.text = "已开启"
+        }else{
+            self.localNotifiicationLabel.text = "已停用"
+        }
+    }
+    
+    // MARK: - View Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -295,6 +307,13 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             self.localNotifiicationLabel.text = "已停用"
         }
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        //删除观察者
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
+    }
+    
+    
     // MARK: - UIPickerViewDataSource
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1

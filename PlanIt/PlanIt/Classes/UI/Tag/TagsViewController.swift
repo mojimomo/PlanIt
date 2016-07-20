@@ -58,7 +58,7 @@ class TagsViewController: UITableViewController {
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowFinished")
         }
     }
-    // MARK: - viewlife
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view.tintColor = UIColor.blackColor()

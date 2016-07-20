@@ -284,7 +284,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.projectTableView.reloadData()
     }
     
-    //MARK: - View Controller Lifecye
+    //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         //设置导航栏
@@ -406,17 +406,22 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //显示
         let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
         popover.show(showView,  point: startPoint)
-        let timeInterval = 1.0 / (newPercent - oldPercent + 1)
-        let numOfTimes = Int(newPercent - oldPercent + 1)
+        let timeInterval = 0.1
+        let numOfTimes = 10
+        let addEveryTime = Double(newPercent -  oldPercent) / 10
         
         let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
         let queue = dispatch_get_global_queue(qos, 0)
         dispatch_async(queue) { () -> Void in
+            let beginTime = NSDate()
+            var endTime = NSDate()
             for var time = 0; time < numOfTimes; time++ {
-                waveLoadingIndicator.progress = (oldPercent + Double(time)) / 100
+                waveLoadingIndicator.progress = (oldPercent + addEveryTime * Double(time) ) / 100
                 NSThread.sleepForTimeInterval(timeInterval)
-                print("sleep\(timeInterval)")
+                print("\(NSDate().FormatToStringYYYYMMMMDDHHMMSS()) : sleep\(timeInterval)")
+                endTime = NSDate()
             }
+            print("开始时间 \(beginTime.FormatToStringYYYYMMMMDDHHMMSS()) \n结束时间 \(endTime.FormatToStringYYYYMMMMDDHHMMSS())")
             dispatch_sync( dispatch_get_main_queue(), { () -> Void in
                  popover.dismiss()
             })

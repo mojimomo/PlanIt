@@ -116,7 +116,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.pieChartView.setNeedsDisplay()
     }
     
-    // MARK: - View lifecye
+    // MARK: - View Lifecycle
     override func viewWillAppear(animated: Bool) {
         if let currentProject = Project().loadData(project.id){
             project = currentProject

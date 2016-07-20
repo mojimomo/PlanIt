@@ -75,7 +75,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    // MARK: - ViewContrl Lifecle
+    // MARK: - ViewContrl Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         doneTextField.tag = UITag.doneTextField
