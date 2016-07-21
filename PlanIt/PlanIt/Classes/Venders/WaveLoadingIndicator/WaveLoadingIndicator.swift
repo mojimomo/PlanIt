@@ -33,13 +33,14 @@ class WaveLoadingIndicator: UIView {
     private let waveMoveSpan = 5.0//波浪移动单位跨度, the span wave move in a unit time
     private let animationUnitTime = 0.08//重画单位时间, redraw unit time
     
-    private let heavyColor = UIColor(red: 38/255.0, green: 227/255.0, blue: 198/255.0, alpha: 1.0)
-    private let lightColor = UIColor(red: 121/255.0, green: 248/255.0, blue: 221/255.0, alpha: 1.0)
-    private let clipCircleColor = UIColor(red: 38/255.0, green: 227/255.0, blue: 198/255.0, alpha: 1.0)
+    private let heavyColor = UIColor(red: 113.0/255.0, green: 162.0/255.0, blue: 231.0/255.0, alpha: 1.0)
+    private let lightColor = UIColor(red: 99.2/255.0, green: 149.7/255.0, blue: 235.9/255.0, alpha: 1.0)
+    private let clipCircleColor = UIColor.clearColor()
+    private let circleColor = UIColor ( red: 0.9373, green: 0.9373, blue: 0.9373, alpha: 1.0 )
     
     private var clipCircleLineWidth: CGFloat = 1
     
-    private let progressTextFontSize: CGFloat = 15.0
+    private let progressTextFontSize: CGFloat = 38.0
     
     private var waving: Bool = true
     
@@ -110,7 +111,7 @@ class WaveLoadingIndicator: UIView {
         drawWaveWater(originX, fillColor: heavyColor)
         
         //Let clipCircle above the waves
-        clipWithCircle()
+        //clipWithCircle()
         
         //draw the tip text of progress
         if isShowProgressText {
@@ -146,6 +147,8 @@ class WaveLoadingIndicator: UIView {
         clipPath.lineWidth = clipCircleLineWidth
         clipPath.stroke()
         clipPath.addClip()
+        circleColor.setFill()
+        clipPath.fill()
     }
     
     
@@ -180,9 +183,9 @@ class WaveLoadingIndicator: UIView {
         
         var attribute: [String : AnyObject]!
         if progress > 0.45 {
-            attribute = [NSFontAttributeName : UIFont.systemFontOfSize(progressTextFontSize), NSForegroundColorAttributeName : UIColor.whiteColor()]
+            attribute = [NSFontAttributeName : UIFont.systemFontOfSize(progressTextFontSize), NSForegroundColorAttributeName : UIColor.blackColor() ]
         } else {
-            attribute = [NSFontAttributeName : UIFont.systemFontOfSize(progressTextFontSize), NSForegroundColorAttributeName : heavyColor]
+            attribute = [NSFontAttributeName : UIFont.systemFontOfSize(progressTextFontSize), NSForegroundColorAttributeName : UIColor.blackColor()]
         }
         
         let textSize = progressText.sizeWithAttributes(attribute)

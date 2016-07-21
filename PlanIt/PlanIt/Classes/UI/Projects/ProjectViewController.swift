@@ -439,7 +439,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
     
     ///弹出完成百分比view
-    func showProcessFinish(name: String){        
+    func showProcessFinish(name: String){
         //整体通知
         let rect = UIScreen.mainScreen().bounds
         let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 120)
