@@ -34,8 +34,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     private var popover: Popover!
     private var isPopoverOver = false
     private var waveLoadingIndicator: WaveLoadingIndicator!
-    private var oldPercent = 0
-    private var newPercent = 0
     private var increasePercent = 0
     private var texts = ["显示未开始", "已完成", "设置"]
     private var popoverOptions: [PopoverOption] = [
@@ -388,7 +386,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //波浪视图
         let waveLoadingIndicator = WaveLoadingIndicator(frame:CGRect(x: 20, y: 60, width: 160, height: 160))
         waveLoadingIndicator.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        waveLoadingIndicator.progress = Double(self.oldPercent) / 100        
+        waveLoadingIndicator.progress = oldPercent / 100
         showView.addSubview(waveLoadingIndicator)
 
         //分割线
@@ -441,11 +439,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
     
     ///弹出完成百分比view
-    func showProcessFinish(name: String){
-        self.oldPercent = Int(oldPercent)
-        self.increasePercent = Int(oldPercent)
-        self.newPercent = Int(newPercent)
-        
+    func showProcessFinish(name: String){        
         //整体通知
         let rect = UIScreen.mainScreen().bounds
         let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 120)
