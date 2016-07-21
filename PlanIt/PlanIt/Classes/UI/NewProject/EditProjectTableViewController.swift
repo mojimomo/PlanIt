@@ -484,6 +484,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.showsVerticalScrollIndicator = false
         projectNameLabel.delegate = self
         projectNameLabel.tag = UITag.projectNameLabel
         unitTextField.delegate = self
