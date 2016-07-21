@@ -390,7 +390,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         waveLoadingIndicator.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         waveLoadingIndicator.progress = Double(self.oldPercent) / 100        
         showView.addSubview(waveLoadingIndicator)
-        
+
         //分割线
         let blackView = UIView(frame: CGRect(x: 10, y: 45, width: 180, height: 1))
         blackView.backgroundColor = UIColor ( red: 0.8078, green: 0.8118, blue: 0.8157, alpha: 1.0 )
@@ -406,26 +406,37 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //显示
         let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
         popover.show(showView,  point: startPoint)
-        let timeInterval = 0.1
-        let numOfTimes = 10
-        let addEveryTime = Double(newPercent -  oldPercent) / 10
         
-        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
-        let queue = dispatch_get_global_queue(qos, 0)
-        dispatch_async(queue) { () -> Void in
-            let beginTime = NSDate()
-            var endTime = NSDate()
-            for var time = 0; time < numOfTimes; time++ {
-                waveLoadingIndicator.progress = (oldPercent + addEveryTime * Double(time) ) / 100
-                NSThread.sleepForTimeInterval(timeInterval)
-                print("\(NSDate().FormatToStringYYYYMMMMDDHHMMSS()) : sleep\(timeInterval)")
-                endTime = NSDate()
+        //总时间 1000毫秒
+        let totalTime = 2000
+        //次数
+        var timeOut = newPercent -  oldPercent + 1
+        //周期
+        let period : UInt64 = UInt64( Double(totalTime) / timeOut)
+        //增量
+        let addEveryTime = 1.0
+        //当前百分比
+        var currentPercent = oldPercent
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+        dispatch_source_set_timer(timer, dispatch_walltime(nil, 0), period * NSEC_PER_MSEC, 0)
+        dispatch_source_set_event_handler(timer, { () -> Void in
+            //倒计时结束，关闭
+            if (timeOut <= 0) {
+                //关闭定时器
+                dispatch_source_cancel(timer)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    //关闭弹窗
+                    popover.dismiss()
+                })
+            } else {
+                //设置百分比
+                waveLoadingIndicator.progress = currentPercent / 100
+                currentPercent = currentPercent + addEveryTime
             }
-            print("开始时间 \(beginTime.FormatToStringYYYYMMMMDDHHMMSS()) \n结束时间 \(endTime.FormatToStringYYYYMMMMDDHHMMSS())")
-            dispatch_sync( dispatch_get_main_queue(), { () -> Void in
-                 popover.dismiss()
-            })
-        }
+            timeOut-- 
+        })
+        dispatch_resume(timer)
     }
 
     
