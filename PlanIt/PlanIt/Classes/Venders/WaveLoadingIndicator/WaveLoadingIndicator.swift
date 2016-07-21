@@ -40,7 +40,7 @@ class WaveLoadingIndicator: UIView {
     
     private var clipCircleLineWidth: CGFloat = 1
     
-    private let progressTextFontSize: CGFloat = 38.0
+    private let progressTextFontSize: CGFloat = 32.0
     
     private var waving: Bool = true
     
