@@ -25,7 +25,7 @@ class WaveLoadingIndicator: UIView {
     static private let amplitude_span = 26.0//波幅可调节幅度
     
     private let cycle = 1.0//循环次数, num of circulation
-    private var term = 10.0//周期（在代码中重新计算）, recalculate in layoutSubviews
+    private var term = 5.0//周期（在代码中重新计算）, recalculate in layoutSubviews
     private var phasePosition = 0.0//相位必须为0(画曲线机制局限), phase Must be 0
     private var amplitude = 29.0//波幅
     private var position = 40.0//X轴所在的Y坐标（在代码中重新计算）, where the x axis of wave position
