@@ -329,6 +329,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             self.view.bringSubviewToFront(addProjectButton!)
 
         }
+        
+        //创建长按选项
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        longPressGestureRecognizer.minimumPressDuration = 0.5
+        self.view.addGestureRecognizer(longPressGestureRecognizer)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -760,12 +765,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             //项目表格
         case tableViewTag.ProjectsTable:
                 let cell = projectTableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
-            
+                
                 let addProcessButtonTag = 1000
-                let getMoreInforTag = 1001
+                
                 //复用清除之前的按钮
                 for subView in cell.subviews{
-                    if subView.tag == addProcessButtonTag || subView.tag == getMoreInforTag{
+                    if subView.tag == addProcessButtonTag {
                         subView.removeFromSuperview()
                     }
                 }
@@ -833,15 +838,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 addProcessButton.tag = addProcessButtonTag
                 //添加按钮
                 cell.addSubview(addProcessButton)
-                //}
-                
-                //单个项目页面按钮
-                let getMoreInfor = UIButton(frame: CGRectMake(0, 0, cell.frame.width - cell.frame.height - self.cellMargin, cell.frame.height))
-                getMoreInfor.setBackgroundImage(.None, forState: .Normal)
-                getMoreInfor.setBackgroundImage(.None, forState: .Highlighted)
-                getMoreInfor.addTarget(self, action: "getMoreInfor:", forControlEvents: .TouchUpInside)
-                getMoreInfor.tag = getMoreInforTag
-                cell.addSubview(getMoreInfor)
+                //}                
+
                 return cell
             //标签表格
         case tableViewTag.TagsTable:
@@ -871,6 +869,37 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
              self.popover.dismiss()
             //项目表格
         case tableViewTag.ProjectsTable:
+                if projects[indexPath.section].type != .NoRecord {
+                    print("打开项目编号为\(indexPath.section)统计页面")
+                    let statisticsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Statistics") as! StatisticsViewController
+                    //设置view背景色
+                    statisticsViewController.view.backgroundColor = allBackground
+                    //设置每个cell的项目
+                    statisticsViewController.project = projects[indexPath.section]
+                    
+                    
+                    //压入导航栏
+                    self.navigationController?.pushViewController(statisticsViewController, animated: true)
+                }else{
+                    print("打开项目编号为\(indexPath.section)编辑页面")
+                    let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
+                    addNewProjectViewController.title = projects[indexPath.section].name
+                    addNewProjectViewController.tableState = .Edit
+                    addNewProjectViewController.view.backgroundColor = allBackground
+                    addNewProjectViewController.modalTransitionStyle = .CoverVertical
+                    let navController = UINavigationController.init(rootViewController: addNewProjectViewController)
+                    //状态栏和导航栏不透明
+                    navController.navigationBar.translucent = false
+                    //设置导航栏颜色
+                    navController.navigationBar.barTintColor = otherNavigationBackground
+                    //去除导航栏分栏线
+                    //                navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+                    //                navController.navigationBar.shadowImage = UIImage()
+                    navController.navigationBar.tintColor = navigationTintColor
+                    navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
+                    self.navigationController?.presentViewController(navController, animated: true, completion: nil)
+                    addNewProjectViewController.project = projects[indexPath.section]
+                }
             return
             //标签表格
         case tableViewTag.TagsTable:
@@ -970,6 +999,17 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func toggle() {
         UIView.animateWithDuration(2) {
             self.navigationController?.navigationBarHidden = self.navigationController?.navigationBarHidden == false
+        }
+    }
+
+    func handleLongPress(gesture: UILongPressGestureRecognizer){
+        if gesture.state ==  .Ended{
+            let point = gesture.locationInView(self.projectTableView)
+            let indexPath = self.projectTableView.indexPathForRowAtPoint(point)
+            if indexPath != nil {
+                let cell = projectTableView.cellForRowAtIndexPath(indexPath!) as! ProjectTableViewCell
+                cell.isShowState = !cell.isShowState
+            }
         }
     }
     

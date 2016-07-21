@@ -25,7 +25,7 @@ public class RoundTableviewCell: UITableViewCell {
         }
     }
     
-    @IBInspectable public var selectedColor: UIColor = UIColor.grayColor() {
+    @IBInspectable public var selectedColor: UIColor = UIColor.whiteColor() {
         didSet {
         }
     }
