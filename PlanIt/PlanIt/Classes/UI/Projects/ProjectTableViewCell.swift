@@ -39,35 +39,35 @@ class ProjectTableViewCell: RoundTableviewCell{
                 case .NoRecord:
                     if project.isFinished == .OverTime{
                         let days = project.endTimeDate.daysToEndDate(NSDate())
-                        projectName = "进度项目：项目已经超出\(days)天"
+                        projectName = "项目已超出 \(days) 天"
                     }else if project.isFinished == .NotBegined{
                         let days = project.beginTimeDate.daysToEndDate(NSDate())
-                        projectName = "非进度项目：距离项目开始还有\(days)天"
+                        projectName = "距项目开始还有 \(days) 天"
                     }else{
                         let days = NSDate().daysToEndDate(project.endTimeDate)
-                        projectName = "非进度项目：项目剩余\(days)天"
+                        projectName = "项目剩余 \(days) 天"
                     }
                 case .Normal:
                     if project.isFinished == .OverTime{
                         let days = project.endTimeDate.daysToEndDate(NSDate())
-                        projectName = "进度项目：项目已经超出\(days)天"
+                        projectName = "项目已超出 \(days) 天"
                     }else if project.isFinished == .NotBegined{
                         let days = project.beginTimeDate.daysToEndDate(NSDate())
-                        projectName = "进度项目：距离项目开始还有\(days)天"
+                        projectName = "距项目开始还有 \(days) 天"
                     }else{
                         let days = NSDate().daysToEndDate(project.endTimeDate)
-                        projectName = "进度项目：每天需完成 \(Int(project.rest / Double(days)))\(project.unit))"
+                        projectName = "余下每天需完成 \(Int(project.rest / Double(days))) \(project.unit)"
                     }
                 case .Punch:
                     if project.isFinished == .OverTime{
                         let days = project.endTimeDate.daysToEndDate(NSDate())
-                        projectName = "打卡项目：项目已经超出\(days)天"
+                        projectName = "项目已经超出 \(days) 天"
                     }else if project.isFinished == .NotBegined{
                         let days = project.beginTimeDate.daysToEndDate(NSDate())
-                        projectName = "打卡项目：距离项目开始还有\(days)天"
+                        projectName = "距项目开始还有 \(days) 天"
                     }else{
                         let days = NSDate().daysToEndDate(project.endTimeDate)
-                        projectName = "打卡项目：剩余 \(days)天需打卡\(Int(project.rest))次"
+                        projectName = "剩余 \(days) 天需打卡 \(Int(project.rest)) 次"
                     }
                 default:break
                 }
