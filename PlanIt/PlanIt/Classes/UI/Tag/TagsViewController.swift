@@ -61,6 +61,7 @@ class TagsViewController: UITableViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.showsVerticalScrollIndicator = false
         //self.view.tintColor = UIColor.blackColor()
         self.view.backgroundColor = allBackground
         self.title = "标签选择"

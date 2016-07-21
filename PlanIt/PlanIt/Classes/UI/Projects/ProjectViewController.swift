@@ -285,6 +285,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        //去除滚动条
+        self.projectTableView.showsVerticalScrollIndicator = false
         //设置导航栏
         self.navigationController?.navigationBar.barTintColor = navigationBackground
         self.navigationController?.navigationBar.tintColor = navigationTintColor
