@@ -230,6 +230,10 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }else{
             if indexPath.row < tags.count {
+                if tags[indexPath.row].isSelected == false && totalTagsSelected >= 2{
+                    return
+                }
+                
                 if type != .Manage {
                     _ = tags[indexPath.row]
                     if tags[indexPath.row].isSelected == false {

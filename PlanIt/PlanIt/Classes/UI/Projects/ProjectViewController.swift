@@ -425,7 +425,34 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 dispatch_source_cancel(timer)
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     //关闭弹窗
-                    popover.dismiss()
+                    if newPercent == 100.0{
+                        //完成视图
+                        waveLoadingIndicator.removeFromSuperview()
+                        
+                        let successView = UIImageView(image: UIImage(named: "projectFinish"))
+                        successView.frame = CGRect(x: 20, y: 60, width: 160, height: 160)
+                        showView.addSubview(successView)
+                        successView.transform = CGAffineTransformMakeScale(0.0, 0.0)
+                        UIView.animateWithDuration(1 , delay: 0,
+                            usingSpringWithDamping: 1,
+                            initialSpringVelocity: 0,
+                            options: .CurveEaseInOut,
+                            animations: {
+                                successView.transform = CGAffineTransformIdentity
+                            }){ _ in
+                                
+                        }
+                        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
+                        let queue = dispatch_get_global_queue(qos, 0)
+                        dispatch_async(queue) { () -> Void in
+                            NSThread.sleepForTimeInterval(1)
+                            dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+                                popover.dismiss()
+                            })
+                        }
+                    }else{
+                        popover.dismiss()
+                    }
                 })
             } else {
                 //设置百分比
@@ -833,6 +860,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         case tableViewTag.MuneTable:
             if indexPath.row == 1 {
                 isShowFinished = !isShowFinished
+                selectTag = nil
                 loadData()
                 self.projectTableView.reloadData()
             }else if indexPath.row == 2{
