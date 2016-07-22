@@ -48,22 +48,22 @@ extension NSDate{
         
         //判断时间
         if timeInterval < 60{
-            result += "1分钟内"
+            result += "1 分"
         }else if timeInterval / 60 < 60 {
             tmp = Int(timeInterval / 60 )
-            result += "\(tmp)分"
+            result += "\(tmp) 分"
         }else if timeInterval / 60 / 60 < 24 {
             tmp = Int(timeInterval / 60 / 24)
-            result += "\(tmp)小时"
+            result += "\(tmp) 小时"
         }else if timeInterval / 60 / 60 / 24 < 30 {
             tmp = Int(timeInterval / 60 / 60 / 24 )
-            result += "\(tmp)天"
+            result += "\(tmp) 天"
         }else if timeInterval / 60 / 60 / 24 / 30 < 12 {
             tmp = Int(timeInterval / 60 / 60 / 24 / 30 )
-            result += "\(tmp)月"
+            result += "\(tmp) 月"
         }else{
             tmp = Int(timeInterval / 60 / 60 / 24 / 30 / 12)
-            result += "\(tmp)年"
+            result += "\(tmp) 年"
         }
         return result
     }

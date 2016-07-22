@@ -61,7 +61,7 @@ class ProjectTableViewCell: RoundTableviewCell{
                 case .Punch:
                     if project.isFinished == .OverTime{
                         let days = project.endTimeDate.compareCurrentTime()
-                        projectName = "项目已经超出 \(days)"
+                        projectName = "项目已超出 \(days)"
                     }else if project.isFinished == .NotBegined{
                         let days = project.beginTimeDate.compareCurrentTime()
                         projectName = "距项目开始还有 \(days)"
