@@ -380,9 +380,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     // MARK: - 跳转动作
     ///弹出完成百分比view    
     func showProcessChange(oldPercent: Double, newPercent: Double, name: String){
-        //self.oldPercent = Int(oldPercent)
-        //self.increasePercent = Int(oldPercent)
-        //self.newPercent = Int(newPercent)
+//        self.oldPercent = Int(oldPercent)
+//        self.increasePercent = Int(oldPercent)
+//        self.newPercent = Int(newPercent)
         
         //整体通知
         let rect = UIScreen.mainScreen().bounds
@@ -436,16 +436,20 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                         //完成视图
                         waveLoadingIndicator.removeFromSuperview()
                         
-                        let successView = UIImageView(image: UIImage(named: "projectFinish"))
+                        let successView = UIImageView(image: UIImage(named: "oval"))
                         successView.frame = CGRect(x: 20, y: 60, width: 160, height: 160)
                         showView.addSubview(successView)
-                        successView.transform = CGAffineTransformMakeScale(0.0, 0.0)
+                        
+                        let fillView = UIImageView(image: UIImage(named: "projectFinish"))
+                        fillView.frame = CGRect(x: 20, y: 60, width: 160, height: 160)
+                        showView.addSubview(fillView)
+                        fillView.transform = CGAffineTransformMakeScale(0.0, 0.0)
                         UIView.animateWithDuration(1 , delay: 0,
                             usingSpringWithDamping: 1,
                             initialSpringVelocity: 0,
                             options: .CurveEaseInOut,
                             animations: {
-                                successView.transform = CGAffineTransformIdentity
+                                fillView.transform = CGAffineTransformIdentity
                             }){ _ in
                                 
                         }
@@ -542,7 +546,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     process.insertProcess()
                     ProcessDate().chengeData(projects[indexPath.section].id, timeDate: currentTime, changeValue: 1.0)
                     projects[indexPath.section].increaseDone(1.0)
-                    let new = projects[indexPath.section].percent
+                    let new = projects[indexPath.section].percent                    
                     //更新图标
                     loadData()
                     updateTable()

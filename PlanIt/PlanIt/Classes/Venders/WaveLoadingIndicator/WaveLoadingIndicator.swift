@@ -33,7 +33,7 @@ class WaveLoadingIndicator: UIView {
     private let waveMoveSpan = 5.0//波浪移动单位跨度, the span wave move in a unit time
     private let animationUnitTime = 0.08//重画单位时间, redraw unit time
     
-    private let heavyColor = UIColor(red: 113.0/255.0, green: 162.0/255.0, blue: 231.0/255.0, alpha: 1.0)
+    private let heavyColor = UIColor(red: 114.0/255.0, green: 164.0/255.0, blue: 231.0/255.0, alpha: 1.0)
     private let lightColor = UIColor(red: 99.2/255.0, green: 149.7/255.0, blue: 235.9/255.0, alpha: 1.0)
     private let clipCircleColor = UIColor.clearColor()
     private let circleColor = UIColor ( red: 0.9373, green: 0.9373, blue: 0.9373, alpha: 1.0 )
