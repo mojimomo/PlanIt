@@ -38,11 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         NSUserDefaults.standardUserDefaults().setInteger( 0 , forKey: "numsLocalNotifiication")
         if launchOptions != nil {
-            if let localNotification = launchOptions!["UIApplicationLaunchOptionsLocalNotificationKey"] as? UILocalNotification {
-                if let dict = localNotification.userInfo {
-
-                }
-            }
+//            if let localNotification = launchOptions!["UIApplicationLaunchOptionsLocalNotificationKey"] as? UILocalNotification {
+//                if let dict = localNotification.userInfo {
+//
+//                }
+//            }
         }
         return true
     }
@@ -50,9 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /** 接收本地通知 */
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         // 获取通知上绑定的信息
-        guard let dict = notification.userInfo else {
-            return
-        }
+//        guard let dict = notification.userInfo else {
+//            return
+//        }
         
         // 后面作相应处理...
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0

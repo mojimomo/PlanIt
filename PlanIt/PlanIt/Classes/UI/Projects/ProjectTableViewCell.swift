@@ -28,7 +28,7 @@ class ProjectTableViewCell: RoundTableviewCell{
     ///是否显示状态
     var isShowState = false{
         didSet{
-            if isShowState{
+            if !isShowState{
                 projectName = project.name
             }else{
                 if project.isFinished == .Finished{
@@ -38,35 +38,35 @@ class ProjectTableViewCell: RoundTableviewCell{
                     //不记录进度
                 case .NoRecord:
                     if project.isFinished == .OverTime{
-                        let days = project.endTimeDate.daysToEndDate(NSDate())
-                        projectName = "项目已超出 \(days) 天"
+                        let days = project.endTimeDate.compareCurrentTime()
+                        projectName = "项目已超出 \(days)"
                     }else if project.isFinished == .NotBegined{
-                        let days = project.beginTimeDate.daysToEndDate(NSDate())
-                        projectName = "距项目开始还有 \(days) 天"
+                        let days = project.beginTimeDate.compareCurrentTime()
+                        projectName = "距项目开始还有 \(days)"
                     }else{
-                        let days = NSDate().daysToEndDate(project.endTimeDate)
-                        projectName = "项目剩余 \(days) 天"
+                        let days = project.endTimeDate.compareCurrentTime()
+                        projectName = "项目剩余 \(days)"
                     }
                 case .Normal:
                     if project.isFinished == .OverTime{
-                        let days = project.endTimeDate.daysToEndDate(NSDate())
-                        projectName = "项目已超出 \(days) 天"
+                        let days = project.endTimeDate.compareCurrentTime()
+                        projectName = "项目已超出 \(days)"
                     }else if project.isFinished == .NotBegined{
-                        let days = project.beginTimeDate.daysToEndDate(NSDate())
-                        projectName = "距项目开始还有 \(days) 天"
+                        let days = project.beginTimeDate.compareCurrentTime()
+                        projectName = "距项目开始还有 \(days)"
                     }else{
-                        let days = NSDate().daysToEndDate(project.endTimeDate)
+                        let days = NSDate().daysToEndDate(project.endTimeDate) + 1
                         projectName = "余下每天需完成 \(Int(project.rest / Double(days))) \(project.unit)"
                     }
                 case .Punch:
                     if project.isFinished == .OverTime{
-                        let days = project.endTimeDate.daysToEndDate(NSDate())
-                        projectName = "项目已经超出 \(days) 天"
+                        let days = project.endTimeDate.compareCurrentTime()
+                        projectName = "项目已经超出 \(days)"
                     }else if project.isFinished == .NotBegined{
-                        let days = project.beginTimeDate.daysToEndDate(NSDate())
-                        projectName = "距项目开始还有 \(days) 天"
+                        let days = project.beginTimeDate.compareCurrentTime()
+                        projectName = "距项目开始还有 \(days)"
                     }else{
-                        let days = NSDate().daysToEndDate(project.endTimeDate)
+                        let days = NSDate().daysToEndDate(project.endTimeDate) + 1
                         projectName = "剩余 \(days) 天需打卡 \(Int(project.rest)) 次"
                     }
                 default:break

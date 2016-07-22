@@ -385,12 +385,15 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-    func handleLongPress(){
-        isEditMod = true
-        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: "handleCancelEditMod")
-        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.Done, target: self, action: "handleDelete")
-        editTags = Tag().loadAllData()
-        collectionTag.reloadData()
+    func handleLongPress(gesture: UILongPressGestureRecognizer){
+        if gesture.state ==  .Began{
+            isEditMod = true
+            self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: "handleCancelEditMod")
+            self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.Done, target: self, action: "handleDelete")
+            editTags = Tag().loadAllData()
+            collectionTag.reloadData()
+        }
+
     }
     
     override func viewDidLoad() {
@@ -401,8 +404,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         self.view.addSubview(navigationBar)
         
         //创建长按选项
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleLongPress")
-        longPressGestureRecognizer.minimumPressDuration = 1
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        longPressGestureRecognizer.minimumPressDuration = 0.5
         self.view.addGestureRecognizer(longPressGestureRecognizer)
         
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)

@@ -780,6 +780,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 cell.roundBackgroundColor = allBackground
                 cell.needPercent = true
                 cell.percent = projects[indexPath.section].percent
+                cell.isShowState = false
                 
                 //if projects[indexPath.section].isFinished == .NotFinished{
                 //新增进度按钮
@@ -1003,7 +1004,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
 
     func handleLongPress(gesture: UILongPressGestureRecognizer){
-        if gesture.state ==  .Ended{
+        if gesture.state ==  .Began{
             let point = gesture.locationInView(self.projectTableView)
             let indexPath = self.projectTableView.indexPathForRowAtPoint(point)
             if indexPath != nil {
