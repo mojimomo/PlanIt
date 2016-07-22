@@ -19,6 +19,7 @@
 		BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */; };
 		BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */; };
 		BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */; };
+		BE4EDFFF1D41F7D2003EA7A0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4EDFFE1D41F7D2003EA7A0 /* MBProgressHUD.m */; };
 		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
 		BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */; };
 		BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FE7A81CCF8A0E00BC5F86 /* TagModel.swift */; };
@@ -91,7 +92,6 @@
 		BE1C16051D2CCC3800A4B4A5 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
 		BE1C16071D2CCC4200A4B4A5 /* WebviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebviewController.swift; sourceTree = "<group>"; };
 		BE1C16091D2CCC4600A4B4A5 /* AboutUsWebviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsWebviewController.swift; sourceTree = "<group>"; };
-		BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlanIt-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYDrawerController.swift; path = KYDrawerController/Classes/KYDrawerController.swift; sourceTree = "<group>"; };
 		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
@@ -99,6 +99,8 @@
 		BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveLoadingIndicator.swift; sourceTree = "<group>"; };
 		BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessesTableViewController.swift; path = ../Statistics/ProcessesTableViewController.swift; sourceTree = "<group>"; };
+		BE4EDFFD1D41F7D2003EA7A0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		BE4EDFFE1D41F7D2003EA7A0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		BE4F02371CEF365F00126237 /* RoundTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundTableviewCell.h; sourceTree = "<group>"; };
 		BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableviewCell.swift; sourceTree = "<group>"; };
 		BE5FE7A61CCF5C5400BC5F86 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
@@ -244,6 +246,15 @@
 			path = KDCircularProgress;
 			sourceTree = "<group>";
 		};
+		BE4EDFFC1D41F7D2003EA7A0 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BE4EDFFD1D41F7D2003EA7A0 /* MBProgressHUD.h */,
+				BE4EDFFE1D41F7D2003EA7A0 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		BE4F02351CEF365F00126237 /* RoundTableviewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +370,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE4EDFFC1D41F7D2003EA7A0 /* MBProgressHUD */,
 				BE6A1A641D3CC83200E39B7B /* WActivityIndicator */,
 				BE3B754B1D278B3900F7AEC3 /* KDCircularProgress */,
 				BE31C12C1D21168800A1A47B /* WaveLoadingIndicator */,
@@ -491,7 +503,6 @@
 				BEA520A31CCF417F00FFE43E /* Main.storyboard */,
 				BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */,
 				36006BD01D3BC5D800E08324 /* PlanIt-Bridging-Header.h */,
-				BE279CF21CDF1D0D00D4FCFB /* PlanIt-Bridging-Header.h */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -714,6 +725,7 @@
 				BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
 				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
+				BE4EDFFF1D41F7D2003EA7A0 /* MBProgressHUD.m in Sources */,
 				BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */,
 				BE79BCC91D2D38B2001512D6 /* UIViewController+mojiView.swift in Sources */,
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,

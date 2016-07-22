@@ -116,6 +116,11 @@ class ProcessesTableViewController: UITableViewController {
         return months.count
     }
     
+    ///自定义删除按钮文字
+    override func tableView(tableView:UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath:NSIndexPath) ->String?{
+        return "删除"
+    }
+    
     // MARK: - Func
     func loadProcess(){
         processes = Process().loadData(project.id)
@@ -138,5 +143,4 @@ class ProcessesTableViewController: UITableViewController {
             }
         }
     }
-
 }
