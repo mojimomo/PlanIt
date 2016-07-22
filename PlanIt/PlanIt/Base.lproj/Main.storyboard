@@ -644,11 +644,21 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注：洛杉矶来得及立法是经典款" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7i3-Zu-ZKb">
-                                            <rect key="frame" x="23" y="43" width="554" height="16.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" text="备注：洛杉矶来得及立法是经典款" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7i3-Zu-ZKb">
+                                            <rect key="frame" x="23" y="40" width="554" height="19.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="G6D-tu-eLc"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="1" id="IVn-mL-Ta8"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="G6D-tu-eLc"/>
+                                                    <exclude reference="IVn-mL-Ta8"/>
+                                                </mask>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -659,7 +669,7 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="7i3-Zu-ZKb" secondAttribute="bottom" id="4xY-6c-5Rd"/>
                                         <constraint firstItem="RKh-Z2-dzd" firstAttribute="height" secondItem="ewr-Fq-nJ0" secondAttribute="height" multiplier="0.5" id="74o-uM-CmE"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="wAo-Ys-7pp" secondAttribute="bottom" id="8aV-rZ-1Re"/>
-                                        <constraint firstItem="7i3-Zu-ZKb" firstAttribute="top" secondItem="wAo-Ys-7pp" secondAttribute="bottom" constant="8" id="IQ7-c2-lnW"/>
+                                        <constraint firstItem="7i3-Zu-ZKb" firstAttribute="top" secondItem="wAo-Ys-7pp" secondAttribute="bottom" constant="5" id="IQ7-c2-lnW"/>
                                         <constraint firstItem="7i3-Zu-ZKb" firstAttribute="leading" secondItem="ewr-Fq-nJ0" secondAttribute="leadingMargin" constant="15" id="IUk-Qs-w5j"/>
                                         <constraint firstItem="7i3-Zu-ZKb" firstAttribute="height" secondItem="ewr-Fq-nJ0" secondAttribute="height" multiplier="0.5" id="Kg1-h6-T4q"/>
                                         <constraint firstItem="RKh-Z2-dzd" firstAttribute="leading" secondItem="wAo-Ys-7pp" secondAttribute="trailing" id="MCU-UR-QIU"/>

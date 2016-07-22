@@ -37,7 +37,7 @@ class ProcessesTableViewController: UITableViewController {
         self.tableView.sectionFooterHeight = 25
         self.tableView.sectionHeaderHeight = 0
         
-        self.tableView.estimatedRowHeight = 44.0
+        self.tableView.estimatedRowHeight = 2.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
     

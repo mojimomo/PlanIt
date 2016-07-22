@@ -19,9 +19,11 @@ class ProcessTableViewCell: UITableViewCell {
             //let doneString = String(format: "%.1f", process.done)
             doneLabel?.text = "\(Int(process.done))" + " " + unit
             if process.remark == ""{
-                remarksLabel?.text = ""
+                remarksLabel?.text = " "
+                remarksLabel.font = UIFont(name: "PingFangSC-Thin", size: 1)
             }else{
                 remarksLabel?.text = "备注: " + process.remark
+                remarksLabel.font = UIFont(name: "PingFangSC-Thin", size: 10)
             }
         }
     }
