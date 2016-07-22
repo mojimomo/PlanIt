@@ -19,7 +19,7 @@ extension UIViewController{
         hud.label.text = title
         hud.detailsLabel.text = message
         //延迟隐藏
-        hud.hideAnimated(true, afterDelay: 0.8)
+        hud.hideAnimated(true, afterDelay: 1)
     }
     
     ///发起成功提示
@@ -33,7 +33,7 @@ extension UIViewController{
         hud.customView = UIImageView(image: UIImage(named: "Checkmark")!)
         hud.label.text = title
         //延迟隐藏
-        hud.hideAnimated(true, afterDelay: 0.8)
+        hud.hideAnimated(true, afterDelay: 1)
     }
     
     ///发起失败提示
@@ -47,7 +47,7 @@ extension UIViewController{
         hud.customView = UIImageView(image: UIImage(named: "Checkmark")!)
         hud.label.text = title
         //延迟隐藏
-        hud.hideAnimated(true, afterDelay: 0.8)
+        hud.hideAnimated(true, afterDelay: 1)
     }
     
     ///发起系统提示
