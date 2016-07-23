@@ -79,7 +79,11 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     ///项目总量
     var projectTotal:Double{
         get{
-            return Double((totalTextField?.text)!)!
+            if totalTextField?.text != ""{
+                return Double((totalTextField?.text)!)!
+            }else{
+                return 0
+            }
         }
         set{
             totalTextField?.text = "\(Int(newValue))"
@@ -325,10 +329,11 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             }else{
                 project.unit = projectUnit
             }
-            if  projectTotal != 0{
+
+            if  projectTotal != 0 {
                 project.setNewProjectTotal(projectTotal)
             }else{
-                callAlert("提交错误",message: "项目任务总量不能为0!")
+                callAlert("提交错误",message: "项目任务总量不能为空或0!")
                 return
             }
         }
