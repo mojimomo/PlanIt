@@ -47,7 +47,7 @@ class Project: NSObject {
     var endTime = ""{
         didSet{
             if endTime != ""{
-                endTimeDate = endTime.FormatToNSDateYYYYMMMMDD()!
+                endTimeDate = endTime.FormatToNSDateYYYYMMMMDD()!.increase1Day()!
             }
         }
     }

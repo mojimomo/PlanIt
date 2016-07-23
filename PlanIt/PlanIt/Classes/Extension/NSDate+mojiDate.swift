@@ -41,7 +41,7 @@ extension NSDate{
         var result = ""
         var tmp = 0
         
-        //判断是否是负
+        //判断是否是负
         if timeInterval < 0{
             timeInterval = -timeInterval
         }
@@ -53,7 +53,7 @@ extension NSDate{
             tmp = Int(timeInterval / 60 )
             result += "\(tmp) 分"
         }else if timeInterval / 60 / 60 < 24 {
-            tmp = Int(timeInterval / 60 / 24)
+            tmp = Int(timeInterval / 60 / 60)
             result += "\(tmp) 小时"
         }else if timeInterval / 60 / 60 / 24 < 30 {
             tmp = Int(timeInterval / 60 / 60 / 24 )
