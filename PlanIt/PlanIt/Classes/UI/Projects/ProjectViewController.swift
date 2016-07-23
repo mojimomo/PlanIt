@@ -1008,7 +1008,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 //延迟消失
                 let queue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
                 dispatch_async(queue) { () -> Void in
-                    NSThread.sleepForTimeInterval(3)
+                    NSThread.sleepForTimeInterval(2.5)
                     dispatch_sync( dispatch_get_main_queue(), { () -> Void in
                         cell.isShowState = false
                     })
@@ -1028,12 +1028,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func goBackAct(state: EditProjectBackState){
         switch state{
         case .AddSuccess:
-            callAlertSuccess("新建项目成功!")
+            callAlertSuccess("创建成功!")
         case .DeleteSucceess:
-            callAlertSuccess("删除项目成功!")
-        case .EditSucceess:
-            callAlertSuccess("编辑项目成功!")
-        //default: break
+            callAlertSuccess("删除成功!")
+//        case .EditSucceess:
+//            callAlertSuccess("编辑成功!")
+        default: break
         }
     }
 }
