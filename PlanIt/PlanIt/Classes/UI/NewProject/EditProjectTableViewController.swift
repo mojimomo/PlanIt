@@ -8,12 +8,16 @@
 
 import UIKit
 
-enum editProjectTableState{
+enum EditProjectTableState{
     case Add, Edit
 }
 
+enum EditProjectBackState{
+    case AddSuccess, EditSucceess, DeleteSucceess
+}
+
 protocol EditProjectTableViewDelegate: class{
-    func goBackAct()
+    func goBackAct(state: EditProjectBackState)
 }
 
 class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate{
@@ -95,7 +99,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     }
     
     ///当前表状态（修改状态、新增状态）
-    var tableState: editProjectTableState = .Add
+    var tableState: EditProjectTableState = .Add
     
     ///当前项目
     var project = Project(){
@@ -294,7 +298,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         callAlertAsk("是否确定删除该项目？", okHandler: { (UIAlertAction) -> Void in
             self.project.deleteProject()
             self.dismissViewControllerAnimated(true) { () -> Void in
-                self.delegate?.goBackAct()
+                self.delegate?.goBackAct(.DeleteSucceess)
             }
             }, cancelandler: nil, completion: nil)
     }
@@ -342,6 +346,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 project.addNotification()
                 //callAlertAndBack("提交成功",message: "新建项目成功!")
                 dismiss()
+                self.delegate?.goBackAct(.AddSuccess)
                 return
             }
         }
@@ -392,7 +397,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             if(project.updateProject()){
                 //callAlertAndBack("修改成功",message: "修改项目成功!")
                 self.dismissViewControllerAnimated(true) { () -> Void in
-                    self.delegate?.goBackAct()
+                    self.delegate?.goBackAct(.EditSucceess)
                 }
                 return
             }

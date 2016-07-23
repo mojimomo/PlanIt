@@ -9,7 +9,7 @@
 import UIKit
 import Popover
 
-class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate ,UIGestureRecognizerDelegate{
+class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate ,UIGestureRecognizerDelegate, EditProjectTableViewDelegate{
 
     @IBOutlet weak var tagsBarButton: UIBarButtonItem!
     @IBOutlet weak var projectTableView: UITableView!{
@@ -591,6 +591,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     //更新图标
                     self.loadData()
                     self.updateTable()
+                    self.callAlertSuccess("删除项目成功!")
                     }, cancelandler: nil, completion: nil)
             }else if projects[indexPath.section].isFinished == .NotBegined{
                 var type = ""
@@ -613,6 +614,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
         addNewProjectViewController.title = "新增项目"
         addNewProjectViewController.tableState = .Add
+        addNewProjectViewController.delegate = self
         //设置view颜色
         addNewProjectViewController.view.backgroundColor = allBackground
         addNewProjectViewController.modalTransitionStyle = .CoverVertical
@@ -877,6 +879,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
                     addNewProjectViewController.title = projects[indexPath.section].name
                     addNewProjectViewController.tableState = .Edit
+                    addNewProjectViewController.delegate = self
                     addNewProjectViewController.view.backgroundColor = allBackground
                     addNewProjectViewController.modalTransitionStyle = .CoverVertical
                     let navController = UINavigationController.init(rootViewController: addNewProjectViewController)
@@ -1000,7 +1003,16 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let indexPath = self.projectTableView.indexPathForRowAtPoint(point)
             if indexPath != nil {
                 let cell = projectTableView.cellForRowAtIndexPath(indexPath!) as! ProjectTableViewCell
-                cell.isShowState = !cell.isShowState
+                cell.isShowState = true
+                
+                //延迟消失
+                let queue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+                dispatch_async(queue) { () -> Void in
+                    NSThread.sleepForTimeInterval(3)
+                    dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+                        cell.isShowState = false
+                    })
+                }
             }
         }
     }
@@ -1011,6 +1023,18 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             return true
         }
         return false
+    }
+    // MARK: - EditProjectTableViewDelegate
+    func goBackAct(state: EditProjectBackState){
+        switch state{
+        case .AddSuccess:
+            callAlertSuccess("新建项目成功!")
+        case .DeleteSucceess:
+            callAlertSuccess("删除项目成功!")
+        case .EditSucceess:
+            callAlertSuccess("编辑项目成功!")
+        //default: break
+        }
     }
 }
 

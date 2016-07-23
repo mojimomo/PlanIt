@@ -9,7 +9,7 @@ import UIKit
 
 extension UIViewController{
     ///发起提示
-    func callAlert(title:String, message: String){
+    func callAlertHUD(title:String, message: String){
         var showView = self.view
         if self.navigationController != nil{
             showView = self.navigationController?.view
@@ -51,7 +51,7 @@ extension UIViewController{
     }
     
     ///发起系统提示
-    func callAlertSystem(title:String, message: String, completion: (() -> Void)? = nil){
+    func callAlert(title:String, message: String, completion: (() -> Void)? = nil){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "好的", style: .Default,
                     handler: nil)
