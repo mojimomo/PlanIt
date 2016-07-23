@@ -55,7 +55,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
-    var labels = ["1天", "2天", "3天", "4天", "5天", "6天", "7天"]
+    var labels = ["当天", "1天", "2天", "3天", "4天", "5天", "6天"]
     var days = [1, 2, 3, 4, 5, 6, 7]
     
     //是否允许推送
@@ -276,7 +276,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             isNeedLocalNotifiicationSwitch.setOn(true, animated: false)
         }
         
-        self.daysLabel.text = "\(day)天"
+        self.daysLabel.text = "\(labels[day - 1])"
         //对back to app进行观察
         NSNotificationCenter.defaultCenter().addObserver(self,selector:  "applicationDidBecomeActive:",name: UIApplicationDidBecomeActiveNotification,object: nil)
     }
