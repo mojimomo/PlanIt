@@ -591,7 +591,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     //更新图标
                     self.loadData()
                     self.updateTable()
-                    self.callAlertSuccess("删除项目成功!")
+                    self.callAlertSuccess("删除成功!")
                     }, cancelandler: nil, completion: nil)
             }else if projects[indexPath.section].isFinished == .NotBegined{
                 var type = ""
@@ -1029,10 +1029,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         switch state{
         case .AddSuccess:
             callAlertSuccess("创建成功!")
-        case .DeleteSucceess:
-            callAlertSuccess("删除成功!")
-//        case .EditSucceess:
-//            callAlertSuccess("编辑成功!")
+//        case .DeleteSucceess:
+//            callAlertSuccess("删除成功!")
+        case .EditSucceess:
+            callAlertSuccess("编辑成功!")
         default: break
         }
     }
