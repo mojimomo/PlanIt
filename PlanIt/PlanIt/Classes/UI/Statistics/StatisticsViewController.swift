@@ -530,7 +530,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     
     // MARK: - EditProjectTableViewDelegate
     func goBackAct(state: EditProjectBackState){
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        switch state {
+        case .EditSucceess:
+            callAlertSuccess("编辑成功!")
+        case .DeleteSucceess:
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        default:break
+        }
+        
     }
     
 
