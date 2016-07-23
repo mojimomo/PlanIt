@@ -170,7 +170,7 @@ class Project: NSObject {
         // 初始化一个通知
         let localNoti = UILocalNotification()
         // 通知的触发时间
-        let fireDate = endTimeDate.dateByAddingTimeInterval(Double(day)*24*60*60)
+        let fireDate = endTimeDate.dateByAddingTimeInterval(-Double(day)*24*60*60)
         //let fireDate = NSDate().dateByAddingTimeInterval(30)
         localNoti.fireDate = fireDate
         // 设置时区
@@ -224,6 +224,7 @@ class Project: NSObject {
             self.total = total
             self.rest = 0
             self.isFinished = .Finished
+            self.deleteNotification()
             return true
         }else{
             self.total = total
@@ -242,6 +243,7 @@ class Project: NSObject {
                 complete = total
                 rest = 0
                 percent = 100.0
+                self.deleteNotification()
             }else if complete < 0{
                 complete = 0
                 rest = total
@@ -256,6 +258,7 @@ class Project: NSObject {
         if type == .NoRecord{
             complete += 1
             updateProject()
+            self.deleteNotification()
         }
     }
     
