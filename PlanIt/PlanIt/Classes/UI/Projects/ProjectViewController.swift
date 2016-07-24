@@ -285,6 +285,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             projectTableView.tableFooterView = footerView
         }else{
             projectTableView.tableFooterView = nil
+            
+            if notDataImageView != nil{
+                notDataImageView?.removeFromSuperview()
+            }            
             let count = UInt32(noDataImageString.count)
             let index = Int(arc4random() % count)
             notDataImageView = UIImageView(image: UIImage(named: noDataImageString[index]))
