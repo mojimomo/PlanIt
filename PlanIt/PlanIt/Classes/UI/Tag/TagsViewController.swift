@@ -110,7 +110,7 @@ class TagsViewController: UITableViewController {
                 }
             }
         }else{
-            noTagCount = projects.count
+            noTagCount = counts
         }
 
         tagCounts.append(noTagCount)
