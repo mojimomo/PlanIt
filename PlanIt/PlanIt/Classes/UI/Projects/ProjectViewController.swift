@@ -288,8 +288,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let count = UInt32(noDataImageString.count)
             let index = Int(arc4random() % count)
             notDataImageView = UIImageView(image: UIImage(named: noDataImageString[index]))
-            notDataImageView.center = (self.navigationController?.view.center)!
-            self.navigationController?.view.addSubview(notDataImageView)
+            //获取导航栏高度
+            let rectNav = self.navigationController?.navigationBar.frame
+            //获取静态栏的高度
+            let rectStatus = UIApplication.sharedApplication().statusBarFrame
+            notDataImageView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - (rectNav?.height)! - rectStatus.height) / 2 - (rectNav?.height)! - rectStatus.height)
+            self.projectTableView.addSubview(notDataImageView)
         }
     }
     
@@ -388,7 +392,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         projectTableView.reloadData()
 
     }
-
+    
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if (velocity.y > 0.0)
         {
@@ -936,6 +940,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             return
         }
     }
+
     
     // MARK: - prepareForSegue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
