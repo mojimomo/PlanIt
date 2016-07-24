@@ -19,30 +19,41 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             projectTableView.dataSource = self
         }
     }
-    
     @IBOutlet weak var projectName: UILabel!
-    struct tableViewTag {
+    ///故事版id
+    private struct Storyboard{
+        static let CellReusIdentifier = "ProjectCell"
+    }
+    ///表格标签
+    private struct tableViewTag {
         static let MuneTable = 0
         static let TagsTable = 1
         static let ProjectsTable = 2
     }
-    //表格高度
+    ///没有数据图像的路劲
+    private var noDataImageString = ["bike", "book2"]
+    ///没有数据图像视图
+    private var notDataImageView : UIImageView!
+    ///其他表格高度
     let tableViewHeight : CGFloat = 44
+    ///菜单表格高度
     let MenuTableViewHeight : CGFloat = 60
+    ///新增按钮尺寸
     private var addButtonSize : CGSize!
+    ///选择的标签
     private var selectTag : Tag?
+    ///菜单
     private var popover: Popover!
-    private var isPopoverOver = false
-    private var waveLoadingIndicator: WaveLoadingIndicator!
-    private var increasePercent = 0
+    ///菜单文字
     private var texts = ["显示未开始", "已完成", "设置"]
+    ///菜单弹窗参数
     private var popoverOptions: [PopoverOption] = [
         .Type(.Down),
         .CornerRadius(0.0),
         .ArrowSize(CGSize(width: 0.0, height: 0.0)),
         .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
-    
+    ///提示弹窗参数
     private var showPercentPopoverOptions: [PopoverOption] = [
         .Type(.Down),
         .CornerRadius(8.0),
@@ -79,9 +90,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     var addProjectButtonMargin : CGFloat = 20.0
     ///添加按钮尺寸
     var addProjectButtonSize : CGSize = CGSize(width: 0, height: 0)
-    private struct Storyboard{
-        static let CellReusIdentifier = "ProjectCell"
-    }
     
     ///呼出标签栏
     @IBAction func callTag(sender: UIBarButtonItem) {
@@ -263,6 +271,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //添加统计label
         if projects.count != 0{
+            if notDataImageView != nil{
+                notDataImageView?.removeFromSuperview()
+            }
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100 + 100))
             let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100))
             countLabel.text = "\(projects.count)个项目"
@@ -274,12 +285,38 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             projectTableView.tableFooterView = footerView
         }else{
             projectTableView.tableFooterView = nil
+            let count = UInt32(noDataImageString.count)
+            let index = Int(arc4random() % count)
+            notDataImageView = UIImageView(image: UIImage(named: noDataImageString[index]))
+            notDataImageView.center = (self.navigationController?.view.center)!
+            self.navigationController?.view.addSubview(notDataImageView)
         }
     }
     
     ///更新表格
     func updateTable(){
         self.projectTableView.reloadData()
+    }
+    
+    ///长按响应函数
+    func handleLongPress(gesture: UILongPressGestureRecognizer){
+        if gesture.state ==  .Began{
+            let point = gesture.locationInView(self.projectTableView)
+            let indexPath = self.projectTableView.indexPathForRowAtPoint(point)
+            if indexPath != nil {
+                let cell = projectTableView.cellForRowAtIndexPath(indexPath!) as! ProjectTableViewCell
+                cell.isShowState = true
+                
+                //延迟消失
+                let queue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+                dispatch_async(queue) { () -> Void in
+                    NSThread.sleepForTimeInterval(2.5)
+                    dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+                        cell.isShowState = false
+                    })
+                }
+            }
+        }
     }
     
     //MARK: - View Controller Lifecycle
@@ -380,10 +417,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     // MARK: - 跳转动作
     ///弹出完成百分比view    
     func showProcessChange(oldPercent: Double, newPercent: Double, name: String){
-//        self.oldPercent = Int(oldPercent)
-//        self.increasePercent = Int(oldPercent)
-//        self.newPercent = Int(newPercent)
-        
         //整体通知
         let rect = UIScreen.mainScreen().bounds
         let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 120)
@@ -997,25 +1030,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         }
     }
 
-    func handleLongPress(gesture: UILongPressGestureRecognizer){
-        if gesture.state ==  .Began{
-            let point = gesture.locationInView(self.projectTableView)
-            let indexPath = self.projectTableView.indexPathForRowAtPoint(point)
-            if indexPath != nil {
-                let cell = projectTableView.cellForRowAtIndexPath(indexPath!) as! ProjectTableViewCell
-                cell.isShowState = true
-                
-                //延迟消失
-                let queue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
-                dispatch_async(queue) { () -> Void in
-                    NSThread.sleepForTimeInterval(2.5)
-                    dispatch_sync( dispatch_get_main_queue(), { () -> Void in
-                        cell.isShowState = false
-                    })
-                }
-            }
-        }
-    }
     
     // MARK: - UIGestureRecognizerDelegate
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
