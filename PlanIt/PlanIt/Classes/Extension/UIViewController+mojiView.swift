@@ -67,15 +67,21 @@ extension UIViewController{
     
     ///发起询问提示
     func callAlertAsk(title:String, okHandler: ((UIAlertAction) -> Void)?, cancelandler: ((UIAlertAction) -> Void)?, completion: (() -> Void)?){
-            let alerController = UIAlertController(title: title, message: nil, preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .ActionSheet)
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: okHandler)
             //创建UIAlertAction 取消按钮
             let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: cancelandler)
             //添加动作
-            alerController.addAction(alerActionOK)
-            alerController.addAction(alerActionCancel)
+            alertController.addAction(alerActionOK)
+            alertController.addAction(alerActionCancel)
+        
+            if let popoverPresentationController = alertController.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.sourceRect =  CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+            }
+        
             //显示alert
-            self.presentViewController(alerController, animated: true, completion: completion)
+            self.presentViewController(alertController, animated: true, completion: completion)
     }
 }

@@ -456,9 +456,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //总时间 1000毫秒
         let totalTime = 2000
         //次数
-        var timeOut = newPercent -  oldPercent + 1
+        var timeOut = Int(newPercent -  oldPercent + 1)
         //周期
-        let period : UInt64 = UInt64( Double(totalTime) / timeOut)
+        let period : UInt64 = UInt64( totalTime / timeOut)
         //增量
         let addEveryTime = 1.0
         //当前百分比
