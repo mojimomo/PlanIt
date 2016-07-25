@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0AA8C566706EFBEE8F482108 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */; };
+		367B7B3D1D4675C80035B099 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B7B3C1D4675C80035B099 /* AboutViewController.swift */; };
 		BE004A5F1D2A43A400556E85 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */; };
 		BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16051D2CCC3800A4B4A5 /* OptionsTableViewController.swift */; };
 		BE1C16081D2CCC4200A4B4A5 /* WebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16071D2CCC4200A4B4A5 /* WebviewController.swift */; };
-		BE1C160A1D2CCC4600A4B4A5 /* AboutUsWebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16091D2CCC4600A4B4A5 /* AboutUsWebviewController.swift */; };
 		BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */; };
 		BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */; };
 		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
@@ -86,12 +86,12 @@
 		36006BDD1D3BC84E00E08324 /* WActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WActivityIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WActivityIndicator.swift"; sourceTree = "<group>"; };
 		36006BDE1D3BC84E00E08324 /* WIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicator.swift"; sourceTree = "<group>"; };
 		36006BDF1D3BC84E00E08324 /* WIndicatorText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicatorText.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicatorText.swift"; sourceTree = "<group>"; };
+		367B7B3C1D4675C80035B099 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		5F835661849BEA352693A738 /* Pods-PlanIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlanIt/Pods-PlanIt.debug.xcconfig"; sourceTree = "<group>"; };
 		75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		BE1C16051D2CCC3800A4B4A5 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
 		BE1C16071D2CCC4200A4B4A5 /* WebviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebviewController.swift; sourceTree = "<group>"; };
-		BE1C16091D2CCC4600A4B4A5 /* AboutUsWebviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsWebviewController.swift; sourceTree = "<group>"; };
 		BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYDrawerController.swift; path = KYDrawerController/Classes/KYDrawerController.swift; sourceTree = "<group>"; };
 		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
@@ -212,9 +212,9 @@
 		BE1C16041D2CCC2500A4B4A5 /* Options(设置) */ = {
 			isa = PBXGroup;
 			children = (
-				BE1C16091D2CCC4600A4B4A5 /* AboutUsWebviewController.swift */,
 				BE1C16051D2CCC3800A4B4A5 /* OptionsTableViewController.swift */,
 				BE1C16071D2CCC4200A4B4A5 /* WebviewController.swift */,
+				367B7B3C1D4675C80035B099 /* AboutViewController.swift */,
 			);
 			name = "Options(设置)";
 			path = Options;
@@ -743,6 +743,7 @@
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
 				BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */,
 				BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */,
+				367B7B3D1D4675C80035B099 /* AboutViewController.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
 				BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */,
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
@@ -764,7 +765,6 @@
 				BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */,
 				BE79BCC61D2D38B2001512D6 /* NSDate+mojiDate.swift in Sources */,
 				BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */,
-				BE1C160A1D2CCC4600A4B4A5 /* AboutUsWebviewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
