@@ -97,6 +97,9 @@ class ProcessesTableViewController: UITableViewController {
                 //删除表格
                 processTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
+        if records.count == 0{
+            loadProcess()
+        }
         //}
     }
     
