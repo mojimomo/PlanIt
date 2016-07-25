@@ -270,10 +270,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         }
         
         //添加统计label
+        notDataImageView?.removeFromSuperview()
         if projects.count != 0{
-            if notDataImageView != nil{
-                notDataImageView?.removeFromSuperview()
-            }
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100 + 100))
             let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100))
             countLabel.text = "\(projects.count)个项目"
@@ -285,10 +283,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             projectTableView.tableFooterView = footerView
         }else{
             projectTableView.tableFooterView = nil
-            
-            if notDataImageView != nil{
-                notDataImageView?.removeFromSuperview()
-            }            
             let count = UInt32(noDataImageString.count)
             let index = Int(arc4random() % count)
             notDataImageView = UIImageView(image: UIImage(named: noDataImageString[index]))

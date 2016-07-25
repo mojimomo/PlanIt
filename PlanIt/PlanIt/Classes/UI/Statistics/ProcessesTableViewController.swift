@@ -14,6 +14,8 @@ class ProcessesTableViewController: UITableViewController {
     var records = [Int]()
     var processes = [Process]()
     var isEditingMod = false
+    var noDataView : UIView!
+    var noDataButton : UIButton!
     @IBOutlet var processTableView: UITableView!
     
     @IBAction func finishEdit(sender: AnyObject) {
@@ -123,24 +125,66 @@ class ProcessesTableViewController: UITableViewController {
     
     // MARK: - Func
     func loadProcess(){
+        ///清除无数据试图
+        noDataView?.removeFromSuperview()
+        noDataButton?.removeFromSuperview()
+        
+        ///加载数据
         processes = Process().loadData(project.id)
-        for process in processes{
-            var index = 0
-            if months.count == 0{
-                months.append(process.month)
-                records.append(1)
-            }else{
-                for month in months{
-                    if process.month == month{
-                        records[index]++
-                        break
-                    }else if month == months.last {
-                        months.append(process.month)
-                        records.append(1)
+        if processes.count > 0 {
+            for process in processes{
+                var index = 0
+                if months.count == 0{
+                    months.append(process.month)
+                    records.append(1)
+                }else{
+                    for month in months{
+                        if process.month == month{
+                            records[index]++
+                            break
+                        }else if month == months.last {
+                            months.append(process.month)
+                            records.append(1)
+                        }
+                        index++
                     }
-                    index++
                 }
             }
+        }else{
+            var noDataImageString = ""
+            switch project.type {
+            case .Normal:
+                noDataImageString = "recordnodata"
+            case .Punch:
+                noDataImageString = "punchnodata"
+            default:break
+            }
+            
+            //添加没有数据图片
+            let noDataImage = UIImage(named: noDataImageString)
+            noDataView = UIImageView(image: noDataImage)
+            //获取导航栏高度
+            let rectNav = self.navigationController?.navigationBar.frame
+            //获取静态栏的高度
+            let rectStatus = UIApplication.sharedApplication().statusBarFrame
+            noDataView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - (rectNav?.height)! - rectStatus.height) / 2 - (rectNav?.height)! - rectStatus.height)
+            self.tableView.addSubview(noDataView)
+            
+            //添加去添加按钮
+            noDataButton = UIButton(type: .System)
+            noDataButton.setTitle("去添加", forState: .Normal)
+            noDataButton.setTitleColor(UIColor.colorFromHex("#85b4ea"), forState: .Normal)
+            noDataButton.sizeToFit()
+            let margin:CGFloat = 10
+            noDataButton.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - (rectNav?.height)! - rectStatus.height) / 2 - (rectNav?.height)! - rectStatus.height + noDataView.bounds.height / 2 + noDataButton.bounds.height / 2 + margin)
+            noDataButton.addTarget(self, action: "handleBack", forControlEvents: .TouchUpInside)
+            self.tableView.addSubview(noDataButton)
         }
     }
+    
+    func handleBack(){
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
 }
+
+
