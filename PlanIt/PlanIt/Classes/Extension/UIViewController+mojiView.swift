@@ -67,7 +67,7 @@ extension UIViewController{
     
     ///发起询问提示
     func callAlertAsk(title:String, okHandler: ((UIAlertAction) -> Void)?, cancelandler: ((UIAlertAction) -> Void)?, completion: (() -> Void)?){
-            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: okHandler)
             //创建UIAlertAction 取消按钮
