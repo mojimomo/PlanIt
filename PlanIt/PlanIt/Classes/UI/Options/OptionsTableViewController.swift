@@ -211,7 +211,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         //设置反馈邮件地址、主题及内容
         mailComposeVC.setToRecipients(["markplan@foxmail.com"])
         mailComposeVC.setSubject("马克计划 - 意见反馈")
-        mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(modelName)\n应用版本：\(ver)(\(buildVer)))", isHTML: false)
+        mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(modelName)\n应用版本：\(ver)(\(buildVer))", isHTML: false)
         
         return mailComposeVC
     
