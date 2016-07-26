@@ -176,7 +176,11 @@ class Project: NSObject {
         // 设置时区
         localNoti.timeZone = NSTimeZone.defaultTimeZone()
         // 通知上显示的主题内容
-        localNoti.alertBody = "\(name)项目还有\(day)天到期"
+        if day == 1 {
+            localNoti.alertBody = "\(name)项目今天到期"
+        } else {
+            localNoti.alertBody = "\(name)项目还有\(day-1)天到期"
+        }
         // 收到通知时播放的声音，默认消息声音
         localNoti.soundName = UILocalNotificationDefaultSoundName
         //待机界面的滑动动作提示

@@ -55,7 +55,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
-    var labels = ["当天", "1天前", "2天前", "3天前", "4天前", "5天前", "6天前"]
+    var labels = ["当天", "1天", "2天", "3天", "4天", "5天", "6天"]
     var days = [1, 2, 3, 4, 5, 6, 7]
     
     //是否允许推送
@@ -332,6 +332,12 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return labels[row]
     }
+    
+    // UIPickerView行高
+    func pickerView(pickerView: UIPickerView,rowHeightForComponent component: Int) -> CGFloat{
+        return 35
+    }
+
 
     /*
     override func didReceiveMemoryWarning() {
