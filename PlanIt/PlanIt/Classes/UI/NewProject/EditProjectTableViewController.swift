@@ -196,23 +196,28 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //设置日期
             datePicker.setDate(self.project.beginTimeDate, animated: false)
             //创建UIAlertController
-            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
             alerController.view.addSubview(datePicker)
             
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
-                self.projectBeginTime = dateString
+                if self.project.setNewProjectTime(dateString, endTime: self.projectEndTime) == false{
+                    self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime)
+                    self.callAlert("修改错误",message: "开始结束时间不正确!")
+                }else{
+                    self.projectBeginTime = dateString
+                }
             })
    
-            //创建UIAlertAction 取消按钮
-            let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
-                
-            })
+//            //创建UIAlertAction 取消按钮
+//            let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+//                
+//            })
             
             //添加动作
             alerController.addAction(alerActionOK)
-            alerController.addAction(alerActionCancel)
+            //alerController.addAction(alerActionCancel)
             
             if let popoverPresentationController = alerController.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
@@ -244,19 +249,24 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             alerController.view.addSubview(datePicker)
         
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
-                self.projectEndTime = dateString
+                if self.project.setNewProjectTime(self.projectBeginTime, endTime: dateString) == false{
+                    self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime)
+                    self.callAlert("修改错误",message: "开始结束时间不正确!")
+                }else{
+                    self.projectEndTime = dateString
+                }
             })
             
              //创建UIAlertAction 取消按钮
-            let alerActionCancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            //let alerActionCancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
                 
-            })
+            //})
             
             //添加动作
             alerController.addAction(alerActionOK)
-            alerController.addAction(alerActionCancel)
+            //alerController.addAction(alerActionCancel)
             
             if let popoverPresentationController = alerController.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
@@ -315,14 +325,12 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
 
         
         if projectBeginTime != "" && projectEndTime != ""{
-                if project.setNewProjectTime(projectBeginTime, endTime: projectEndTime) == false{
-                    callAlert("提交错误",message: "开始结束时间不正确!")
-                    return
-                }
+
         }else{
             callAlert("提交错误",message: "时间不能为空!")
             return
         }
+        
         project.type = projectType
         switch projectType{
         case .NoRecord: break
@@ -364,10 +372,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         
         
         if projectBeginTime != "" && projectEndTime != ""{
-            if project.setNewProjectTime(projectBeginTime, endTime: projectEndTime) == false{
-                callAlert("修改错误",message: "开始结束时间不正确!")
-                return
-            }
+
         }else{
             callAlert("修改错误",message: "时间不能为空!")
             return

@@ -98,7 +98,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 alerController.view.addSubview(numberPicker)
                 
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
+                let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
                     self.daysLabel.text = self.labels[numberPicker.selectedRowInComponent(0)]
                     self.day = self.days[numberPicker.selectedRowInComponent(0)]
                     
@@ -115,13 +115,11 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 })
                 
                 //创建UIAlertAction 取消按钮
-                let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
-                    
-                })
+                //let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: nil)
                 
                 //添加动作
                 alerController.addAction(alerActionOK)
-                alerController.addAction(alerActionCancel)
+                //alerController.addAction(alerActionCancel)
                 
                 //let oldframe = numberPicker.frame
 
