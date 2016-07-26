@@ -196,7 +196,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //设置日期
             datePicker.setDate(self.project.beginTimeDate, animated: false)
             //创建UIAlertController
-            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
             alerController.view.addSubview(datePicker)
             
             //创建UIAlertAction 确定按钮
@@ -238,9 +238,9 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //设置模式为日期模式
             datePicker.datePickerMode = .Date
             //设置日期
-            datePicker.setDate(self.project.endTimeDate, animated: false)
+            datePicker.setDate(self.project.endTimeDate.increaseDays(-1)!, animated: false)
             //创建UIAlertController
-            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
             alerController.view.addSubview(datePicker)
         
             //创建UIAlertAction 确定按钮
@@ -250,7 +250,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             })
             
              //创建UIAlertAction 取消按钮
-            let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+            let alerActionCancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
                 
             })
             

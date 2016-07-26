@@ -70,20 +70,16 @@ extension NSDate{
     
     ///增加一天
     func increase1Day() -> NSDate? {
-        let dateComponents = NSDateComponents()
-        dateComponents.day = 1
-        let nextDate = NSCalendar.currentCalendar().dateByAddingComponents(dateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        let day = 1.0
+        let nextDate = self.dateByAddingTimeInterval(day * 24 * 60 * 60)
         return nextDate
         
     }
     
     ///增加几天
-    func increaseDays(day: Int) -> NSDate? {
-        let dateComponents = NSDateComponents()
-        dateComponents.day = day
-        let nextDate = NSCalendar.currentCalendar().dateByAddingComponents(dateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+    func increaseDays(day: Double) -> NSDate? {
+        let nextDate = self.dateByAddingTimeInterval(day * 24 * 60 * 60)
         return nextDate
-        
     }
     
     ///格式化日期到字符串 YYYY年MM月DD日
