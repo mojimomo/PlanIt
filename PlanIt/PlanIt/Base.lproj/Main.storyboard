@@ -1543,10 +1543,10 @@
             </objects>
             <point key="canvasLocation" x="162.5" y="1697.5"/>
         </scene>
-        <!--关于我们-->
+        <!--关于-->
         <scene sceneID="Mjr-od-KI3">
             <objects>
-                <viewController id="JHy-vf-eBS" customClass="AboutViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JHy-vf-eBS" userLabel="关于" customClass="AboutViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L96-e8-NGJ"/>
                         <viewControllerLayoutGuide type="bottom" id="9Zu-Tc-m85"/>
@@ -1556,7 +1556,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gKZ-LW-EoG">
-                                <rect key="frame" x="137" y="95" width="100" height="100"/>
+                                <rect key="frame" x="137" y="90" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="ZNT-HW-C2V"/>
                                     <constraint firstAttribute="height" constant="100" id="pCs-VM-nod"/>
@@ -1581,7 +1581,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="马克计划" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mS-Ku-qAM">
-                                <rect key="frame" x="147" y="215" width="81" height="21"/>
+                                <rect key="frame" x="147" y="210" width="81" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="PY1-a7-JgP"/>
                                     <constraint firstAttribute="width" constant="81" id="S7k-2j-PUU"/>
@@ -1591,7 +1591,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版本" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWL-86-drm">
-                                <rect key="frame" x="137" y="247" width="100" height="21"/>
+                                <rect key="frame" x="137" y="242" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="aT3-C2-9br"/>
                                     <constraint firstAttribute="height" constant="21" id="rWf-04-dR4"/>
@@ -1611,11 +1611,11 @@
                             <constraint firstItem="7mS-Ku-qAM" firstAttribute="centerX" secondItem="oWL-86-drm" secondAttribute="centerX" id="dLP-b8-omc"/>
                             <constraint firstItem="1RJ-xU-Dpf" firstAttribute="top" secondItem="sfm-kW-bKZ" secondAttribute="bottom" constant="1" id="edp-kY-ZSt"/>
                             <constraint firstItem="oWL-86-drm" firstAttribute="centerX" secondItem="sfm-kW-bKZ" secondAttribute="centerX" id="j46-3P-dqi"/>
-                            <constraint firstItem="gKZ-LW-EoG" firstAttribute="top" secondItem="L96-e8-NGJ" secondAttribute="bottom" constant="75" id="s2L-EJ-PRK"/>
+                            <constraint firstItem="gKZ-LW-EoG" firstAttribute="top" secondItem="L96-e8-NGJ" secondAttribute="bottom" constant="70" id="s2L-EJ-PRK"/>
                             <constraint firstItem="gKZ-LW-EoG" firstAttribute="centerX" secondItem="7mS-Ku-qAM" secondAttribute="centerX" id="vxK-GE-WcH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="关于我们" id="qYl-L8-gr4"/>
+                    <navigationItem key="navigationItem" title="关于我们" id="qYl-L8-gr4" userLabel="关于"/>
                     <connections>
                         <outlet property="appVersion" destination="oWL-86-drm" id="Vlh-O2-axL"/>
                         <outlet property="memberIntro" destination="sfm-kW-bKZ" id="LrQ-Qb-t4K"/>

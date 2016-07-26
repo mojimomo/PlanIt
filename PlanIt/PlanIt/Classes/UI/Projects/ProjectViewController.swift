@@ -433,7 +433,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
         //分割线
         let blackView = UIView(frame: CGRect(x: 10, y: 45, width: 180, height: 1))
-        blackView.backgroundColor = UIColor ( red: 0.8078, green: 0.8118, blue: 0.8157, alpha: 1.0 )
+        blackView.backgroundColor = UIColor ( red: 0.9453, green: 0.9453, blue: 0.9453, alpha: 0.8 )
         showView.addSubview(blackView)
         
         //标题
@@ -535,7 +535,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         }
         //分割线
         let blackView = UIView(frame: CGRect(x: 10, y: 45, width: 180, height: 1))
-        blackView.backgroundColor = UIColor ( red: 0.8078, green: 0.8118, blue: 0.8157, alpha: 1.0 )
+        blackView.backgroundColor = UIColor ( red: 0.9453, green: 0.9453, blue: 0.9453, alpha: 0.8 )
         showView.addSubview(blackView)
         
         //标题

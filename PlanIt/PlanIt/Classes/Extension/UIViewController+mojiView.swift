@@ -32,6 +32,7 @@ extension UIViewController{
         hud.mode = MBProgressHUDMode.CustomView
         hud.customView = UIImageView(image: UIImage(named: "Checkmark")!)
         hud.label.text = title
+        hud.color = UIColor.colorFromHex("#CACACA")
         //延迟隐藏
         hud.hideAnimated(true, afterDelay: 1)
     }
