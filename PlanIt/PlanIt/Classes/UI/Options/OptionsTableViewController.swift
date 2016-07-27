@@ -129,16 +129,19 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                     popoverPresentationController.sourceView = self.view
                     let rect = tableView.rectForRowAtIndexPath(indexPath)
                     popoverPresentationController.sourceRect = rect
+                    
+                    //配置位置
+                    numberPicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height )
+                    numberPicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                }else{
+                    //配置位置
+                    numberPicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 50 )
+                    numberPicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
                 }
                 
                 //显示alert
-                self.presentViewController(alerController, animated: true, completion: { () -> Void in
-                    
-                })
-                
-                //配置位置
-                numberPicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 100 )
-                numberPicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                self.presentViewController(alerController, animated: true, completion: nil)
+
             }
         }
         
@@ -263,7 +266,8 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
-    // MARK: - ViewLife
+    
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         self.tableView.showsVerticalScrollIndicator = false
         let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
@@ -293,8 +297,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             self.localNotifiicationLabel.text = "已停用"
         }
     }
-    
-    // MARK: - View Lifecycle
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

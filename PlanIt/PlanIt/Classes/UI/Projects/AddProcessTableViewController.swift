@@ -20,7 +20,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
     @IBOutlet weak var currentProcessTextField: UITextField!
     @IBOutlet weak var remarkTextField: UITextField!
     @IBOutlet weak var currentProcessLabel: UILabel!
-    
+    let maxLengthDict  = [UITag.doneTextField : 6, UITag.remarkTextField : 20]
     struct UITag {
         static let doneTextField = 1004
         static let remarkTextField = 1005
@@ -70,6 +70,30 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         }
     }
     
+    ///观察是否超出字符
+    func textFiledEditChanged(sender: NSNotification){
+        let textField = sender.object as! UITextField
+        let kMaxLength = maxLengthDict[textField.tag] ?? 0
+        let toBeString = textField.text!
+        //获取高亮部分
+        let selectedRange = textField.markedTextRange
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if selectedRange == nil {
+            if (toBeString.characters.count > kMaxLength){
+                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequenceAtIndex(kMaxLength)
+                if rangeIndex.length == 1
+                {
+                    textField.text = (toBeString as NSString).substringToIndex(kMaxLength)
+                }
+                else
+                {
+                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequencesForRange(NSMakeRange(0, kMaxLength))
+                    textField.text = (toBeString as NSString).substringToIndex(rangeRange.length)
+                }
+            }
+        }
+    }
+    
     // MARK: - TableView delegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -94,6 +118,14 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
         self.tableView.sectionFooterHeight = 0
         self.tableView.sectionHeaderHeight = 25
+        
+        //添加lebel观察者
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:  "textFiledEditChanged:",name: UITextFieldTextDidChangeNotification ,object: remarkTextField)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        //删除观察者
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: remarkTextField)
     }
     
     // MARK: - UITextFieldDelegate
@@ -104,17 +136,17 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         switch textField.tag{
         case UITag.doneTextField:
             let new = newText as String
-            if newText.length >= 0 && newText.length <= 6 && (new.validateNum() || new == ""){
+            if newText.length >= 0 && newText.length <= maxLengthDict[UITag.doneTextField] && (new.validateNum() || new == ""){
                 return true
             }else {
                 return false
             }
-        case UITag.remarkTextField:
-            if newText.length >= 0 && newText.length <= 20{
-                return true
-            }else {
-                return false
-            }
+//        case UITag.remarkTextField:
+//            if newText.length >= 0 && newText.length <= maxLengthDict[UITag.remarkTextField]{
+//                return true
+//            }else {
+//                return false
+//            }
         default:
             return true
         }

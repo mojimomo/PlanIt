@@ -35,11 +35,14 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     @IBOutlet weak var finishEditButton: UIButton!
     @IBOutlet weak var punchCell: UITableViewCell!
     
+    let maxLengthDict  = [UITag.projectNameLabel : 10, UITag.unitTextField : 5, UITag.totalTextField : 6]
+    
     struct UITag {
         static let projectNameLabel = 1001
         static let unitTextField = 1002
         static let totalTextField = 1003
     }
+    
     
     var delegate: EditProjectTableViewDelegate?
     ///按钮文字
@@ -175,17 +178,30 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         }
     }
 
-    @IBAction func unitDidChanged(sender: UITextField) {
-        if  sender.text?.characters.count > 5 {
-            sender.text = (sender.text! as NSString).substringToIndex(5)
+    ///观察是否超出字符
+    func textFiledEditChanged(sender: NSNotification){
+        let textField = sender.object as! UITextField
+        let kMaxLength = maxLengthDict[textField.tag] ?? 0
+        let toBeString = textField.text!
+        //获取高亮部分
+        let selectedRange = textField.markedTextRange
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if selectedRange == nil {
+            if (toBeString.characters.count > kMaxLength){
+                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequenceAtIndex(kMaxLength)
+                if rangeIndex.length == 1
+                {
+                    textField.text = (toBeString as NSString).substringToIndex(kMaxLength)
+                }
+                else
+                {
+                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequencesForRange(NSMakeRange(0, kMaxLength))
+                    textField.text = (toBeString as NSString).substringToIndex(rangeRange.length)
+                }
+            }
         }
     }
     
-    @IBAction func projectNameDidChanged(sender: UITextField) {
-        if  sender.text?.characters.count > 10 {
-            sender.text = (sender.text! as NSString).substringToIndex(10)
-        }
-    }
     //是否改变开始时间
     func editBeginTime(rect: CGRect) {
         if IS_IOS8{
@@ -222,6 +238,14 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             if let popoverPresentationController = alerController.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
+                //配置位置
+                datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height)
+                datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                
+            }else{
+                //配置位置
+                datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 50)
+                datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             }
             
             //显示alert
@@ -229,9 +253,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 
             })
             
-            //配置位置
-            datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 100 )
-            datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+
         }
     }
     
@@ -245,7 +267,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //设置日期
             datePicker.setDate(self.project.endTimeDate.increaseDays(-1)!, animated: false)
             //创建UIAlertController
-            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
             alerController.view.addSubview(datePicker)
         
             //创建UIAlertAction 确定按钮
@@ -271,16 +293,21 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             if let popoverPresentationController = alerController.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
+                //配置位置
+                datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height)
+                datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                
+            }else{
+                //配置位置
+                datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 50)
+                datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             }
+            
             
             //显示alert
             self.presentViewController(alerController, animated: true, completion: { () -> Void in
                 
             })
-            
-            //配置位置
-            datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 100 )
-            datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         }
     }
 
@@ -325,7 +352,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
 
         
         if projectBeginTime != "" && projectEndTime != ""{
-
+            self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime)
         }else{
             callAlert("提交错误",message: "时间不能为空!")
             return
@@ -372,7 +399,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         
         
         if projectBeginTime != "" && projectEndTime != ""{
-
+            self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime)
         }else{
             callAlert("修改错误",message: "时间不能为空!")
             return
@@ -553,6 +580,16 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         self.tableView.sectionFooterHeight = 25
         self.tableView.sectionHeaderHeight = 0
 
+        //添加lebel观察者
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:  "textFiledEditChanged:",name: UITextFieldTextDidChangeNotification ,object: projectNameLabel)
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:  "textFiledEditChanged:",name: UITextFieldTextDidChangeNotification ,object: unitTextField)
+        
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        //删除观察者
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: projectNameLabel)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: unitTextField)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -580,6 +617,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     func projectForTagsView(sneder: TagsViewController) -> Project? {
         return project
     }
+
     
     // MARK: - UITextFieldDelegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -587,21 +625,21 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         let newText: NSString = oldText.stringByReplacingCharactersInRange(range, withString: string)
 
         switch textField.tag{
-        case UITag.projectNameLabel:
-            if newText.length >= 0 && newText.length <= 10{
-                return true
-            }else {
-                return false
-            }
-        case UITag.unitTextField:
-            if newText.length >= 0 && newText.length <= 5{
-                return true
-            }else {
-                return false
-            }
+//        case UITag.projectNameLabel:
+//            if newText.length >= 0 && newText.length <= 10{
+//                return true
+//            }else {
+//                return false
+//            }
+//        case UITag.unitTextField:
+//            if newText.length >= 0 && newText.length <= 5{
+//                return true
+//            }else {
+//                return false
+//            }
         case UITag.totalTextField:
             let new = newText as String
-            if newText.length >= 0 && newText.length <= 6 &&  (new.validateNum() || new == ""){
+            if newText.length >= 0 && newText.length <= maxLengthDict[UITag.totalTextField] &&  (new.validateNum() || new == ""){
                 return true
             }else {
                 return false
