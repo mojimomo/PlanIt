@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1909" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O7P-2h-JoM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O7P-2h-JoM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -858,11 +858,11 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截止2016年12月12日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAP-cj-VgG">
                                                 <rect key="frame" x="30" y="78" width="105" height="13.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                <color key="textColor" red="0.32156862745098036" green="0.33725490196078434" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CNQ-UT-ZBX">
-                                                <rect key="frame" x="30" y="101" width="105" height="2"/>
+                                                <rect key="frame" x="30" y="109.5" width="105" height="2"/>
                                                 <color key="backgroundColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" red="0.99607843137254903" green="0.38039215686274508" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -952,7 +952,7 @@
                                             <constraint firstItem="exL-J4-Unb" firstAttribute="leading" secondItem="eqa-q5-DLe" secondAttribute="leadingMargin" constant="30" id="QHb-L0-Axs"/>
                                             <constraint firstItem="sZE-Xp-KFN" firstAttribute="top" secondItem="eqa-q5-DLe" secondAttribute="top" constant="26" id="RT4-XA-rd0"/>
                                             <constraint firstItem="exL-J4-Unb" firstAttribute="top" secondItem="eqa-q5-DLe" secondAttribute="topMargin" id="Ryt-fC-HMy"/>
-                                            <constraint firstItem="CNQ-UT-ZBX" firstAttribute="top" secondItem="RAP-cj-VgG" secondAttribute="bottom" constant="10" id="SNu-JZ-hJV"/>
+                                            <constraint firstItem="CNQ-UT-ZBX" firstAttribute="top" secondItem="RAP-cj-VgG" secondAttribute="bottom" constant="18" id="SNu-JZ-hJV"/>
                                             <constraint firstItem="exL-J4-Unb" firstAttribute="top" secondItem="eqa-q5-DLe" secondAttribute="topMargin" id="TCx-Qo-QtT"/>
                                             <constraint firstItem="exL-J4-Unb" firstAttribute="leading" secondItem="eqa-q5-DLe" secondAttribute="leading" constant="30" id="V4V-Lv-uCF"/>
                                             <constraint firstItem="CNQ-UT-ZBX" firstAttribute="top" secondItem="gYA-jv-LwE" secondAttribute="bottom" constant="8" symbolic="YES" id="Wcg-zg-xnV"/>
@@ -996,7 +996,6 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hg3-uW-fDh">
                                                 <rect key="frame" x="299" y="21" width="1" height="140"/>
-                                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="140" id="XWi-1c-LUH"/>
                                                     <constraint firstAttribute="width" constant="1" id="hpi-wJ-1Ck"/>
@@ -1109,7 +1108,7 @@
                                                     <segment title="周     "/>
                                                     <segment title="日     "/>
                                                 </segments>
-                                                <color key="tintColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="changeLineChart:" destination="hPX-EG-K6r" eventType="valueChanged" id="fdP-yS-qUQ"/>
                                                 </connections>
@@ -1716,7 +1715,7 @@
                             <constraint firstItem="gKZ-LW-EoG" firstAttribute="centerX" secondItem="7mS-Ku-qAM" secondAttribute="centerX" id="vxK-GE-WcH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="关于我们" id="qYl-L8-gr4" userLabel="关于"/>
+                    <navigationItem key="navigationItem" title="关于" id="qYl-L8-gr4" userLabel="关于"/>
                     <connections>
                         <outlet property="appVersion" destination="oWL-86-drm" id="Vlh-O2-axL"/>
                         <outlet property="memberIntro" destination="sfm-kW-bKZ" id="LrQ-Qb-t4K"/>

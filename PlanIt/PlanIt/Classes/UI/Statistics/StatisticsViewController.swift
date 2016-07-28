@@ -161,7 +161,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 progressView.setProgress(1 , animated: false)
                 project.percent = 100
             case .OverTime:
-                prompLabel?.text = "超出截止"
+                prompLabel?.text = "超出期限"
                 let restString = project.endTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
                  surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
@@ -187,7 +187,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 needFinishLabel.text = "\(times) \(project.unit)"
                 needFinishLabel.changeTextAttributeByString(" \(project.unit)", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
             }else if project.type == .Punch && project.isFinished == .NotFinished{
-                needLabel.text = "余下每天打卡次数"
+                needLabel.text = "余下每天需打卡"
                 let days = NSDate().daysToEndDate(project.endTimeDate) + 1
                 let times = (project.rest / Double(days)).toIntCarry()
                 needFinishLabel.text = "\(times) 次"
@@ -248,6 +248,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //设置按钮
         self.navigationItem.rightBarButtonItems = [spacer, historyBarButton, gap, editBarButton]
         self.navigationItem.leftBarButtonItem = backButtom
+        
+        //修改progressView高度
+        self.progressView.transform = CGAffineTransformMakeScale(1.0, 4.5)
+        self.progressView.trackTintColor = UIColor.colorFromHex("#F5F4F2")
         
         //setupConstraints()
         
