@@ -56,7 +56,7 @@ class ProjectTableViewCell: RoundTableviewCell{
                         projectName = "距项目开始还有 \(days)"
                     }else{
                         let days = NSDate().daysToEndDate(project.endTimeDate) + 1
-                        projectName = "余下每天需完成 \(Int(project.rest / Double(days))) \(project.unit)"
+                        projectName = "余下每天需完成 \((project.rest / Double(days)).toIntCarry()) \(project.unit)"
                     }
                 case .Punch:
                     if project.isFinished == .OverTime{

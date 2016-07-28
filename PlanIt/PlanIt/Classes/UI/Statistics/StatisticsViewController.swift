@@ -183,12 +183,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             if project.type == .Normal && project.isFinished == .NotFinished{
                 needLabel.text = "余下每天需完成"
                 let days = NSDate().daysToEndDate(project.endTimeDate) + 1
-                needFinishLabel.text = "\(Int(project.rest / Double(days))) \(project.unit)"
+                let times = (project.rest / Double(days)).toIntCarry()
+                needFinishLabel.text = "\(times) \(project.unit)"
                 needFinishLabel.changeTextAttributeByString(" \(project.unit)", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
             }else if project.type == .Punch && project.isFinished == .NotFinished{
                 needLabel.text = "余下每天打卡次数"
                 let days = NSDate().daysToEndDate(project.endTimeDate) + 1
-                needFinishLabel.text = "\(Int(project.rest / Double(days))) 次"
+                let times = (project.rest / Double(days)).toIntCarry()
+                needFinishLabel.text = "\(times) 次"
                 needFinishLabel.changeTextAttributeByString(" 次", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
             }else{
                 needLabel.hidden = true

@@ -63,3 +63,14 @@ extension String{
         return numTest.evaluateWithObject(self)
     }
 }
+
+extension Double{
+    ///进位转换
+    func toIntCarry() -> Int{
+        if self == Double(Int(self)){
+            return Int(self)
+        }else{
+            return Int(self) + 1
+        }
+    }
+}

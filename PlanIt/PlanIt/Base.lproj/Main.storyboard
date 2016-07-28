@@ -846,29 +846,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wk-w5-VXD">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="AOX-o4-V0B">
-                                        <rect key="frame" x="0.0" y="384" width="600" height="274"/>
-                                        <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="ZLF-S9-5cz">
-                                                <rect key="frame" x="232" y="17" width="137" height="29"/>
-                                                <segments>
-                                                    <segment title="月     "/>
-                                                    <segment title="周     "/>
-                                                    <segment title="日     "/>
-                                                </segments>
-                                                <color key="tintColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
-                                                <connections>
-                                                    <action selector="changeLineChart:" destination="hPX-EG-K6r" eventType="valueChanged" id="fdP-yS-qUQ"/>
-                                                </connections>
-                                            </segmentedControl>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="ZLF-S9-5cz" firstAttribute="centerX" secondItem="AOX-o4-V0B" secondAttribute="centerX" id="Cuv-qL-wkS"/>
-                                            <constraint firstAttribute="height" constant="274" id="fSz-MO-7oO"/>
-                                            <constraint firstItem="ZLF-S9-5cz" firstAttribute="top" secondItem="AOX-o4-V0B" secondAttribute="top" constant="17" id="muz-Ot-R7x"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqa-q5-DLe">
                                         <rect key="frame" x="0.0" y="222" width="600" height="142"/>
                                         <subviews>
@@ -878,19 +855,19 @@
                                                 <color key="textColor" red="0.32156862745098036" green="0.33725490196078434" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截止：2016年12月12日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAP-cj-VgG">
-                                                <rect key="frame" x="30" y="78" width="116" height="13.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截止2016年12月12日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAP-cj-VgG">
+                                                <rect key="frame" x="30" y="78" width="105" height="13.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <color key="textColor" red="0.32156862745098036" green="0.33725490196078434" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CNQ-UT-ZBX">
-                                                <rect key="frame" x="30" y="101" width="120" height="2"/>
+                                                <rect key="frame" x="30" y="101" width="105" height="2"/>
                                                 <color key="backgroundColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" red="0.99607843137254903" green="0.38039215686274508" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="152" id="R4d-fs-C3a"/>
-                                                    <constraint firstAttribute="width" constant="120" id="TmB-GM-fEt"/>
+                                                    <constraint firstAttribute="width" constant="105" id="TmB-GM-fEt"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
@@ -1121,6 +1098,29 @@
                                                 <exclude reference="zg1-qc-jxL"/>
                                             </mask>
                                         </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="AOX-o4-V0B">
+                                        <rect key="frame" x="0.0" y="384" width="600" height="274"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="ZLF-S9-5cz">
+                                                <rect key="frame" x="232" y="17" width="137" height="29"/>
+                                                <segments>
+                                                    <segment title="月     "/>
+                                                    <segment title="周     "/>
+                                                    <segment title="日     "/>
+                                                </segments>
+                                                <color key="tintColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="changeLineChart:" destination="hPX-EG-K6r" eventType="valueChanged" id="fdP-yS-qUQ"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="ZLF-S9-5cz" firstAttribute="centerX" secondItem="AOX-o4-V0B" secondAttribute="centerX" id="Cuv-qL-wkS"/>
+                                            <constraint firstAttribute="height" constant="274" id="fSz-MO-7oO"/>
+                                            <constraint firstItem="ZLF-S9-5cz" firstAttribute="top" secondItem="AOX-o4-V0B" secondAttribute="top" constant="17" id="muz-Ot-R7x"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>

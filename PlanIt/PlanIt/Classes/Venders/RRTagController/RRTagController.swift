@@ -54,29 +54,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     var editTags = [Tag]()
-    var totalTagsSelected: Int {
-        get {
-            return self._totalTagsSelected
-        }
-        set {
-            if newValue == 0 {
-                self._totalTagsSelected = 0
-                return
-            }
-            self._totalTagsSelected += newValue
-            self._totalTagsSelected = (self._totalTagsSelected < 0) ? 0 : self._totalTagsSelected
-//            self.navigationBarItem = UINavigationItem(title: "选择标签")
-//            self.navigationBarItem.leftBarButtonItem = self.leftButton
-//            if (self._totalTagsSelected == 0) {
-//                self.navigationBarItem.rightBarButtonItem = nil
-//            }
-//            else {
-//           self.navigationBarItem.rightBarButtonItem = self.rigthButton
-//            }
-//            self.navigationBar.pushNavigationItem(self.navigationBarItem, animated: false)
-        }
-    }
-    
+    var totalTagsSelected: Int = 0
     lazy var collectionTag: UICollectionView = {
         let layoutCollectionView = UICollectionViewFlowLayout()
         layoutCollectionView.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
@@ -162,8 +140,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }
         
-        if selected.count > 2{
-            callAlert("提交错误", message: "所选标签不能超过2个")
+        if selected.count > 3{
+            callAlert("提交错误", message: "所选标签不能超过3个")
             return
         }
         
@@ -230,7 +208,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }else{
             if indexPath.row < tags.count {
-                if tags[indexPath.row].isSelected == false && totalTagsSelected >= 2{
+                if tags[indexPath.row].isSelected == false && totalTagsSelected >= 3{
                     return
                 }
                 
@@ -239,12 +217,12 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                     if tags[indexPath.row].isSelected == false {
                         tags[indexPath.row].isSelected = true
                         selectedCell?.animateSelection(tags[indexPath.row].isSelected)
-                        totalTagsSelected = 1
+                        totalTagsSelected += 1
                     }
                     else {
                         tags[indexPath.row].isSelected = false
                         selectedCell?.animateSelection(tags[indexPath.row].isSelected)
-                        totalTagsSelected = -1
+                        totalTagsSelected -= 1
                     }
                 }
             }
@@ -266,6 +244,9 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                     textField.placeholder = "例如: 编程, 健身"
                 })
                 
+                //添加lebel观察者
+                NSNotificationCenter.defaultCenter().addObserver(self,selector:  "textFiledEditChanged:",name: UITextFieldTextDidChangeNotification ,object: (alerController.textFields?.first)!)
+                
                 //创建UIAlertAction 确定按钮
                 let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
                     if alerController.textFields?.count > 0 {
@@ -280,6 +261,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                                         if let tag = Tag.loadDataFromName(contentTag){
                                             self.tags.insert(tag, atIndex: self.tags.count)
                                             self.collectionTag.reloadData()
+                                            //删除观察者
+                                            NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: (alerController.textFields?.first)!)
                                         }
                                     }else{
                                         self.callAlert("创建失败", message: "该标签已存在！")
@@ -290,12 +273,16 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                             }
                         }
                     }
+
                 })
                 
                 //创建UIAlertAction 取消按钮
-                let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: nil)
+                let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler:{(UIAlertAction) -> Void in
+                    //删除观察者
+                    NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: (alerController.textFields?.first)!)
+                    })
 
-                //添加动作                
+                //添加动作
                 alerController.addAction(alerActionCancel)
                 alerController.addAction(alerActionOK)
                 
@@ -306,6 +293,30 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }
      }
+    
+    ///观察是否超出字符
+    func textFiledEditChanged(sender: NSNotification){
+        let textField = sender.object as! UITextField
+        let kMaxLength = 8
+        let toBeString = textField.text!
+        //获取高亮部分
+        let selectedRange = textField.markedTextRange
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if selectedRange == nil {
+            if (toBeString.characters.count > kMaxLength){
+                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequenceAtIndex(kMaxLength)
+                if rangeIndex.length == 1
+                {
+                    textField.text = (toBeString as NSString).substringToIndex(kMaxLength)
+                }
+                else
+                {
+                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequencesForRange(NSMakeRange(0, kMaxLength))
+                    textField.text = (toBeString as NSString).substringToIndex(rangeRange.length)
+                }
+            }
+        }
+    }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
@@ -414,6 +425,11 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        for tag in tags{
+            if tag.isSelected == true{
+                totalTagsSelected += 1
+            }
+        }
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancelTagController")
         self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishTagController")
