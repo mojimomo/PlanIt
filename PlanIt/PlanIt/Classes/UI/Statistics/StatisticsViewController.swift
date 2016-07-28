@@ -23,7 +23,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     ///chart标签
     lazy var chartLabel = [String]()
     
-    var processDatesDict = [String : Double]()
     var projectName = ""{
         didSet{
             self.title = projectName
