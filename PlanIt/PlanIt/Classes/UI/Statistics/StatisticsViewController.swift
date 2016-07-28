@@ -297,7 +297,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //清除之前的数据
         chartData.removeAll()
         chartLabel.removeAll()
-        processDatesDict.removeAll()
         //数据库加载数据
         processDates = ProcessDate().loadData(project.id)
         
@@ -331,22 +330,17 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             var date = project.beginTimeDate.increaseDays(-7)!
             for var week = 0; week < weeks ; week++ {
                 let weekString = date.FormatToStringYYYY() + "第\(date.getWeekOfYear())周"
-                processDatesDict[weekString] = 0
+                var total = 0.0
                 for processDate in processDates{
                     if processDate.week == weekString {
-                        processDatesDict[weekString] = processDate.done + processDatesDict[weekString]!
+                        total += processDate.done
                     }
                 }
+                chartData.append(total)
+                chartLabel.append(weekString)
                 date = date.increaseDays(7)!
             }
-            
-            for key in processDatesDict.keys{
-                chartLabel.append(key)
-            }
-            
-            for value in processDatesDict.values{
-                chartData.append(value)
-            }
+
             //按照月统计
         }else if lineChartType == .Month{
             let beginDate = project.beginTimeDate
@@ -355,24 +349,17 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             var date = project.beginTimeDate.increaseMonths(-1)!
             for var month = 0; month < months ; month++ {
                 let monthString = date.FormatToStringYYYYMM()
-                processDatesDict[monthString] = 0
+                var total = 0.0
                 for processDate in processDates{
                     if processDate.month == monthString {
-                        processDatesDict[monthString] = processDate.done + processDatesDict[monthString]!
+                        total += processDate.done
                     }
                 }
+                chartData.append(total)
+                chartLabel.append(monthString)
                 date = date.increase1Month()!
             }
-            
-            for key in processDatesDict.keys{
-                chartLabel.append(key)
-            }
-            
-            for value in processDatesDict.values{
-                chartData.append(value)
-            }
         }
-
     }
     
     
