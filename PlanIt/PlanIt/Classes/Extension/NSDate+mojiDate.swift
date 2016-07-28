@@ -27,6 +27,14 @@ extension NSDate{
         return Int(days)
     }
     
+    ///计算此时间与结束时间相差几周
+    func weeksToEndDate(endDate: NSDate) -> Int{
+        let timeEnd = endDate.timeIntervalSince1970
+        let timeBegin = self.timeIntervalSince1970
+        let days = (timeEnd - timeBegin)/( 60 * 60 * 24 * 7)
+        return Int(days)
+    }
+    
     ///计算此时间与结束时间相差几月
     func monthsToEndDate(endDate: NSDate) -> Int{
         let timeEnd = endDate.timeIntervalSince1970
@@ -82,6 +90,22 @@ extension NSDate{
         return nextDate
     }
     
+    ///增加一月
+    func increase1Month() -> NSDate? {
+        let newDateComponents = NSDateComponents()
+        newDateComponents.month = 1
+        let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        return calculatedDate
+    }    
+    
+    ///增加几月
+    func increaseMonths(month: Int) -> NSDate? {
+        let newDateComponents = NSDateComponents()
+        newDateComponents.month = month
+        let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        return calculatedDate
+    }
+    
     ///格式化日期到字符串 YYYY年MM月DD日
     func FormatToStringYYYYMMDD() -> String{
         let dateFormat = NSDateFormatter()
@@ -127,6 +151,25 @@ extension NSDate{
         let strDate = dateFormat.stringFromDate(self)
         return strDate
     }
+    
+    ///格式化日期到字符串 MM月
+    func FormatToStringMMMM() -> String{
+        let dateFormat = NSDateFormatter()
+        dateFormat.setLocalizedDateFormatFromTemplate("MMMM")
+        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        let strDate = dateFormat.stringFromDate(self)
+        return strDate
+    }
+    
+    ///格式化日期到字符串 YYYY年
+    func FormatToStringYYYY() -> String{
+        let dateFormat = NSDateFormatter()
+        dateFormat.setLocalizedDateFormatFromTemplate("yyyy")
+        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        let strDate = dateFormat.stringFromDate(self)
+        return strDate
+    }
+    
     ///格式化日期到字符串 DD日HH小时MM分钟
     func FormatToStringDDHHMM() -> String{
         let dateFormat = NSDateFormatter()
@@ -134,5 +177,25 @@ extension NSDate{
         dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
         let strDate = dateFormat.stringFromDate(self)
         return strDate
+    }
+    
+    ///获取这是这个月的第几周
+    func getWeekOfMonth() -> Int{
+        let calendar:NSCalendar = NSCalendar.currentCalendar()
+        let dateComp:NSDateComponents = calendar.components( .WeekOfMonth, fromDate: self)
+        return dateComp.weekOfMonth
+    }
+    
+    ///获取这是这个年的第几月
+    func getMonthkOfYear() -> Int{
+        let calendar:NSCalendar = NSCalendar.currentCalendar()
+        let dateComp:NSDateComponents = calendar.components( .Month, fromDate: self)
+        return dateComp.month
+    }
+    ///获取这是这个年的第几月
+    func getWeekOfYear() -> Int{
+        let calendar:NSCalendar = NSCalendar.currentCalendar()
+        let dateComp:NSDateComponents = calendar.components( .WeekOfYear, fromDate: self)
+        return dateComp.weekOfYear
     }
 }

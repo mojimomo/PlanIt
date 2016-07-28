@@ -9,6 +9,11 @@
 import UIKit
 
 class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate{
+    enum LineChartType{
+        case Month, Week, Day
+    }
+    ///表格类型
+    var lineChartType: LineChartType = .Day
     ///统计页面当前项目
     var project = Project()
     ///此项目的所有进度数据
@@ -18,7 +23,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     ///chart标签
     lazy var chartLabel = [String]()
     
-    var processDatesDicts = [[String : Int]]()
+    var processDatesDict = [String : Double]()
     var projectName = ""{
         didSet{
             self.title = projectName
@@ -30,14 +35,23 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             
         }
         get{
-//            let staticRect = UIApplication.sharedApplication().statusBarFrame
-//            let navRect =  self.navigationController?.navigationBar.frame
-//            let height = self.view.bounds.height - staticRect.height - navRect!.height - 30 - 220
-            return CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height / 2 - 30)
+            if (UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
+                return CGRectMake(0, 64, self.view.bounds.width, 210 )
+            }
+            else {
+                return CGRectMake(0, 64, self.view.bounds.width, self.view.bounds.height - 531.0 )
+            }
         }
     }
-    
+
+    @IBOutlet weak var needLabel: UILabel!
+    ///剩余每天完成的量 2 小时
+    @IBOutlet weak var needFinishLabel: UILabel!
+    ///已完成 50 / 100 小时
+    @IBOutlet weak var doneLabel: UILabel!
+    ///距离截止
     @IBOutlet weak var prompLabel: UILabel!
+    ///距离截止 15天
     @IBOutlet weak var surplusLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var tagListView: TagListView!{
@@ -55,6 +69,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         }
     }
     @IBOutlet weak var percentLabel: UILabel!
+    ///截止：2016年12月12日
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var inforView: UIView!
     @IBOutlet weak var pieChartView: KDCircularProgress!{
@@ -130,14 +145,16 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             //根据不同项目完成度
             switch project.isFinished {
             case .NotBegined:
-                prompLabel?.text = "距离项目开始"
+                prompLabel?.text = "距离开始"
                 let restString = project.beginTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
+                surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
                 progressView.setProgress(0 , animated: false)
             case .NotFinished:
-                prompLabel?.text = "距离项目截止"
+                prompLabel?.text = "距离截止"
                 let restString = project.endTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
+                surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
                 let timePercent = project.beginTimeDate.percentFromCurrentTime(project.endTimeDate)
                 progressView.setProgress(Float(timePercent), animated: false)
             case .Finished:
@@ -145,9 +162,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 progressView.setProgress(1 , animated: false)
                 project.percent = 100
             case .OverTime:
-                prompLabel?.text = "超出项目截止"
+                prompLabel?.text = "超出截止"
                 let restString = project.endTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
+                 surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
                 let timePercent = project.beginTimeDate.percentFromCurrentTime(project.endTimeDate)
                 progressView.setProgress(Float(timePercent), animated: false)
             default:break
@@ -159,10 +177,34 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 //                    print("animation stopped, was interrupted")
 //                }
 //            }
+
+            //余下每天需完成
+            needLabel.hidden = false
+            needFinishLabel.hidden = false
+            if project.type == .Normal && project.isFinished == .NotFinished{
+                needLabel.text = "余下每天需完成"
+                let days = NSDate().daysToEndDate(project.endTimeDate) + 1
+                needFinishLabel.text = "\(Int(project.rest / Double(days))) \(project.unit)"
+                needFinishLabel.changeTextAttributeByString(" \(project.unit)", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
+            }else if project.type == .Punch && project.isFinished == .NotFinished{
+                needLabel.text = "余下每天打卡次数"
+                let days = NSDate().daysToEndDate(project.endTimeDate) + 1
+                needFinishLabel.text = "\(Int(project.rest / Double(days))) 次"
+                needFinishLabel.changeTextAttributeByString(" 次", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
+            }else{
+                needLabel.hidden = true
+                needFinishLabel.hidden = true
+            }
+            //已完成
+            doneLabel.text = "\(Int(project.complete)) / \(Int(project.total)) \(project.unit)"
+            doneLabel.changeTextAttributeByString(" / \(Int(project.total)) \(project.unit)", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
+            //百分比
             pieChartView.angle = Double(project.percent) / 100 * 360
             percentLabel.text = "\(Int(project.percent))%"
+            //距离截止
             percentLabel.sizeToFit()
-            endTimeLabel.text = "截止：\(project.endTime)"
+            endTimeLabel.text = "\(project.endTime)截止"
+            //画表格
             loadProcessDate()
             drawLineChart()
             updateUI()
@@ -172,7 +214,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = nil
-        
 
     }
     
@@ -236,41 +277,102 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
     
      //MARK: - Func
+    ///更改现状图
+    @IBAction func changeLineChart(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex{
+        case 0:
+            lineChartType = .Month
+        case 1:
+            lineChartType = .Week
+        case 2:
+            lineChartType = .Day
+        default:break
+        }
+        loadProcessDate()
+        drawLineChart()
+    }
+    
     ///读取进度数据
     func loadProcessDate(){
-        
+        //清除之前的数据
         chartData.removeAll()
         chartLabel.removeAll()
-        
+        processDatesDict.removeAll()
+        //数据库加载数据
         processDates = ProcessDate().loadData(project.id)
         
-        let beginDate = project.beginTimeDate
-        let endDate = project.endTimeDate
-        let days = beginDate.daysToEndDate(endDate)
-        var date = beginDate
-        if processDates.count == 0 {
+        //按照日统计
+        if lineChartType == .Day{
+            let beginDate = project.beginTimeDate
+            let endDate = project.endTimeDate
+            let days = beginDate.daysToEndDate(endDate) + 1
+            var date = beginDate.increaseDays(-1)!
             for var day = 0; day < days ; day++ {
-                chartData.append(0)
+                if processDates.count == 0 {
+                    chartData.append(0)
+                }
+                
+                for processDate in processDates{
+                    if processDate.recordTimeDate == date {
+                        chartData.append(processDate.done)
+                        break
+                    }else if processDate ==  processDates.last{
+                        chartData.append(0)
+                    }
+                }
                 chartLabel.append(date.FormatToStringMMMMDD())
                 date = date.increase1Day()!
             }
-        }
-        
-        for var day = 0; day < days ; day++ {
-            for processDate in processDates{
-                if processDate.recordTimeDate == date {
-                    //processDatesDicts.append([processDate.recordTime : Int(processDate.done)])
-                    chartData.append(processDate.done)
-                    chartLabel.append(date.FormatToStringMMMMDD())
-                    break
-                }else if processDate ==  processDates.last{
-                    //processDatesDicts.append([date.FormatToStringYYYYMMDD() : 0])
-                    chartData.append(0)
-                    chartLabel.append(date.FormatToStringMMMMDD())
+            //按照周统计
+        }else if lineChartType == .Week{
+            let beginDate = project.beginTimeDate
+            let endDate = project.endTimeDate
+            let weeks = beginDate.weeksToEndDate(endDate) + 2
+            var date = project.beginTimeDate.increaseDays(-7)!
+            for var week = 0; week < weeks ; week++ {
+                let weekString = date.FormatToStringYYYY() + "第\(date.getWeekOfYear())周"
+                processDatesDict[weekString] = 0
+                for processDate in processDates{
+                    if processDate.week == weekString {
+                        processDatesDict[weekString] = processDate.done + processDatesDict[weekString]!
+                    }
                 }
+                date = date.increaseDays(7)!
             }
-            date = date.increase1Day()!
+            
+            for key in processDatesDict.keys{
+                chartLabel.append(key)
+            }
+            
+            for value in processDatesDict.values{
+                chartData.append(value)
+            }
+            //按照月统计
+        }else if lineChartType == .Month{
+            let beginDate = project.beginTimeDate
+            let endDate = project.endTimeDate
+            let months = beginDate.monthsToEndDate(endDate) + 2
+            var date = project.beginTimeDate.increaseMonths(-1)!
+            for var month = 0; month < months ; month++ {
+                let monthString = date.FormatToStringYYYYMM()
+                processDatesDict[monthString] = 0
+                for processDate in processDates{
+                    if processDate.month == monthString {
+                        processDatesDict[monthString] = processDate.done + processDatesDict[monthString]!
+                    }
+                }
+                date = date.increase1Month()!
+            }
+            
+            for key in processDatesDict.keys{
+                chartLabel.append(key)
+            }
+            
+            for value in processDatesDict.values{
+                chartData.append(value)
+            }
         }
+
     }
     
     
@@ -283,7 +385,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             graphView = createDarkGraph(lineChartViewFrame)
             self.lineChartView.addSubview(graphView)
         }
-        
+        graphView.backgroundColor = UIColor.whiteColor()
         graphView.setData(chartData, withLabels: chartLabel)
         self.lineChartView.insertSubview(graphView, belowSubview: label)
     }
@@ -539,9 +641,26 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         }
         
     }
-    
-
 }
 
+extension UILabel{
+    func changeTextAttributeByString(needChangeString: String, font: UIFont, color: UIColor){
+        let noteString = NSMutableAttributedString(string: self.text!)
+        if let index = noteString.string.rangeOfString(needChangeString){
+            let range = NSMakeRange(Int(String(index.startIndex))!, needChangeString.characters.count)
+                noteString.addAttributes([NSForegroundColorAttributeName : color], range: range)
+                noteString.addAttributes([NSFontAttributeName : font], range: range)
+            self.attributedText = noteString
+        }
+    }
+    
+    func changeTextAttributeByRange(range: NSRange, font: UIFont, color: UIColor){
+        let noteString = NSMutableAttributedString(string: self.text!)
+        noteString.addAttributes([NSForegroundColorAttributeName : color], range: range)
+        noteString.addAttributes([NSFontAttributeName : font], range: range)
+        self.attributedText = noteString
+        
+    }
+}
 
     

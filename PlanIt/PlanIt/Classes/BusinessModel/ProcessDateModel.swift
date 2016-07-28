@@ -25,7 +25,13 @@ class ProcessDate: NSObject {
     var done: Double = -1
     ///记录时间
     var recordTimeDate = NSDate()
-
+    //2016年11月
+    var month = ""
+    //2016年11月第1周
+    var week = ""
+    //5日11点12分
+    var day = ""
+    
     override init() {
         super.init()
     }
@@ -38,6 +44,9 @@ class ProcessDate: NSObject {
         projectID = dict["projectID"]!.integerValue
         done = dict["done"]!.doubleValue
         recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()!
+        month = recordTimeDate.FormatToStringYYYYMM()
+        week = recordTimeDate.FormatToStringYYYY() + "第\(recordTimeDate.getWeekOfYear())周"
+        day = recordTimeDate.FormatToStringMMMMDD()
     }
     
     // MARK:- 和数据库之间的操作
