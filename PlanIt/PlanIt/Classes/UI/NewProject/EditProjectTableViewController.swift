@@ -173,6 +173,11 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     @IBAction func changeIsPunch(sender: UISwitch) {
         if sender.on{
             projectType = .Punch
+            if unitTextField.text == "" && totalTextField.text == ""{
+                unitTextField.text = "次"
+                let days = project.beginTimeDate.daysToEndDate(project.endTimeDate)
+                totalTextField.text = "\(days)"
+            }            
         }else{
             projectType = .Normal
         }
@@ -378,7 +383,6 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         }
         if project.check(){
             if(project.insertProject()){
-                project.addNotification()
                 //callAlertAndBack("提交成功",message: "新建项目成功!")
                 dismiss()
                 self.delegate?.goBackAct(.AddSuccess)

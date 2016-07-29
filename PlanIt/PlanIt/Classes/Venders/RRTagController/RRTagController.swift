@@ -434,6 +434,16 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancelTagController")
         self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishTagController")
 
+        //判断是否第一次打开此页面
+        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchTagManagerView") as Bool!) == false){
+            print("第一次打开项目页面")
+            //设置为非第一次打开此页面
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagManagerView")
+            //设置引导弹窗
+            self.callFirstRemain("长按进入编辑模式", startPoint: self.collectionTag.center)
+        }else{
+            
+        }
     }
     
     class func displayTagController(parentController parentController: UIViewController, tagsString: [String]?,

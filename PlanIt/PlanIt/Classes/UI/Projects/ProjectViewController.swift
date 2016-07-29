@@ -30,6 +30,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         static let TagsTable = 1
         static let ProjectsTable = 2
     }
+    let addProcessButtonTag = 1000
     ///没有数据图像的路劲
     private var noDataImageString = ["bike", "book2"]
     ///没有数据图像视图
@@ -173,8 +174,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     //点击是否显示未开始
     func showNotBegin(){
         isShowNotBegin = !isShowNotBegin
-        loadData()
-        self.projectTableView.reloadData()
+        updateTable()
     }
     
     ///根据超时快速排序
@@ -297,7 +297,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     
     ///更新表格
     func updateTable(){
-        self.projectTableView.reloadData()
+        loadData()
+        projectTableView.reloadData()
     }
     
     ///长按响应函数
@@ -384,11 +385,51 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         //读取数据按照id顺序排序
-        loadData()
+        updateTable()
         
-        //更新表格
-        projectTableView.reloadData()
+        //判断是否第一次打开此页面
+        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchProjectView") as Bool!) == false){
+            print("第一次打开项目页面")
+            //设置为非第一次打开此页面
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchProjectView")
+            
+            //创建引导项目
+            let firstProject = Project()
+            firstProject.name = "马克计划新手指引"
+            firstProject.beginTime = NSDate().FormatToStringYYYYMMDD()
+            firstProject.endTime = NSDate().increaseDays(7)!.FormatToStringYYYYMMDD()
+            firstProject.type = .Punch
+            firstProject.unit = "次"
+            firstProject.total = 2
+            firstProject.rest = 2
+            firstProject.complete = 0
+            firstProject.insertProject()
+            let newTag = Tag(name: "生活")
+            newTag.insertTag()
+            let newTag2 = Tag(name: "锻炼")
+            newTag2.insertTag()
+            
+            updateTable()
+            
+            //设置引导弹窗
+            callFirstRemain("点击创建新项目", view: addProjectButton!, type: .Up, showHandler: nil, dismissHandler: { () -> () in
+                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                if let cell = self.projectTableView.cellForRowAtIndexPath(indexPath){
+                    for subView in cell.subviews{
+                        if subView.tag == self.addProcessButtonTag {
+                            self.callFirstRemain("点击添加进度", view: subView, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                                self.callFirstRemain("长按查看状态", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                                    self.callFirstRemain("点击查看详情", view: cell)
+                                })
+                            })
+                            break
+                        }
+                    }
+                }
+            })
+        }else{
 
+        }
     }
     
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -444,7 +485,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         showView.addSubview(titleLabel)
         
         //显示
-        let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
+        let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler:  {() -> () in
+            self.updateTable()
+            })
         popover.show(showView,  point: startPoint)
         
         //总时间 1000毫秒
@@ -546,7 +589,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         showView.addSubview(titleLabel)
         
         //显示
-        let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: nil)
+        let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: {() -> () in
+            self.updateTable()
+            })
+
         popover.show(showView,  point: startPoint)
         
         let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
@@ -581,12 +627,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     process.insertProcess()
                     ProcessDate().chengeData(projects[indexPath.section].id, timeDate: currentTime, changeValue: 1.0)
                     projects[indexPath.section].increaseDone(1.0)
-                    let new = projects[indexPath.section].percent                    
-                    //更新图标
-                    loadData()
-                    updateTable()
+                    let new = projects[indexPath.section].percent
                     showProcessChange(old, newPercent: new, name: name)
-                    
                     //记录进度项目
                 }else if projects[indexPath.section].type == .Normal{
                      print("打开项目编号为\(indexPath.section)进度页面")
@@ -614,18 +656,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     print("项目编号为\(indexPath.section)完成项目")
                     let name = projects[indexPath.section].name
                     projects[indexPath.section].finishDone()
-                    //更新图标
-                    loadData()
-                    updateTable()
                     showProcessFinish(name)
                 }
             //项目完成
             }else if projects[indexPath.section].isFinished == .Finished{
                 callAlertAsk("是否确定删除该项目？", okHandler: {(UIAlertAction) -> Void in
                     self.projects[indexPath.section].deleteProject()
-                    //更新图标
-                    self.loadData()
-                    self.updateTable()
                     self.callAlertSuccess("删除成功!")
                     }, cancelandler: nil, completion: nil)
             }else if projects[indexPath.section].isFinished == .NotBegined{
@@ -794,8 +830,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         case tableViewTag.ProjectsTable:
                 let cell = projectTableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
                 
-                let addProcessButtonTag = 1000
-                
                 //复用清除之前的按钮
                 for subView in cell.subviews{
                     if subView.tag == addProcessButtonTag {
@@ -890,8 +924,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             if indexPath.row == 1 {
                 isShowFinished = !isShowFinished
                 selectTag = nil
-                loadData()
-                self.projectTableView.reloadData()
+                updateTable()
             }else if indexPath.row == 2{
                 handleCallOptions()
             }

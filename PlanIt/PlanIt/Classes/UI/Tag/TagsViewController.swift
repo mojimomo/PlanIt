@@ -147,6 +147,23 @@ class TagsViewController: UITableViewController {
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 1))
         self.tableView.sectionFooterHeight = 0
         self.tableView.sectionHeaderHeight = 0
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //判断是否第一次打开此页面
+        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchTagsView") as Bool!) == false){
+            print("第一次打开标签页面")
+            //设置为非第一次打开此页面
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagsView")
+            let indexPath = NSIndexPath(forRow: tags.count + 1, inSection: 0)
+            if let cell = self.tableView.cellForRowAtIndexPath(indexPath){
+                self.callFirstRemain("点击查看查看此标签项目", view: cell)
+            }
+        }else{
+            
+        }
     }
     
     // MARK: - UITableViewDataSource

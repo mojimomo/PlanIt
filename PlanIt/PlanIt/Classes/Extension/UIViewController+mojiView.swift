@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Ken. All rights reserved.
 //
 import UIKit
-
+import Popover
 extension UIViewController{
     ///发起提示
     func callAlertHUD(title:String, message: String){
@@ -84,5 +84,51 @@ extension UIViewController{
         
             //显示alert
             self.presentViewController(alertController, animated: true, completion: completion)
+    }
+    
+    ///用户引导页面
+    func callFirstRemain(title:String, view: UIView, type:PopoverType = .Down,showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil){
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.sizeToFit()
+        
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: titleLabel.bounds.width + 30 , height: titleLabel.bounds.height + 20 ))
+        titleLabel.center = aView.center
+        aView.addSubview(titleLabel)
+        
+        ///提示弹窗参数
+        let popoverOptions: [PopoverOption] = [
+            .Type(type),
+            .CornerRadius(6.0),
+            .Animation(.None)
+        ]
+        let popover = Popover(options: popoverOptions, showHandler: showHandler, dismissHandler: dismissHandler)
+        popover.popoverColor = UIColor ( red: 0.9529, green: 0.4941, blue: 0.0, alpha: 1.0 )
+        popover.show(aView, fromView: view)
+    }
+
+    ///用户引导页面
+    func callFirstRemain(title:String, startPoint: CGPoint, type:PopoverType = .Down,showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil){
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.sizeToFit()
+        
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: titleLabel.bounds.width + 30 , height: titleLabel.bounds.height + 20 ))
+        titleLabel.center = aView.center
+        aView.addSubview(titleLabel)
+        
+        ///提示弹窗参数
+        let popoverOptions: [PopoverOption] = [
+            .Type(type),
+            .CornerRadius(6.0),
+            .Animation(.None)
+        ]
+        let popover = Popover(options: popoverOptions, showHandler: showHandler, dismissHandler: dismissHandler)
+        popover.popoverColor = UIColor ( red: 0.9529, green: 0.4941, blue: 0.0, alpha: 1.0 )
+        popover.show(aView, point: startPoint)
     }
 }
