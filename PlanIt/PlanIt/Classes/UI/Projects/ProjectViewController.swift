@@ -630,6 +630,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     let new = projects[indexPath.section].percent
                     showProcessChange(old, newPercent: new, name: name)                    
 
+                    MobClick.event("2001")
                     //记录进度项目
                 }else if projects[indexPath.section].type == .Normal{
                      print("打开项目编号为\(indexPath.section)进度页面")
@@ -659,7 +660,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     projects[indexPath.section].finishDone()
                     showProcessFinish(name)
                     
-
+                    MobClick.event("2003")
                 }
             //项目完成
             }else if projects[indexPath.section].isFinished == .Finished{

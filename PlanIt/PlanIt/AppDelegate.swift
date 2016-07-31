@@ -16,11 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
+        //新增友盟
         UMAnalyticsConfig.sharedInstance().appKey = "579da6cd67e58e81fb003264"
         UMAnalyticsConfig.sharedInstance().eSType = .E_UM_NORMAL
         MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
-        
+
         //创建id
         //let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
 

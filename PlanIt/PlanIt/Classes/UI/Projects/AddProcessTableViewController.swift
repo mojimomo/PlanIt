@@ -53,6 +53,9 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
             ProcessDate().chengeData(project.id, timeDate: currentTime, changeValue: process.done)
             project.increaseDone(process.done)
             newPercent = project.percent
+            
+            MobClick.event("2002")
+            
             //返回
             cancel()
         }
