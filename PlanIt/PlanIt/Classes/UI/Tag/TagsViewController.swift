@@ -159,7 +159,7 @@ class TagsViewController: UITableViewController {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagsView")
             let indexPath = NSIndexPath(forRow: tags.count + 1, inSection: 0)
             if let cell = self.tableView.cellForRowAtIndexPath(indexPath){
-                self.callFirstRemain("点击查看查看此标签项目", view: cell)
+                self.callFirstRemain("点击查看此标签项目", view: cell)
             }
         }else{
             
