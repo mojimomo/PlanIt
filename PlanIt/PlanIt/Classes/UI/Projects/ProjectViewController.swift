@@ -628,7 +628,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     ProcessDate().chengeData(projects[indexPath.section].id, timeDate: currentTime, changeValue: 1.0)
                     projects[indexPath.section].increaseDone(1.0)
                     let new = projects[indexPath.section].percent
-                    showProcessChange(old, newPercent: new, name: name)
+                    showProcessChange(old, newPercent: new, name: name)                    
+
                     //记录进度项目
                 }else if projects[indexPath.section].type == .Normal{
                      print("打开项目编号为\(indexPath.section)进度页面")
@@ -657,6 +658,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     let name = projects[indexPath.section].name
                     projects[indexPath.section].finishDone()
                     showProcessFinish(name)
+                    
+
                 }
             //项目完成
             }else if projects[indexPath.section].isFinished == .Finished{

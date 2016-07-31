@@ -17,6 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        UMAnalyticsConfig.sharedInstance().appKey = "579da6cd67e58e81fb003264"
+        UMAnalyticsConfig.sharedInstance().eSType = .E_UM_NORMAL
+        MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
+        
+        //创建id
+        //let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
+
+        
         //判断是否第一次启动   
         if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunch") as Bool!) == false){
             //第一次启动，播放引导页面

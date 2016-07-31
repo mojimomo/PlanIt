@@ -37,6 +37,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
     
     func finishEdit(){
         if doneTextField.text != "" {
+            //新增进度
             oldPercent = project.percent
             let process = Process()
             process.projectID = project.id
@@ -52,6 +53,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
             ProcessDate().chengeData(project.id, timeDate: currentTime, changeValue: process.done)
             project.increaseDone(process.done)
             newPercent = project.percent
+            //返回
             cancel()
         }
     }

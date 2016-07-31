@@ -384,6 +384,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         if project.check(){
             if(project.insertProject()){
                 //callAlertAndBack("提交成功",message: "新建项目成功!")
+
+                //返回
                 dismiss()
                 self.delegate?.goBackAct(.AddSuccess)
                 return

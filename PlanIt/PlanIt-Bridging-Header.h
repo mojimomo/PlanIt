@@ -4,4 +4,5 @@
 
 #import "sqlite3.h"
 #import "MBProgressHUD.h"
+#import "MobClick.h"
 #import <time.h>

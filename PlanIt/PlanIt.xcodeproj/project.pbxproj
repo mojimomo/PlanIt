@@ -59,8 +59,13 @@
 		BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */; };
 		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
 		BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */; };
-		BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9DB321CD87D05007043AA /* libsqlite3.dylib */; };
 		BEE477FE1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE477FD1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift */; };
+		BEFD57E41D4DCA3C00CAD595 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD57E31D4DCA3C00CAD595 /* libc++.tbd */; };
+		BEFD57E61D4DCA4A00CAD595 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD57E51D4DCA4A00CAD595 /* libz.tbd */; };
+		BEFD57E81D4DCA5500CAD595 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD57E71D4DCA5500CAD595 /* SystemConfiguration.framework */; };
+		BEFD58071D4DD10900CAD595 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD58061D4DD10900CAD595 /* libsqlite3.tbd */; };
+		BEFD58091D4DDEDC00CAD595 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD58081D4DDEDC00CAD595 /* UMMobClick.framework */; };
+		BEFD580F1D4DE13400CAD595 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD580E1D4DE13400CAD595 /* CoreTelephony.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,8 +154,16 @@
 		BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessTableViewCell.swift; sourceTree = "<group>"; };
 		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
 		BED76F5F1D167AFB00C8B521 /* AddProcessTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProcessTableViewController.swift; sourceTree = "<group>"; };
-		BED9DB321CD87D05007043AA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SOURCE_ROOT; };
 		BEE477FD1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTagsViewControl.swift; sourceTree = "<group>"; };
+		BEFD57E31D4DCA3C00CAD595 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		BEFD57E51D4DCA4A00CAD595 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		BEFD57E71D4DCA5500CAD595 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BEFD58061D4DD10900CAD595 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		BEFD58081D4DDEDC00CAD595 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
+		BEFD580B1D4DDF0300CAD595 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		BEFD580C1D4DDF0300CAD595 /* MobClickGameAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickGameAnalytics.h; sourceTree = "<group>"; };
+		BEFD580D1D4DDF0300CAD595 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		BEFD580E1D4DE13400CAD595 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +171,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BED9DB341CD87D05007043AA /* libsqlite3.dylib in Frameworks */,
+				BEFD580F1D4DE13400CAD595 /* CoreTelephony.framework in Frameworks */,
+				BEFD58091D4DDEDC00CAD595 /* UMMobClick.framework in Frameworks */,
+				BEFD58071D4DD10900CAD595 /* libsqlite3.tbd in Frameworks */,
+				BEFD57E81D4DCA5500CAD595 /* SystemConfiguration.framework in Frameworks */,
+				BEFD57E61D4DCA4A00CAD595 /* libz.tbd in Frameworks */,
+				BEFD57E41D4DCA3C00CAD595 /* libc++.tbd in Frameworks */,
 				0AA8C566706EFBEE8F482108 /* Pods_PlanIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +210,11 @@
 		200B3328E0DC1CA2BA07C039 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEFD580E1D4DE13400CAD595 /* CoreTelephony.framework */,
+				BEFD58061D4DD10900CAD595 /* libsqlite3.tbd */,
+				BEFD57E71D4DCA5500CAD595 /* SystemConfiguration.framework */,
+				BEFD57E51D4DCA4A00CAD595 /* libz.tbd */,
+				BEFD57E31D4DCA3C00CAD595 /* libc++.tbd */,
 				36006BDC1D3BC83700E08324 /* MBProgressHUD */,
 				BEAC77631D363300007BBB0E /* Popover.framework */,
 				75936E3A3A1A3413A5114395 /* Pods_PlanIt.framework */,
@@ -370,6 +393,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BEFD580A1D4DDF0300CAD595 /* MobClick */,
 				BE4EDFFC1D41F7D2003EA7A0 /* MBProgressHUD */,
 				BE6A1A641D3CC83200E39B7B /* WActivityIndicator */,
 				BE3B754B1D278B3900F7AEC3 /* KDCircularProgress */,
@@ -468,9 +492,9 @@
 		BEA5209E1CCF417F00FFE43E /* PlanIt */ = {
 			isa = PBXGroup;
 			children = (
+				BEFD58031D4DCF1A00CAD595 /* Frameworks */,
 				BE802AEE1CCF4B2B0092F2DE /* Classes */,
 				BEA520D01CCF418B00FFE43E /* Support Files */,
-				BED9DB331CD87D05007043AA /* Frameworks */,
 			);
 			path = PlanIt;
 			sourceTree = "<group>";
@@ -526,13 +550,22 @@
 			path = GraphView;
 			sourceTree = "<group>";
 		};
-		BED9DB331CD87D05007043AA /* Frameworks */ = {
+		BEFD58031D4DCF1A00CAD595 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BED9DB321CD87D05007043AA /* libsqlite3.dylib */,
+				BEFD58081D4DDEDC00CAD595 /* UMMobClick.framework */,
 			);
-			name = Frameworks;
-			path = "../../../../SQLiteDB-master/Examples/iOS";
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		BEFD580A1D4DDF0300CAD595 /* MobClick */ = {
+			isa = PBXGroup;
+			children = (
+				BEFD580B1D4DDF0300CAD595 /* MobClick.h */,
+				BEFD580C1D4DDF0300CAD595 /* MobClickGameAnalytics.h */,
+				BEFD580D1D4DDF0300CAD595 /* MobClickSocialAnalytics.h */,
+			);
+			path = MobClick;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -607,6 +640,11 @@
 					BEA5209B1CCF417F00FFE43E = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = CYTA756UDU;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 					BEA520B21CCF417F00FFE43E = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -911,15 +949,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Release-iphoneos/Popover",
+					"$(PROJECT_DIR)/PlanIt/Frameworks",
 				);
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/usr/lib",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mojimomo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
@@ -937,15 +971,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Release-iphoneos/Popover",
+					"$(PROJECT_DIR)/PlanIt/Frameworks",
 				);
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/usr/lib",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mojimomo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
@@ -1048,15 +1078,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Release-iphoneos/Popover",
+					"$(PROJECT_DIR)/PlanIt/Frameworks",
 				);
 				INFOPLIST_FILE = PlanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/usr/lib",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mojimomo.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
