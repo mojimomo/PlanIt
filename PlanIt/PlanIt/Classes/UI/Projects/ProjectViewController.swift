@@ -255,6 +255,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }
             }else{
                 if project.isFinished == .Finished {
+                    if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchFinishedProject") as Bool!) == false){
+                        let startPoint = CGPoint(x: self.view.frame.width - 30, y: 55)
+                        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchFinishedProject")
+                        callFirstRemain("点击查看已完成", startPoint: startPoint)
+                    }
                     projects.removeAtIndex(index)
                     continue
                 }
@@ -394,41 +399,68 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchProjectView")
             
             //创建引导项目
-            let firstProject = Project()
-            firstProject.name = "马克计划新手指引"
-            firstProject.beginTime = NSDate().FormatToStringYYYYMMDD()
-            firstProject.endTime = NSDate().increaseDays(7)!.FormatToStringYYYYMMDD()
-            firstProject.type = .Punch
-            firstProject.unit = "次"
-            firstProject.total = 2
-            firstProject.rest = 2
-            firstProject.complete = 0
-            firstProject.insertProject()
             let newTag = Tag(name: "生活")
             newTag.insertTag()
             let newTag2 = Tag(name: "锻炼")
             newTag2.insertTag()
+            let newTag3 = Tag(name: "学习")
+            newTag3.insertTag()
             
             updateTable()
-            
             //设置引导弹窗
-            callFirstRemain("点击创建新项目", view: addProjectButton!, type: .Up, showHandler: nil, dismissHandler: { () -> () in
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                if let cell = self.projectTableView.cellForRowAtIndexPath(indexPath){
-                    for subView in cell.subviews{
-                        if subView.tag == self.addProcessButtonTag {
-                            self.callFirstRemain("点击添加进度", view: subView, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+            callFirstRemain("点击创建新项目", view: addProjectButton!, type: .Up, showHandler: nil, dismissHandler: nil)
+        }else if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchNormalProject") as Bool!) == false){
+            print("第一次添加进度项目")
+            var index = 0
+            for project in projects{
+                if project.type == .Punch ||  project.type == .Normal{
+                    let indexPath = NSIndexPath(forRow: 0, inSection: index)
+                    if let cell = self.projectTableView.cellForRowAtIndexPath(indexPath){
+                        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchNormalProject")
+                        updateTable()
+                        self.callFirstRemain("打卡/记录进度项目", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                            self.callFirstRemain("点击查看详情", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
                                 self.callFirstRemain("长按查看状态", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
-                                    self.callFirstRemain("点击查看详情", view: cell)
+                                    for subView in cell.subviews{
+                                        if subView.tag == self.addProcessButtonTag {
+                                            self.callFirstRemain("点击添加进度", view: subView)
+                                            break
+                                        }
+                                    }
                                 })
                             })
-                            break
-                        }
+                        })
                     }
+                    break
                 }
-            })
-        }else{
-
+                index++
+            }
+        }else if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchNoRecordProject") as Bool!) == false){
+            print("第一次添加非进度项目")
+            var index = 0
+            for project in projects{
+                if project.type == .NoRecord{
+                    let indexPath = NSIndexPath(forRow: 0, inSection: index)
+                    if let cell = self.projectTableView.cellForRowAtIndexPath(indexPath){
+                        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchNoRecordProject")
+                        updateTable()
+                        self.callFirstRemain("不记录进度项目", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                            self.callFirstRemain("点击修改项目", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                                self.callFirstRemain("长按查看状态", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                                    for subView in cell.subviews{
+                                        if subView.tag == self.addProcessButtonTag {
+                                            self.callFirstRemain("点击完成项目", view: subView)
+                                            break
+                                        }
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    break
+                }
+                index++
+            }
         }
     }
     
