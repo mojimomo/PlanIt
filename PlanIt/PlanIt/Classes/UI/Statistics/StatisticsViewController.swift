@@ -225,13 +225,13 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //历史按钮
         let historyButton = UIButton(frame:CGRectMake(0, 0, 24, 24))
         historyButton.setImage(UIImage(named: "history"), forState: .Normal)
-        historyButton.addTarget(self,action:Selector("openHistory"),forControlEvents:.TouchUpInside)
+        historyButton.addTarget(self,action:#selector(StatisticsViewController.openHistory),forControlEvents:.TouchUpInside)
         let historyBarButton = UIBarButtonItem(customView: historyButton)
         
         //编辑项目按钮
         let editButton = UIButton(frame:CGRectMake(0, 0, 24, 24))
         editButton.setImage(UIImage(named: "edit"), forState: .Normal)
-        editButton.addTarget(self,action:Selector("editProject"),forControlEvents:.TouchUpInside)
+        editButton.addTarget(self,action:#selector(StatisticsViewController.editProject),forControlEvents:.TouchUpInside)
         let editBarButton = UIBarButtonItem(customView: editButton)
         
         //按钮间的空隙
@@ -244,7 +244,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             action: nil)
         spacer.width = -10;
         
-        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(StatisticsViewController.dismiss))
         //设置按钮
         self.navigationItem.rightBarButtonItems = [spacer, historyBarButton, gap, editBarButton]
         self.navigationItem.leftBarButtonItem = backButtom
@@ -311,7 +311,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             let endDate = project.endTimeDate
             let days = beginDate.daysToEndDate(endDate) + 1
             var date = beginDate.increaseDays(-1)!
-            for var day = 0; day < days ; day++ {
+            for _ in 0 ..< days  {
                 if processDates.count == 0 {
                     chartData.append(0)
                 }
@@ -333,7 +333,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             let endDate = project.endTimeDate
             let weeks = beginDate.weeksToEndDate(endDate) + 2
             var date = project.beginTimeDate.increaseDays(-7)!
-            for var week = 0; week < weeks ; week++ {
+            for _ in 0 ..< weeks  {
                 let weekString = date.FormatToStringYYYY() + "第\(date.getWeekOfYear())周"
                 var total = 0.0
                 for processDate in processDates{
@@ -352,7 +352,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             let endDate = project.endTimeDate
             let months = beginDate.monthsToEndDate(endDate) + 2
             var date = project.beginTimeDate.increaseMonths(-1)!
-            for var month = 0; month < months ; month++ {
+            for _ in 0 ..< months  {
                 let monthString = date.FormatToStringYYYYMM()
                 var total = 0.0
                 for processDate in processDates{
@@ -561,22 +561,22 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     /// 添加和更新图切换标签在屏幕的右上角
     private func addLabel(withText text: String) {
         
-        label.removeFromSuperview()
-        label = createLabel(withText: text)
-        label.userInteractionEnabled = true
-        
-        let rightConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -20)
-        
-        let topConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 20)
-        
-        let heightConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 40)
-        let widthConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: label.frame.width * 1.5)
-        
-        let tapGestureRecogniser = UITapGestureRecognizer(target: self, action: "didTap")
-        label.addGestureRecognizer(tapGestureRecogniser)
-        
-        self.view.insertSubview(label, aboveSubview: graphView)
-        self.view.addConstraints([rightConstraint, topConstraint, heightConstraint, widthConstraint])
+//        label.removeFromSuperview()
+//        label = createLabel(withText: text)
+//        label.userInteractionEnabled = true
+//        
+//        let rightConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -20)
+//        
+//        let topConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 20)
+//        
+//        let heightConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 40)
+//        let widthConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: label.frame.width * 1.5)
+//        
+//        let tapGestureRecogniser = UITapGestureRecognizer(target: self, action: Selector("didTap"))
+//        label.addGestureRecognizer(tapGestureRecogniser)
+//        
+//        self.view.insertSubview(label, aboveSubview: graphView)
+//        self.view.addConstraints([rightConstraint, topConstraint, heightConstraint, widthConstraint])
     }
     
     private func createLabel(withText text: String) -> UILabel {

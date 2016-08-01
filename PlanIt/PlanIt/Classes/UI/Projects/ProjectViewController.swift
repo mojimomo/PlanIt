@@ -264,7 +264,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     continue
                 }
             }
-            index++
+            index += 1
         }
         projects = qsortProjectByOuttime(projects)
         
@@ -851,7 +851,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 65, y: 14, width: 40, height: MenuTableViewHeight))
                 isShowAllSwitch.onTintColor = switchColor
                 isShowAllSwitch.on = !isShowNotBegin
-                isShowAllSwitch.addTarget(self, action: "showNotBegin", forControlEvents: .ValueChanged)
+                isShowAllSwitch.addTarget(self, action: #selector(ProjectViewController.showNotBegin), forControlEvents: .ValueChanged)
                 cell.addSubview(isShowAllSwitch)
             }
             if indexPath.row == 1{

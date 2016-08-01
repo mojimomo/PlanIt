@@ -62,7 +62,7 @@ public class KYDrawerController: UIViewController, UIGestureRecognizerDelegate {
     
     lazy private var _containerView: UIView = {
         let view = UIView(frame: self.view.frame)
-        let tapGesture = UITapGestureRecognizer(target: self, action: "didtapContainerView:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(KYDrawerController.didtapContainerView(_:)))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(white: 0.0, alpha: 0)
         view.addGestureRecognizer(tapGesture)
@@ -73,7 +73,7 @@ public class KYDrawerController: UIViewController, UIGestureRecognizerDelegate {
     public var screenEdgePanGestreEnabled = true
     
     lazy private(set) var screenEdgePanGesture: UIScreenEdgePanGestureRecognizer = {
-        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: "handlePanGesture:")
+        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(KYDrawerController.handlePanGesture(_:)))
         switch self.drawerDirection {
         case .Left:     gesture.edges = .Left
         case .Right:    gesture.edges = .Right
@@ -83,7 +83,7 @@ public class KYDrawerController: UIViewController, UIGestureRecognizerDelegate {
     }()
     
     lazy private(set) var panGesture: UIPanGestureRecognizer = {
-        let gesture = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(KYDrawerController.handlePanGesture(_:)))
         gesture.delegate = self
         return gesture
     }()

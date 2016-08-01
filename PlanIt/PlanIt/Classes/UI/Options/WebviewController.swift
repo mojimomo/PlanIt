@@ -17,7 +17,7 @@ class WebviewController: UIViewController,UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(WebviewController.dismiss))
         self.navigationItem.leftBarButtonItem = backButtom
         
         webView.delegate = self

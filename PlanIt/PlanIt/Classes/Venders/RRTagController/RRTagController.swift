@@ -91,7 +91,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         buttonCancel.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         buttonCancel.titleLabel?.font = UIFont.boldSystemFontOfSize(17)
         buttonCancel.layer.cornerRadius = 15
-        buttonCancel.addTarget(self, action: "cancelEditTag", forControlEvents: UIControlEvents.TouchUpInside)
+        buttonCancel.addTarget(self, action: #selector(RRTagController.cancelEditTag), forControlEvents: UIControlEvents.TouchUpInside)
 
         let buttonAccept = UIButton(frame: CGRectMake(UIScreen.mainScreen().bounds.size.width - 110, 10, 100, 30))
         buttonAccept.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).CGColor
@@ -101,7 +101,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         buttonAccept.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         buttonAccept.titleLabel?.font = UIFont.boldSystemFontOfSize(17)
         buttonAccept.layer.cornerRadius = 15
-        buttonAccept.addTarget(self, action: "createNewTag", forControlEvents: UIControlEvents.TouchUpInside)
+        buttonAccept.addTarget(self, action: #selector(RRTagController.createNewTag), forControlEvents: UIControlEvents.TouchUpInside)
         
         controlPanel.addSubview(buttonCancel)
         controlPanel.addSubview(buttonAccept)
@@ -245,7 +245,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 })
                 
                 //添加lebel观察者
-                NSNotificationCenter.defaultCenter().addObserver(self,selector:  "textFiledEditChanged:",name: UITextFieldTextDidChangeNotification ,object: (alerController.textFields?.first)!)
+                NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(RRTagController.textFiledEditChanged(_:)),name: UITextFieldTextDidChangeNotification ,object: (alerController.textFields?.first)!)
                 
                 //创建UIAlertAction 确定按钮
                 let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
@@ -364,8 +364,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     func handleCancelEditMod(){
         isEditMod = false
-        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: "cancelTagController")
-        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: UIBarButtonItemStyle.Done, target: self, action: "finishTagController")
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.cancelTagController))
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.finishTagController))
         tags = Tag().loadAllData()
         collectionTag.reloadData()
     }
@@ -399,8 +399,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     func handleLongPress(gesture: UILongPressGestureRecognizer){
         if gesture.state ==  .Began{
             isEditMod = true
-            self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: "handleCancelEditMod")
-            self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.Done, target: self, action: "handleDelete")
+            self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.handleCancelEditMod))
+            self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.handleDelete))
             editTags = Tag().loadAllData()
             collectionTag.reloadData()
         }
@@ -415,7 +415,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         self.view.addSubview(navigationBar)
         
         //创建长按选项
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(RRTagController.handleLongPress(_:)))
         longPressGestureRecognizer.minimumPressDuration = 0.5
         self.view.addGestureRecognizer(longPressGestureRecognizer)
         
@@ -431,8 +431,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }
         self.view.backgroundColor = UIColor.whiteColor()
-        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancelTagController")
-        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishTagController")
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(RRTagController.cancelTagController))
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(RRTagController.finishTagController))
 
         //判断是否第一次打开此页面
         if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchTagManagerView") as Bool!) == false){

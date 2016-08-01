@@ -270,7 +270,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         self.tableView.showsVerticalScrollIndicator = false
-        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(OptionsTableViewController.dismiss))
         self.navigationItem.leftBarButtonItem = backButtom
         
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
@@ -286,7 +286,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         self.daysLabel.text = "\(labels[day - 1])"
         //对back to app进行观察
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:  "applicationDidBecomeActive:",name: UIApplicationDidBecomeActiveNotification,object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)),name: UIApplicationDidBecomeActiveNotification,object: nil)
     }
     
     //观察是否back to app进行刷新数据

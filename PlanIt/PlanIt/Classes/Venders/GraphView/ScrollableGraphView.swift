@@ -240,7 +240,7 @@ public class ScrollableGraphView: UIScrollView, UIScrollViewDelegate, Scrollable
         self.insertSubview(labelsView, aboveSubview: drawingView)
         
         // Animation loop for when the range adapts
-        displayLink = CADisplayLink(target: self, selector: "animationUpdate")
+        displayLink = CADisplayLink(target: self, selector: #selector(ScrollableGraphView.animationUpdate))
         displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
         displayLink.paused = true
         

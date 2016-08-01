@@ -539,21 +539,21 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         switch tableState{
         case .Add:
             //添加新增项目按钮
-         let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishEdit:")
+         let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(EditProjectTableViewController.finishEdit(_:)))
             self.navigationItem.rightBarButtonItem = addButton
             
             //新增返回按钮
-            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "dismiss")
+            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(EditProjectTableViewController.dismiss))
             self.navigationItem.leftBarButtonItem = backButton
         case .Edit:
             //添加新增项目按钮
-            let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishEdit:")
+            let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(EditProjectTableViewController.finishEdit(_:)))
             
             ///新增返回按钮
-            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "dismiss")
+            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(EditProjectTableViewController.dismiss))
             
             //新增删除按钮
-            let deleteButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: "deleteProject")
+            let deleteButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: #selector(EditProjectTableViewController.deleteProject))
             
             //按钮间的空隙
             let gap = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil,
@@ -594,8 +594,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         self.tableView.sectionHeaderHeight = 0
 
         //添加lebel观察者
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:  "textFiledEditChanged:",name: UITextFieldTextDidChangeNotification ,object: projectNameLabel)
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:  "textFiledEditChanged:",name: UITextFieldTextDidChangeNotification ,object: unitTextField)
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(EditProjectTableViewController.textFiledEditChanged(_:)),name: UITextFieldTextDidChangeNotification ,object: projectNameLabel)
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(EditProjectTableViewController.textFiledEditChanged(_:)),name: UITextFieldTextDidChangeNotification ,object: unitTextField)
         
     }
     

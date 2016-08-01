@@ -32,7 +32,7 @@ class ProcessesTableViewController: UITableViewController {
 //        let editBarButton = UIBarButtonItem(image: UIImage(named: "edit"), style: .Done, target: self, action: "finishEdit:")
 //        self.navigationItem.rightBarButtonItem = ///删除某一行
         
-        let backBarButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: "dissmiss")
+        let backBarButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: #selector(ProcessesTableViewController.dissmiss))
         self.navigationItem.leftBarButtonItem = backBarButton
         
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 1))
@@ -64,7 +64,7 @@ class ProcessesTableViewController: UITableViewController {
         //配置cell
         cell.unit = project.unit
         var index = 0
-        for var group = 0; group < indexPath.section ; group++ {
+        for group in 0 ..< indexPath.section  {
             index += records[group]
         }
         index += indexPath.row
@@ -76,7 +76,7 @@ class ProcessesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         //if isEditingMod == true{
             var index = 0
-            for var group = 0; group < indexPath.section ; group++ {
+            for group in 0 ..< indexPath.section  {
                 index += records[group]
             }
             index += indexPath.row
@@ -87,7 +87,7 @@ class ProcessesTableViewController: UITableViewController {
             ProcessDate().chengeData(process.projectID, timeDate: process.recordTimeDate, changeValue: -process.done)
             //删除输出源
             processes.removeAtIndex(index)
-            records[indexPath.section]--
+            records[indexPath.section] -= 1
             //是否是分组最后一行
             if records[indexPath.section] == 0{
                 records.removeAtIndex(indexPath.section)
@@ -143,13 +143,13 @@ class ProcessesTableViewController: UITableViewController {
                 }else{
                     for month in months{
                         if process.month == month{
-                            records[index]++
+                            records[index] += 1
                             break
                         }else if month == months.last {
                             months.append(process.month)
                             records.append(1)
                         }
-                        index++
+                        index += 1
                     }
                 }
             }
@@ -180,7 +180,7 @@ class ProcessesTableViewController: UITableViewController {
             noDataButton.sizeToFit()
             let margin:CGFloat = 10
             noDataButton.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - (rectNav?.height)! - rectStatus.height) / 2 - (rectNav?.height)! - rectStatus.height + noDataView.bounds.height / 2 + noDataButton.bounds.height / 2 + margin)
-            noDataButton.addTarget(self, action: "handleBack", forControlEvents: .TouchUpInside)
+            noDataButton.addTarget(self, action: #selector(ProcessesTableViewController.handleBack), forControlEvents: .TouchUpInside)
             self.tableView.addSubview(noDataButton)
         }
     }

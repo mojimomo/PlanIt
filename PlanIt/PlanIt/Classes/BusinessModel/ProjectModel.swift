@@ -186,7 +186,7 @@ class Project: NSObject {
         //待机界面的滑动动作提示
         localNoti.alertAction = "打开应用"
         // 应用程序图标右上角显示的消息数
-        numNotife++
+        numNotife += 1
         localNoti.applicationIconBadgeNumber = numNotife
         // 通知上绑定的其他信息，为键值对
         localNoti.userInfo = ["id": "\(id)",  "name": "\(name)"]

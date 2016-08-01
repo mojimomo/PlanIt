@@ -300,8 +300,8 @@ public class TagListView: UIView {
         tagView.removeButtonIconSize = removeButtonIconSize
         tagView.enableRemoveButton = enableRemoveButton
         tagView.removeIconLineColor = removeIconLineColor
-        tagView.addTarget(self, action: "tagPressed:", forControlEvents: .TouchUpInside)
-        tagView.removeButton.addTarget(self, action: "removeButtonPressed:", forControlEvents: .TouchUpInside)
+        tagView.addTarget(self, action: #selector(TagListView.tagPressed(_:)), forControlEvents: .TouchUpInside)
+        tagView.removeButton.addTarget(self, action: #selector(TagListView.removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         return addTagView(tagView)
     }

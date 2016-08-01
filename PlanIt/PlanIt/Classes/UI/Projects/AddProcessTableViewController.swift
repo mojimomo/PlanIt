@@ -112,10 +112,10 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         remarkTextField.tag = UITag.remarkTextField
         remarkTextField.delegate = self
         
-        let addBarButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: "finishEdit")
+        let addBarButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(AddProcessTableViewController.finishEdit))
         self.navigationItem.rightBarButtonItem = addBarButton
         
-        let cancelBarButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: "cancel")
+        let cancelBarButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(AddProcessTableViewController.cancel))
         self.navigationItem.leftBarButtonItem = cancelBarButton
         doneTextField.placeholder = project.unit
         currentProcessLabel.text = "已记录总量:  \(Int(project.complete)) / \(Int(project.total))"
@@ -125,7 +125,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         self.tableView.sectionHeaderHeight = 25
         
         //添加lebel观察者
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:  "textFiledEditChanged:",name: UITextFieldTextDidChangeNotification ,object: remarkTextField)
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(AddProcessTableViewController.textFiledEditChanged(_:)),name: UITextFieldTextDidChangeNotification ,object: remarkTextField)
     }
     
     override func viewDidDisappear(animated: Bool) {

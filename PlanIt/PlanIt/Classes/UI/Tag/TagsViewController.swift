@@ -73,11 +73,11 @@ class TagsViewController: UITableViewController {
         for project in projects {
             if isShowFinished{
                  if project.isFinished == .Finished{
-                    counts++
+                    counts += 1
                 }
             }else{
                 if project.isFinished != .Finished{
-                    counts++
+                    counts += 1
                 }
             }
         }
@@ -93,7 +93,7 @@ class TagsViewController: UITableViewController {
                             if tagMap.projectID == project.id{
                                 break
                             }else if tagMap == tagMaps.last{
-                                noTagCount++
+                                noTagCount += 1
                             }
                         }
                     }
@@ -103,7 +103,7 @@ class TagsViewController: UITableViewController {
                             if tagMap.projectID == project.id{
                                 break
                             }else if tagMap == tagMaps.last{
-                                noTagCount++
+                                noTagCount += 1
                             }
                         }
                     }
@@ -124,11 +124,11 @@ class TagsViewController: UITableViewController {
                         if tagMap.projectID == project.id{
                             if isShowFinished{
                                 if project.isFinished == .Finished{
-                                    tagCount++
+                                    tagCount += 1
                                 }
                             }else{
                                 if project.isFinished != .Finished{
-                                    tagCount++
+                                    tagCount += 1
                                 }
                             }
                             break
@@ -141,7 +141,7 @@ class TagsViewController: UITableViewController {
         }
         
         selectTags = [Bool](count: tags.count, repeatedValue: false)
-        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: "handleBack")        
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: #selector(TagsViewController.handleBack))
         self.navigationItem.leftBarButtonItem = backButton
         
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 1))

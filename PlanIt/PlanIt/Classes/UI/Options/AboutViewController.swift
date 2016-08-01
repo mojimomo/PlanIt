@@ -17,7 +17,7 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
         
         //返回button
-        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: "dismiss")
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(AboutViewController.dismiss))
         self.navigationItem.leftBarButtonItem = backButtom
         
         //app版本label
