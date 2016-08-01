@@ -58,19 +58,19 @@ extension NSDate{
         if timeInterval < 60{
             result += "1 分"
         }else if timeInterval / 60 < 60 {
-            tmp = Int(timeInterval / 60 ) + 1
+            tmp = (timeInterval / 60 ).toIntCarry()
             result += "\(tmp) 分"
         }else if timeInterval / 60 / 60 < 24 {
-            tmp = Int(timeInterval / 60 / 60) + 1
+            tmp = (timeInterval / 60 / 60).toIntCarry()
             result += "\(tmp) 小时"
         }else if timeInterval / 60 / 60 / 24 < 30 {
-            tmp = Int(timeInterval / 60 / 60 / 24 ) + 1
+            tmp = (timeInterval / 60 / 60 / 24 ).toIntCarry()
             result += "\(tmp) 天"
         }else if timeInterval / 60 / 60 / 24 / 30 < 12 {
-            tmp = Int(timeInterval / 60 / 60 / 24 / 30 ) + 1
+            tmp = (timeInterval / 60 / 60 / 24 / 30 ).toIntCarry()
             result += "\(tmp) 月"
         }else{
-            tmp = Int(timeInterval / 60 / 60 / 24 / 30 / 12) + 1
+            tmp = (timeInterval / 60 / 60 / 24 / 30 / 12).toIntCarry()
             result += "\(tmp) 年"
         }
         return result

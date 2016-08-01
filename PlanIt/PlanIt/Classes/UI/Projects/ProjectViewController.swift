@@ -326,10 +326,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                                 })
                             }
                         }
-
                     }
                 }
-
             }
         }
     }
