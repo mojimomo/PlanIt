@@ -362,7 +362,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             addProjectButton = UIButton(frame: CGRectMake((self.view.bounds.size.width - addImage.size.width)/2 , self.view.bounds.size.height - addImage.size.height - rectNav!.size.height - rectStatus.size.height - addProjectButtonMargin, addImage.size.width, addImage.size.height))
             addProjectButton?.setImage(addImage, forState: .Normal)
             addProjectButton?.setImage(addImageClick, forState: .Highlighted)
-            addProjectButton?.addTarget(self, action: "addNewProject", forControlEvents: .TouchUpInside)
+            addProjectButton?.addTarget(self, action: #selector(ProjectViewController.addNewProject), forControlEvents: .TouchUpInside)
             
             //阴影 颜色#9C4E50
             addProjectButton?.layer.shadowColor = UIColor(red: 156/255, green: 78/255, blue: 80/255, alpha: 0.35).CGColor
@@ -376,7 +376,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         }
         
         //创建长按选项
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ProjectViewController.handleLongPress(_:)))
         longPressGestureRecognizer.minimumPressDuration = 0.5
         self.view.addGestureRecognizer(longPressGestureRecognizer)
     }
@@ -433,7 +433,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     }
                     break
                 }
-                index++
+                index += 1
             }
         }else if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchNoRecordProject") as Bool!) == false){
             print("第一次添加非进度项目")
@@ -459,7 +459,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     }
                     break
                 }
-                index++
+                index += 1
             }
         }
     }
@@ -580,7 +580,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 waveLoadingIndicator.progress = currentPercent / 100
                 currentPercent = currentPercent + addEveryTime
             }
-            timeOut-- 
+            timeOut -= 1
         })
         dispatch_resume(timer)
     }
@@ -933,7 +933,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 //进行缩
                 addProcessButton.setImage(buttonImage, forState: .Normal)
                 addProcessButton.setImage(buttonSelectedIamge, forState: .Highlighted)
-                addProcessButton.addTarget(self, action: "addProcess:", forControlEvents: .TouchUpInside)
+                addProcessButton.addTarget(self, action: #selector(ProjectViewController.addProcess(_:)), forControlEvents: .TouchUpInside)
                 addProcessButton.tag = addProcessButtonTag
                 //添加按钮
                 cell.addSubview(addProcessButton)
