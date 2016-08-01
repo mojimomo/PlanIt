@@ -132,3 +132,13 @@ extension UIViewController{
         popover.show(aView, point: startPoint)
     }
 }
+
+extension UIView{
+    func pointInView(point: CGPoint) -> Bool{
+        if point.x > bounds.width || point.x < 0 || point.y > bounds.height || point.y < 0 {
+            return false
+        }else{
+            return true
+        }
+    }
+}

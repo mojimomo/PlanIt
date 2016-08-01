@@ -313,16 +313,23 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let indexPath = self.projectTableView.indexPathForRowAtPoint(point)
             if indexPath != nil {
                 let cell = projectTableView.cellForRowAtIndexPath(indexPath!) as! ProjectTableViewCell
-                cell.isShowState = true
-                
-                //延迟消失
-                let queue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
-                dispatch_async(queue) { () -> Void in
-                    NSThread.sleepForTimeInterval(2.5)
-                    dispatch_sync( dispatch_get_main_queue(), { () -> Void in
-                        cell.isShowState = false
-                    })
+                for subView in cell.subviews{
+                    if subView.tag == addProcessButtonTag {
+                        if subView.pointInView(subView.convertPoint(point, fromView: self.projectTableView)) == false{
+                            cell.isShowState = true
+                            //延迟消失
+                            let queue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+                            dispatch_async(queue) { () -> Void in
+                                NSThread.sleepForTimeInterval(2.5)
+                                dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+                                    cell.isShowState = false
+                                })
+                            }
+                        }
+
+                    }
                 }
+
             }
         }
     }

@@ -197,5 +197,5 @@ extension NSDate{
         let calendar:NSCalendar = NSCalendar.currentCalendar()
         let dateComp:NSDateComponents = calendar.components( .WeekOfYear, fromDate: self)
         return dateComp.weekOfYear
-    }
+    }    
 }
