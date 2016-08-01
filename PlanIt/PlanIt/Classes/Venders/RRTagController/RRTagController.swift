@@ -250,7 +250,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 //创建UIAlertAction 确定按钮
                 let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
                     if alerController.textFields?.count > 0 {
-                        if let textField = (alerController.textFields?.first)! as? UITextField{
+                        if let textField = (alerController.textFields?.first)! ?? nil{
                             if textField.text != "" && textField.text?.characters.count < 9{
                                 let spaceSet = NSCharacterSet.whitespaceCharacterSet()
                                 let contentTag = textField.text!.stringByTrimmingCharactersInSet(spaceSet)
