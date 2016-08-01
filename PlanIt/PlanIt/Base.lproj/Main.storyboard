@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O7P-2h-JoM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O7P-2h-JoM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -1649,15 +1649,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gKZ-LW-EoG">
-                                <rect key="frame" x="137" y="90" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="optionAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gKZ-LW-EoG">
+                                <rect key="frame" x="137" y="85" width="99" height="99"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="ZNT-HW-C2V"/>
-                                    <constraint firstAttribute="height" constant="100" id="pCs-VM-nod"/>
+                                    <constraint firstAttribute="width" constant="99" id="ZNT-HW-C2V"/>
+                                    <constraint firstAttribute="height" constant="99" id="pCs-VM-nod"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品/也而  设计/STEVEN  开发/墨迹" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfm-kW-bKZ">
-                                <rect key="frame" x="99" y="594" width="176" height="21"/>
+                                <rect key="frame" x="99" y="597" width="176" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="e8k-jx-fcg"/>
                                 </constraints>
@@ -1666,7 +1666,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2016 Markplan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1RJ-xU-Dpf">
-                                <rect key="frame" x="121" y="616" width="132" height="21"/>
+                                <rect key="frame" x="121" y="621" width="132" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="KnC-5l-0T9"/>
                                 </constraints>
@@ -1675,7 +1675,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="马克计划" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mS-Ku-qAM">
-                                <rect key="frame" x="135" y="210" width="104" height="32"/>
+                                <rect key="frame" x="135" y="204" width="104" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="PY1-a7-JgP"/>
                                     <constraint firstAttribute="width" constant="81" id="S7k-2j-PUU"/>
@@ -1691,7 +1691,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版本" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWL-86-drm">
-                                <rect key="frame" x="137" y="253" width="100" height="21"/>
+                                <rect key="frame" x="137" y="245" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="aT3-C2-9br"/>
                                     <constraint firstAttribute="height" constant="21" id="rWf-04-dR4"/>
@@ -1703,15 +1703,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oWL-86-drm" firstAttribute="top" secondItem="7mS-Ku-qAM" secondAttribute="bottom" constant="11" id="3eM-Pq-779"/>
+                            <constraint firstItem="oWL-86-drm" firstAttribute="top" secondItem="7mS-Ku-qAM" secondAttribute="bottom" constant="9" id="3eM-Pq-779"/>
                             <constraint firstItem="7mS-Ku-qAM" firstAttribute="top" secondItem="gKZ-LW-EoG" secondAttribute="bottom" constant="20" id="Cx4-Ch-4jr"/>
-                            <constraint firstItem="gKZ-LW-EoG" firstAttribute="centerX" secondItem="EIA-tX-mwZ" secondAttribute="centerX" id="OGQ-Mi-vxR"/>
+                            <constraint firstItem="gKZ-LW-EoG" firstAttribute="centerX" secondItem="EIA-tX-mwZ" secondAttribute="centerX" constant="-1" id="OGQ-Mi-vxR"/>
                             <constraint firstItem="sfm-kW-bKZ" firstAttribute="centerX" secondItem="1RJ-xU-Dpf" secondAttribute="centerX" id="YQD-hM-U1l"/>
-                            <constraint firstAttribute="bottom" secondItem="1RJ-xU-Dpf" secondAttribute="bottom" constant="30" id="cHa-kv-J7C"/>
+                            <constraint firstAttribute="bottom" secondItem="1RJ-xU-Dpf" secondAttribute="bottom" constant="25" id="cHa-kv-J7C"/>
                             <constraint firstItem="7mS-Ku-qAM" firstAttribute="centerX" secondItem="oWL-86-drm" secondAttribute="centerX" id="dLP-b8-omc"/>
-                            <constraint firstItem="1RJ-xU-Dpf" firstAttribute="top" secondItem="sfm-kW-bKZ" secondAttribute="bottom" constant="1" id="edp-kY-ZSt"/>
+                            <constraint firstItem="1RJ-xU-Dpf" firstAttribute="top" secondItem="sfm-kW-bKZ" secondAttribute="bottom" constant="3" id="edp-kY-ZSt"/>
                             <constraint firstItem="oWL-86-drm" firstAttribute="centerX" secondItem="sfm-kW-bKZ" secondAttribute="centerX" id="j46-3P-dqi"/>
-                            <constraint firstItem="gKZ-LW-EoG" firstAttribute="top" secondItem="L96-e8-NGJ" secondAttribute="bottom" constant="70" id="s2L-EJ-PRK"/>
+                            <constraint firstItem="gKZ-LW-EoG" firstAttribute="top" secondItem="L96-e8-NGJ" secondAttribute="bottom" constant="65" id="s2L-EJ-PRK"/>
                             <constraint firstItem="gKZ-LW-EoG" firstAttribute="centerX" secondItem="7mS-Ku-qAM" secondAttribute="centerX" id="vxK-GE-WcH"/>
                         </constraints>
                     </view>
@@ -1751,6 +1751,7 @@
         <image name="grade" width="23" height="23"/>
         <image name="inform" width="23" height="23"/>
         <image name="more" width="21" height="7"/>
+        <image name="optionAppIcon" width="100" height="100"/>
         <image name="options-tag" width="23" height="23"/>
         <image name="share" width="23" height="23"/>
         <image name="sponsor" width="23" height="23"/>
