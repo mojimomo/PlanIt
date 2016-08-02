@@ -44,7 +44,8 @@ public class Popover: UIView {
   public var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
   public var overlayBlur: UIBlurEffect?
   public var popoverColor: UIColor = UIColor.whiteColor()
-    public var popoverAnimation: PopoverAnimation = .Translation
+  public var popoverAnimation: PopoverAnimation = .Translation
+  public var showAlpha: CGFloat = 1.0
     
   // custom closure
   private var didShowHandler: (() -> ())?
@@ -228,7 +229,7 @@ public class Popover: UIView {
       delay: 0,
       options: .CurveLinear,
       animations: { _ in
-        self.blackOverlay.alpha = 1
+        self.blackOverlay.alpha = self.showAlpha
       }, completion: { _ in
     })
   }

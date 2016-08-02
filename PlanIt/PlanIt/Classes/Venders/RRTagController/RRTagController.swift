@@ -398,11 +398,16 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     func handleLongPress(gesture: UILongPressGestureRecognizer){
         if gesture.state ==  .Began{
-            isEditMod = true
-            self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.handleCancelEditMod))
-            self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.handleDelete))
-            editTags = Tag().loadAllData()
-            collectionTag.reloadData()
+            let point = gesture.locationInView(self.collectionTag)
+            if let indexPath = self.collectionTag.indexPathForItemAtPoint(point){
+                if indexPath.row < tags.count{
+                    isEditMod = true
+                    self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.handleCancelEditMod))
+                    self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.handleDelete))
+                    editTags = Tag().loadAllData()
+                    collectionTag.reloadData()
+                }
+            }
         }
 
     }
@@ -433,16 +438,22 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(RRTagController.cancelTagController))
         self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(RRTagController.finishTagController))
-
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         //判断是否第一次打开此页面
         if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchTagManagerView") as Bool!) == false){
-            print("第一次打开项目页面")
-            //设置为非第一次打开此页面
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagManagerView")
-            //设置引导弹窗
-            self.callFirstRemain("长按进入编辑模式", startPoint: self.collectionTag.center)
-        }else{
-            
+            if tags.count > 0 {
+                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                if let cell = collectionTag.cellForItemAtIndexPath(indexPath){
+                    print("第一次打开项目页面")
+                    //设置为非第一次打开此页面
+                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagManagerView")
+                    //设置引导弹窗
+                    self.callFirstRemain("长按进入编辑模式", view:  cell)
+                }
+            }
         }
     }
     

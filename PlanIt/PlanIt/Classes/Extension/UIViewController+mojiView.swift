@@ -88,10 +88,12 @@ extension UIViewController{
     
     ///用户引导页面
     func callFirstRemain(title:String, view: UIView, type:PopoverType = .Down,showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil){
+        //创建label
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = UIFont.systemFontOfSize(16)
         titleLabel.textColor = UIColor.whiteColor()
+        //自适应大小
         titleLabel.sizeToFit()
         
         let aView = UIView(frame: CGRect(x: 0, y: 0, width: titleLabel.bounds.width + 30 , height: titleLabel.bounds.height + 20 ))
@@ -105,16 +107,26 @@ extension UIViewController{
             .Animation(.None)
         ]
         let popover = Popover(options: popoverOptions, showHandler: showHandler, dismissHandler: dismissHandler)
+        popover.showAlpha = 0.1
         popover.popoverColor = UIColor ( red: 0.9529, green: 0.4941, blue: 0.0, alpha: 1.0 )
         popover.show(aView, fromView: view)
     }
 
     ///用户引导页面
-    func callFirstRemain(title:String, startPoint: CGPoint, type:PopoverType = .Down,showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil){
+    func callFirstRemainMultiLine(title:String, view: UIView, type:PopoverType = .Down,showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil){
+        //创建label
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = UIFont.systemFontOfSize(16)
         titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.numberOfLines = 0
+        // 调整行间距
+        let attributedString = NSMutableAttributedString(string: titleLabel.text!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5.0
+        attributedString.addAttributes([NSParagraphStyleAttributeName : paragraphStyle], range: NSMakeRange(0, titleLabel.text!.characters.count))
+        titleLabel.attributedText = attributedString
+        //自适应大小
         titleLabel.sizeToFit()
         
         let aView = UIView(frame: CGRect(x: 0, y: 0, width: titleLabel.bounds.width + 30 , height: titleLabel.bounds.height + 20 ))
@@ -128,6 +140,33 @@ extension UIViewController{
             .Animation(.None)
         ]
         let popover = Popover(options: popoverOptions, showHandler: showHandler, dismissHandler: dismissHandler)
+        popover.showAlpha = 0.1
+        popover.popoverColor = UIColor ( red: 0.9529, green: 0.4941, blue: 0.0, alpha: 1.0 )
+        popover.show(aView, fromView: view)
+    }
+    
+    ///用户引导页面
+    func callFirstRemain(title:String, startPoint: CGPoint, type:PopoverType = .Down,showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil){
+        //创建label
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.textColor = UIColor.whiteColor()
+        //自适应大小
+        titleLabel.sizeToFit()
+        
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: titleLabel.bounds.width + 30 , height: titleLabel.bounds.height + 20 ))
+        titleLabel.center = aView.center
+        aView.addSubview(titleLabel)
+        
+        ///提示弹窗参数
+        let popoverOptions: [PopoverOption] = [
+            .Type(type),
+            .CornerRadius(6.0),
+            .Animation(.None)
+        ]
+        let popover = Popover(options: popoverOptions, showHandler: showHandler, dismissHandler: dismissHandler)
+        popover.showAlpha = 0.1
         popover.popoverColor = UIColor ( red: 0.9529, green: 0.4941, blue: 0.0, alpha: 1.0 )
         popover.show(aView, point: startPoint)
     }

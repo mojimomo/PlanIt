@@ -150,16 +150,23 @@ class TagsViewController: UITableViewController {
 
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         //判断是否第一次打开此页面
         if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchTagsView") as Bool!) == false){
             print("第一次打开标签页面")
             //设置为非第一次打开此页面
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagsView")
-            let indexPath = NSIndexPath(forRow: tags.count + 1, inSection: 0)
-            if let cell = self.tableView.cellForRowAtIndexPath(indexPath){
-                self.callFirstRemain("点击查看此标签项目", view: cell)
+            if tags.count > 0 {
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagsView")
+                let indexPath = NSIndexPath(forRow: tags.count + 1, inSection: 0)
+                if let cell = self.tableView.cellForRowAtIndexPath(indexPath){
+                    self.callFirstRemain("点击查看包含\(tags.last!.name)标签的项目", view: cell)
+                }
             }
         }else{
             
