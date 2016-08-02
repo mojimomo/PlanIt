@@ -63,15 +63,15 @@ extension NSDate{
         }else if timeInterval / 60 / 60 < 24 {
             tmp = (timeInterval / 60 / 60).toIntCarry()
             result += "\(tmp) 小时"
-        }else if timeInterval / 60 / 60 / 24 < 30 {
+        }else {
             tmp = (timeInterval / 60 / 60 / 24 ).toIntCarry()
             result += "\(tmp) 天"
-        }else if timeInterval / 60 / 60 / 24 / 30 < 12 {
-            tmp = (timeInterval / 60 / 60 / 24 / 30 ).toIntCarry()
-            result += "\(tmp) 月"
-        }else{
-            tmp = (timeInterval / 60 / 60 / 24 / 30 / 12).toIntCarry()
-            result += "\(tmp) 年"
+//        }else if timeInterval / 60 / 60 / 24 / 30 < 12 {
+//            tmp = (timeInterval / 60 / 60 / 24 / 30 ).toIntCarry()
+//            result += "\(tmp) 月"
+//        }else{
+//            tmp = (timeInterval / 60 / 60 / 24 / 30 / 12).toIntCarry()
+//            result += "\(tmp) 年"
         }
         return result
     }
