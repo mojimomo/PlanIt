@@ -65,12 +65,8 @@ extension String{
 }
 
 extension Double{
-    ///进位转换
+    ///进位转换 返回不小于x的最小整数值
     func toIntCarry() -> Int{
-        if self == Double(Int(self)){
-            return Int(self)
-        }else{
-            return Int(self) + 1
-        }
+        return Int(ceil(self))
     }
 }
