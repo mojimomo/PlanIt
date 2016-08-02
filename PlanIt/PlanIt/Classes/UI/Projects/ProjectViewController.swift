@@ -420,7 +420,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             callFirstRemain("点击创建新项目", view: addProjectButton!, type: .Up, showHandler: nil, dismissHandler: nil)
         }else{
             //是否第一次创建普通项目
-            if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchNormalProject4") as Bool!) == false){
+            if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchNormalProject") as Bool!) == false){
                 print("第一次添加进度项目")
                 var index = 0
                 for project in projects{
