@@ -307,7 +307,7 @@
                                                         <action selector="changeIsPunch:" destination="z9z-wq-QO9" eventType="valueChanged" id="AbU-4B-rw6"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="打卡项目每次打卡进度量+1。不填写进度单位及进度总量时开启，会自动填充天数为进度总量。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60g-Df-Yyl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="打卡项目每次打卡进度量+1。不填写进度单位及进度总量时开启，将自动填充天数为进度总量。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60g-Df-Yyl">
                                                     <rect key="frame" x="23" y="43" width="554" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                                                     <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="0.69647090517241383" colorSpace="calibratedRGB"/>

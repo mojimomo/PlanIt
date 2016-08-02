@@ -256,9 +256,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }else{
                 if project.isFinished == .Finished {
                     if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchFinishedProject") as Bool!) == false){
-                        let startPoint = CGPoint(x: self.view.frame.width - 30, y: 55)
+                        let startPoint = CGPoint(x: self.view.frame.width - 32.5, y: 55)
                         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchFinishedProject")
-                        callFirstRemain("点击查看已完成", startPoint: startPoint)
+                        callFirstRemain("查看已完成项目", startPoint: startPoint)
                     }
                     projects.removeAtIndex(index)
                     continue
@@ -453,7 +453,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                         if let cell = self.projectTableView.cellForRowAtIndexPath(indexPath){
                             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchNoRecordProject")
                             updateTable()
-                            self.callFirstRemainMultiLine("◎ 点击修改项目\n◉ 长按查看进度提示", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                            self.callFirstRemainMultiLine("◎ 点击编辑项目\n◉ 长按查看进度提示", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
                                 for subView in cell.subviews{
                                     if subView.tag == self.addProcessButtonTag {
                                         self.callFirstRemain("点击完成项目", view: subView)

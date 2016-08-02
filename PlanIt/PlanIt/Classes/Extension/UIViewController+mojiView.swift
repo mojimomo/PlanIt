@@ -108,7 +108,7 @@ extension UIViewController{
         ]
         let popover = Popover(options: popoverOptions, showHandler: showHandler, dismissHandler: dismissHandler)
         popover.showAlpha = 0.1
-        popover.popoverColor = UIColor ( red: 0.9529, green: 0.4941, blue: 0.0, alpha: 1.0 )
+        popover.popoverColor = UIColor(red:0.35, green:0.64, blue:1.00, alpha:1.00)
         popover.show(aView, fromView: view)
     }
 
@@ -141,7 +141,7 @@ extension UIViewController{
         ]
         let popover = Popover(options: popoverOptions, showHandler: showHandler, dismissHandler: dismissHandler)
         popover.showAlpha = 0.1
-        popover.popoverColor = UIColor ( red: 0.9529, green: 0.4941, blue: 0.0, alpha: 1.0 )
+        popover.popoverColor = UIColor(red:0.35, green:0.64, blue:1.00, alpha:1.00)
         popover.show(aView, fromView: view)
     }
     
@@ -167,7 +167,7 @@ extension UIViewController{
         ]
         let popover = Popover(options: popoverOptions, showHandler: showHandler, dismissHandler: dismissHandler)
         popover.showAlpha = 0.1
-        popover.popoverColor = UIColor ( red: 0.9529, green: 0.4941, blue: 0.0, alpha: 1.0 )
+        popover.popoverColor = UIColor(red:0.35, green:0.64, blue:1.00, alpha:1.00)
         popover.show(aView, point: startPoint)
     }
 }

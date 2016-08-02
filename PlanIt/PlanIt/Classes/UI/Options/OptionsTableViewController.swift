@@ -29,7 +29,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     var day : Int{
         get{
             if NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int! == 0{
-                NSUserDefaults.standardUserDefaults().setInteger( 3 , forKey: "daysLocalNotifiication")
+                NSUserDefaults.standardUserDefaults().setInteger( 1 , forKey: "daysLocalNotifiication")
             }
             return NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int
         }
