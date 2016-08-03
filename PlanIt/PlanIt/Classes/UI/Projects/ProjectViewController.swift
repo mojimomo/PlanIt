@@ -415,7 +415,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let newTag3 = Tag(name: "学习")
             newTag3.insertTag()
             
-            updateTable()
+            //updateTable()
             //设置引导弹窗
             callFirstRemain("点击创建新项目", view: addProjectButton!, type: .Up, showHandler: nil, dismissHandler: nil)
         }else{
