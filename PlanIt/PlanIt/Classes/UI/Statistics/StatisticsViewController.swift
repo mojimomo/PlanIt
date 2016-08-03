@@ -308,7 +308,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //按照日统计
         if lineChartType == .Day{
             let beginDate = project.beginTimeDate
-            let endDate = project.endTimeDate
+            var endDate = project.endTimeDate
+            if project.endTimeDate.timeIntervalSinceNow < 0{
+                endDate = NSDate().increase1Day()!.FormatToStringYYYYMMDD().FormatToNSDateYYYYMMMMDD()!
+            }
             let days = beginDate.daysToEndDate(endDate) + 1
             var date = beginDate.increaseDays(-1)!
             for _ in 0 ..< days  {
