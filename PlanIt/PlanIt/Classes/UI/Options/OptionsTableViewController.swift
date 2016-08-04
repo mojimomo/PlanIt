@@ -102,7 +102,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                     self.daysLabel.text = self.labels[numberPicker.selectedRowInComponent(0)]
                     self.day = self.days[numberPicker.selectedRowInComponent(0)]
                     
-                    if self.isNeedLocalNotifiicationSwitch.on{
+                    //if self.isNeedLocalNotifiicationSwitch.on{
                         //删除所有推送
                         Project.deleteAllNotificication()
                         //创建所有推送
@@ -111,7 +111,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                             project.addNotification()
                         }
                         
-                    }
+                    //}
                 })
                 
                 //创建UIAlertAction 取消按钮
