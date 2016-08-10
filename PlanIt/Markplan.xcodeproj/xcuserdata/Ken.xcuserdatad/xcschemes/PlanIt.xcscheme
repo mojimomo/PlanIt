@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BEA5209B1CCF417F00FFE43E"
-               BuildableName = "PlanIt.app"
-               BlueprintName = "PlanIt"
-               ReferencedContainer = "container:PlanIt.xcodeproj">
+               BuildableName = "Markplan.app"
+               BlueprintName = "Markplan"
+               ReferencedContainer = "container:Markplan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BEA520B21CCF417F00FFE43E"
-               BuildableName = "PlanItTests.xctest"
-               BlueprintName = "PlanItTests"
-               ReferencedContainer = "container:PlanIt.xcodeproj">
+               BuildableName = "Markplan.xctest"
+               BlueprintName = "MarkplanTests"
+               ReferencedContainer = "container:Markplan.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BEA520BD1CCF417F00FFE43E"
-               BuildableName = "PlanItUITests.xctest"
-               BlueprintName = "PlanItUITests"
-               ReferencedContainer = "container:PlanIt.xcodeproj">
+               BuildableName = "Markplan.xctest"
+               BlueprintName = "MarkplanUITests"
+               ReferencedContainer = "container:Markplan.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BEA5209B1CCF417F00FFE43E"
-            BuildableName = "PlanIt.app"
-            BlueprintName = "PlanIt"
-            ReferencedContainer = "container:PlanIt.xcodeproj">
+            BuildableName = "Markplan.app"
+            BlueprintName = "Markplan"
+            ReferencedContainer = "container:Markplan.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BEA5209B1CCF417F00FFE43E"
-            BuildableName = "PlanIt.app"
-            BlueprintName = "PlanIt"
-            ReferencedContainer = "container:PlanIt.xcodeproj">
+            BuildableName = "Markplan.app"
+            BlueprintName = "Markplan"
+            ReferencedContainer = "container:Markplan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BEA5209B1CCF417F00FFE43E"
-            BuildableName = "PlanIt.app"
-            BlueprintName = "PlanIt"
-            ReferencedContainer = "container:PlanIt.xcodeproj">
+            BuildableName = "Markplan.app"
+            BlueprintName = "Markplan"
+            ReferencedContainer = "container:Markplan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -131,17 +131,17 @@
 		BE977A801D17B87200D6899C /* CellBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellBackgroundView.swift; sourceTree = "<group>"; };
 		BE9ACE771D0BE2420097A76F /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		BE9ACE791D0C03B30097A76F /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = PlanIt/Classes/UI/Projects/PieChartView.swift; sourceTree = SOURCE_ROOT; };
-		BEA5209C1CCF417F00FFE43E /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEA5209C1CCF417F00FFE43E /* Markplan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Markplan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEA520A41CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BEA520A71CCF417F00FFE43E /* PlanIt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlanIt.xcdatamodel; sourceTree = "<group>"; };
 		BEA520A91CCF417F00FFE43E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEA520AC1CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEA520AE1CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BEA520B31CCF417F00FFE43E /* PlanItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEA520B31CCF417F00FFE43E /* Markplan.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Markplan.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA520B71CCF417F00FFE43E /* PlanItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItTests.swift; sourceTree = "<group>"; };
 		BEA520B91CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BEA520BE1CCF417F00FFE43E /* PlanItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEA520BE1CCF417F00FFE43E /* Markplan.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Markplan.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA520C21CCF417F00FFE43E /* PlanItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItUITests.swift; sourceTree = "<group>"; };
 		BEA520C41CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEAC77631D363300007BBB0E /* Popover.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Popover.framework; path = "Pods/../build/Release-iphoneos/Popover/Popover.framework"; sourceTree = "<group>"; };
@@ -482,9 +482,9 @@
 		BEA5209D1CCF417F00FFE43E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BEA5209C1CCF417F00FFE43E /* PlanIt.app */,
-				BEA520B31CCF417F00FFE43E /* PlanItTests.xctest */,
-				BEA520BE1CCF417F00FFE43E /* PlanItUITests.xctest */,
+				BEA5209C1CCF417F00FFE43E /* Markplan.app */,
+				BEA520B31CCF417F00FFE43E /* Markplan.xctest */,
+				BEA520BE1CCF417F00FFE43E /* Markplan.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -571,9 +571,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BEA5209B1CCF417F00FFE43E /* PlanIt */ = {
+		BEA5209B1CCF417F00FFE43E /* Markplan */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BEA520C71CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanIt" */;
+			buildConfigurationList = BEA520C71CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "Markplan" */;
 			buildPhases = (
 				2EB76F99291F69F55CE99C78 /* 📦 Check Pods Manifest.lock */,
 				BEA520981CCF417F00FFE43E /* Sources */,
@@ -586,14 +586,14 @@
 			);
 			dependencies = (
 			);
-			name = PlanIt;
+			name = Markplan;
 			productName = PlanIt;
-			productReference = BEA5209C1CCF417F00FFE43E /* PlanIt.app */;
+			productReference = BEA5209C1CCF417F00FFE43E /* Markplan.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BEA520B21CCF417F00FFE43E /* PlanItTests */ = {
+		BEA520B21CCF417F00FFE43E /* MarkplanTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BEA520CA1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanItTests" */;
+			buildConfigurationList = BEA520CA1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "MarkplanTests" */;
 			buildPhases = (
 				BEA520AF1CCF417F00FFE43E /* Sources */,
 				BEA520B01CCF417F00FFE43E /* Frameworks */,
@@ -604,14 +604,14 @@
 			dependencies = (
 				BEA520B51CCF417F00FFE43E /* PBXTargetDependency */,
 			);
-			name = PlanItTests;
+			name = MarkplanTests;
 			productName = PlanItTests;
-			productReference = BEA520B31CCF417F00FFE43E /* PlanItTests.xctest */;
+			productReference = BEA520B31CCF417F00FFE43E /* Markplan.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BEA520BD1CCF417F00FFE43E /* PlanItUITests */ = {
+		BEA520BD1CCF417F00FFE43E /* MarkplanUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BEA520CD1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanItUITests" */;
+			buildConfigurationList = BEA520CD1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "MarkplanUITests" */;
 			buildPhases = (
 				BEA520BA1CCF417F00FFE43E /* Sources */,
 				BEA520BB1CCF417F00FFE43E /* Frameworks */,
@@ -622,9 +622,9 @@
 			dependencies = (
 				BEA520C01CCF417F00FFE43E /* PBXTargetDependency */,
 			);
-			name = PlanItUITests;
+			name = MarkplanUITests;
 			productName = PlanItUITests;
-			productReference = BEA520BE1CCF417F00FFE43E /* PlanItUITests.xctest */;
+			productReference = BEA520BE1CCF417F00FFE43E /* Markplan.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -656,7 +656,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BEA520971CCF417F00FFE43E /* Build configuration list for PBXProject "PlanIt" */;
+			buildConfigurationList = BEA520971CCF417F00FFE43E /* Build configuration list for PBXProject "Markplan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -669,9 +669,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BEA5209B1CCF417F00FFE43E /* PlanIt */,
-				BEA520B21CCF417F00FFE43E /* PlanItTests */,
-				BEA520BD1CCF417F00FFE43E /* PlanItUITests */,
+				BEA5209B1CCF417F00FFE43E /* Markplan */,
+				BEA520B21CCF417F00FFE43E /* MarkplanTests */,
+				BEA520BD1CCF417F00FFE43E /* MarkplanUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -827,12 +827,12 @@
 /* Begin PBXTargetDependency section */
 		BEA520B51CCF417F00FFE43E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BEA5209B1CCF417F00FFE43E /* PlanIt */;
+			target = BEA5209B1CCF417F00FFE43E /* Markplan */;
 			targetProxy = BEA520B41CCF417F00FFE43E /* PBXContainerItemProxy */;
 		};
 		BEA520C01CCF417F00FFE43E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BEA5209B1CCF417F00FFE43E /* PlanIt */;
+			target = BEA5209B1CCF417F00FFE43E /* Markplan */;
 			targetProxy = BEA520BF1CCF417F00FFE43E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -948,15 +948,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LauchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PlanIt/Frameworks",
 				);
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mojimomo.PlanIt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = info.markplan.markplan;
+				PRODUCT_NAME = Markplan;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -971,15 +973,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LauchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PlanIt/Frameworks",
 				);
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mojimomo.PlanIt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = info.markplan.markplan;
+				PRODUCT_NAME = Markplan;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -992,8 +996,8 @@
 				INFOPLIST_FILE = PlanItTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlanIt.app/PlanIt";
+				PRODUCT_NAME = Markplan;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Markplan.app/Markplan";
 			};
 			name = Debug;
 		};
@@ -1004,8 +1008,8 @@
 				INFOPLIST_FILE = PlanItTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlanIt.app/PlanIt";
+				PRODUCT_NAME = Markplan;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Markplan.app/Markplan";
 			};
 			name = Release;
 		};
@@ -1015,7 +1019,7 @@
 				INFOPLIST_FILE = PlanItUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Markplan;
 				TEST_TARGET_NAME = PlanIt;
 				USES_XCTRUNNER = YES;
 			};
@@ -1027,7 +1031,7 @@
 				INFOPLIST_FILE = PlanItUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Markplan;
 				TEST_TARGET_NAME = PlanIt;
 				USES_XCTRUNNER = YES;
 			};
@@ -1079,15 +1083,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LauchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PlanIt/Frameworks",
 				);
 				INFOPLIST_FILE = PlanIt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mojimomo.PlanIt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = info.markplan.markplan;
+				PRODUCT_NAME = Markplan;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1100,8 +1106,8 @@
 				INFOPLIST_FILE = PlanItTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlanIt.app/PlanIt";
+				PRODUCT_NAME = Markplan;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Markplan.app/Markplan";
 			};
 			name = "Ad Hoc";
 		};
@@ -1111,7 +1117,7 @@
 				INFOPLIST_FILE = PlanItUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Markplan;
 				TEST_TARGET_NAME = PlanIt;
 				USES_XCTRUNNER = YES;
 			};
@@ -1120,7 +1126,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BEA520971CCF417F00FFE43E /* Build configuration list for PBXProject "PlanIt" */ = {
+		BEA520971CCF417F00FFE43E /* Build configuration list for PBXProject "Markplan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BEA520C51CCF417F00FFE43E /* Debug */,
@@ -1130,7 +1136,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BEA520C71CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanIt" */ = {
+		BEA520C71CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "Markplan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BEA520C81CCF417F00FFE43E /* Debug */,
@@ -1140,7 +1146,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BEA520CA1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanItTests" */ = {
+		BEA520CA1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "MarkplanTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BEA520CB1CCF417F00FFE43E /* Debug */,
@@ -1150,7 +1156,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BEA520CD1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "PlanItUITests" */ = {
+		BEA520CD1CCF417F00FFE43E /* Build configuration list for PBXNativeTarget "MarkplanUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BEA520CE1CCF417F00FFE43E /* Debug */,
