@@ -169,16 +169,16 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         if indexPath.section == 1 && indexPath.row == 2 {
             print("给应用评分")
             //跳转appID应用
-            let url = "itms-apps://itunes.apple.com/app/id000000000"
+            let url = "itms-apps://itunes.apple.com/app/id1141710914"
             UIApplication.sharedApplication().openURL(NSURL(string: url)!)
         }
         
         if indexPath.section == 1 && indexPath.row == 3 {
             print("推荐应用")
             //APP介绍页面
-            let link = NSURL(string: "http://zoomyale.com")
+            let link = NSURL(string: "http://www.markplan.info")
             let rect = tableView.rectForRowAtIndexPath(indexPath)
-            let shareVC = UIActivityViewController(activityItems: ["我正在使用马克计划，一款简洁好用的个人项目进度管理应用。快来下载试试：","http://www.markplan.info",link!,UIImage(named: "about")!], applicationActivities: nil)
+            let shareVC = UIActivityViewController(activityItems: ["我正在使用马克计划，一款简洁好用的个人项目进度管理应用。快来下载试试：","http://www.markplan.info",link!,UIImage(named: "SharePic")!], applicationActivities: nil)
             if let popoverPresentationController = shareVC.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
