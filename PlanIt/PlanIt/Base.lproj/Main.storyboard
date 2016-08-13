@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O7P-2h-JoM">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -10,7 +11,7 @@
         <!--Edit Project Table View Controller-->
         <scene sceneID="okG-gs-EUp">
             <objects>
-                <tableViewController storyboardIdentifier="EditProject" id="z9z-wq-QO9" customClass="EditProjectTableViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditProject" id="z9z-wq-QO9" customClass="EditProjectTableViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="mzd-qC-12h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -376,7 +377,7 @@
         <!--Add Process Table View Controller-->
         <scene sceneID="L6F-s4-2Lb">
             <objects>
-                <tableViewController storyboardIdentifier="addProcess" id="qh9-Oj-hfp" customClass="AddProcessTableViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="addProcess" id="qh9-Oj-hfp" customClass="AddProcessTableViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="sX6-Fr-6QA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -527,13 +528,13 @@
         <!--Tags View Controller-->
         <scene sceneID="CVD-G7-9hU">
             <objects>
-                <tableViewController storyboardIdentifier="ShowTags" id="eDm-jg-sII" customClass="TagsViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ShowTags" id="eDm-jg-sII" customClass="TagsViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="FOw-XD-CGm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagCell" id="R0S-Er-xbb" customClass="TagTableViewCell" customModule="PlanIt" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagCell" id="R0S-Er-xbb" customClass="TagTableViewCell" customModule="Markplan" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R0S-Er-xbb" id="TRL-Ev-Ogf">
@@ -606,14 +607,14 @@
         <!--Processes Table View Controller-->
         <scene sceneID="4KK-S5-GBB">
             <objects>
-                <tableViewController storyboardIdentifier="Processes" id="bgm-m3-i9f" customClass="ProcessesTableViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Processes" id="bgm-m3-i9f" customClass="ProcessesTableViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="68" sectionHeaderHeight="18" sectionFooterHeight="18" id="T7s-46-MGJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProcessCell" rowHeight="68" id="kSn-sX-7WO" customClass="ProcessTableViewCell" customModule="PlanIt" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProcessCell" rowHeight="68" id="kSn-sX-7WO" customClass="ProcessTableViewCell" customModule="Markplan" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="49.5" width="600" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kSn-sX-7WO" id="ewr-Fq-nJ0">
@@ -719,7 +720,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LTI-y5-MgP">
             <objects>
-                <navigationController id="O7P-2h-JoM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainPage" id="O7P-2h-JoM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="P9U-zn-lWD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -741,7 +742,7 @@
         <!--项目-->
         <scene sceneID="nB3-zC-I69">
             <objects>
-                <viewController restorationIdentifier="Projects" storyboardIdentifier="Projects" id="Vrd-B6-D5V" customClass="ProjectViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="Projects" storyboardIdentifier="Projects" id="Vrd-B6-D5V" customClass="ProjectViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VR3-Ws-LY6"/>
                         <viewControllerLayoutGuide type="bottom" id="dry-fF-wwc"/>
@@ -754,7 +755,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="44" id="T2Y-J2-EI0" customClass="ProjectTableViewCell" customModule="PlanIt" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="44" id="T2Y-J2-EI0" customClass="ProjectTableViewCell" customModule="Markplan" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T2Y-J2-EI0" id="g86-Q4-uHt">
@@ -834,7 +835,7 @@
         <!--Statistics View Controller-->
         <scene sceneID="IOG-Op-yrA">
             <objects>
-                <viewController storyboardIdentifier="Statistics" id="hPX-EG-K6r" customClass="StatisticsViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Statistics" id="hPX-EG-K6r" customClass="StatisticsViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="emJ-go-94c"/>
                         <viewControllerLayoutGuide type="bottom" id="kAf-mw-Iwx"/>
@@ -895,7 +896,7 @@
                                                 <color key="textColor" red="0.32156862745098036" green="0.33725490196078434" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdU-2l-bn6" customClass="TagListView" customModule="PlanIt" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdU-2l-bn6" customClass="TagListView" customModule="Markplan" customModuleProvider="target">
                                                 <rect key="frame" x="331" y="53" width="239" height="59"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1028,7 +1029,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLd-QR-X8W">
                                                 <rect key="frame" x="300" y="0.0" width="300" height="182"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcs-hp-rJP" customClass="KDCircularProgress" customModule="PlanIt" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcs-hp-rJP" customClass="KDCircularProgress" customModule="Markplan" customModuleProvider="target">
                                                         <rect key="frame" x="69" y="10" width="162" height="162"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tau-Cq-hUb">
@@ -1258,6 +1259,47 @@
             </objects>
             <point key="canvasLocation" x="-32" y="464"/>
         </scene>
+        <!--Guide View Controller-->
+        <scene sceneID="seA-N9-yA3">
+            <objects>
+                <viewController storyboardIdentifier="guide" id="b3s-LD-gdx" customClass="GuideViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O7r-4t-CpV"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Ip-3G-Fhi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="quk-ML-Kkp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2SR-li-nFc">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="VNu-GF-ZdC">
+                                <rect key="frame" x="0.0" y="532" width="600" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="VNu-GF-ZdC" secondAttribute="trailing" id="341-zJ-iBJ"/>
+                            <constraint firstItem="2SR-li-nFc" firstAttribute="top" secondItem="O7r-4t-CpV" secondAttribute="bottom" id="8sV-OV-0RG"/>
+                            <constraint firstItem="0Ip-3G-Fhi" firstAttribute="top" secondItem="VNu-GF-ZdC" secondAttribute="bottom" constant="31" id="EKc-Ub-lIC"/>
+                            <constraint firstItem="VNu-GF-ZdC" firstAttribute="leading" secondItem="quk-ML-Kkp" secondAttribute="leading" id="ERC-9f-Cjx"/>
+                            <constraint firstItem="2SR-li-nFc" firstAttribute="leading" secondItem="quk-ML-Kkp" secondAttribute="leading" id="JwO-J8-NyE"/>
+                            <constraint firstAttribute="trailing" secondItem="2SR-li-nFc" secondAttribute="trailing" id="qwz-zI-9Ae"/>
+                            <constraint firstItem="0Ip-3G-Fhi" firstAttribute="top" secondItem="2SR-li-nFc" secondAttribute="bottom" id="z3R-B6-XkH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="guideSocrollView" destination="2SR-li-nFc" id="t1L-iP-1vg"/>
+                        <outlet property="pageControl" destination="VNu-GF-ZdC" id="6Fp-y4-StA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w5K-1X-Qlz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-364" y="1070"/>
+        </scene>
         <!--Drawer-->
         <scene sceneID="z4q-wN-geV">
             <objects>
@@ -1370,7 +1412,7 @@
         <!--设置-->
         <scene sceneID="PPL-oC-p6t">
             <objects>
-                <tableViewController storyboardIdentifier="Options" id="k9u-I8-gwM" customClass="OptionsTableViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Options" id="k9u-I8-gwM" customClass="OptionsTableViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="24" sectionFooterHeight="1" id="dtE-gK-gpe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1640,7 +1682,7 @@
         <!--关于-->
         <scene sceneID="Mjr-od-KI3">
             <objects>
-                <viewController id="JHy-vf-eBS" userLabel="关于" customClass="AboutViewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JHy-vf-eBS" userLabel="关于" customClass="AboutViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L96-e8-NGJ"/>
                         <viewControllerLayoutGuide type="bottom" id="9Zu-Tc-m85"/>
@@ -1738,7 +1780,7 @@
         <!--使用帮助-->
         <scene sceneID="0LW-pT-9kL">
             <objects>
-                <viewController id="do2-Km-bFM" customClass="WebviewController" customModule="PlanIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="do2-Km-bFM" customClass="WebviewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
                     <webView key="view" contentMode="scaleToFill" scalesPageToFit="YES" id="2rW-oi-zBV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

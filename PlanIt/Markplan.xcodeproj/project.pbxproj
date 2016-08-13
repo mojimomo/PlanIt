@@ -51,6 +51,7 @@
 		BEA520AD1CCF417F00FFE43E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA520AB1CCF417F00FFE43E /* LaunchScreen.storyboard */; };
 		BEA520B81CCF417F00FFE43E /* PlanItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA520B71CCF417F00FFE43E /* PlanItTests.swift */; };
 		BEA520C31CCF417F00FFE43E /* PlanItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA520C21CCF417F00FFE43E /* PlanItUITests.swift */; };
+		BEACC90D1D5F7FF70093FB94 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEACC90C1D5F7FF70093FB94 /* GuideViewController.swift */; };
 		BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB033EC1CE058B4001128D3 /* EditProjectTableViewController.swift */; };
 		BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3221CF57870002A20FE /* CloseButton.swift */; };
 		BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3251CF57870002A20FE /* TagListView.swift */; };
@@ -145,6 +146,7 @@
 		BEA520C21CCF417F00FFE43E /* PlanItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItUITests.swift; sourceTree = "<group>"; };
 		BEA520C41CCF417F00FFE43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEAC77631D363300007BBB0E /* Popover.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Popover.framework; path = "Pods/../build/Release-iphoneos/Popover/Popover.framework"; sourceTree = "<group>"; };
+		BEACC90C1D5F7FF70093FB94 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		BEB033EC1CE058B4001128D3 /* EditProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProjectTableViewController.swift; sourceTree = "<group>"; };
 		BEB8B3221CF57870002A20FE /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		BEB8B3241CF57870002A20FE /* TagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagListView.h; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 			children = (
 				BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */,
 				BE9ACE771D0BE2420097A76F /* Global.swift */,
+				BEACC90C1D5F7FF70093FB94 /* GuideViewController.swift */,
 			);
 			name = "Main(公共)";
 			path = Main;
@@ -773,6 +776,7 @@
 				BE6A1A6A1D3CC83200E39B7B /* WIndicatorText.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */,
+				BEACC90D1D5F7FF70093FB94 /* GuideViewController.swift in Sources */,
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
 				BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */,
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,

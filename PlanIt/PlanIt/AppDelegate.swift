@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        //新增友盟
+        //友盟链接
         UMAnalyticsConfig.sharedInstance().appKey = "579da6cd67e58e81fb003264"
         UMAnalyticsConfig.sharedInstance().eSType = .E_UM_NORMAL
         MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
@@ -31,6 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("第一次启动")
             //设置为非第一次启动
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunch")
+            //进入引导页面
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainPageVC = storyboard.instantiateViewControllerWithIdentifier("guide")
+            window?.rootViewController = mainPageVC
+            
         }else{
             print("不是第一次启动")
         }
