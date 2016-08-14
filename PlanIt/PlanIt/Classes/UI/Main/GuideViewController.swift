@@ -30,9 +30,9 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
     //MARK: - Func
     ///设置导航图片
     func setGuidePage(){
-        guideSocrollView.contentSize = CGSizeMake(width * 3, height)
+        guideSocrollView.contentSize = CGSizeMake(width * 4, height)
         
-        for i in 1...3{
+        for i in 1...4{
 
             let imageView = UIImageView(frame: CGRect(x: width * CGFloat(i - 1), y: 0, width: width, height: height))
             imageView.image = UIImage(named: "guide\(i)")
@@ -52,9 +52,13 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
 
     ///新增goButton按钮
     func addGoButton(){
-        goButton = UIButton(frame: CGRect(x: width * 2 , y: height - 100 , width: 100, height: 35))
-        goButton.center.x = self.view.center.x + width * 2
-        goButton.setImage(UIImage(named: "goButton"), forState: .Normal)
+        goButton = UIButton(frame: CGRect(x: width * 3 , y: height - 60 , width: width, height: 60))
+        goButton.center.x = self.view.center.x + width * 3
+        goButton.setBackgroundImage(UIImage.imageWithColor(UIColor.colorFromHex("#FE6158"), size: CGSizeMake( width, 60)), forState: .Normal)
+        goButton.setTitle("开始体验", forState: .Normal)
+        goButton.setTitleColor(UIColor.whiteColor(),forState: .Normal) //普通状态下文字的颜色
+        //goButton.setTitleColor(UIColor.whiteColor(),forState: .Highlighted) //触摸状态下文字的颜色
+        goButton.titleLabel?.font = UIFont(name: "PingFangSC-Regular", size: 18.0)!
         goButton.addTarget(self, action: #selector(GuideViewController.handleGoMain), forControlEvents: .TouchUpInside)
         guideSocrollView.addSubview(goButton)
         //guideSocrollView.bringSubviewToFront(goButton)
@@ -73,14 +77,14 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
         let currectPage = Int(scrollView.contentOffset.x / width)
         
         //goButton淡出效果
-        if currectPage == 2 {
+        if currectPage == 3 {
             self.pageControl.hidden = true
             UIView.animateWithDuration(1.5, animations: {
                 self.goButton.layer.opacity = 1
             })
         }else{
+            self.goButton.layer.opacity = 0
             UIView.animateWithDuration(1.5, animations: {
-                self.goButton.layer.opacity = 0
                 self.pageControl.hidden = false
             })
         }

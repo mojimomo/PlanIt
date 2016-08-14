@@ -35,7 +35,9 @@ let overTimeFontColor = UIColor.colorFromHex("#EC4A4D")
 ///导航栏字体和颜色
 let navigationTitleAttribute = [ NSForegroundColorAttributeName: navigationFontColor,
                        NSFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 17.0)! ]
-
+///引导页字体和颜色
+let guideTitleAttribute = [ NSForegroundColorAttributeName: UIColor.whiteColor(),
+                                 NSFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18.0)! ]
 ///菜单字体和颜色
 let MenuAttribute = [ NSForegroundColorAttributeName: navigationFontColor,
     NSFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 17.0)! ]
