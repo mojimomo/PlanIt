@@ -1288,7 +1288,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="do2-Km-bFM" kind="presentation" id="tnF-xN-w5k"/>
+                                            <segue destination="do2-Km-bFM" kind="show" id="tnF-xN-w5k"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="zY5-B2-P3F" imageView="Y04-We-0M3" style="IBUITableViewCellStyleDefault" id="Iof-Fm-D99">
@@ -1379,7 +1379,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="JHy-vf-eBS" kind="presentation" id="xMM-0i-pgv"/>
+                                            <segue destination="JHy-vf-eBS" kind="show" id="xMM-0i-pgv"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="x0f-IM-Eed" imageView="pqw-0H-p1a" style="IBUITableViewCellStyleDefault" id="Eo8-Uc-qyO">
