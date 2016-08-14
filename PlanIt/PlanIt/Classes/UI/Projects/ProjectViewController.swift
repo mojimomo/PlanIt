@@ -11,6 +11,7 @@ import Popover
 
 class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate ,UIGestureRecognizerDelegate, EditProjectTableViewDelegate{
 
+    @IBOutlet weak var addProjectButton: UIButton!
     @IBOutlet weak var tagsBarButton: UIBarButtonItem!
     @IBOutlet weak var projectTableView: UITableView!{
         didSet{
@@ -39,8 +40,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     let tableViewHeight : CGFloat = 44
     ///菜单表格高度
     let MenuTableViewHeight : CGFloat = 60
-    ///新增按钮尺寸
-    private var addButtonSize : CGSize!
     ///选择的标签
     private var selectTag : Tag?
     ///菜单
@@ -54,6 +53,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         .ArrowSize(CGSize(width: 0.0, height: 0.0)),
         .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
+    //获取静态栏的高度
+    let rectStatus = UIApplication.sharedApplication().statusBarFrame
     ///提示弹窗参数
     private var showPercentPopoverOptions: [PopoverOption] = [
         .Type(.Down),
@@ -80,17 +81,16 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowFinished")
         }
     }
-    ///添加项目按钮
-    var addProjectButton: UIButton?
+
     ///项目列表
     var projects = [Project]()
     var orginProjects = [Project]()
     ///cell边距
     var cellMargin : CGFloat = 15.0
-    ///添加新项目底部边距
-    var addProjectButtonMargin : CGFloat = 20.0
-    ///添加按钮尺寸
-    var addProjectButtonSize : CGSize = CGSize(width: 0, height: 0)
+//    ///添加新项目底部边距
+//    var addProjectButtonMargin : CGFloat = 20.0
+//    ///添加按钮尺寸
+//    var addProjectButtonSize : CGSize = CGSize(width: 0, height: 0)
     
     ///呼出标签栏
     @IBAction func callTag(sender: UIBarButtonItem) {
@@ -141,26 +141,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
 
     ///点击创建新项目
-    @IBAction func addProject(sender: UIBarButtonItem) {
-        //查找故事板中EditProject
-        let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
-        addNewProjectViewController.title = "新增项目"
-        addNewProjectViewController.tableState = .Add
-        addNewProjectViewController.modalPresentationStyle = .Popover
-        addNewProjectViewController.preferredContentSize = CGSizeMake(view.bounds.width * 0.8, view.bounds.height * 0.8)
-        
-        if let popController = addNewProjectViewController.popoverPresentationController {
-            let sourceView = view
-            popController.permittedArrowDirections = .Up
-            popController.sourceView = self.navigationController?.view
-            let y = sourceView.center.y + sourceView.bounds.height / 2
-            popController.sourceRect = CGRectMake(sourceView.center.x, y, 0, 0)
-            popController.delegate = self
-        }
-        
-        self.presentViewController(addNewProjectViewController, animated: true, completion: nil)
+    @IBAction func addNewProject(sender: UIButton) {
+        addNewProject()
     }
-
+    
     // MARK: - Func
     ///打开菜单
     func handleCallOptions(){
@@ -355,30 +339,28 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //手势代理
         self.navigationController!.interactivePopGestureRecognizer!.delegate = self
         
-        if let addImage = UIImage(named: "add"){
-            let addImageClick = UIImage(named: "addclick")
-            //获取导航栏高度
-            let rectNav = self.navigationController?.navigationBar.frame
-            //获取静态栏的高度
-            let rectStatus = UIApplication.sharedApplication().statusBarFrame
-            //添加按钮
-            addProjectButtonSize = addImage.size
-            addButtonSize = addImage.size
-            addProjectButton = UIButton(frame: CGRectMake((self.view.bounds.size.width - addImage.size.width)/2 , self.view.bounds.size.height - addImage.size.height - rectNav!.size.height - rectStatus.size.height - addProjectButtonMargin, addImage.size.width, addImage.size.height))
-            addProjectButton?.setImage(addImage, forState: .Normal)
-            addProjectButton?.setImage(addImageClick, forState: .Highlighted)
-            addProjectButton?.addTarget(self, action: #selector(ProjectViewController.addNewProject), forControlEvents: .TouchUpInside)
-            
+//        if let addImage = UIImage(named: "add"){
+//            let addImageClick = UIImage(named: "addclick")
+//
+//            //添加按钮
+//            addProjectButtonSize = addImage.size
+//            addProjectButton = UIButton(frame: CGRectMake(0 , 0, addImage.size.width, addImage.size.height))
+//            addProjectButton.setImage(addImage, forState: .Normal)
+//            addProjectButton.setImage(addImageClick, forState: .Highlighted)
+//            addProjectButton.addTarget(self, action: #selector(ProjectViewController.addNewProject), forControlEvents: .TouchUpInside)
+//            addProjectButton.center.x = UIScreen.mainScreen().bounds.width / 2
+        
             //阴影 颜色#9C4E50
-            addProjectButton?.layer.shadowColor = UIColor(red: 156/255, green: 78/255, blue: 80/255, alpha: 0.35).CGColor
-            addProjectButton?.layer.shadowOffset = CGSize(width: 0, height: 2)
-            addProjectButton?.layer.shadowOpacity = 1
-            addProjectButton?.layer.shadowRadius = 2.0
-            
-            self.view.addSubview(addProjectButton!)
-            self.view.bringSubviewToFront(addProjectButton!)
-
-        }
+            addProjectButton.layer.shadowColor = UIColor(red: 156/255, green: 78/255, blue: 80/255, alpha: 0.35).CGColor
+            addProjectButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+            addProjectButton.layer.shadowOpacity = 1
+            addProjectButton.layer.shadowRadius = 2.0
+        
+//            addProjectButton.translatesAutoresizingMaskIntoConstraints = false
+//            self.view.addSubview(addProjectButton)
+//            self.view.bringSubviewToFront(addProjectButton)
+//        addProjectButton.addConstraint(NSLayoutConstraint(item: addProjectButton, attribute: .Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.bottomLayoutGuide, attribute: .Bottom, multiplier: 1.0, constant: 20.0))
+//        }
         
         //创建长按选项
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ProjectViewController.handleLongPress(_:)))
@@ -387,8 +369,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillAppear(animated)
-
+        
         //配置导航栏
         self.navigationController?.navigationBar.barTintColor = navigationBackground
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
@@ -396,6 +379,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //读取数据按照id顺序排序
         updateTable()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -417,7 +405,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             
             //updateTable()
             //设置引导弹窗
-            callFirstRemain("点击创建新项目", view: addProjectButton!, type: .Up, showHandler: nil, dismissHandler: nil)
+            callFirstRemain("点击创建新项目", view: addProjectButton, type: .Up, showHandler: nil, dismissHandler: nil)
         }else{
             //是否第一次创建普通项目
             if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchNormalProject") as Bool!) == false){
@@ -485,16 +473,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             //self.addProjectButton?.hidden = false
         }
     }
-
-//    override func  scrollViewDidScroll(scrollView: UIScrollView) {
-//        //获取导航栏高度
-//        let rectNav = self.navigationController?.navigationBar.frame
-//        //获取静态栏的高度
-//        let rectStatus = UIApplication.sharedApplication().statusBarFrame
-//        //设置按钮位置
-//        addProjectButton?.frame = CGRectMake((self.view.bounds.size.width - addProjectButtonSize.width)/2 , self.tableView.contentOffset.y + self.view.bounds.size.height - addProjectButtonSize.height - rectNav!.size.height - rectStatus.size.height - addProjectButtonMargin, addProjectButtonSize.width, addProjectButtonSize.height)
-//    }
-    
     // MARK: - 跳转动作
     ///弹出完成百分比view    
     func showProcessChange(oldPercent: Double, newPercent: Double, name: String){
@@ -685,9 +663,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     navController.navigationBar.translucent = false
                     //设置导航栏颜色
                     navController.navigationBar.barTintColor = otherNavigationBackground
-                    //去除导航栏分栏线
-//                    navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-//                    navController.navigationBar.shadowImage = UIImage()
+
                     navController.navigationBar.tintColor = navigationTintColor
                     navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
                     self.navigationController?.presentViewController(navController, animated: true, completion: nil)
@@ -727,7 +703,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func addNewProject(){
         //创建后返回不显示已完成项目
         isShowFinished = false
-        
         let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
         addNewProjectViewController.title = "新增项目"
         addNewProjectViewController.tableState = .Add
@@ -778,9 +753,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 navController.navigationBar.translucent = false
                 //设置导航栏颜色
                 navController.navigationBar.barTintColor = otherNavigationBackground
-                //去除导航栏分栏线
-//                navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-//                navController.navigationBar.shadowImage = UIImage()
+
                 navController.navigationBar.tintColor = navigationTintColor
                 navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
                 self.navigationController?.presentViewController(navController, animated: true, completion: nil)
@@ -1001,9 +974,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     navController.navigationBar.translucent = false
                     //设置导航栏颜色
                     navController.navigationBar.barTintColor = otherNavigationBackground
-                    //去除导航栏分栏线
-                    //                navController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-                    //                navController.navigationBar.shadowImage = UIImage()
+
                     navController.navigationBar.tintColor = navigationTintColor
                     navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
                     self.navigationController?.presentViewController(navController, animated: true, completion: nil)
@@ -1073,35 +1044,23 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     // MARK: - UIScrollViewDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
-//        //scrollView已经有拖拽手势，直接拿到scrollView的拖拽手势
-//        let pan = scrollView.panGestureRecognizer
-//        //获取到拖拽的速度 >0 向下拖动 <0 向上拖动
-//        let velocity = pan.velocityInView(scrollView).y
-//        
-//        if velocity < -5 {
-//            
-//            //向上拖动，隐藏导航栏
-//            self.navigationController?.setNavigationBarHidden(true, animated: true)
-//
-//            //获取静态栏的高度
-//            let rectStatus = UIApplication.sharedApplication().statusBarFrame
-//            addProjectButton?.frame = CGRectMake          ((self.view.bounds.size.width - addButtonSize.width)/2 , self.view.bounds.size.height - addButtonSize.height - rectStatus.size.height - addProjectButtonMargin, addButtonSize.width, addButtonSize.height)
-//        }
-//        else if velocity > 5 {
-//            //向下拖动，显示导航栏
-//            self.navigationController?.setNavigationBarHidden(false, animated: true)
-//
-//            //获取导航栏高度
-//            let rectNav = self.navigationController?.navigationBar.frame
-//            //获取静态栏的高度
-//            let rectStatus = UIApplication.sharedApplication().statusBarFrame
-//            addProjectButton?.frame = CGRectMake          ((self.view.bounds.size.width - addButtonSize.width)/2 , self.view.bounds.size.height - addButtonSize.height - (rectNav?.size.height)! - rectStatus.size.height - addProjectButtonMargin, addButtonSize.width, addButtonSize.height)
-//            
-//        }
-//        else if velocity == 0{
-//            
-//            //停止拖拽
-//        }
+        //scrollView已经有拖拽手势，直接拿到scrollView的拖拽手势
+        let pan = scrollView.panGestureRecognizer
+        //获取到拖拽的速度 >0 向下拖动 <0 向上拖动
+        let velocity = pan.velocityInView(scrollView).y
+        
+        if velocity < -5 {
+            //向上拖动，隐藏导航栏
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+        else if velocity > 5 {
+            //向下拖动，显示导航栏
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+        else if velocity == 0{
+            
+            //停止拖拽
+        }
     }
     
     
