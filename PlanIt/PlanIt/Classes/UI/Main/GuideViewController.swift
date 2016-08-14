@@ -55,10 +55,11 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
         goButton = UIButton(frame: CGRect(x: width * 3 , y: height - 60 , width: width, height: 60))
         goButton.center.x = self.view.center.x + width * 3
         goButton.setBackgroundImage(UIImage.imageWithColor(UIColor.colorFromHex("#FE6158"), size: CGSizeMake( width, 60)), forState: .Normal)
+        goButton.setBackgroundImage(UIImage.imageWithColor(UIColor.colorFromHex("#FF928C"), size: CGSizeMake( width, 60)), forState: .Highlighted)
         goButton.setTitle("开始体验", forState: .Normal)
         goButton.setTitleColor(UIColor.whiteColor(),forState: .Normal) //普通状态下文字的颜色
-        //goButton.setTitleColor(UIColor.whiteColor(),forState: .Highlighted) //触摸状态下文字的颜色
-        goButton.titleLabel?.font = UIFont(name: "PingFangSC-Regular", size: 18.0)!
+        goButton.setTitleColor(UIColor.whiteColor(),forState: .Highlighted) //触摸状态下文字的颜色
+        goButton.titleLabel?.font = UIFont(name: "PingFangSC-Light", size: 18.0)!
         goButton.addTarget(self, action: #selector(GuideViewController.handleGoMain), forControlEvents: .TouchUpInside)
         guideSocrollView.addSubview(goButton)
         //guideSocrollView.bringSubviewToFront(goButton)
@@ -79,16 +80,27 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
         //goButton淡出效果
         if currectPage == 3 {
             self.pageControl.hidden = true
-            UIView.animateWithDuration(1.5, animations: {
+            UIView.animateWithDuration(0.7, animations: {
                 self.goButton.layer.opacity = 1
             })
-        }else{
+        }else if  currectPage == 2{
             self.goButton.layer.opacity = 0
-            UIView.animateWithDuration(1.5, animations: {
+            UIView.animateWithDuration(0.7, animations: {
+                self.pageControl.hidden = false
+                //注册通知
+                if IS_IOS8 {
+                    let uns = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+                    UIApplication.sharedApplication().registerUserNotificationSettings(uns)
+                }
+            })
+        } else{
+            self.goButton.layer.opacity = 0
+            UIView.animateWithDuration(0.7, animations: {
                 self.pageControl.hidden = false
             })
         }
         
+
         //设置页面控制器当前属性
         pageControl.currentPage = currectPage
     }

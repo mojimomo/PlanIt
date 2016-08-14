@@ -39,12 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else{
             print("不是第一次启动")
         }
-        
-        //注册通知
-        if IS_IOS8 {
-            let uns = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            UIApplication.sharedApplication().registerUserNotificationSettings(uns)
-        }
+
     
     //
     // 获取通知上绑定的信息后作相应处理...
