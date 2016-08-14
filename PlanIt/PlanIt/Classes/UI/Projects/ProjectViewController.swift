@@ -44,6 +44,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     private var selectTag : Tag?
     ///菜单
     private var popover: Popover!
+    ///状态栏遮盖
+    private var statusView: UIView!
     ///菜单文字
     private var texts = ["显示未开始", "已完成", "设置"]
     ///菜单弹窗参数
@@ -54,7 +56,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
     //获取静态栏的高度
-    let rectStatus = UIApplication.sharedApplication().statusBarFrame
+    let rectStatusHeight = UIApplication.sharedApplication().statusBarFrame.height
+    //导航栏的高度
+    let navBarHeight : CGFloat = 44.0
     ///提示弹窗参数
     private var showPercentPopoverOptions: [PopoverOption] = [
         .Type(.Down),
@@ -128,9 +132,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             drawer.setDrawerState( .Opened, animated: true)
         }
         let startPoint = CGPoint(x: self.view.frame.width / 2, y: 0)
-        let rectStatus = UIApplication.sharedApplication().statusBarFrame
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200 + rectStatus.size.height))
-        tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: rectStatus.size.height + 12))
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200 + rectStatusHeight))
+        tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: rectStatusHeight + 12))
         tableView.tag = tableViewTag.MuneTable
         tableView.delegate = self
         tableView.dataSource = self
@@ -146,6 +149,12 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     // MARK: - Func
+
+func toggle() {
+    UIView.animateWithDuration(2) {
+        self.navigationController?.navigationBarHidden = self.navigationController?.navigationBarHidden == false
+    }
+}
     ///打开菜单
     func handleCallOptions(){
         print("打开菜单页面")
@@ -153,6 +162,26 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //压入导航栏
         self.navigationController?.pushViewController(muneViewController, animated: true)
+    }
+    
+    ///隐藏导航栏
+    func setNavBarHidden(){
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        if statusView == nil{
+            statusView = UIView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: rectStatusHeight + 12))
+            statusView.backgroundColor = allBackground
+        }
+        self.view.addSubview(statusView)
+        self.view.bringSubviewToFront(statusView)
+    }
+    
+    ///显示导航栏
+    func setNavBarShown(){
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        projectTableView.tableHeaderView = nil
+        if statusView != nil{
+            statusView.removeFromSuperview()
+        }
     }
     
     //点击是否显示未开始
@@ -276,10 +305,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let index = Int(arc4random() % count)
             notDataImageView = UIImageView(image: UIImage(named: noDataImageString[index]))
             //获取导航栏高度
-            let rectNav = self.navigationController?.navigationBar.frame
-            //获取静态栏的高度
-            let rectStatus = UIApplication.sharedApplication().statusBarFrame
-            notDataImageView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - (rectNav?.height)! - rectStatus.height) / 2 - (rectNav?.height)! - rectStatus.height)
+            notDataImageView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - navBarHeight - rectStatusHeight) / 2 - navBarHeight - rectStatusHeight)
             self.projectTableView.addSubview(notDataImageView)
         }
     }
@@ -369,7 +395,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillAppear(animated)
         
         //配置导航栏
@@ -382,7 +407,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     override func viewWillDisappear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        setNavBarShown()
         super.viewWillDisappear(animated)
     }
     
@@ -1051,23 +1076,15 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         if velocity < -5 {
             //向上拖动，隐藏导航栏
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            setNavBarHidden()
         }
         else if velocity > 5 {
             //向下拖动，显示导航栏
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            setNavBarShown()
         }
         else if velocity == 0{
             
             //停止拖拽
-        }
-    }
-    
-    
-    
-    func toggle() {
-        UIView.animateWithDuration(2) {
-            self.navigationController?.navigationBarHidden = self.navigationController?.navigationBarHidden == false
         }
     }
 

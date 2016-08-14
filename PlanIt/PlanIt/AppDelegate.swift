@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         //判断是否第一次启动   
-        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunch1") as Bool!) == false){
+        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunch") as Bool!) == false){
             //第一次启动，播放引导页面
             print("第一次启动")
             //设置为非第一次启动

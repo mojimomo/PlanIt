@@ -35,16 +35,15 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
         for i in 1...4{
 
             let imageView = UIImageView(frame: CGRect(x: width * CGFloat(i - 1), y: 0, width: width, height: height))
-            imageView.image = UIImage(named: "guide\(i)")
-            //imageView.image = UIImage(named: "fourpage-375w")
-            
-//            if i == 1{
-//                imageView.image = UIImage.imageWithColor(UIColor.redColor(), size: CGSizeMake(width, height))
-//            }else if i == 2{
-//                 imageView.image = UIImage.imageWithColor(UIColor.greenColor(), size: CGSizeMake(width, height))
-//            }else{
-//                 imageView.image = UIImage.imageWithColor(UIColor.blueColor(), size: CGSizeMake(width, height))
-//            }
+            if IS_IPHONE{
+                if width == 320 {
+                    imageView.image = UIImage(named: "guide\(i)IP4")
+                }else{
+                    imageView.image = UIImage(named: "guide\(i)")
+                }
+            }else{
+                imageView.image = UIImage(named: "guide\(i)iPad")
+            }
             
             guideSocrollView.addSubview(imageView)
         }

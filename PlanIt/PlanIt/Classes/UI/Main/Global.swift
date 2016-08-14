@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+let IS_IPHONE = UIDevice.currentDevice().userInterfaceIdiom == .Phone
 ///判断系统是否iOS8.0以上
 let IS_IOS8 = (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0
 ///导航栏背景色

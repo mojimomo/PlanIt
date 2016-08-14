@@ -34,7 +34,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             
         }
         get{
-            if (UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
+            if IS_IPHONE {
                 return CGRectMake(0, 64, self.view.bounds.width, 210 )
             }
             else {
