@@ -223,12 +223,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
-                if self.project.setNewProjectTime(dateString, endTime: self.projectEndTime) == false{
-                    self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime)
-                    self.callAlert("修改错误",message: "开始结束时间不正确!")
-                }else{
-                    self.projectBeginTime = dateString
-                }
+                self.projectBeginTime = dateString
             })
    
 //            //创建UIAlertAction 取消按钮
@@ -278,12 +273,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
-                if self.project.setNewProjectTime(self.projectBeginTime, endTime: dateString) == false{
-                    self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime)
-                    self.callAlert("修改错误",message: "开始结束时间不正确!")
-                }else{
-                    self.projectEndTime = dateString
-                }
+                self.projectEndTime = dateString
             })
             
              //创建UIAlertAction 取消按钮
@@ -354,10 +344,12 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         }else{
             project.name = projectName
         }
-
-        
+            
         if projectBeginTime != "" && projectEndTime != ""{
-            self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime)
+            if self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime) == false{
+                self.callAlert("修改错误",message: "开始结束时间不正确!")
+                return
+            }
         }else{
             callAlert("提交错误",message: "时间不能为空!")
             return
