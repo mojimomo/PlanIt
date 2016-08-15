@@ -404,7 +404,10 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         
         
         if projectBeginTime != "" && projectEndTime != ""{
-            self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime)
+            if self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime) == false{
+                self.callAlert("修改错误",message: "开始结束时间不正确!")
+                return
+            }
         }else{
             callAlert("修改错误",message: "时间不能为空!")
             return
