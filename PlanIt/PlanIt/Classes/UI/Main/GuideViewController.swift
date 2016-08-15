@@ -36,7 +36,7 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
 
             let imageView = UIImageView(frame: CGRect(x: width * CGFloat(i - 1), y: 0, width: width, height: height))
             if IS_IPHONE{
-                if width == 320 {
+                if width == 320 && height == 480 {
                     imageView.image = UIImage(named: "guide\(i)IP4")
                 }else{
                     imageView.image = UIImage(named: "guide\(i)")
