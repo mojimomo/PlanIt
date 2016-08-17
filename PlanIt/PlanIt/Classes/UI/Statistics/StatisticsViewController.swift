@@ -35,10 +35,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     ///菜单
     private var popover: Popover!
     ///菜单文字
-    private var texts = ["按月查阅", "按日查阅"]
+    private var texts = ["按月查看", "按日查看"]
     ///菜单弹窗参数
     private var popoverOptions: [PopoverOption] = [
-        .CornerRadius(6.0),
+        .CornerRadius(5.0),
         .Animation(.None)
     ]
     var chartTitle = ""{
@@ -290,6 +290,11 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //setupConstraints()
         
         //addLabel(withText: "DARK (TAP HERE)")
+        
+        //修改chartTitleButton
+        chartTitleButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        chartTitleButton.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        chartTitleButton.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     }
     
     func dismiss(){

@@ -934,35 +934,34 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lcv-as-fem">
                                                 <rect key="frame" x="0.0" y="15" width="600" height="32"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umi-Aw-maF">
-                                                        <rect key="frame" x="30" y="0.0" width="50" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umi-Aw-maF">
+                                                        <rect key="frame" x="30" y="0.0" width="30" height="32"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="Pzp-oz-m5r"/>
+                                                            <constraint firstAttribute="width" constant="30" id="Pzp-oz-m5r"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" image="left"/>
                                                         <connections>
                                                             <action selector="back:" destination="hPX-EG-K6r" eventType="touchUpInside" id="0vn-aM-hb9"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xku-VW-pA8">
-                                                        <rect key="frame" x="520" y="0.0" width="50" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xku-VW-pA8">
+                                                        <rect key="frame" x="540" y="0.0" width="30" height="32"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="xhN-XK-fea"/>
+                                                            <constraint firstAttribute="width" constant="30" id="xhN-XK-fea"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" image="right"/>
                                                         <connections>
                                                             <action selector="next:" destination="hPX-EG-K6r" eventType="touchUpInside" id="qkR-K5-SBE"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msf-B6-Jca">
-                                                        <rect key="frame" x="110" y="0.0" width="380" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msf-B6-Jca">
+                                                        <rect key="frame" x="253" y="5" width="95" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="240" id="0Kx-OL-J8b"/>
                                                             <constraint firstAttribute="height" constant="30" id="Azc-Sk-rDh"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                        <state key="normal" title="2016年8月">
-                                                            <color key="titleColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="2016年8月" image="triangle">
+                                                            <color key="titleColor" red="0.5607843137254902" green="0.58039215686274503" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <variation key="default">
                                                             <mask key="constraints">
@@ -1613,12 +1612,15 @@
         <image name="feedback" width="23" height="23"/>
         <image name="grade" width="23" height="23"/>
         <image name="inform" width="23" height="23"/>
+        <image name="left" width="9" height="16"/>
         <image name="more" width="21" height="7"/>
         <image name="optionAppIcon" width="100" height="100"/>
         <image name="options-tag" width="23" height="23"/>
+        <image name="right" width="9" height="16"/>
         <image name="share" width="23" height="23"/>
         <image name="sponsor" width="23" height="23"/>
         <image name="tag" width="19" height="19"/>
+        <image name="triangle" width="7" height="5"/>
         <image name="tutorial" width="23" height="23"/>
     </resources>
 </document>
