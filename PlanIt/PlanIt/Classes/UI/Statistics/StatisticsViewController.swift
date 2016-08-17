@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate{
+import Popover
+class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate, UITableViewDelegate, UITableViewDataSource {
     enum LineChartType{
         case Year, Month, Week, Day
     }
@@ -16,6 +16,8 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     var searchDate: NSDate = NSDate()
     ///表格类型
     var lineChartType: LineChartType = .Day
+    ///选中菜单
+    var selectRow = 1
     ///统计页面当前项目
     var project = Project()
     ///此项目的所有进度数据
@@ -26,9 +28,19 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     lazy var chartLabel = [String]()
     ///chart标题按钮
     @IBOutlet weak var chartTitleButton: UIButton!
+    ///chart上一个按钮
     @IBOutlet weak var nextButton: UIButton!
+    ///chart下一个按钮
     @IBOutlet weak var backButton: UIButton!
-    
+    ///菜单
+    private var popover: Popover!
+    ///菜单文字
+    private var texts = ["按月查阅", "按日查阅"]
+    ///菜单弹窗参数
+    private var popoverOptions: [PopoverOption] = [
+        .CornerRadius(6.0),
+        .Animation(.None)
+    ]
     var chartTitle = ""{
         didSet{
             chartTitleButton.setTitle(chartTitle, forState: .Normal)
@@ -219,6 +231,13 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             endTimeLabel.text = "\(project.endTime)截止"
             //设置表格标题
             chartTitle = "\(searchDate.FormatToStringYYYYMM())"
+            
+            if searchDate.FormatToStringYYYYMM() == project.beginTimeDate.FormatToStringYYYYMM(){
+                backButton.enabled = false
+            }else{
+                backButton.enabled = true
+            }
+            
             nextButton.enabled = false
             //画表格
             loadProcessData()
@@ -297,6 +316,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
     
      //MARK: - Func
+    @IBAction func changeType(sender: UIButton) {
+        callChartMenu()
+    }
+    
     @IBAction func back(sender: UIButton) {
         if lineChartType == .Day{
             searchDate = searchDate.increaseMonths(-1)!
@@ -305,8 +328,25 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             }else{
                 nextButton.enabled = true
             }
+            
+            if searchDate.FormatToStringYYYYMM() == project.beginTimeDate.FormatToStringYYYYMM(){
+                backButton.enabled = false
+            }else{
+                backButton.enabled = true
+            }
+        }else if lineChartType == .Month{
+            searchDate = searchDate.increaseYears(-1)!
+            if searchDate.FormatToStringYYYY() == NSDate().FormatToStringYYYY(){
+                nextButton.enabled = false
+            }else{
+                nextButton.enabled = true
+            }
+            if searchDate.FormatToStringYYYY() == project.beginTimeDate.FormatToStringYYYY(){
+                backButton.enabled = false
+            }else{
+                backButton.enabled = true
+            }
         }
-        chartTitle = "\(searchDate.FormatToStringYYYYMM())"
         loadChartData()
         drawLineChart()
     }
@@ -319,12 +359,29 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             }else{
                 nextButton.enabled = true
             }
+            if searchDate.FormatToStringYYYYMM() == project.beginTimeDate.FormatToStringYYYYMM(){
+                backButton.enabled = false
+            }else{
+                backButton.enabled = true
+            }
+        }else if lineChartType == .Month{
+            searchDate = searchDate.increaseYears(1)!
+            if searchDate.FormatToStringYYYY() == NSDate().FormatToStringYYYY(){
+                nextButton.enabled = false
+            }else{
+                nextButton.enabled = true
+            }
+            if searchDate.FormatToStringYYYY() == project.beginTimeDate.FormatToStringYYYY(){
+                backButton.enabled = false
+            }else{
+                backButton.enabled = true
+            }
         }
-        
-        chartTitle = "\(searchDate.FormatToStringYYYYMM())"
+
         loadChartData()
         drawLineChart()
     }
+    
     ///更改现状图
     @IBAction func changeLineChart(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
@@ -338,6 +395,18 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         }
         loadProcessData()
         drawLineChart()
+    }
+    
+    ///点击点开菜单
+    func callChartMenu() {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 130, height: 105 ))
+        tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: 130, height: 10))
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.scrollEnabled = false
+        tableView.separatorStyle = .None
+        self.popover = Popover(options: self.popoverOptions, showHandler: nil, dismissHandler: nil)
+        self.popover.show(tableView, fromView: chartTitleButton)
     }
     
     ///读取进度数据
@@ -357,7 +426,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                     if processDates.count == 0 {
                         chartData.append(0)
                     }
-                    
                     for processDate in processDates{
                         if processDate.recordTimeDate == date {
                             chartData.append(processDate.done)
@@ -366,10 +434,11 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                             chartData.append(0)
                         }
                     }
-                    chartLabel.append(date.FormatToStringMMMMDD())
+                    chartLabel.append(date.FormatToStringDD())
                     date = date.increase1Day()!
                 }
             }
+            chartTitle = "\(searchDate.FormatToStringYYYYMM())"
             //按照周统计
         }else if lineChartType == .Week{
             let beginDate = project.beginTimeDate
@@ -391,22 +460,25 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             
             //按照月统计
         }else if lineChartType == .Month{
-            let beginDate = project.beginTimeDate
-            let endDate = project.endTimeDate
-            let months = beginDate.monthsToEndDate(endDate) + 2
-            var date = project.beginTimeDate.increaseMonths(-1)!
-            for _ in 0 ..< months  {
-                let monthString = date.FormatToStringYYYYMM()
-                var total = 0.0
-                for processDate in processDates{
-                    if processDate.month == monthString {
-                        total += processDate.done
+            let beginDate = searchDate.getYearBeginAndEnd().firstDay
+            let endDate = searchDate.getYearBeginAndEnd().lastDay
+            if beginDate != nil && endDate != nil {
+                let months = beginDate!.monthsToEndDate(endDate!)
+                var date = beginDate!
+                for _ in 0 ..< months  {
+                    let monthString = date.FormatToStringYYYYMM()
+                    var total = 0.0
+                    for processDate in processDates{
+                        if processDate.month == monthString {
+                            total += processDate.done
+                        }
                     }
+                    chartData.append(total)
+                    chartLabel.append(monthString)
+                    date = date.increase1Month()!
                 }
-                chartData.append(total)
-                chartLabel.append(monthString)
-                date = date.increase1Month()!
             }
+            chartTitle = "\(searchDate.FormatToStringYYYY())"
         }
 
     }
@@ -684,6 +756,56 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         default:break
         }
         
+        
+    }
+    // MARK: - UITableViewDataSource
+    ///确认节数
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    ///确定每行高度
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 44
+    }
+    
+    ///确定行数
+    func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int {
+        return 2
+    }
+    
+    ///配置cell内容
+    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->
+        UITableViewCell {
+        let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+        cell.textLabel?.text = self.texts[indexPath.row]
+        cell.textLabel?.textColor = navigationFontColor
+        cell.textLabel?.font = UIFont(name: "PingFangSC-Light", size: 17.0)!
+        if indexPath.row == selectRow{
+            cell.accessoryType = .Checkmark
+        }else{
+            cell.accessoryType = .None
+        }
+        return cell
+    }
+    
+    //选中cell
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let oldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectRow, inSection: 0)){
+            oldCell.accessoryType = .None
+        }
+        if let cell = tableView.cellForRowAtIndexPath(indexPath){
+            cell.accessoryType = .Checkmark
+            selectRow = indexPath.row
+            if  indexPath.row == 0{
+                lineChartType = .Month
+            }else if indexPath.row == 1{
+                lineChartType = .Day
+            }
+        }
+        self.popover.dismiss()
+        loadChartData()
+        drawLineChart()
     }
 }
 

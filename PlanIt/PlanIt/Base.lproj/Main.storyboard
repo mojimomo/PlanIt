@@ -970,6 +970,9 @@
                                                                 <exclude reference="Azc-Sk-rDh"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <action selector="changeType:" destination="hPX-EG-K6r" eventType="touchUpInside" id="RTr-fb-Uia"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

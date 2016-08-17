@@ -106,6 +106,22 @@ extension NSDate{
         return calculatedDate
     }
     
+    ///增加一年
+    func increase1Year() -> NSDate? {
+        let newDateComponents = NSDateComponents()
+        newDateComponents.year = 1
+        let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        return calculatedDate
+    }
+    
+    ///增加几年
+    func increaseYears(year: Int) -> NSDate? {
+        let newDateComponents = NSDateComponents()
+        newDateComponents.year = year
+        let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        return calculatedDate
+    }
+    
     ///格式化日期到字符串 YYYY年MM月DD日
     func FormatToStringYYYYMMDD() -> String{
         let dateFormat = NSDateFormatter()
@@ -120,6 +136,15 @@ extension NSDate{
     func FormatToStringMMMMDD() -> String{
         let dateFormat = NSDateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("MMMMdd")
+        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        let strDate = dateFormat.stringFromDate(self)
+        return strDate
+    }
+    
+    ///格式化日期到字符串 DD日
+    func FormatToStringDD() -> String{
+        let dateFormat = NSDateFormatter()
+        dateFormat.setLocalizedDateFormatFromTemplate("dd")
         dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
         let strDate = dateFormat.stringFromDate(self)
         return strDate
@@ -209,6 +234,21 @@ extension NSDate{
         var firstDay: NSDate?
         var lastDay: NSDate?
         if calendar.rangeOfUnit(.NSMonthCalendarUnit, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
+            firstDay = firstDay?.increase1Day()
+            lastDay = firstDay?.dateByAddingTimeInterval(intervalCount - 1)
+        }
+        return (firstDay, lastDay)
+    }
+    
+    ///获取这个年的第一月和最后一月
+    func getYearBeginAndEnd() -> (firstDay: NSDate?, lastDay: NSDate?){
+        let calendar:NSCalendar = NSCalendar.currentCalendar()
+        var intervalCount: NSTimeInterval = 0
+        let newDateString = self.FormatToStringYYYY()
+        let newDate = newDateString.FormatToNSDateYYYY()!
+        var firstDay: NSDate?
+        var lastDay: NSDate?
+        if calendar.rangeOfUnit(.NSYearCalendarUnit, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
             firstDay = firstDay?.increase1Day()
             lastDay = firstDay?.dateByAddingTimeInterval(intervalCount - 1)
         }

@@ -36,6 +36,15 @@ extension String{
         return date
     }
     
+    ///字符串到格式化日期 YYYY年
+    func FormatToNSDateYYYY() -> NSDate? {
+        let dateFormat = NSDateFormatter()
+        dateFormat.setLocalizedDateFormatFromTemplate("yyyy")
+        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        let date = dateFormat.dateFromString(self)
+        return date
+    }
+    
     /// 判断是否是邮箱
     func validateEmail() -> Bool {
         let emailRegex: String = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
