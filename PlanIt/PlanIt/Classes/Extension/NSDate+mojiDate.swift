@@ -233,7 +233,7 @@ extension NSDate{
         let newDate = newDateString.FormatToNSDateYYYYMMMM()!
         var firstDay: NSDate?
         var lastDay: NSDate?
-        if calendar.rangeOfUnit(.NSMonthCalendarUnit, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
+        if calendar.rangeOfUnit(.Month, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
             firstDay = firstDay?.increase1Day()
             lastDay = firstDay?.dateByAddingTimeInterval(intervalCount - 1)
         }
@@ -248,7 +248,7 @@ extension NSDate{
         let newDate = newDateString.FormatToNSDateYYYY()!
         var firstDay: NSDate?
         var lastDay: NSDate?
-        if calendar.rangeOfUnit(.NSYearCalendarUnit, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
+        if calendar.rangeOfUnit(.Year, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
             firstDay = firstDay?.increase1Day()
             lastDay = firstDay?.dateByAddingTimeInterval(intervalCount - 1)
         }

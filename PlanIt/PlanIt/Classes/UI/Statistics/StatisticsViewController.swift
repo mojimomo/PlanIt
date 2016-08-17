@@ -321,13 +321,38 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
     
      //MARK: - Func
+    ///更改表格类型
     @IBAction func changeType(sender: UIButton) {
         callChartMenu()
     }
     
+    ///上一个
     @IBAction func back(sender: UIButton) {
         if lineChartType == .Day{
             searchDate = searchDate.increaseMonths(-1)!
+        }else if lineChartType == .Month{
+            searchDate = searchDate.increaseYears(-1)!
+        }
+        changeButtonEnabled()
+        loadChartData()
+        drawLineChart()
+    }
+    
+    ///下一个
+    @IBAction func next(sender: UIButton) {
+        if lineChartType == .Day{
+            searchDate = searchDate.increaseMonths(1)!
+        }else if lineChartType == .Month{
+            searchDate = searchDate.increaseYears(1)!
+        }
+        changeButtonEnabled()
+        loadChartData()
+        drawLineChart()
+    }
+    
+    ///根据搜索的日期修改按钮状态
+    func changeButtonEnabled(){
+        if lineChartType == .Day{
             if searchDate.FormatToStringYYYYMM() == NSDate().FormatToStringYYYYMM(){
                 nextButton.enabled = false
             }else{
@@ -340,7 +365,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 backButton.enabled = true
             }
         }else if lineChartType == .Month{
-            searchDate = searchDate.increaseYears(-1)!
             if searchDate.FormatToStringYYYY() == NSDate().FormatToStringYYYY(){
                 nextButton.enabled = false
             }else{
@@ -352,39 +376,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 backButton.enabled = true
             }
         }
-        loadChartData()
-        drawLineChart()
-    }
-    
-    @IBAction func next(sender: UIButton) {
-        if lineChartType == .Day{
-            searchDate = searchDate.increaseMonths(1)!
-            if searchDate.FormatToStringYYYYMM() == NSDate().FormatToStringYYYYMM(){
-                nextButton.enabled = false
-            }else{
-                nextButton.enabled = true
-            }
-            if searchDate.FormatToStringYYYYMM() == project.beginTimeDate.FormatToStringYYYYMM(){
-                backButton.enabled = false
-            }else{
-                backButton.enabled = true
-            }
-        }else if lineChartType == .Month{
-            searchDate = searchDate.increaseYears(1)!
-            if searchDate.FormatToStringYYYY() == NSDate().FormatToStringYYYY(){
-                nextButton.enabled = false
-            }else{
-                nextButton.enabled = true
-            }
-            if searchDate.FormatToStringYYYY() == project.beginTimeDate.FormatToStringYYYY(){
-                backButton.enabled = false
-            }else{
-                backButton.enabled = true
-            }
-        }
-
-        loadChartData()
-        drawLineChart()
     }
     
     ///更改现状图
@@ -479,7 +470,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                         }
                     }
                     chartData.append(total)
-                    chartLabel.append(monthString)
+                    chartLabel.append(date.FormatToStringMMMM())
                     date = date.increase1Month()!
                 }
             }
@@ -721,7 +712,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         label.layer.cornerRadius = 2
         label.clipsToBounds = true
         
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.sizeToFit()
         
@@ -786,6 +776,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         cell.textLabel?.text = self.texts[indexPath.row]
         cell.textLabel?.textColor = navigationFontColor
         cell.textLabel?.font = UIFont(name: "PingFangSC-Light", size: 17.0)!
+        cell.selectionStyle = .None
         if indexPath.row == selectRow{
             cell.accessoryType = .Checkmark
         }else{
@@ -796,9 +787,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     
     //选中cell
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if selectRow == indexPath.row {
+            return
+        }
+        //去掉勾
         if let oldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectRow, inSection: 0)){
             oldCell.accessoryType = .None
         }
+        //打钩
         if let cell = tableView.cellForRowAtIndexPath(indexPath){
             cell.accessoryType = .Checkmark
             selectRow = indexPath.row
@@ -808,7 +804,11 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 lineChartType = .Day
             }
         }
+        
+        //关闭谭传
         self.popover.dismiss()
+        //更改表格
+        changeButtonEnabled()
         loadChartData()
         drawLineChart()
     }

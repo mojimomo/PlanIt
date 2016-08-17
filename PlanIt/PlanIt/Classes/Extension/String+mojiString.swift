@@ -23,6 +23,7 @@ extension String{
         let dateFormat = NSDateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMdd")
         dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+        dateFormat.dateStyle = .LongStyle
         let date = dateFormat.dateFromString(self)
         return date
     }
