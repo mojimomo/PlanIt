@@ -175,7 +175,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             projectType = .Punch
             if unitTextField.text == "" && totalTextField.text == ""{
                 unitTextField.text = "次"
-                let days = project.beginTimeDate.daysToEndDate(project.endTimeDate)
+                let days = projectBeginTime.FormatToNSDateYYYYMMMMDD()!.daysToEndDate(projectEndTime.FormatToNSDateYYYYMMMMDD()!)
                 totalTextField.text = "\(days)"
             }            
         }else{

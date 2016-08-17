@@ -192,10 +192,26 @@ extension NSDate{
         let dateComp:NSDateComponents = calendar.components( .Month, fromDate: self)
         return dateComp.month
     }
+    
     ///获取这是这个年的第几月
     func getWeekOfYear() -> Int{
         let calendar:NSCalendar = NSCalendar.currentCalendar()
         let dateComp:NSDateComponents = calendar.components( .WeekOfYear, fromDate: self)
         return dateComp.weekOfYear
-    }    
-}
+    }
+    
+    ///获取这个月的第一天和最后一天
+    func getMonthBeginAndEnd() -> (firstDay: NSDate?, lastDay: NSDate?){        
+        let calendar:NSCalendar = NSCalendar.currentCalendar()
+        var intervalCount: NSTimeInterval = 0
+        let newDateString = self.FormatToStringYYYYMM()
+        let newDate = newDateString.FormatToNSDateYYYYMMMM()!
+        var firstDay: NSDate?
+        var lastDay: NSDate?
+        if calendar.rangeOfUnit(.NSMonthCalendarUnit, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
+            firstDay = firstDay?.increase1Day()
+            lastDay = firstDay?.dateByAddingTimeInterval(intervalCount - 1)
+        }
+        return (firstDay, lastDay)
+    }
+ }

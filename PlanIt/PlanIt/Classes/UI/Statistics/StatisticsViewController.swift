@@ -10,8 +10,10 @@ import UIKit
 
 class StatisticsViewController: UIViewController, PieChartDataSource ,TagListViewDelegate, EditProjectTableViewDelegate{
     enum LineChartType{
-        case Month, Week, Day
+        case Year, Month, Week, Day
     }
+    ///查询数据日期
+    var searchDate: NSDate = NSDate()
     ///表格类型
     var lineChartType: LineChartType = .Day
     ///统计页面当前项目
@@ -22,6 +24,16 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     lazy var chartData = [Double]()
     ///chart标签
     lazy var chartLabel = [String]()
+    ///chart标题按钮
+    @IBOutlet weak var chartTitleButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
+    var chartTitle = ""{
+        didSet{
+            chartTitleButton.setTitle(chartTitle, forState: .Normal)
+        }
+    }
     
     var projectName = ""{
         didSet{
@@ -205,8 +217,11 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             //距离截止
             percentLabel.sizeToFit()
             endTimeLabel.text = "\(project.endTime)截止"
+            //设置表格标题
+            chartTitle = "\(searchDate.FormatToStringYYYYMM())"
+            nextButton.enabled = false
             //画表格
-            loadProcessDate()
+            loadProcessData()
             drawLineChart()
             updateUI()
             
@@ -282,6 +297,34 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
     
      //MARK: - Func
+    @IBAction func back(sender: UIButton) {
+        if lineChartType == .Day{
+            searchDate = searchDate.increaseMonths(-1)!
+            if searchDate.FormatToStringYYYYMM() == NSDate().FormatToStringYYYYMM(){
+                nextButton.enabled = false
+            }else{
+                nextButton.enabled = true
+            }
+        }
+        chartTitle = "\(searchDate.FormatToStringYYYYMM())"
+        loadChartData()
+        drawLineChart()
+    }
+    
+    @IBAction func next(sender: UIButton) {
+        if lineChartType == .Day{
+            searchDate = searchDate.increaseMonths(1)!
+            if searchDate.FormatToStringYYYYMM() == NSDate().FormatToStringYYYYMM(){
+                nextButton.enabled = false
+            }else{
+                nextButton.enabled = true
+            }
+        }
+        
+        chartTitle = "\(searchDate.FormatToStringYYYYMM())"
+        loadChartData()
+        drawLineChart()
+    }
     ///更改现状图
     @IBAction func changeLineChart(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
@@ -293,42 +336,39 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             lineChartType = .Day
         default:break
         }
-        loadProcessDate()
+        loadProcessData()
         drawLineChart()
     }
     
     ///读取进度数据
-    func loadProcessDate(){
+    func loadChartData(){
         //清除之前的数据
         chartData.removeAll()
         chartLabel.removeAll()
-        //数据库加载数据
-        processDates = ProcessDate().loadData(project.id)
         
         //按照日统计
         if lineChartType == .Day{
-            let beginDate = project.beginTimeDate
-            var endDate = project.endTimeDate
-            if project.endTimeDate.timeIntervalSinceNow < 0{
-                endDate = NSDate().increase1Day()!.FormatToStringYYYYMMDD().FormatToNSDateYYYYMMMMDD()!
-            }
-            let days = beginDate.daysToEndDate(endDate) + 1
-            var date = beginDate.increaseDays(-1)!
-            for _ in 0 ..< days  {
-                if processDates.count == 0 {
-                    chartData.append(0)
-                }
-                
-                for processDate in processDates{
-                    if processDate.recordTimeDate == date {
-                        chartData.append(processDate.done)
-                        break
-                    }else if processDate ==  processDates.last{
+            let beginDate = searchDate.getMonthBeginAndEnd().firstDay
+            let endDate = searchDate.getMonthBeginAndEnd().lastDay
+            if beginDate != nil && endDate != nil {
+                let days = beginDate!.daysToEndDate(endDate!) + 1
+                var date = beginDate!.increaseDays(-1)!
+                for _ in 0 ..< days  {
+                    if processDates.count == 0 {
                         chartData.append(0)
                     }
+                    
+                    for processDate in processDates{
+                        if processDate.recordTimeDate == date {
+                            chartData.append(processDate.done)
+                            break
+                        }else if processDate ==  processDates.last{
+                            chartData.append(0)
+                        }
+                    }
+                    chartLabel.append(date.FormatToStringMMMMDD())
+                    date = date.increase1Day()!
                 }
-                chartLabel.append(date.FormatToStringMMMMDD())
-                date = date.increase1Day()!
             }
             //按照周统计
         }else if lineChartType == .Week{
@@ -348,7 +388,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 chartLabel.append(weekString)
                 date = date.increaseDays(7)!
             }
-
+            
             //按照月统计
         }else if lineChartType == .Month{
             let beginDate = project.beginTimeDate
@@ -368,7 +408,16 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 date = date.increase1Month()!
             }
         }
+
     }
+    
+    ///读取进度数据
+    func loadProcessData(){
+        //数据库加载数据
+        processDates = ProcessDate().loadData(project.id)
+        //加载表格数据
+        loadChartData()
+     }
     
     
 

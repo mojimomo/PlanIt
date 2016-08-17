@@ -931,24 +931,77 @@
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="AOX-o4-V0B">
                                         <rect key="frame" x="0.0" y="384" width="600" height="274"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="ZLF-S9-5cz">
-                                                <rect key="frame" x="232" y="17" width="137" height="29"/>
-                                                <segments>
-                                                    <segment title="月     "/>
-                                                    <segment title="周     "/>
-                                                    <segment title="日     "/>
-                                                </segments>
-                                                <color key="tintColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
-                                                <connections>
-                                                    <action selector="changeLineChart:" destination="hPX-EG-K6r" eventType="valueChanged" id="fdP-yS-qUQ"/>
-                                                </connections>
-                                            </segmentedControl>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lcv-as-fem">
+                                                <rect key="frame" x="0.0" y="15" width="600" height="32"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umi-Aw-maF">
+                                                        <rect key="frame" x="30" y="0.0" width="50" height="32"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="Pzp-oz-m5r"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="back:" destination="hPX-EG-K6r" eventType="touchUpInside" id="0vn-aM-hb9"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xku-VW-pA8">
+                                                        <rect key="frame" x="520" y="0.0" width="50" height="32"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="xhN-XK-fea"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="next:" destination="hPX-EG-K6r" eventType="touchUpInside" id="qkR-K5-SBE"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msf-B6-Jca">
+                                                        <rect key="frame" x="110" y="0.0" width="380" height="32"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="240" id="0Kx-OL-J8b"/>
+                                                            <constraint firstAttribute="height" constant="30" id="Azc-Sk-rDh"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                        <state key="normal" title="2016年8月">
+                                                            <color key="titleColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="0Kx-OL-J8b"/>
+                                                                <exclude reference="Azc-Sk-rDh"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="msf-B6-Jca" firstAttribute="centerX" secondItem="Lcv-as-fem" secondAttribute="centerX" id="0Mm-6e-KtT"/>
+                                                    <constraint firstAttribute="bottom" secondItem="msf-B6-Jca" secondAttribute="bottom" id="0se-0p-Et4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="msf-B6-Jca" secondAttribute="trailing" constant="110" id="Adt-xP-1bE"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Xku-VW-pA8" secondAttribute="bottom" id="DbZ-FO-2zB"/>
+                                                    <constraint firstItem="Xku-VW-pA8" firstAttribute="top" secondItem="Lcv-as-fem" secondAttribute="top" id="LFX-8S-2D3"/>
+                                                    <constraint firstItem="Xku-VW-pA8" firstAttribute="leading" secondItem="msf-B6-Jca" secondAttribute="trailing" constant="30" id="Oph-mV-Svx"/>
+                                                    <constraint firstAttribute="height" constant="32" id="Var-ia-T8A"/>
+                                                    <constraint firstItem="msf-B6-Jca" firstAttribute="centerY" secondItem="Lcv-as-fem" secondAttribute="centerY" id="WLi-Op-Ldz"/>
+                                                    <constraint firstAttribute="bottom" secondItem="umi-Aw-maF" secondAttribute="bottom" id="btr-02-52I"/>
+                                                    <constraint firstItem="umi-Aw-maF" firstAttribute="top" secondItem="Lcv-as-fem" secondAttribute="top" id="htE-l4-Ipy"/>
+                                                    <constraint firstItem="msf-B6-Jca" firstAttribute="leading" secondItem="umi-Aw-maF" secondAttribute="trailing" constant="30" id="kUf-dc-RVS"/>
+                                                    <constraint firstItem="msf-B6-Jca" firstAttribute="top" secondItem="Lcv-as-fem" secondAttribute="top" id="kow-JP-upG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Xku-VW-pA8" secondAttribute="trailing" constant="30" id="uFf-eT-crt"/>
+                                                    <constraint firstItem="umi-Aw-maF" firstAttribute="leading" secondItem="Lcv-as-fem" secondAttribute="leading" constant="30" id="zSi-e4-tEZ"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="Adt-xP-1bE"/>
+                                                    </mask>
+                                                </variation>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="ZLF-S9-5cz" firstAttribute="centerX" secondItem="AOX-o4-V0B" secondAttribute="centerX" id="Cuv-qL-wkS"/>
+                                            <constraint firstItem="Lcv-as-fem" firstAttribute="leading" secondItem="AOX-o4-V0B" secondAttribute="leading" id="4av-Gv-M7Z"/>
+                                            <constraint firstItem="Lcv-as-fem" firstAttribute="top" secondItem="AOX-o4-V0B" secondAttribute="top" constant="15" id="F2y-Xm-rxw"/>
+                                            <constraint firstAttribute="trailing" secondItem="Lcv-as-fem" secondAttribute="trailing" id="RfO-PR-QNp"/>
                                             <constraint firstAttribute="height" constant="274" id="fSz-MO-7oO"/>
-                                            <constraint firstItem="ZLF-S9-5cz" firstAttribute="top" secondItem="AOX-o4-V0B" secondAttribute="top" constant="17" id="muz-Ot-R7x"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -976,11 +1029,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="umi-Aw-maF" id="rhx-R5-dai"/>
+                        <outlet property="chartTitleButton" destination="msf-B6-Jca" id="yFH-D4-duD"/>
                         <outlet property="doneLabel" destination="eeK-dJ-Ul2" id="pzD-rA-pvW"/>
                         <outlet property="endTimeLabel" destination="RAP-cj-VgG" id="tl7-Qb-trZ"/>
                         <outlet property="lineChartView" destination="AOX-o4-V0B" id="AFy-2l-znJ"/>
                         <outlet property="needFinishLabel" destination="6w7-Cy-H0w" id="sjQ-8f-8sf"/>
                         <outlet property="needLabel" destination="bEq-00-jlK" id="hyg-SW-49a"/>
+                        <outlet property="nextButton" destination="Xku-VW-pA8" id="nh0-rg-Wfy"/>
                         <outlet property="percentLabel" destination="Tau-Cq-hUb" id="tmQ-Uf-EDJ"/>
                         <outlet property="pieChartView" destination="zcs-hp-rJP" id="L7m-CJ-AMX"/>
                         <outlet property="progressView" destination="CNQ-UT-ZBX" id="1TY-1v-0Ss"/>
