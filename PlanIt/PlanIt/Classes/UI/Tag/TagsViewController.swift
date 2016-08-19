@@ -184,15 +184,25 @@ class TagsViewController: UITableViewController {
     override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! TagTableViewCell
         //配置cell
+        //去除分割线
+        for view in cell.subviews {
+            if view.tag == 1025{
+                view.removeFromSuperview()
+            }
+        }
+        //显示全部
         if indexPath.row == 0{
             cell.tagName = "显示全部"
             cell.tagCounts = tagCounts[indexPath.row]
             let sepView = UIView(frame: CGRect(x: 15, y: 43.5, width: self.tableView.bounds.width - 30, height: 0.5))
+            sepView.tag = 1025
             sepView.backgroundColor = UIColor.colorFromHex("#EFEFEF")
             cell.addSubview(sepView)
+        //无标签
         }else if indexPath.row == 1{
             cell.tagName = "无标签"
             cell.tagCounts = tagCounts[indexPath.row]
+        //其他tag
         }else{
             cell.tagName = tags[indexPath.row - 2].name
             cell.tagCounts = tagCounts[indexPath.row]

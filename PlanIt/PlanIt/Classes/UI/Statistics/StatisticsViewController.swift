@@ -252,6 +252,12 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        moveToToday()
+    }
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -350,6 +356,28 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         drawLineChart()
     }
     
+    ///图表中移动到今天
+    private func moveToToday(){
+        if lineChartType == .Day{
+            if searchDate.FormatToStringYYYYMM() == NSDate().FormatToStringYYYYMM(){
+                let offset = graphView.contentSize.width - graphView.bounds.size.width
+                if offset > 0 {
+                    graphView.setContentOffset(CGPointMake( offset , 0), animated: true)
+                    graphView.bouncesZoom = false
+                }
+                
+            }
+        }else if lineChartType == .Month{
+            if searchDate.FormatToStringYYYY() == NSDate().FormatToStringYYYY(){
+                let offset = graphView.contentSize.width - graphView.bounds.size.width
+                if offset > 0 {
+                    graphView.setContentOffset(CGPointMake( offset, 0), animated: true)
+                    graphView.bouncesZoom = false
+                }
+            }
+        }
+    }
+    
     ///根据搜索的日期修改按钮状态
     func changeButtonEnabled(){
         if lineChartType == .Day{
@@ -414,7 +442,12 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //按照日统计
         if lineChartType == .Day{
             let beginDate = searchDate.getMonthBeginAndEnd().firstDay
-            let endDate = searchDate.getMonthBeginAndEnd().lastDay
+            var endDate : NSDate?
+            if searchDate.FormatToStringYYYYMM() != NSDate().FormatToStringYYYYMM(){
+                endDate = searchDate.getMonthBeginAndEnd().lastDay
+            }else{
+                endDate = NSDate()
+            }
             if beginDate != nil && endDate != nil {
                 let days = beginDate!.daysToEndDate(endDate!) + 1
                 var date = beginDate!.increaseDays(-1)!
@@ -457,7 +490,12 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             //按照月统计
         }else if lineChartType == .Month{
             let beginDate = searchDate.getYearBeginAndEnd().firstDay
-            let endDate = searchDate.getYearBeginAndEnd().lastDay
+            var endDate : NSDate?
+            if searchDate.FormatToStringYYYY() != NSDate().FormatToStringYYYY(){
+                endDate = searchDate.getYearBeginAndEnd().lastDay
+            }else{
+                endDate = NSDate().getMonthBeginAndEnd().lastDay
+            }
             if beginDate != nil && endDate != nil {
                 let months = beginDate!.monthsToEndDate(endDate!)
                 var date = beginDate!
@@ -500,6 +538,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         graphView.backgroundColor = UIColor.whiteColor()
         graphView.setData(chartData, withLabels: chartLabel)
         self.lineChartView.insertSubview(graphView, belowSubview: label)
+        moveToToday()
     }
     
     ///打开历史页面

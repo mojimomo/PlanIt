@@ -163,7 +163,7 @@ class Project: NSObject {
     // MARK:- 数据操作
     ///新增推送
     func addNotification() {
-        //如果项目已经完成不添加
+        //如果项目已经完成不添加7
         if isFinished == .Finished{
             return
         }
@@ -172,6 +172,12 @@ class Project: NSObject {
         // 通知的触发时间
         let fireDate = endTimeDate.dateByAddingTimeInterval(-Double(day)*24*60*60)
         //let fireDate = NSDate().dateByAddingTimeInterval(30)
+        
+        //过去的通知不触发
+        if fireDate.timeIntervalSinceNow < 0{
+            return
+        }
+        
         localNoti.fireDate = fireDate
         // 设置时区
         localNoti.timeZone = NSTimeZone.defaultTimeZone()
