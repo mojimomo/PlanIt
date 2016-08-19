@@ -163,10 +163,10 @@ class Project: NSObject {
     // MARK:- 数据操作
     ///新增推送
     func addNotification() {
+        //如果项目已经完成不添加
         if isFinished == .Finished{
             return
         }
-
         // 初始化一个通知
         let localNoti = UILocalNotification()
         // 通知的触发时间
@@ -446,12 +446,9 @@ class Project: NSObject {
     func updateProject() -> Bool{
         //删除推送
         deleteNotification()
-        
-        //如果不是已完成项目
-        if self.isFinished != .Finished{
-            //添加推送
-            addNotification()
-        }
+
+        //添加推送
+        addNotification()
         
         //删除之前的映射关系
         deleteTags()
