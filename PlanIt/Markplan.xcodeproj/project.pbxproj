@@ -18,6 +18,9 @@
 		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
 		BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */; };
 		BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */; };
+		BE3F86EE1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F86ED1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift */; };
+		BE3F86F61D67826D002FACA2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE3F86F31D67826D002FACA2 /* Info.plist */; };
+		BE3F86F71D67826D002FACA2 /* UICollectionViewLeftAlignedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3F86F51D67826D002FACA2 /* UICollectionViewLeftAlignedLayout.m */; };
 		BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */; };
 		BE4EDFFF1D41F7D2003EA7A0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4EDFFE1D41F7D2003EA7A0 /* MBProgressHUD.m */; };
 		BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F02381CEF365F00126237 /* RoundTableviewCell.swift */; };
@@ -104,6 +107,10 @@
 		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
 		BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveLoadingIndicator.swift; sourceTree = "<group>"; };
 		BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
+		BE3F86ED1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+mojiLabel.swift.swift"; sourceTree = "<group>"; };
+		BE3F86F31D67826D002FACA2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE3F86F41D67826D002FACA2 /* UICollectionViewLeftAlignedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLeftAlignedLayout.h; sourceTree = "<group>"; };
+		BE3F86F51D67826D002FACA2 /* UICollectionViewLeftAlignedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewLeftAlignedLayout.m; sourceTree = "<group>"; };
 		BE45A9F81CF98845007FD5DE /* ProcessesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessesTableViewController.swift; path = ../Statistics/ProcessesTableViewController.swift; sourceTree = "<group>"; };
 		BE4EDFFD1D41F7D2003EA7A0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BE4EDFFE1D41F7D2003EA7A0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -271,6 +278,16 @@
 			path = KDCircularProgress;
 			sourceTree = "<group>";
 		};
+		BE3F86F21D67826D002FACA2 /* UICollectionViewLeftAlignedLayout */ = {
+			isa = PBXGroup;
+			children = (
+				BE3F86F31D67826D002FACA2 /* Info.plist */,
+				BE3F86F41D67826D002FACA2 /* UICollectionViewLeftAlignedLayout.h */,
+				BE3F86F51D67826D002FACA2 /* UICollectionViewLeftAlignedLayout.m */,
+			);
+			path = UICollectionViewLeftAlignedLayout;
+			sourceTree = "<group>";
+		};
 		BE4EDFFC1D41F7D2003EA7A0 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +335,7 @@
 				BE79BCC41D2D38B2001512D6 /* UIColor+colorFromHex.swift */,
 				BE79BCC51D2D38B2001512D6 /* UIViewController+mojiView.swift */,
 				BE79BCCA1D2D38E6001512D6 /* UIImage+mojiImage.swift */,
+				BE3F86ED1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift */,
 			);
 			name = "Extension(扩展)";
 			path = Extension;
@@ -395,6 +413,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE3F86F21D67826D002FACA2 /* UICollectionViewLeftAlignedLayout */,
 				BEFD580A1D4DDF0300CAD595 /* MobClick */,
 				BE4EDFFC1D41F7D2003EA7A0 /* MBProgressHUD */,
 				BE6A1A641D3CC83200E39B7B /* WActivityIndicator */,
@@ -684,6 +703,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3F86F61D67826D002FACA2 /* Info.plist in Resources */,
 				BEA520AD1CCF417F00FFE43E /* LaunchScreen.storyboard in Resources */,
 				BEA520AA1CCF417F00FFE43E /* Assets.xcassets in Resources */,
 				BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */,
@@ -762,6 +782,7 @@
 				BE9ACE7A1D0C03B30097A76F /* PieChartView.swift in Sources */,
 				BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */,
 				BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */,
+				BE3F86EE1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift in Sources */,
 				BE1C16081D2CCC4200A4B4A5 /* WebviewController.swift in Sources */,
 				BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
@@ -791,6 +812,7 @@
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
 				BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */,
+				BE3F86F71D67826D002FACA2 /* UICollectionViewLeftAlignedLayout.m in Sources */,
 				BE79BCC71D2D38B2001512D6 /* String+mojiString.swift in Sources */,
 				BE6A1A691D3CC83200E39B7B /* WIndicator.swift in Sources */,
 				BE79BCCB1D2D38E6001512D6 /* UIImage+mojiImage.swift in Sources */,

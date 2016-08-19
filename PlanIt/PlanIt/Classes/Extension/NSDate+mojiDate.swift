@@ -24,7 +24,7 @@ extension NSDate{
         let timeEnd = endDate.timeIntervalSince1970
         let timeBegin = self.timeIntervalSince1970
         let days = (timeEnd - timeBegin)/( 60 * 60 * 24)
-        return Int(days)
+        return days.toIntCarry()
     }
     
     ///计算此时间与结束时间相差几周
@@ -32,15 +32,7 @@ extension NSDate{
         let timeEnd = endDate.timeIntervalSince1970
         let timeBegin = self.timeIntervalSince1970
         let days = (timeEnd - timeBegin)/( 60 * 60 * 24 * 7)
-        return Int(days)
-    }
-    
-    ///计算此时间与结束时间相差几月
-    func monthsToEndDate(endDate: NSDate) -> Int{
-        let timeEnd = endDate.timeIntervalSince1970
-        let timeBegin = self.timeIntervalSince1970
-        let months = (timeEnd - timeBegin)/( 60 * 60 * 24 * 30)
-        return Int(months)
+        return days.toIntCarry()
     }
     
     ///与现在时间比较

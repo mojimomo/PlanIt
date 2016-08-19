@@ -56,12 +56,13 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     var editTags = [Tag]()
     var totalTagsSelected: Int = 0
     lazy var collectionTag: UICollectionView = {
-        let layoutCollectionView = UICollectionViewFlowLayout()
+        //let layoutCollectionView = UICollectionViewFlowLayout()
+        let layoutCollectionView =  UICollectionViewLeftAlignedLayout()
         layoutCollectionView.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         layoutCollectionView.itemSize = CGSizeMake(90, 20)
         layoutCollectionView.minimumLineSpacing = 10
         layoutCollectionView.minimumInteritemSpacing = 5
-        let collectionTag = UICollectionView(frame: self.view.frame, collectionViewLayout: layoutCollectionView)
+        let collectionTag = UICollectionView(frame: self.view.frame, collectionViewLayout: layoutCollectionView )
         collectionTag.contentInset = UIEdgeInsets(top: 84, left: 0, bottom: 20, right: 0)
         collectionTag.delegate = self
         collectionTag.dataSource = self

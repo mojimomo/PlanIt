@@ -36,33 +36,43 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     private var popover: Popover!
     ///菜单文字
     private var texts = ["按月查看", "按日查看"]
+    
+    private var effectView :UIVisualEffectView!
     ///菜单弹窗参数
     private var popoverOptions: [PopoverOption] = [
         .CornerRadius(5.0),
         .Animation(.None)
     ]
-    var chartTitle = ""{
+    private var chartTitle = ""{
         didSet{
             chartTitleButton.setTitle(chartTitle, forState: .Normal)
         }
     }
     
-    var projectName = ""{
+    private var projectName = ""{
         didSet{
             self.title = projectName
         }
     }
 
-    var lineChartViewFrame: CGRect{
-        set{
-            
-        }
+    private var lineChartViewFrame: CGRect{
         get{
             if IS_IPHONE {
                 return CGRectMake(0, 64, self.view.bounds.width, 210 )
             }
             else {
                 return CGRectMake(0, 64, self.view.bounds.width, self.view.bounds.height - 531.0 )
+            }
+        }
+    }
+    
+    private var effectViewFrame: CGRect{
+        get{
+            if IS_IPHONE {
+                return CGRectMake(0, 0, self.view.bounds.width, 210 + 64)
+            }
+            else {
+                return CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height - 531.0  + 64)
             }
         }
     }
@@ -188,7 +198,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 prompLabel?.text = "超出期限"
                 let restString = project.endTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
-                 surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
+                surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
                 let timePercent = project.beginTimeDate.percentFromCurrentTime(project.endTimeDate)
                 progressView.setProgress(Float(timePercent), animated: false)
             default:break
@@ -358,6 +368,9 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     
     ///图表中移动到今天
     private func moveToToday(){
+        if project.isFinished == .NotBegined{
+            return
+        }
         if lineChartType == .Day{
             if searchDate.FormatToStringYYYYMM() == NSDate().FormatToStringYYYYMM(){
                 let offset = graphView.contentSize.width - graphView.bounds.size.width
@@ -375,6 +388,30 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                     graphView.bouncesZoom = false
                 }
             }
+        }
+    }
+    
+    private func addVisualEffectView(){
+        if project.isFinished == .NotBegined{
+            let blur = UIBlurEffect(style: .Light)
+            if effectView == nil{
+                effectView = UIVisualEffectView(effect: blur)
+                effectView.frame = effectViewFrame
+                
+                let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blur)
+                let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+                vibrancyEffectView.frame = effectViewFrame
+                effectView.contentView.addSubview(vibrancyEffectView)
+
+                let button = UIButton(type: .Custom)
+                button.setImage( UIImage(named: "timer"), forState: .Normal)
+                button.setTitle(" 项目还未开始", forState: .Normal)
+                button.titleLabel!.font = UIFont.systemFontOfSize(19)
+                button.sizeToFit()
+                button.center = effectView.center
+                vibrancyEffectView.contentView.addSubview(button)
+            }
+            lineChartView.addSubview(effectView)
         }
     }
     
@@ -497,11 +534,10 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 endDate = NSDate().getMonthBeginAndEnd().lastDay
             }
             if beginDate != nil && endDate != nil {
-                let months = beginDate!.monthsToEndDate(endDate!)
                 var date = beginDate!
-                for _ in 0 ..< months  {
-                    let monthString = date.FormatToStringYYYYMM()
+                while date.FormatToStringYYYYMM() !=  endDate!.FormatToStringYYYYMM() {
                     var total = 0.0
+                    let monthString = date.FormatToStringYYYYMM()
                     for processDate in processDates{
                         if processDate.month == monthString {
                             total += processDate.done
@@ -529,7 +565,11 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
 
     ///画直线图
-    func drawLineChart(){
+    func drawLineChart(){        
+        if effectView != nil{
+            effectView.removeFromSuperview()
+        }
+        
         if graphView == nil{
             graphView = ScrollableGraphView(frame: lineChartViewFrame)
             graphView = createDarkGraph(lineChartViewFrame)
@@ -539,6 +579,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         graphView.setData(chartData, withLabels: chartLabel)
         self.lineChartView.insertSubview(graphView, belowSubview: label)
         moveToToday()
+        addVisualEffectView()
     }
     
     ///打开历史页面
@@ -850,26 +891,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         changeButtonEnabled()
         loadChartData()
         drawLineChart()
-    }
-}
-
-extension UILabel{
-    func changeTextAttributeByString(needChangeString: String, font: UIFont, color: UIColor){
-        let noteString = NSMutableAttributedString(string: self.text!)
-        if let index = noteString.string.rangeOfString(needChangeString){
-            let range = NSMakeRange(Int(String(index.startIndex))!, needChangeString.characters.count)
-                noteString.addAttributes([NSForegroundColorAttributeName : color], range: range)
-                noteString.addAttributes([NSFontAttributeName : font], range: range)
-            self.attributedText = noteString
-        }
-    }
-    
-    func changeTextAttributeByRange(range: NSRange, font: UIFont, color: UIColor){
-        let noteString = NSMutableAttributedString(string: self.text!)
-        noteString.addAttributes([NSForegroundColorAttributeName : color], range: range)
-        noteString.addAttributes([NSFontAttributeName : font], range: range)
-        self.attributedText = noteString
-        
     }
 }
 
