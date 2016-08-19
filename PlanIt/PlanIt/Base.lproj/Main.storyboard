@@ -935,9 +935,9 @@
                                                 <rect key="frame" x="0.0" y="15" width="600" height="32"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umi-Aw-maF">
-                                                        <rect key="frame" x="30" y="0.0" width="30" height="32"/>
+                                                        <rect key="frame" x="30" y="0.0" width="50" height="32"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="30" id="Pzp-oz-m5r"/>
+                                                            <constraint firstAttribute="width" constant="50" id="Pzp-oz-m5r"/>
                                                         </constraints>
                                                         <state key="normal" image="left"/>
                                                         <connections>
@@ -945,9 +945,9 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xku-VW-pA8">
-                                                        <rect key="frame" x="540" y="0.0" width="30" height="32"/>
+                                                        <rect key="frame" x="520" y="0.0" width="50" height="32"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="30" id="xhN-XK-fea"/>
+                                                            <constraint firstAttribute="width" constant="50" id="xhN-XK-fea"/>
                                                         </constraints>
                                                         <state key="normal" image="right"/>
                                                         <connections>
@@ -955,7 +955,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msf-B6-Jca">
-                                                        <rect key="frame" x="90" y="0.0" width="420" height="32"/>
+                                                        <rect key="frame" x="95" y="0.0" width="410" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="240" id="0Kx-OL-J8b"/>
                                                             <constraint firstAttribute="height" constant="30" id="Azc-Sk-rDh"/>
@@ -981,12 +981,12 @@
                                                     <constraint firstAttribute="trailing" secondItem="msf-B6-Jca" secondAttribute="trailing" constant="110" id="Adt-xP-1bE"/>
                                                     <constraint firstAttribute="bottom" secondItem="Xku-VW-pA8" secondAttribute="bottom" id="DbZ-FO-2zB"/>
                                                     <constraint firstItem="Xku-VW-pA8" firstAttribute="top" secondItem="Lcv-as-fem" secondAttribute="top" id="LFX-8S-2D3"/>
-                                                    <constraint firstItem="Xku-VW-pA8" firstAttribute="leading" secondItem="msf-B6-Jca" secondAttribute="trailing" constant="30" id="Oph-mV-Svx"/>
+                                                    <constraint firstItem="Xku-VW-pA8" firstAttribute="leading" secondItem="msf-B6-Jca" secondAttribute="trailing" constant="15" id="Oph-mV-Svx"/>
                                                     <constraint firstAttribute="height" constant="32" id="Var-ia-T8A"/>
                                                     <constraint firstItem="msf-B6-Jca" firstAttribute="centerY" secondItem="Lcv-as-fem" secondAttribute="centerY" id="WLi-Op-Ldz"/>
                                                     <constraint firstAttribute="bottom" secondItem="umi-Aw-maF" secondAttribute="bottom" id="btr-02-52I"/>
                                                     <constraint firstItem="umi-Aw-maF" firstAttribute="top" secondItem="Lcv-as-fem" secondAttribute="top" id="htE-l4-Ipy"/>
-                                                    <constraint firstItem="msf-B6-Jca" firstAttribute="leading" secondItem="umi-Aw-maF" secondAttribute="trailing" constant="30" id="kUf-dc-RVS"/>
+                                                    <constraint firstItem="msf-B6-Jca" firstAttribute="leading" secondItem="umi-Aw-maF" secondAttribute="trailing" constant="15" id="kUf-dc-RVS"/>
                                                     <constraint firstItem="msf-B6-Jca" firstAttribute="top" secondItem="Lcv-as-fem" secondAttribute="top" id="kow-JP-upG"/>
                                                     <constraint firstAttribute="trailing" secondItem="Xku-VW-pA8" secondAttribute="trailing" constant="30" id="uFf-eT-crt"/>
                                                     <constraint firstItem="umi-Aw-maF" firstAttribute="leading" secondItem="Lcv-as-fem" secondAttribute="leading" constant="30" id="zSi-e4-tEZ"/>

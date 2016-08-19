@@ -228,7 +228,6 @@ class Project: NSObject {
             self.total = total
             self.rest = 0
             self.isFinished = .Finished
-            self.deleteNotification()
             return true
         }else{
             self.total = total
@@ -247,7 +246,7 @@ class Project: NSObject {
                 complete = total
                 rest = 0
                 percent = 100.0
-                self.deleteNotification()
+                self.isFinished = .Finished
             }else if complete < 0{
                 complete = 0
                 rest = total
@@ -261,8 +260,8 @@ class Project: NSObject {
     func finishDone(){
         if type == .NoRecord{
             complete += 1
+            self.isFinished = .Finished
             updateProject()
-            self.deleteNotification()
         }
     }
     
@@ -447,8 +446,13 @@ class Project: NSObject {
     func updateProject() -> Bool{
         //删除推送
         deleteNotification()
-        //添加推送
-        addNotification()
+        
+        //如果不是已完成项目
+        if self.isFinished != .Finished{
+            //添加推送
+            addNotification()
+        }
+        
         //删除之前的映射关系
         deleteTags()
         
