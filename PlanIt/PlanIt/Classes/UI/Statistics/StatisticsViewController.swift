@@ -37,7 +37,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     ///菜单文字
     private var texts = ["按月查看", "按日查看"]
     
-    private var effectView :UIVisualEffectView!
+    private var effectView :DynamicBlurView!
     ///菜单弹窗参数
     private var popoverOptions: [PopoverOption] = [
         .CornerRadius(5.0),
@@ -393,25 +393,33 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     
     private func addVisualEffectView(){
         if project.isFinished == .NotBegined{
-            let blur = UIBlurEffect(style: .Light)
+            
             if effectView == nil{
-                effectView = UIVisualEffectView(effect: blur)
-                effectView.frame = effectViewFrame
+                effectView = DynamicBlurView(frame: effectViewFrame)
                 
-                let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blur)
-                let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-                vibrancyEffectView.frame = effectViewFrame
-                effectView.contentView.addSubview(vibrancyEffectView)
+//                let blur = UIBlurEffect(style: .Light)                
+//                effectView = UIVisualEffectView(effect: blur)
+//                effectView.frame = effectViewFrame
+//                
+//                let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blur)
+//                let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+//                vibrancyEffectView.frame = effectViewFrame
+//                effectView.contentView.addSubview(vibrancyEffectView)
 
                 let button = UIButton(type: .Custom)
                 button.setImage( UIImage(named: "timer"), forState: .Normal)
                 button.setTitle(" 项目还未开始", forState: .Normal)
+                button.setTitleColor(UIColor.colorFromHex("#AFAFAF"), forState: .Normal)
                 button.titleLabel!.font = UIFont.systemFontOfSize(19)
                 button.sizeToFit()
                 button.center = effectView.center
-                vibrancyEffectView.contentView.addSubview(button)
+                effectView.addSubview(button)
             }
             lineChartView.addSubview(effectView)
+            effectView.blurRadius = 10
+            chartTitleButton.enabled = false
+        }else{
+            chartTitleButton.enabled = true
         }
     }
     

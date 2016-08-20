@@ -12,6 +12,7 @@
 		BE004A5F1D2A43A400556E85 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */; };
 		BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16051D2CCC3800A4B4A5 /* OptionsTableViewController.swift */; };
 		BE1C16081D2CCC4200A4B4A5 /* WebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C16071D2CCC4200A4B4A5 /* WebviewController.swift */; };
+		BE24E5C11D6820E1007CB5D6 /* DynamicBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24E5C01D6820E1007CB5D6 /* DynamicBlurView.swift */; };
 		BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */; };
 		BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */; };
 		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
@@ -101,6 +102,7 @@
 		BE004A5E1D2A43A400556E85 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		BE1C16051D2CCC3800A4B4A5 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
 		BE1C16071D2CCC4200A4B4A5 /* WebviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebviewController.swift; sourceTree = "<group>"; };
+		BE24E5C01D6820E1007CB5D6 /* DynamicBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicBlurView.swift; sourceTree = "<group>"; };
 		BE279CF31CDF1D4D00D4FCFB /* KYDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYDrawerController.swift; path = KYDrawerController/Classes/KYDrawerController.swift; sourceTree = "<group>"; };
 		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
@@ -250,6 +252,14 @@
 			);
 			name = "Options(设置)";
 			path = Options;
+			sourceTree = "<group>";
+		};
+		BE24E5BF1D6820E1007CB5D6 /* DynamicBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				BE24E5C01D6820E1007CB5D6 /* DynamicBlurView.swift */,
+			);
+			path = DynamicBlurView;
 			sourceTree = "<group>";
 		};
 		BE279CEB1CDF1AE700D4FCFB /* KYDrawerController */ = {
@@ -413,6 +423,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE24E5BF1D6820E1007CB5D6 /* DynamicBlurView */,
 				BE3F86F21D67826D002FACA2 /* UICollectionViewLeftAlignedLayout */,
 				BEFD580A1D4DDF0300CAD595 /* MobClick */,
 				BE4EDFFC1D41F7D2003EA7A0 /* MBProgressHUD */,
@@ -797,6 +808,7 @@
 				BE6A1A6A1D3CC83200E39B7B /* WIndicatorText.swift in Sources */,
 				BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */,
 				BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */,
+				BE24E5C11D6820E1007CB5D6 /* DynamicBlurView.swift in Sources */,
 				BEACC90D1D5F7FF70093FB94 /* GuideViewController.swift in Sources */,
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
 				BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */,
