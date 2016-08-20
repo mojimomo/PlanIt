@@ -7,4 +7,4 @@
 ![](./PlanIt/Artboard.png)<br>
 
 ###下载马克计划
-<img src="http://7xrasx.com1.z0.glb.clouddn.com/appdownload1.png" width = "150" href="https://itunes.apple.com/cn/app/ma-ke-ji-hua/id1141710914"  alt="AppStore" align=center />
+<a href="https://itunes.apple.com/cn/app/ma-ke-ji-hua/id1141710914"  ><img src="http://7xrasx.com1.z0.glb.clouddn.com/appdownload1.png" width = "150" alt="AppStore" align=center /> </a>
