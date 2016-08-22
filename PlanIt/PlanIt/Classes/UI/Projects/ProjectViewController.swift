@@ -540,7 +540,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //显示
         let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler:  {() -> () in
-            self.updateTable()
+            weak var weakSelf = self
+            weakSelf?.updateTable()
             })
         popover.show(showView,  point: startPoint)
         
@@ -644,7 +645,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //显示
         let popover = Popover(options: self.showPercentPopoverOptions, showHandler: nil, dismissHandler: {() -> () in
-            self.updateTable()
+            weak var weakSelf = self
+            weakSelf?.updateTable()
             })
 
         popover.show(showView,  point: startPoint)
@@ -721,9 +723,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 let alerActionOK = UIAlertAction(title: "取消", style: .Default, handler: nil)
                 //创建UIAlertAction 取消按钮
                 let alerActionCancel = UIAlertAction(title: "确定", style: .Destructive, handler:  {(UIAlertAction) -> Void in
-                    self.projects[indexPath.section].deleteProject()
-                    self.callAlertSuccess("删除成功!")
-                    self.updateTable()
+                    weak var weakSelf = self
+                    weakSelf?.projects[indexPath.section].deleteProject()
+                    weakSelf?.callAlertSuccess("删除成功!")
+                    weakSelf?.updateTable()
                 })
                 //添加动作
                 alertController.addAction(alerActionOK)
@@ -1000,7 +1003,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }else if indexPath.row == 2{
                 handleCallOptions()
             }
-             self.popover.dismiss()
+            popover.dismiss()
             //项目表格
         case tableViewTag.ProjectsTable:
                 if projects[indexPath.section].type != .NoRecord {

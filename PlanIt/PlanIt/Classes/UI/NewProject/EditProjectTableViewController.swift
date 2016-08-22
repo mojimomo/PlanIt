@@ -273,7 +273,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
-                self.projectEndTime = dateString
+                weak var weakSelf = self
+                weakSelf?.projectEndTime = dateString
             })
             
              //创建UIAlertAction 取消按钮
@@ -332,9 +333,10 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         let alerActionOK = UIAlertAction(title: "取消", style: .Default, handler: nil)
         //创建UIAlertAction 取消按钮
         let alerActionCancel = UIAlertAction(title: "确定", style: .Destructive, handler:  {(UIAlertAction) -> Void in
-            self.project.deleteProject()
-            self.dismissViewControllerAnimated(true) { () -> Void in
-                self.delegate?.goBackAct(.DeleteSucceess)
+            weak var weakSelf = self
+            weakSelf?.project.deleteProject()
+            weakSelf?.dismissViewControllerAnimated(true) { () -> Void in
+                weakSelf?.delegate?.goBackAct(.DeleteSucceess)
             }
         })
         //添加动作
@@ -527,7 +529,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                     }
                 }
                 RRTagController.displayTagController(parentController: self, tags: tags, blockFinish: { (selectedTags, unSelectedTags) -> () in
-                    self.project.tags = selectedTags
+                    weak var weakSelf = self
+                    weakSelf?.project.tags = selectedTags
                     }) { () -> () in
                 }
             }

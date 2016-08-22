@@ -565,14 +565,15 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.indicator.hidden = false
         self.indicator.startAnimating()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            weak var weakSelf = self
             //数据库加载数据
-            self.processDates = ProcessDate().loadData(self.project.id)
+            weakSelf?.processDates = ProcessDate().loadData(self.project.id)
             //加载表格数据
-            self.loadChartData()
+            weakSelf?.loadChartData()
             dispatch_async(dispatch_get_main_queue()){
-                self.indicator.stopAnimating()
-                self.drawLineChart()
-                self.indicator.hidden = true
+                weakSelf?.indicator.stopAnimating()
+                weakSelf?.drawLineChart()
+                weakSelf?.indicator.hidden = true
             }
         }
      }

@@ -48,6 +48,9 @@ class ProcessesTableViewController: UITableViewController {
         loadProcess()
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     func dissmiss(){
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -132,28 +135,41 @@ class ProcessesTableViewController: UITableViewController {
         noDataView?.removeFromSuperview()
         noDataButton?.removeFromSuperview()
         
-        ///加载数据
-        processes = Process().loadData(project.id)
-        if processes.count > 0 {
-            for process in processes{
-                var index = 0
-                if months.count == 0{
-                    months.append(process.month)
-                    records.append(1)
-                }else{
-                    for month in months{
-                        if process.month == month{
-                            records[index] += 1
-                            break
-                        }else if month == months.last {
-                            months.append(process.month)
-                            records.append(1)
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        dispatch_async(queue) {
+            weak var weakSelf = self
+            ///加载数据
+            weakSelf?.processes = Process().loadData(self.project.id)
+            if self.processes.count > 0 {
+                for process in self.processes{
+                    var index = 0
+                    if weakSelf?.months.count == 0{
+                        weakSelf?.months.append(process.month)
+                        weakSelf?.records.append(1)
+                    }else{
+                        for month in self.months{
+                            if process.month == month{
+                                weakSelf?.records[index] += 1
+                                break
+                            }else if month == self.months.last {
+                                weakSelf?.months.append(process.month)
+                                weakSelf?.records.append(1)
+                            }
+                            index += 1
                         }
-                        index += 1
                     }
                 }
             }
-        }else{
+            dispatch_async(dispatch_get_main_queue(), {
+                weakSelf?.tableView.reloadData()
+                weakSelf?.checkTableView()
+            })
+        }
+
+    }
+    
+    func checkTableView(){
+        if processes.count == 0{
             var noDataImageString = ""
             switch project.type {
             case .Normal:
