@@ -205,7 +205,9 @@ class Project: NSObject {
         if let locals = UIApplication.sharedApplication().scheduledLocalNotifications {
             for localNoti in locals {
                 if let dict = localNoti.userInfo {
+                    print("\(dict)")
                     if dict.keys.contains("id") && dict["id"] is String && (dict["id"] as! String) == "\(id)" {
+
                         // 取消通知
                         UIApplication.sharedApplication().cancelLocalNotification(localNoti)
                     }
@@ -401,8 +403,6 @@ class Project: NSObject {
 
     /// 加载所有的数据
     func selectID() -> Int?{
-        var projects : [Project] = [Project]()
-        
         // 1.获取查询语句
         let querySQL = "SELECT * FROM t_project WHERE name = '\(name)';"
         
@@ -415,33 +415,52 @@ class Project: NSObject {
         // 3.遍历数组
         for dict in array {
             let p = Project(dict: dict)
-            projects.append(p)
+            return p.id
         }
-        return projects[0].id
+        
+        return nil
+    }
+
+    ///查询是否同名
+    func nameIsVailed() -> Bool{
+        // 1.获取查询语句
+        let querySQL = "SELECT * FROM t_project WHERE name = '\(name)';"
+        
+        // 2.执行查询语句
+        guard let array = SQLiteManager.shareIntance.querySQL(querySQL) else {
+            print("查询所有Project数据失败")
+            return false
+        }
+        
+        // 3.遍历数组
+        if array.count == 0{
+            return true
+        }else{
+            return false
+        }
     }
     
     ///插入本项目
     func insertProject() -> Bool{
-        //添加推送
-        addNotification()
-        
         // 1.获取插入的SQL语句
         let insertSQL = "INSERT INTO t_project (name, type, beginTime, endTime, unit, total, complete, rest) VALUES ('\(name)', '\(type.rawValue)', '\(beginTime)', '\(endTime)', '\(unit)', '\(total)', '\(complete)', '\(rest)');"
 
         // 2.执行SQL语句
         if SQLiteManager.shareIntance.execSQL(insertSQL) {
             print("插入新项目成功")
-            
+
             if let selectid = selectID(){
                 id = selectid
                 //保存映射关系
                 saveTags()
+                //添加推送
+                addNotification()
                 return true
             }else{
                 print("保存映射失败")
                 return false
             }
-            
+
         }else{
             print("插入新项目失败")
             return false

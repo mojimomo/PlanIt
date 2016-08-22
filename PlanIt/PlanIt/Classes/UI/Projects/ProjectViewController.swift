@@ -11,6 +11,7 @@ import Popover
 
 class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate ,UIGestureRecognizerDelegate, EditProjectTableViewDelegate{
 
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var addProjectButton: UIButton!
     @IBOutlet weak var tagsBarButton: UIBarButtonItem!
     @IBOutlet weak var projectTableView: UITableView!{
@@ -149,12 +150,36 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     // MARK: - Func
-
-func toggle() {
-    UIView.animateWithDuration(2) {
-        self.navigationController?.navigationBarHidden = self.navigationController?.navigationBarHidden == false
+    func toggle() {
+        UIView.animateWithDuration(2) {
+            self.navigationController?.navigationBarHidden = self.navigationController?.navigationBarHidden == false
+        }
     }
-}
+    
+    private func checkTableView(){
+        //添加统计label
+        notDataImageView?.removeFromSuperview()
+        projectTableView?.tableFooterView = nil
+        if projects.count != 0{
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100 + 100))
+            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100))
+            countLabel.text = "\(projects.count)个项目"
+            countLabel.font = projectCountsFont
+            countLabel.textColor = projectCountsFontColor
+            countLabel.textAlignment = .Center
+            countLabel.backgroundColor = UIColor.clearColor()
+            footerView.addSubview(countLabel)
+            projectTableView?.tableFooterView = footerView
+        }else{
+            let count = UInt32(noDataImageString.count)
+            let index = Int(arc4random() % count)
+            notDataImageView = UIImageView(image: UIImage(named: noDataImageString[index]))
+            //获取导航栏高度
+            notDataImageView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - navBarHeight - rectStatusHeight) / 2 - navBarHeight - rectStatusHeight)
+            self.projectTableView?.addSubview(notDataImageView)
+        }
+    }
+    
     ///打开菜单
     func handleCallOptions(){
         print("打开菜单页面")
@@ -286,34 +311,22 @@ func toggle() {
             notBeginedProjects = qsortProjectByBeginTime(notBeginedProjects)
             projects = projects + notBeginedProjects
         }
-        
-        //添加统计label
-        notDataImageView?.removeFromSuperview()
-        if projects.count != 0{
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100 + 100))
-            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100))
-            countLabel.text = "\(projects.count)个项目"
-            countLabel.font = projectCountsFont
-            countLabel.textColor = projectCountsFontColor
-            countLabel.textAlignment = .Center
-            countLabel.backgroundColor = UIColor.clearColor()
-            footerView.addSubview(countLabel)
-            projectTableView.tableFooterView = footerView
-        }else{
-            projectTableView.tableFooterView = nil
-            let count = UInt32(noDataImageString.count)
-            let index = Int(arc4random() % count)
-            notDataImageView = UIImageView(image: UIImage(named: noDataImageString[index]))
-            //获取导航栏高度
-            notDataImageView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - navBarHeight - rectStatusHeight) / 2 - navBarHeight - rectStatusHeight)
-            self.projectTableView.addSubview(notDataImageView)
-        }
+
     }
     
     ///更新表格
     func updateTable(){
-        loadData()
-        projectTableView.reloadData()
+        self.indicator.hidden = false
+        self.indicator.startAnimating()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            self.loadData()
+            dispatch_async(dispatch_get_main_queue()){
+                self.indicator.stopAnimating()
+                self.projectTableView.reloadData()
+                self.checkTableView()
+                self.indicator.hidden = true
+            }
+        }
     }
     
     ///长按响应函数
@@ -413,7 +426,7 @@ func toggle() {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        checkTableView()
         //判断是否第一次打开此页面
         if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchProjectView") as Bool!) == false){
             print("第一次打开项目页面")
@@ -703,11 +716,26 @@ func toggle() {
                 }
             //项目完成
             }else if projects[indexPath.section].isFinished == .Finished{
-                callAlertAsk("是否确定删除该项目？", okHandler: {(UIAlertAction) -> Void in
+                let alertController = UIAlertController(title: "确认删除", message: "无法撤销删除操作", preferredStyle: .Alert)
+                //创建UIAlertAction 确定按钮
+                let alerActionOK = UIAlertAction(title: "取消", style: .Default, handler: nil)
+                //创建UIAlertAction 取消按钮
+                let alerActionCancel = UIAlertAction(title: "确定", style: .Destructive, handler:  {(UIAlertAction) -> Void in
                     self.projects[indexPath.section].deleteProject()
                     self.callAlertSuccess("删除成功!")
                     self.updateTable()
-                    }, cancelandler: nil, completion: nil)
+                })
+                //添加动作
+                alertController.addAction(alerActionOK)
+                alertController.addAction(alerActionCancel)
+                
+                if let popoverPresentationController = alertController.popoverPresentationController {
+                    popoverPresentationController.sourceView = self.view
+                    popoverPresentationController.sourceRect =  CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+                }
+                //显示alert
+                self.presentViewController(alertController, animated: true, completion: nil)
+
             }else if projects[indexPath.section].isFinished == .NotBegined{
                 var type = ""
                 switch projects[indexPath.section].type{

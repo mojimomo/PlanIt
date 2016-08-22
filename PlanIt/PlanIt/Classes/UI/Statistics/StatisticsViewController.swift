@@ -251,7 +251,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             nextButton.enabled = false
             //画表格
             loadProcessData()
-            drawLineChart()
             updateUI()
             
         }
@@ -351,7 +350,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         }
         changeButtonEnabled()
         loadChartData()
-        drawLineChart()
     }
     
     ///下一个
@@ -463,7 +461,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         default:break
         }
         loadProcessData()
-        drawLineChart()
     }
     
     ///点击点开菜单
@@ -561,12 +558,23 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
     }
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
     ///读取进度数据
     func loadProcessData(){
-        //数据库加载数据
-        processDates = ProcessDate().loadData(project.id)
-        //加载表格数据
-        loadChartData()
+        self.indicator.hidden = false
+        self.indicator.startAnimating()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            //数据库加载数据
+            self.processDates = ProcessDate().loadData(self.project.id)
+            //加载表格数据
+            self.loadChartData()
+            dispatch_async(dispatch_get_main_queue()){
+                self.indicator.stopAnimating()
+                self.drawLineChart()
+                self.indicator.hidden = true
+            }
+        }
      }
     
     
@@ -898,7 +906,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         //更改表格
         changeButtonEnabled()
         loadChartData()
-        drawLineChart()
     }
 }
 

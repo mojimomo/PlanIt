@@ -327,12 +327,26 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     
     ///删除项目
     func deleteProject(){
-        callAlertAsk("是否确定删除该项目？", okHandler: { (UIAlertAction) -> Void in
+        let alertController = UIAlertController(title: "确认删除", message: "无法撤销删除操作", preferredStyle: .Alert)
+        //创建UIAlertAction 确定按钮
+        let alerActionOK = UIAlertAction(title: "取消", style: .Default, handler: nil)
+        //创建UIAlertAction 取消按钮
+        let alerActionCancel = UIAlertAction(title: "确定", style: .Destructive, handler:  {(UIAlertAction) -> Void in
             self.project.deleteProject()
             self.dismissViewControllerAnimated(true) { () -> Void in
                 self.delegate?.goBackAct(.DeleteSucceess)
             }
-            }, cancelandler: nil, completion: nil)
+        })
+        //添加动作
+        alertController.addAction(alerActionOK)
+        alertController.addAction(alerActionCancel)
+        
+        if let popoverPresentationController = alertController.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceRect =  CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+        }
+        //显示alert
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     //MARK: - Func
@@ -343,6 +357,10 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             return
         }else{
             project.name = projectName
+            if !project.nameIsVailed(){
+                callAlert("提交错误",message: "项目名称不能重复!")
+                return
+            }
         }
             
         if projectBeginTime != "" && projectEndTime != ""{
