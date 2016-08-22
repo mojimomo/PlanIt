@@ -218,8 +218,8 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 needLabel.text = "余下每天需完成"
                 let days = NSDate().daysToEndDate(project.endTimeDate) + 1
                 let times = (project.rest / Double(days)).toIntCarry()
-                needFinishLabel.text = "\(times) \(project.unit)"
-                needFinishLabel.changeTextAttributeByString(" \(project.unit)", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
+                needFinishLabel.text = "\(times) " + project.unit
+                needFinishLabel.changeTextAttributeByString(project.unit, font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
             }else if project.type == .Punch && project.isFinished == .NotFinished{
                 needLabel.text = "余下每天需打卡"
                 let days = NSDate().daysToEndDate(project.endTimeDate) + 1
@@ -231,16 +231,16 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 needFinishLabel.hidden = true
             }
             //已完成
-            doneLabel.text = "\(Int(project.complete)) / \(Int(project.total)) \(project.unit)"
-            doneLabel.changeTextAttributeByString(" / \(Int(project.total)) \(project.unit)", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
+            doneLabel.text = "\(Int(project.complete)) / \(Int(project.total)) " + project.unit
+            doneLabel.changeTextAttributeByString(" / \(Int(project.total)) " + project.unit, font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
             //百分比
-            pieChartView.angle = Double(project.percent) / 100 * 360
+            pieChartView.angle = Double(project.percent) / 100 * 360            
             percentLabel.text = "\(Int(project.percent))%"
             //距离截止
             percentLabel.sizeToFit()
-            endTimeLabel.text = "\(project.endTime)截止"
+            endTimeLabel.text = project.endTime + "截止"
             //设置表格标题
-            chartTitle = "\(searchDate.FormatToStringYYYYMM())"
+            chartTitle = searchDate.FormatToStringYYYYMM()
             
             if searchDate.FormatToStringYYYYMM() == project.beginTimeDate.FormatToStringYYYYMM(){
                 backButton.enabled = false
