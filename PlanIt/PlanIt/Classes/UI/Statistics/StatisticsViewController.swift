@@ -216,13 +216,13 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             needFinishLabel.hidden = false
             if project.type == .Normal && project.isFinished == .NotFinished{
                 needLabel.text = "余下每天需完成"
-                let days = NSDate().daysToEndDate(project.endTimeDate) + 1
+                let days = NSDate().daysToEndDate(project.endTimeDate)
                 let times = (project.rest / Double(days)).toIntCarry()
                 needFinishLabel.text = "\(times) " + project.unit
                 needFinishLabel.changeTextAttributeByString(project.unit, font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
             }else if project.type == .Punch && project.isFinished == .NotFinished{
                 needLabel.text = "余下每天需打卡"
-                let days = NSDate().daysToEndDate(project.endTimeDate) + 1
+                let days = NSDate().daysToEndDate(project.endTimeDate)
                 let times = (project.rest / Double(days)).toIntCarry()
                 needFinishLabel.text = "\(times) 次"
                 needFinishLabel.changeTextAttributeByString(" 次", font: UIFont.systemFontOfSize(17), color: UIColor.colorFromHex("#9D9D9D"))
@@ -491,7 +491,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 endDate = NSDate()
             }
             if beginDate != nil && endDate != nil {
-                let days = beginDate!.daysToEndDate(endDate!) + 1
+                let days = beginDate!.daysToEndDate(endDate!)
                 var date = beginDate!.increaseDays(-1)!
                 for _ in 0 ..< days  {
                     if processDates.count == 0 {
@@ -509,7 +509,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                     date = date.increase1Day()!
                 }
             }
-            chartTitle = "\(searchDate.FormatToStringYYYYMM())"
+
             //按照周统计
         }else if lineChartType == .Week{
             let beginDate = project.beginTimeDate
@@ -553,7 +553,6 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                     date = date.increase1Month()!
                 }
             }
-            chartTitle = "\(searchDate.FormatToStringYYYY())"
         }
 
     }
@@ -565,15 +564,15 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.indicator.hidden = false
         self.indicator.startAnimating()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            weak var weakSelf = self
+            [weak self] in
             //数据库加载数据
-            weakSelf?.processDates = ProcessDate().loadData(self.project.id)
+            self?.processDates = ProcessDate().loadData(self!.project.id)
             //加载表格数据
-            weakSelf?.loadChartData()
+            self?.loadChartData()
             dispatch_async(dispatch_get_main_queue()){
-                weakSelf?.indicator.stopAnimating()
-                weakSelf?.drawLineChart()
-                weakSelf?.indicator.hidden = true
+                self?.indicator.stopAnimating()
+                self?.drawLineChart()
+                self?.indicator.hidden = true
             }
         }
      }
@@ -595,6 +594,13 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         graphView.backgroundColor = UIColor.whiteColor()
         graphView.setData(chartData, withLabels: chartLabel)
         self.lineChartView.insertSubview(graphView, belowSubview: label)
+        //写标题
+        if lineChartType == .Day{
+            chartTitle = searchDate.FormatToStringYYYYMM()
+        }else if lineChartType == .Month{
+            chartTitle = searchDate.FormatToStringYYYY()
+        }
+        //移动到今天
         moveToToday()
         addVisualEffectView()
     }
@@ -906,7 +912,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         self.popover.dismiss()
         //更改表格
         changeButtonEnabled()
-        loadChartData()
+        loadProcessData()
     }
 }
 

@@ -355,23 +355,23 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     ///完成新增项目
     private func addNewProject(){
         if projectName == "" {
-            callAlert("提交错误",message: "项目名称不能为空!")
+            callAlert("提交错误",message: "项目名称不能为空")
             return
         }else{
             project.name = projectName
             if !project.nameIsVailed(){
-                callAlert("提交错误",message: "项目名称不能重复!")
+                callAlert("提交错误",message: "项目名称不能重复")
                 return
             }
         }
             
         if projectBeginTime != "" && projectEndTime != ""{
             if self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime) == false{
-                self.callAlert("修改错误",message: "开始结束时间不正确!")
+                self.callAlert("修改错误",message: "开始结束时间不正确")
                 return
             }
         }else{
-            callAlert("提交错误",message: "时间不能为空!")
+            callAlert("提交错误",message: "时间不能为空")
             return
         }
         
@@ -380,7 +380,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         case .NoRecord: break
         default:
             if projectUnit == ""{
-                callAlert("提交错误",message: "项目任务单位不能为空!")
+                callAlert("提交错误",message: "项目任务单位不能为空")
                 return
             }else{
                 project.unit = projectUnit
@@ -389,7 +389,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             if  projectTotal != 0 {
                 project.setNewProjectTotal(projectTotal)
             }else{
-                callAlert("提交错误",message: "项目任务总量不能为空或0!")
+                callAlert("提交错误",message: "项目任务总量不能为空或0")
                 return
             }
         }
@@ -410,13 +410,13 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 return
             }
         }
-        callAlert("提交失败",message: "新建项目失败!")
+        callAlert("提交失败",message: "新建项目失败")
     }
    
     ///完成修改项目
     private func finishEditProject(){
         if projectName == "" {
-            callAlert("修改错误",message: "项目名称不能为空!")
+            callAlert("修改错误",message: "项目名称不能为空")
             return
         }else{
             project.name = projectName
@@ -424,11 +424,11 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         
         if projectBeginTime != "" && projectEndTime != ""{
             if self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime) == false{
-                self.callAlert("修改错误",message: "开始结束时间不正确!")
+                self.callAlert("修改错误",message: "开始结束时间不正确")
                 return
             }
         }else{
-            callAlert("修改错误",message: "时间不能为空!")
+            callAlert("修改错误",message: "时间不能为空")
             return
         }
         project.type = projectType
@@ -436,19 +436,19 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         case .NoRecord: break
         default:
             if projectUnit == ""{
-                callAlert("修改错误",message: "项目任务单位不能为空!")
+                callAlert("修改错误",message: "项目任务单位不能为空")
                 return
             }else{
                 project.unit = projectUnit
             }
             if  projectTotal != 0{
                 if !project.editProjectTotal(projectTotal) {
-                    callAlert("修改错误",message: "项目任务总量不能小于已完成量!")
+                    callAlert("修改错误",message: "项目任务总量不能小于已完成量")
                     return
                 }
                 project.setNewProjectTime(projectBeginTime, endTime: projectEndTime)
             }else{
-                callAlert("修改错误",message: "项目任务总量不能为0!")
+                callAlert("修改错误",message: "项目任务总量不能为0")
                 return
             }
         }
@@ -461,7 +461,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 return
             }
         }
-        callAlert("修改失败",message: "新建项目失败!")
+        callAlert("修改失败",message: "新建项目失败")
     }
 
     
@@ -507,7 +507,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                     let rect = tableView.rectForRowAtIndexPath(indexPath)
                     editBeginTime(rect)
                 }else{
-                    callAlert("无法修改", message: "项目已添加进度！")
+                    callAlert("无法修改", message: "项目已添加进度")
                 }
             }else if tableState == .Add{
                 let rect = tableView.rectForRowAtIndexPath(indexPath)

@@ -25,6 +25,10 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet var isNeedLocalNotifiicationSwitch: UISwitch!
     var isNeedLocalNotifiication = false
+    
+    //是否安装支付宝
+    var isAliayInstalled = UIApplication.sharedApplication().canOpenURL(NSURL(string: "alipay://")!)
+    
     //几天后推送
     var day : Int{
         get{
@@ -190,12 +194,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             print("赞赏我们")
             //支付宝转账 url scheme
             let alipay = "alipayqr://platformapi/startapp?saId=10000007&qrcode=https://qr.alipay.com/apmiym1v5ya1dynlb5"
-            if UIApplication.sharedApplication().canOpenURL(NSURL(string: "alipay://")!) {
+            if  isAliayInstalled {
                 print("已安装支付宝")
                 UIApplication.sharedApplication().openURL(NSURL(string: alipay)!)
-            }
-            else {
-                self.showNotFoundAlipayAlert()
             }
         }
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -313,6 +314,12 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             self.localNotifiicationLabel.text = "已开启"
         }else{
             self.localNotifiicationLabel.text = "已停用"
+        }
+        
+        if !isAliayInstalled{
+            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2)){
+                cell.hidden = true
+            }
         }
     }
     

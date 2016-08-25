@@ -750,7 +750,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     type = "标记完成"
                 default: break
                 }
-                callAlert("项目未开始",message: "修改项目开始时间以\(type)！")
+                callAlert("项目未开始",message: "修改项目开始时间以\(type)")
             }
         }
     }
@@ -1131,11 +1131,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func goBackAct(state: EditProjectBackState){
         switch state{
         case .AddSuccess:
-            callAlertSuccess("创建成功!")
+            callAlertSuccess("创建成功")
 //        case .DeleteSucceess:
 //            callAlertSuccess("删除成功!")
         case .EditSucceess:
-            callAlertSuccess("编辑成功!")
+            callAlertSuccess("编辑成功")
         default: break
         }
     }

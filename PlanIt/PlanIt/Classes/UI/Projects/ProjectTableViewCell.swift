@@ -56,7 +56,7 @@ class ProjectTableViewCell: RoundTableviewCell{
                         let days = project.beginTimeDate.compareCurrentTime()
                         projectName = "距项目开始还有 " + days
                     }else{
-                        let days = NSDate().daysToEndDate(project.endTimeDate) + 1
+                        let days = NSDate().daysToEndDate(project.endTimeDate)
                         projectName = "余下每天需完成 \((project.rest / Double(days)).toIntCarry()) " + project.unit
                     }
                 case .Punch:
@@ -67,8 +67,8 @@ class ProjectTableViewCell: RoundTableviewCell{
                         let days = project.beginTimeDate.compareCurrentTime()
                         projectName = "距项目开始还有 " + days
                     }else{
-                        let days = NSDate().daysToEndDate(project.endTimeDate) + 1
-                        projectName = "剩余 \(days) 天需打卡 \(Int(project.rest)) 次"
+                        let days = project.endTimeDate.compareCurrentTime()
+                        projectName = "剩余 " + days + " 需打卡 \(Int(project.rest)) 次"
                     }
                 default:break
                 }
