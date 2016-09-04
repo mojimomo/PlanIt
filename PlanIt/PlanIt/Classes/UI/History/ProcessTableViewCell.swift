@@ -20,10 +20,10 @@ class ProcessTableViewCell: UITableViewCell {
             doneLabel?.text = "\(Int(process.done))" + " " + unit
             if process.remark == ""{
                 remarksLabel?.text = " "
-                remarksLabel.font = UIFont(name: "PingFangSC-Thin", size: 1)
+                remarksLabel.font = UIFont.systemFontOfSize(1, weight: UIFontWeightUltraLight)
             }else{
                 remarksLabel?.text = "备注: " + process.remark
-                remarksLabel.font = UIFont(name: "PingFangSC-Thin", size: 10)
+                remarksLabel.font = UIFont.systemFontOfSize(10, weight: UIFontWeightThin)
             }
         }
     }

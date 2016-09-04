@@ -34,22 +34,31 @@ let notBeginFontColor = UIColor.colorFromHex("#E6E4E1")
 let overTimeFontColor = UIColor.colorFromHex("#EC4A4D")
 ///导航栏字体和颜色
 let navigationTitleAttribute = [ NSForegroundColorAttributeName: navigationFontColor,
-                       NSFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 17.0)! ]
+                       NSFontAttributeName: UIFont.systemFontOfSize(17) ]
 ///引导页字体和颜色
 let guideTitleAttribute = [ NSForegroundColorAttributeName: UIColor.whiteColor(),
-                                 NSFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18.0)! ]
+                                 NSFontAttributeName: UIFont.systemFontOfSize(18)]
 ///菜单字体和颜色
 let MenuAttribute = [ NSForegroundColorAttributeName: navigationFontColor,
-    NSFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 17.0)! ]
+    NSFontAttributeName:  UIFont.systemFontOfSize(17) ]
 
 ///项目计算字体颜色
 let projectCountsFontColor = UIColor ( red: 205 / 255, green: 205 / 255, blue:205 / 255, alpha: 1.0 )
 ///项目计算字体和颜色
-let projectCountsFont = UIFont(name: "PingFangSC-Light", size: 14)
+let projectCountsFont = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
+
 ///tag字体和颜色
-let tagFont = UIFont(name: "PingFangSC-Light", size: 16)
+let tagFont = UIFont.systemFontOfSize(16, weight: UIFontWeightLight)
+
 ///tag字体和颜色
-let tagFontinstatistics = UIFont(name: "PingFangSC-Light", size: 12)
+let goButtonFont = UIFont.systemFontOfSize(18, weight: UIFontWeightLight)
+
+///tag字体和颜色
+let muneTableFont = UIFont.systemFontOfSize(17, weight: UIFontWeightLight)
+
+///tag字体和颜色
+let tagFontinstatistics = UIFont.systemFontOfSize(12, weight: UIFontWeightLight)
+
 ///未开始字体颜色
 let switchColor = UIColor.colorFromHex("#FE6158")
 

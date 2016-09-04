@@ -58,7 +58,7 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
         goButton.setTitle("开始体验", forState: .Normal)
         goButton.setTitleColor(UIColor.whiteColor(),forState: .Normal) //普通状态下文字的颜色
         goButton.setTitleColor(UIColor.whiteColor(),forState: .Highlighted) //触摸状态下文字的颜色
-        goButton.titleLabel?.font = UIFont(name: "PingFangSC-Light", size: 18.0)!
+        goButton.titleLabel?.font = goButtonFont
         goButton.addTarget(self, action: #selector(GuideViewController.handleGoMain), forControlEvents: .TouchUpInside)
         guideSocrollView.addSubview(goButton)
         //guideSocrollView.bringSubviewToFront(goButton)

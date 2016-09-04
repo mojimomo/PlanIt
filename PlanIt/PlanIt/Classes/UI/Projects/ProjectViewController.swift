@@ -885,7 +885,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
             cell.textLabel?.text = self.texts[indexPath.row]
             cell.textLabel?.textColor = navigationFontColor
-            cell.textLabel?.font = UIFont(name: "PingFangSC-Light", size: 17.0)!
+            cell.textLabel?.font = muneTableFont
             if indexPath.row == 0{
                 let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 65, y: 14, width: 40, height: MenuTableViewHeight))
                 isShowAllSwitch.onTintColor = switchColor
