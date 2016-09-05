@@ -878,7 +878,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
         cell.textLabel?.text = self.texts[indexPath.row]
         cell.textLabel?.textColor = navigationFontColor
-        cell.textLabel?.font = UIFont(name: "PingFangSC-Light", size: 17.0)!
+        cell.textLabel?.font = UIFont.systemFontOfSize(17, weight: UIFontWeightLight)
         cell.selectionStyle = .None
         if indexPath.row == selectRow{
             cell.accessoryType = .Checkmark
