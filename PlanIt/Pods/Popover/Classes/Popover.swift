@@ -191,7 +191,12 @@ public class Popover: UIView {
     self.contentView.backgroundColor = UIColor.clearColor()
     self.contentView.layer.cornerRadius = self.cornerRadius
     self.contentView.layer.masksToBounds = true
-    self.arrowShowPoint = point
+    if popoverType == .Down{
+        self.arrowShowPoint = CGPointMake(point.x, point.y + 5)
+    }else{
+        self.arrowShowPoint = CGPointMake(point.x, point.y - 5)
+    }
+    
     self.show()
   }
 

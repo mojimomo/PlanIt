@@ -336,6 +336,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let indexPath = self.projectTableView.indexPathForRowAtPoint(point)
             if indexPath != nil {
                 let cell = projectTableView.cellForRowAtIndexPath(indexPath!) as! ProjectTableViewCell
+                if cell.project.isFinished == .Finished{
+                    return
+                }
                 for subView in cell.subviews{
                     if subView.tag == addProcessButtonTag {
                         if subView.pointInView(subView.convertPoint(point, fromView: self.projectTableView)) == false{
