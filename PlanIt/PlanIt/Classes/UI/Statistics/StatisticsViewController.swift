@@ -350,6 +350,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         }
         changeButtonEnabled()
         loadChartData()
+        drawLineChart()
     }
     
     ///下一个
@@ -491,7 +492,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 endDate = NSDate()
             }
             if beginDate != nil && endDate != nil {
-                let days = beginDate!.daysToEndDate(endDate!)
+                let days = beginDate!.daysToEndDate(endDate!) + 1
                 var date = beginDate!.increaseDays(-1)!
                 for _ in 0 ..< days  {
                     if processDates.count == 0 {
@@ -848,7 +849,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     func goBackAct(state: EditProjectBackState){
         switch state {
         case .EditSucceess:
-            callAlertSuccess("编辑成功!")
+            callAlertSuccess("编辑成功")
         case .DeleteSucceess:
             self.navigationController?.popToRootViewControllerAnimated(true)
         default:break

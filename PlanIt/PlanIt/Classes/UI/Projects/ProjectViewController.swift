@@ -429,7 +429,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        checkTableView()
+        //checkTableView()
         //判断是否第一次打开此页面
         if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchProjectView") as Bool!) == false){
             print("第一次打开项目页面")
