@@ -762,6 +762,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func addNewProject(){
         //创建后返回不显示已完成项目
         isShowFinished = false
+        selectTag = nil
         let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
         addNewProjectViewController.title = "新增项目"
         addNewProjectViewController.tableState = .Add
