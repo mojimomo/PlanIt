@@ -7,17 +7,37 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 enum EditProjectTableState{
-    case Add, Edit
+    case add, edit
 }
 
 enum EditProjectBackState{
-    case AddSuccess, EditSucceess, DeleteSucceess
+    case addSuccess, editSucceess, deleteSucceess
 }
 
 protocol EditProjectTableViewDelegate: class{
-    func goBackAct(state: EditProjectBackState)
+    func goBackAct(_ state: EditProjectBackState)
 }
 
 class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate{
@@ -96,13 +116,13 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             totalTextField?.text = "\(Int(newValue))"
         }
     }
-    private struct storyBoard {
+    fileprivate struct storyBoard {
         static let addFinishEditButton = "新增项目"
         static let deleteFinishEditButton = "删除项目"
     }
     
     ///当前表状态（修改状态、新增状态）
-    var tableState: EditProjectTableState = .Add
+    var tableState: EditProjectTableState = .add
     
     ///当前项目
     var project = Project(){
@@ -119,36 +139,36 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     
 
     ///项目类别
-    var projectType = ProjectType.Normal{
+    var projectType = ProjectType.normal{
         didSet{
             //根据不同项目类别设置不同的状态
             switch projectType{
-            case .Normal:
+            case .normal:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(false, animated: false)
-                punchCell.hidden = false
-                taskUnitCell.hidden = false
-                taskTotalCell.hidden = false
+                punchCell.isHidden = false
+                taskUnitCell.isHidden = false
+                taskTotalCell.isHidden = false
                 
 //                punchSwitch.enabled = true
 //                unitTextField.enabled = true
 //                totalTextField.enabled = true
-            case .Punch:
+            case .punch:
                 recordSwitch?.setOn(true, animated: false)
                 punchSwitch?.setOn(true, animated: false)
-                punchCell.hidden = false
-                taskUnitCell.hidden = false
-                taskTotalCell.hidden = false
+                punchCell.isHidden = false
+                taskUnitCell.isHidden = false
+                taskTotalCell.isHidden = false
                 
 //                punchSwitch.enabled = true
 //                unitTextField.enabled = true
 //                totalTextField.enabled = true
-            case .NoRecord:
+            case .noRecord:
                 recordSwitch?.setOn(false, animated: false)
                 punchSwitch?.setOn(false, animated: false)
-                punchCell.hidden = true
-                taskUnitCell.hidden = true
-                taskTotalCell.hidden = true
+                punchCell.isHidden = true
+                taskUnitCell.isHidden = true
+                taskTotalCell.isHidden = true
                 
 //                punchSwitch.enabled = false
 //                unitTextField.enabled = false
@@ -160,31 +180,31 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
 
     //MARK: - Action
     ///是否改变项目类型
-    @IBAction func changeIsRecorded(sender: UISwitch) {
-        if sender.on{
-            projectType = .Normal
+    @IBAction func changeIsRecorded(_ sender: UISwitch) {
+        if sender.isOn{
+            projectType = .normal
         }else{
-            projectType = .NoRecord
+            projectType = .noRecord
         }
         updateUI()
     }
     
     ///是否改变签到任务
-    @IBAction func changeIsPunch(sender: UISwitch) {
-        if sender.on{
-            projectType = .Punch
+    @IBAction func changeIsPunch(_ sender: UISwitch) {
+        if sender.isOn{
+            projectType = .punch
             if unitTextField.text == "" && totalTextField.text == ""{
                 unitTextField.text = "次"
                 let days = projectBeginTime.FormatToNSDateYYYYMMMMDD()!.daysToEndDate(projectEndTime.FormatToNSDateYYYYMMMMDD()!)
                 totalTextField.text = "\(days + 1)"
             }            
         }else{
-            projectType = .Normal
+            projectType = .normal
         }
     }
 
     ///观察是否超出字符
-    func textFiledEditChanged(sender: NSNotification){
+    func textFiledEditChanged(_ sender: Notification){
         let textField = sender.object as! UITextField
         let kMaxLength = maxLengthDict[textField.tag] ?? 0
         let toBeString = textField.text!
@@ -193,35 +213,35 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if selectedRange == nil {
             if (toBeString.characters.count > kMaxLength){
-                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequenceAtIndex(kMaxLength)
+                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequence(at: kMaxLength)
                 if rangeIndex.length == 1
                 {
-                    textField.text = (toBeString as NSString).substringToIndex(kMaxLength)
+                    textField.text = (toBeString as NSString).substring(to: kMaxLength)
                 }
                 else
                 {
-                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequencesForRange(NSMakeRange(0, kMaxLength))
-                    textField.text = (toBeString as NSString).substringToIndex(rangeRange.length)
+                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequences(for: NSMakeRange(0, kMaxLength))
+                    textField.text = (toBeString as NSString).substring(to: rangeRange.length)
                 }
             }
         }
     }
     
     //是否改变开始时间
-    func editBeginTime(rect: CGRect) {
+    func editBeginTime(_ rect: CGRect) {
         if IS_IOS8{
             //创建datepicker控件
             let datePicker = UIDatePicker()
             //设置模式为日期模式
-            datePicker.datePickerMode = .Date
+            datePicker.datePickerMode = .date
             //设置日期
-            datePicker.setDate(self.project.beginTimeDate, animated: false)
+            datePicker.setDate(self.project.beginTimeDate as Date, animated: false)
             //创建UIAlertController
-            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
             alerController.view.addSubview(datePicker)
             
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
                 self.projectBeginTime = dateString
             })
@@ -239,17 +259,17 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
                 //配置位置
-                datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height)
-                datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                datePicker.frame = CGRect(x: 0, y: 0, width: alerController.view.bounds.width ,height: alerController.view.bounds.height)
+                datePicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 
             }else{
                 //配置位置
-                datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 50)
-                datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                datePicker.frame = CGRect(x: 0, y: 0, width: alerController.view.bounds.width ,height: alerController.view.bounds.height - 50)
+                datePicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             }
             
             //显示alert
-            self.presentViewController(alerController, animated: true, completion: { () -> Void in
+            self.present(alerController, animated: true, completion: { () -> Void in
                 
             })
             
@@ -258,20 +278,20 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     }
     
     ///是否改变结束时间
-    func editEndTime(rect: CGRect) {
+    func editEndTime(_ rect: CGRect) {
         if IS_IOS8{
             //创建datepicker控件
             let datePicker = UIDatePicker()
             //设置模式为日期模式
-            datePicker.datePickerMode = .Date
+            datePicker.datePickerMode = .date
             //设置日期
             datePicker.setDate(self.project.endTimeDate.increaseDays(-1)!, animated: false)
             //创建UIAlertController
-            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
             alerController.view.addSubview(datePicker)
         
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
                 weak var weakSelf = self
                 weakSelf?.projectEndTime = dateString
@@ -290,18 +310,18 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
                 //配置位置
-                datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height)
-                datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                datePicker.frame = CGRect(x: 0, y: 0, width: alerController.view.bounds.width ,height: alerController.view.bounds.height)
+                datePicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 
             }else{
                 //配置位置
-                datePicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 50)
-                datePicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                datePicker.frame = CGRect(x: 0, y: 0, width: alerController.view.bounds.width ,height: alerController.view.bounds.height - 50)
+                datePicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             }
             
             
             //显示alert
-            self.presentViewController(alerController, animated: true, completion: { () -> Void in
+            self.present(alerController, animated: true, completion: { () -> Void in
                 
             })
         }
@@ -310,33 +330,33 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
 
     
     ///完成编辑
-    @IBAction func finishEdit(sender: AnyObject) {
+    @IBAction func finishEdit(_ sender: AnyObject) {
         switch self.tableState{
-        case .Add:
+        case .add:
             addNewProject()
-        case .Edit:
+        case .edit:
             finishEditProject()
         }
     }
  
     ///返回上个页面
-    func dismiss(){
-        self.dismissViewControllerAnimated(true) { () -> Void in
+    func handleDismiss(){
+        self.dismiss(animated: true) { () -> Void in
             
         }
     }
     
     ///删除项目
     func deleteProject(){
-        let alertController = UIAlertController(title: "确认删除", message: "无法撤销删除操作", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "确认删除", message: "无法撤销删除操作", preferredStyle: .alert)
         //创建UIAlertAction 确定按钮
-        let alerActionOK = UIAlertAction(title: "取消", style: .Default, handler: nil)
+        let alerActionOK = UIAlertAction(title: "取消", style: .default, handler: nil)
         //创建UIAlertAction 取消按钮
-        let alerActionCancel = UIAlertAction(title: "确定", style: .Destructive, handler:  {(UIAlertAction) -> Void in
+        let alerActionCancel = UIAlertAction(title: "确定", style: .destructive, handler:  {(UIAlertAction) -> Void in
             weak var weakSelf = self
             weakSelf?.project.deleteProject()
-            weakSelf?.dismissViewControllerAnimated(true) { () -> Void in
-                weakSelf?.delegate?.goBackAct(.DeleteSucceess)
+            weakSelf?.dismiss(animated: true) { () -> Void in
+                weakSelf?.delegate?.goBackAct(.deleteSucceess)
             }
         })
         //添加动作
@@ -345,15 +365,15 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         
         if let popoverPresentationController = alertController.popoverPresentationController {
             popoverPresentationController.sourceView = self.view
-            popoverPresentationController.sourceRect =  CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+            popoverPresentationController.sourceRect =  CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
         }
         //显示alert
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - Func
     ///完成新增项目
-    private func addNewProject(){
+    fileprivate func addNewProject(){
         if projectName == "" {
             callAlert("提交错误",message: "项目名称不能为空")
             return
@@ -377,7 +397,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         
         project.type = projectType
         switch projectType{
-        case .NoRecord: break
+        case .noRecord: break
         default:
             if projectUnit == ""{
                 callAlert("提交错误",message: "项目任务单位不能为空")
@@ -398,15 +418,15 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 //callAlertAndBack("提交成功",message: "新建项目成功!")
 
                 switch project.type{
-                case .Punch: MobClick.event("1001")
-                case .Normal: MobClick.event("1002")
-                case .NoRecord: MobClick.event("1002")
+                case .punch: MobClick.event("1001")
+                case .normal: MobClick.event("1002")
+                case .noRecord: MobClick.event("1002")
                 default:break
                 }
                 
                 //返回
-                dismiss()
-                self.delegate?.goBackAct(.AddSuccess)
+                handleDismiss()
+                self.delegate?.goBackAct(.addSuccess)
                 return
             }
         }
@@ -414,7 +434,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     }
    
     ///完成修改项目
-    private func finishEditProject(){
+    fileprivate func finishEditProject(){
         if projectName == "" {
             callAlert("修改错误",message: "项目名称不能为空")
             return
@@ -433,7 +453,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         }
         project.type = projectType
         switch projectType{
-        case .NoRecord: break
+        case .noRecord: break
         default:
             if projectUnit == ""{
                 callAlert("修改错误",message: "项目任务单位不能为空")
@@ -455,8 +475,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         if project.check(){
             if(project.updateProject()){
                 //callAlertAndBack("修改成功",message: "修改项目成功!")
-                self.dismissViewControllerAnimated(true) { () -> Void in
-                    self.delegate?.goBackAct(.EditSucceess)
+                self.dismiss(animated: true) { () -> Void in
+                    self.delegate?.goBackAct(.editSucceess)
                 }
                 return
             }
@@ -466,7 +486,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
 
     
     ///更新界面
-    private func updateUI(){
+    fileprivate func updateUI(){
         self.tableView.reloadData()
         //self.tableView.setNeedsDisplay()
     }   
@@ -495,27 +515,27 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
 
     
     ///点击某个单元格触发的方法
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let beginTimeCellPath = NSIndexPath(forRow: 0, inSection: 1)
-        let endTimeCellPath = NSIndexPath(forRow: 1, inSection: 1)
-        let tagCellPath = NSIndexPath(forRow: 1, inSection: 0)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let beginTimeCellPath = IndexPath(row: 0, section: 1)
+        let endTimeCellPath = IndexPath(row: 1, section: 1)
+        let tagCellPath = IndexPath(row: 1, section: 0)
         switch indexPath{
         case beginTimeCellPath:
-            if  tableState == .Edit && project.isFinished != .Finished{
+            if  tableState == .edit && project.isFinished != .finished{
                 let processes = Process().loadData(project.id)
                 if processes.count == 0{
-                    let rect = tableView.rectForRowAtIndexPath(indexPath)
+                    let rect = tableView.rectForRow(at: indexPath)
                     editBeginTime(rect)
                 }else{
                     callAlert("无法修改", message: "项目已添加进度")
                 }
-            }else if tableState == .Add{
-                let rect = tableView.rectForRowAtIndexPath(indexPath)
+            }else if tableState == .add{
+                let rect = tableView.rectForRow(at: indexPath)
                 editBeginTime(rect)
             }
         case endTimeCellPath:
-            if project.isFinished != .Finished {
-                let rect = tableView.rectForRowAtIndexPath(indexPath)
+            if project.isFinished != .finished {
+                let rect = tableView.rectForRow(at: indexPath)
                 editEndTime(rect)
             }
         case tagCellPath:
@@ -536,7 +556,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             }
         default:break
         }
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //MARK: - View Controller Lifecycle
@@ -549,34 +569,34 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         unitTextField.tag = UITag.unitTextField
         totalTextField.delegate = self
         totalTextField.tag = UITag.totalTextField
-        unitTextField.autocorrectionType = .No
-        projectNameLabel.autocorrectionType = .No
+        unitTextField.autocorrectionType = .no
+        projectNameLabel.autocorrectionType = .no
         switch tableState{
-        case .Add:
+        case .add:
             //添加新增项目按钮
-         let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(EditProjectTableViewController.finishEdit(_:)))
+         let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .done, target: self, action: #selector(EditProjectTableViewController.finishEdit(_:)))
             self.navigationItem.rightBarButtonItem = addButton
             
             //新增返回按钮
-            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(EditProjectTableViewController.dismiss))
+            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .done, target: self, action: #selector(EditProjectTableViewController.handleDismiss))
             self.navigationItem.leftBarButtonItem = backButton
-        case .Edit:
+        case .edit:
             //添加新增项目按钮
-            let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(EditProjectTableViewController.finishEdit(_:)))
+            let addButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .done, target: self, action: #selector(EditProjectTableViewController.finishEdit(_:)))
             
             ///新增返回按钮
-            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(EditProjectTableViewController.dismiss))
+            let backButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .done, target: self, action: #selector(EditProjectTableViewController.handleDismiss))
             
             //新增删除按钮
-            let deleteButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .Done, target: self, action: #selector(EditProjectTableViewController.deleteProject))
+            let deleteButton = UIBarButtonItem(image: UIImage(named: "delete"), style: .done, target: self, action: #selector(EditProjectTableViewController.deleteProject))
             
             //按钮间的空隙
-            let gap = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil,
+            let gap = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil,
                 action: nil)
             gap.width = 10;
             
             //用于消除右边边空隙，要不然按钮顶不到最边上
-            let spacer = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil,
+            let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil,
                 action: nil)
             spacer.width = 0;
 
@@ -596,42 +616,42 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         }
 
         //初始化代码
-        let nowDate = NSDate()
+        let nowDate = Date()
         let nextDate = nowDate.increaseDays(7)!
         project.beginTime = nowDate.FormatToStringYYYYMMDD()
         project.endTime = nextDate.FormatToStringYYYYMMDD()
         beginTimeLabel?.text = project.beginTime
         endTimeLabel?.text = project.endTime
-        projectType = .Normal
+        projectType = .normal
         
-        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 25))
         self.tableView.sectionFooterHeight = 25
         self.tableView.sectionHeaderHeight = 0
 
         //添加lebel观察者
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(EditProjectTableViewController.textFiledEditChanged(_:)),name: UITextFieldTextDidChangeNotification ,object: projectNameLabel)
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(EditProjectTableViewController.textFiledEditChanged(_:)),name: UITextFieldTextDidChangeNotification ,object: unitTextField)
+        NotificationCenter.default.addObserver(self,selector:  #selector(EditProjectTableViewController.textFiledEditChanged(_:)),name: NSNotification.Name.UITextFieldTextDidChange ,object: projectNameLabel)
+        NotificationCenter.default.addObserver(self,selector:  #selector(EditProjectTableViewController.textFiledEditChanged(_:)),name: NSNotification.Name.UITextFieldTextDidChange ,object: unitTextField)
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         //删除观察者
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: projectNameLabel)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: unitTextField)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: projectNameLabel)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: unitTextField)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        //设置按钮标题
-        finishEditButton?.setTitle(finishEditButtonText, forState: .Normal)
-        if tableState == .Edit{
-            recordSwitch.enabled = false
-            punchSwitch.enabled = false
+        finishEditButton?.setTitle(finishEditButtonText, for: UIControlState())
+        if tableState == .edit{
+            recordSwitch.isEnabled = false
+            punchSwitch.isEnabled = false
         }
     }
     
     // MARK: - prepareForSegue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let ivc = segue.destinationViewController as? TagsViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let ivc = segue.destination as? TagsViewController {
             if let identifier = segue.identifier{
                 switch identifier{
                 case "showTags":
@@ -642,15 +662,15 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         }
     }
     
-    func projectForTagsView(sneder: TagsViewController) -> Project? {
+    func projectForTagsView(_ sneder: TagsViewController) -> Project? {
         return project
     }
 
     
     // MARK: - UITextFieldDelegate
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let oldText: NSString = textField.text!
-        let newText: NSString = oldText.stringByReplacingCharactersInRange(range, withString: string)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let oldText: NSString = textField.text! as NSString
+        let newText: NSString = oldText.replacingCharacters(in: range, with: string) as NSString
 
         switch textField.tag{
 //        case UITag.projectNameLabel:

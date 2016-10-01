@@ -17,7 +17,7 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
         
         //返回button
-        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(AboutViewController.dismiss))
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(AboutViewController.handleDismiss))
         self.navigationItem.leftBarButtonItem = backButtom
         
         //app版本label
@@ -31,24 +31,24 @@ class AboutViewController: UIViewController {
         //也而（位置3长度2）颜色字体设置
         string.addAttribute(NSForegroundColorAttributeName, value: UIColor.colorFromHex("#949596"), range: NSMakeRange(3, 2))
         
-        string.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(13), range: NSMakeRange(3, 2))
+        string.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 13), range: NSMakeRange(3, 2))
         
         //Steven（位置10长度6）颜色字体设置
         string.addAttribute(NSForegroundColorAttributeName, value: UIColor.colorFromHex("#949596"), range: NSMakeRange(10, 6))
         
-        string.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(13), range: NSMakeRange(10, 6))
+        string.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 13), range: NSMakeRange(10, 6))
         
         //墨迹（位置为21长度2）颜色字体设置
         string.addAttribute(NSForegroundColorAttributeName, value: UIColor.colorFromHex("#949596"), range: NSMakeRange(21, 2))
         
-        string.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(13), range: NSMakeRange(21, 2))
+        string.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 13), range: NSMakeRange(21, 2))
         
         //把修改好的string赋值给介绍label
         memberIntro.attributedText = string
     }
     
-    func dismiss(){
-        self.navigationController?.popViewControllerAnimated(true)
+    func handleDismiss(){
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -75,7 +75,7 @@ class AboutViewController: UIViewController {
     
 // MARK: 获取app版本号
 
-let infoDic = NSBundle.mainBundle().infoDictionary
+let infoDic = Bundle.main.infoDictionary
 
 // 获取 App 的版本号
 let appVer = infoDic?["CFBundleShortVersionString"]

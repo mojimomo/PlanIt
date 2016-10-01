@@ -8,29 +8,29 @@
 
 import UIKit
 @IBDesignable
-public class RoundTableviewCell: UITableViewCell {
+open class RoundTableviewCell: UITableViewCell {
 
-    @IBInspectable public var cornerRadius: CGFloat = 22 {
+    @IBInspectable open var cornerRadius: CGFloat = 22 {
         didSet {
         }
     }
     
-    @IBInspectable public var roundBackgroundColor: UIColor = allBackground {
+    @IBInspectable open var roundBackgroundColor: UIColor = allBackground {
         didSet {
         }
     }
     
-    @IBInspectable public var roundFrontColor: UIColor = UIColor.whiteColor() {
+    @IBInspectable open var roundFrontColor: UIColor = UIColor.white {
         didSet {
         }
     }
     
-    @IBInspectable public var selectedColor: UIColor = UIColor.whiteColor() {
+    @IBInspectable open var selectedColor: UIColor = UIColor.white {
         didSet {
         }
     }
     
-    @IBInspectable public var separatorLineInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0) {
+    @IBInspectable open var separatorLineInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0) {
         didSet {
         }
     }
@@ -46,46 +46,46 @@ public class RoundTableviewCell: UITableViewCell {
     var isReuse = false
     var isPercentLayer = false
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         contentView.addSubview(roundContentView)
         roundContentView.translatesAutoresizingMaskIntoConstraints = false
         // align roundContentView from the left and right
-        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[view]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": roundContentView]));
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[view]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": roundContentView]));
         
         // align roundContentView from the top and bottom
-        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": roundContentView]));
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": roundContentView]));
         self.contentView.backgroundColor = roundBackgroundColor
     }
 
-    override public func setSelected(selected: Bool, animated: Bool) {
+    override open func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         setNeedsDisplay()
     }
     
-    override public func setHighlighted(highlighted: Bool, animated: Bool) {
+    override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         setNeedsDisplay()
     }
     
-    override public func didMoveToSuperview() {
+    override open func didMoveToSuperview() {
         if let tableView = getTableview() {
-            tableView.separatorStyle = .None
+            tableView.separatorStyle = .none
         }
     }
     
-    override public func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-        var pathRef: CGMutablePathRef = CGPathCreateMutable()
+    override open func draw(_ rect: CGRect) {
+        super.draw(rect)
+        var pathRef: CGMutablePath = CGMutablePath()
         var addLine = false
         if let tableview = getTableview(),
-            let indexPath = tableview.indexPathForCell(self) {
-                if indexPath.row == 0 && tableview.numberOfRowsInSection(indexPath.section) == 1 {
+            let indexPath = tableview.indexPath(for: self) {
+                if (indexPath as NSIndexPath).row == 0 && tableview.numberOfRows(inSection: (indexPath as NSIndexPath).section) == 1 {
                     pathRef = CreateBothCornerPath()
-                } else if indexPath.row == 0 {
+                } else if (indexPath as NSIndexPath).row == 0 {
                     pathRef = CreateTopCornerPath()
-                } else if indexPath.row == tableview.numberOfRowsInSection(indexPath.section) - 1 {
+                } else if (indexPath as NSIndexPath).row == tableview.numberOfRows(inSection: (indexPath as NSIndexPath).section) - 1 {
                     pathRef = CreateBottomCornerPath()
                     addLine = true
                 } else {
@@ -105,29 +105,29 @@ public class RoundTableviewCell: UITableViewCell {
         }
         
         shapeLayer.path = pathRef
-        self.contentView.layer.insertSublayer(shapeLayer, atIndex: 0)
-        if selected || highlighted {
-            shapeLayer.fillColor = selectedColor.CGColor
+        self.contentView.layer.insertSublayer(shapeLayer, at: 0)
+        if isSelected || isHighlighted {
+            shapeLayer.fillColor = selectedColor.cgColor
         } else {
-            shapeLayer.fillColor = roundFrontColor.CGColor
+            shapeLayer.fillColor = roundFrontColor.cgColor
         }
         
         //创建百分比图层
         if needPercent && percent != 0{
-            var percentRef: CGMutablePathRef = CGPathCreateMutable()
+            var percentRef: CGMutablePath = CGMutablePath()
             if let tableview = getTableview(),
-                let indexPath = tableview.indexPathForCell(self){
-                    if indexPath.row == 0 && tableview.numberOfRowsInSection(indexPath.section) == 1 {
+                let indexPath = tableview.indexPath(for: self){
+                    if (indexPath as NSIndexPath).row == 0 && tableview.numberOfRows(inSection: (indexPath as NSIndexPath).section) == 1 {
                         percentRef = CreateBothCornerPathForPercent()
                     }
             }
             let percentLayer = CAShapeLayer()
             percentLayer.path = percentRef
-            self.contentView.layer.insertSublayer(percentLayer, atIndex: 1)
-            if selected || highlighted {
-                percentLayer.fillColor = percentColor.CGColor
+            self.contentView.layer.insertSublayer(percentLayer, at: 1)
+            if isSelected || isHighlighted {
+                percentLayer.fillColor = percentColor.cgColor
             } else {
-                percentLayer.fillColor = percentColor.CGColor
+                percentLayer.fillColor = percentColor.cgColor
             }
             isPercentLayer = true
         }
@@ -136,23 +136,23 @@ public class RoundTableviewCell: UITableViewCell {
         if needShawdow {
             self.layer.masksToBounds = false
             self.layer.shadowPath = pathRef
-            self.layer.shadowOffset = CGSizeMake(0.5, 0.5)
-            self.layer.shadowColor = UIColor.lightGrayColor().CGColor
+            self.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+            self.layer.shadowColor = UIColor.lightGray.cgColor
             self.layer.shadowOpacity = 0.7
             self.layer.shadowRadius = 4
             self.shapeLayer.masksToBounds = false
             self.shapeLayer.shadowPath = pathRef
-            self.shapeLayer.shadowOffset = CGSizeMake(0.5, 0.5)
-            self.shapeLayer.shadowColor = UIColor.lightGrayColor().CGColor
+            self.shapeLayer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+            self.shapeLayer.shadowColor = UIColor.lightGray.cgColor
             self.shapeLayer.shadowOpacity = 0.7
             self.shapeLayer.shadowRadius = 4
         }
 
         
         if (addLine == true) {
-            let lineHeight: CGFloat = (0.5 / UIScreen.mainScreen().scale)
-            lineLayer.frame = CGRectMake(separatorLineInset.left, lineHeight, bounds.size.width - separatorLineInset.left - separatorLineInset.right - Margin, -lineHeight)
-            lineLayer.backgroundColor = UIColor(red: 221/255.0, green: 221/255.0, blue: 221/255.0, alpha: 1).CGColor
+            let lineHeight: CGFloat = (0.5 / UIScreen.main.scale)
+            lineLayer.frame = CGRect(x: separatorLineInset.left, y: lineHeight, width: bounds.size.width - separatorLineInset.left - separatorLineInset.right - Margin, height: -lineHeight)
+            lineLayer.backgroundColor = UIColor(red: 221/255.0, green: 221/255.0, blue: 221/255.0, alpha: 1).cgColor
             self.layer.addSublayer(lineLayer)
         } else {
             lineLayer.removeFromSuperlayer()
@@ -172,84 +172,121 @@ public class RoundTableviewCell: UITableViewCell {
 }
 
 extension RoundTableviewCell {
-    func CreateTopCornerPath() -> CGMutablePathRef {
-        let pathRef: CGMutablePathRef = CGPathCreateMutable()
+    func CreateTopCornerPath() -> CGMutablePath {
+        let pathRef: CGMutablePath = CGMutablePath()
         
         let height = self.frame.height
         let width = self.frame.width
         
-        CGPathMoveToPoint(pathRef, nil, Margin, height)
-        CGPathAddLineToPoint(pathRef, nil, Margin, cornerRadius)
-        CGPathAddArc(pathRef, nil, Margin + cornerRadius, cornerRadius, cornerRadius, CGFloat(M_PI), CGFloat(3/2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin - cornerRadius, 0)
-        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius,cornerRadius, cornerRadius, CGFloat(3/2 * M_PI), CGFloat(2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin, height)
-        CGPathAddLineToPoint(pathRef, nil, Margin, height)
-        return pathRef
-    }
-    
-    func CreateBottomCornerPath() -> CGMutablePathRef {
-        let pathRef: CGMutablePathRef = CGPathCreateMutable()
+        pathRef.move(to: CGPoint(x: Margin, y: height))
+        pathRef.addLine(to: CGPoint(x: Margin, y: cornerRadius))
+        pathRef.addArc(center: CGPoint(x: Margin + cornerRadius, y: cornerRadius), radius: cornerRadius, startAngle: CGFloat(M_PI), endAngle: CGFloat(3/2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: width - Margin - cornerRadius, y: 0))
+        pathRef.addArc(center: CGPoint(x: width - Margin - cornerRadius, y: cornerRadius), radius: cornerRadius, startAngle: CGFloat(3/2 * M_PI), endAngle: CGFloat(2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: width - Margin, y: height))
+        pathRef.addLine(to: CGPoint(x: Margin, y: height))
         
-        let height = self.frame.height
-        let width = self.frame.width
-        CGPathMoveToPoint(pathRef, nil, Margin, 0)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin, 0)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin, height - cornerRadius)
-        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius, height - cornerRadius, cornerRadius, 0, CGFloat(1/2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, Margin, height)
-        CGPathAddArc(pathRef, nil, Margin + cornerRadius, height - cornerRadius, cornerRadius, CGFloat(1/2 * M_PI), CGFloat(M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, Margin, 0)
+//        CGPathMoveToPoint(pathRef, nil, Margin, height)
+//        CGPathAddLineToPoint(pathRef, nil, Margin, cornerRadius)
+//        CGPathAddArc(pathRef, nil, Margin + cornerRadius, cornerRadius, cornerRadius, CGFloat(M_PI), CGFloat(3/2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin - cornerRadius, 0)
+//        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius,cornerRadius, cornerRadius, CGFloat(3/2 * M_PI), CGFloat(2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin, height)
+//        CGPathAddLineToPoint(pathRef, nil, Margin, height)
         return pathRef
     }
     
-    
-    func CreateBothCornerPath() -> CGMutablePathRef {
-        let pathRef: CGMutablePathRef = CGPathCreateMutable()
+    func CreateBottomCornerPath() -> CGMutablePath {
+        let pathRef: CGMutablePath = CGMutablePath()
         
         let height = self.frame.height
         let width = self.frame.width
         
-        CGPathMoveToPoint(pathRef, nil, Margin, height - cornerRadius)
-        CGPathAddLineToPoint(pathRef, nil, Margin, cornerRadius)
-        CGPathAddArc(pathRef, nil, Margin + cornerRadius, cornerRadius, cornerRadius, CGFloat(M_PI), CGFloat(3/2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin - cornerRadius, 0)
-        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius,cornerRadius, cornerRadius, CGFloat(3/2 * M_PI), CGFloat(2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin, height - cornerRadius)
-        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius, height - cornerRadius, cornerRadius, 0, CGFloat(1/2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, Margin + cornerRadius, height)
-        CGPathAddArc(pathRef, nil, Margin + cornerRadius, height - cornerRadius, cornerRadius, CGFloat(1/2 * M_PI), CGFloat(M_PI), false)
+        pathRef.move(to: CGPoint(x: Margin, y: 0))
+        pathRef.addLine(to: CGPoint(x: width - Margin, y: 0))
+        pathRef.addLine(to: CGPoint(x: width - Margin, y: height - cornerRadius))
+        pathRef.addArc(center: CGPoint(x: width - Margin - cornerRadius, y: height - cornerRadius), radius: cornerRadius, startAngle: 0, endAngle: CGFloat(1/2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: Margin, y: height))
+        pathRef.addArc(center: CGPoint(x: Margin + cornerRadius, y: height - cornerRadius), radius: cornerRadius, startAngle: CGFloat(1/2 * M_PI), endAngle: CGFloat(M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: Margin, y:  0))
+        
+//        CGPathMoveToPoint(pathRef, nil, Margin, 0)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin, 0)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin, height - cornerRadius)
+//        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius, height - cornerRadius, cornerRadius, 0, CGFloat(1/2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, Margin, height)
+//        CGPathAddArc(pathRef, nil, Margin + cornerRadius, height - cornerRadius, cornerRadius, CGFloat(1/2 * M_PI), CGFloat(M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, Margin, 0)
         return pathRef
     }
     
-    func CreateNoneCornerPath() -> CGMutablePathRef {
-        let pathRef: CGMutablePathRef = CGPathCreateMutable()
+    
+    func CreateBothCornerPath() -> CGMutablePath {
+        let pathRef: CGMutablePath = CGMutablePath()
+        
         let height = self.frame.height
         let width = self.frame.width
-        CGPathMoveToPoint(pathRef, nil, Margin, 0)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin, 0)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin, height)
-        CGPathAddLineToPoint(pathRef, nil, Margin, height)
-        CGPathAddLineToPoint(pathRef, nil, Margin, 0)
+        
+        pathRef.move(to: CGPoint(x: Margin, y: height - cornerRadius))
+        pathRef.addLine(to: CGPoint(x: Margin, y: cornerRadius))
+        pathRef.addArc(center: CGPoint(x: Margin + cornerRadius, y: cornerRadius), radius: cornerRadius, startAngle: CGFloat(M_PI), endAngle: CGFloat(3/2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: width - Margin - cornerRadius, y: 0))
+        pathRef.addArc(center: CGPoint(x: width - Margin - cornerRadius, y: cornerRadius), radius: cornerRadius, startAngle: CGFloat(3/2 * M_PI), endAngle: CGFloat(2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: width - Margin, y: height - cornerRadius))
+        pathRef.addArc(center: CGPoint(x: width - Margin - cornerRadius, y: height - cornerRadius), radius: cornerRadius, startAngle: 0, endAngle: CGFloat(1/2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: Margin + cornerRadius, y: height))
+        pathRef.addArc(center: CGPoint(x: Margin + cornerRadius, y: height - cornerRadius), radius: cornerRadius, startAngle: CGFloat(1/2 * M_PI), endAngle: CGFloat(M_PI), clockwise: false)
+//        CGPathMoveToPoint(pathRef, nil, Margin, height - cornerRadius)
+//        CGPathAddLineToPoint(pathRef, nil, Margin, cornerRadius)
+//        CGPathAddArc(pathRef, nil, Margin + cornerRadius, cornerRadius, cornerRadius, CGFloat(M_PI), CGFloat(3/2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin - cornerRadius, 0)
+//        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius,cornerRadius, cornerRadius, CGFloat(3/2 * M_PI), CGFloat(2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin, height - cornerRadius)
+//        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius, height - cornerRadius, cornerRadius, 0, CGFloat(1/2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, Margin + cornerRadius, height)
+//        CGPathAddArc(pathRef, nil, Margin + cornerRadius, height - cornerRadius, cornerRadius, CGFloat(1/2 * M_PI), CGFloat(M_PI), false)
+        return pathRef
+    }
+    
+    func CreateNoneCornerPath() -> CGMutablePath {
+        let pathRef: CGMutablePath = CGMutablePath()
+        let height = self.frame.height
+        let width = self.frame.width
+//        CGPathMoveToPoint(pathRef, nil, Margin, 0)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin, 0)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin, height)
+//        CGPathAddLineToPoint(pathRef, nil, Margin, height)
+//        CGPathAddLineToPoint(pathRef, nil, Margin, 0)
         return pathRef
     }
     
     
-    func CreateBothCornerPathForPercent() -> CGMutablePathRef {
-        let pathRef: CGMutablePathRef = CGPathCreateMutable()
+    func CreateBothCornerPathForPercent() -> CGMutablePath {
+        let pathRef: CGMutablePath = CGMutablePath()
         
         let height = self.frame.height
         let width = self.frame.width
         let outWidth = (width - Margin * 2 - cornerRadius * 2) * CGFloat(1 - percent / 100)
-        CGPathMoveToPoint(pathRef, nil, Margin, height - cornerRadius)
-        CGPathAddLineToPoint(pathRef, nil, Margin, cornerRadius)
-        CGPathAddArc(pathRef, nil, Margin + cornerRadius, cornerRadius, cornerRadius, CGFloat(M_PI), CGFloat(3/2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin - cornerRadius - outWidth, 0)
-        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius - outWidth,cornerRadius, cornerRadius, CGFloat(3/2 * M_PI), CGFloat(2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, width - Margin - outWidth, height - cornerRadius)
-        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius - outWidth, height - cornerRadius, cornerRadius, 0, CGFloat(1/2.0 * M_PI), false)
-        CGPathAddLineToPoint(pathRef, nil, Margin + cornerRadius, height)
-        CGPathAddArc(pathRef, nil, Margin + cornerRadius, height - cornerRadius, cornerRadius, CGFloat(1/2 * M_PI), CGFloat(M_PI), false)
+        
+        pathRef.move(to: CGPoint(x: Margin, y: height - cornerRadius))
+        pathRef.addLine(to: CGPoint(x: Margin, y: cornerRadius))
+        pathRef.addArc(center: CGPoint(x: Margin + cornerRadius, y: cornerRadius), radius: cornerRadius, startAngle: CGFloat(M_PI), endAngle: CGFloat(3/2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: width - Margin - cornerRadius - outWidth, y: 0))
+        pathRef.addArc(center: CGPoint(x: width - Margin - cornerRadius - outWidth, y: cornerRadius), radius: cornerRadius, startAngle: CGFloat(3/2 * M_PI), endAngle: CGFloat(2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: width - Margin - outWidth, y: height - cornerRadius))
+        pathRef.addArc(center: CGPoint(x: width - Margin - cornerRadius - outWidth, y: height - cornerRadius), radius: cornerRadius, startAngle: 0, endAngle: CGFloat(1/2.0 * M_PI), clockwise: false)
+        pathRef.addLine(to: CGPoint(x: Margin + cornerRadius, y: height))
+        pathRef.addArc(center: CGPoint(x: Margin + cornerRadius, y: height - cornerRadius), radius: cornerRadius, startAngle: CGFloat(1/2 * M_PI), endAngle: CGFloat(M_PI), clockwise: false)
+        
+//        CGPathMoveToPoint(pathRef, nil, Margin, height - cornerRadius)
+//        CGPathAddLineToPoint(pathRef, nil, Margin, cornerRadius)
+//        CGPathAddArc(pathRef, nil, Margin + cornerRadius, cornerRadius, cornerRadius, CGFloat(M_PI), CGFloat(3/2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin - cornerRadius - outWidth, 0)
+//        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius - outWidth,cornerRadius, cornerRadius, CGFloat(3/2 * M_PI), CGFloat(2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, width - Margin - outWidth, height - cornerRadius)
+//        CGPathAddArc(pathRef, nil, width - Margin - cornerRadius - outWidth, height - cornerRadius, cornerRadius, 0, CGFloat(1/2.0 * M_PI), false)
+//        CGPathAddLineToPoint(pathRef, nil, Margin + cornerRadius, height)
+//        CGPathAddArc(pathRef, nil, Margin + cornerRadius, height - cornerRadius, cornerRadius, CGFloat(1/2 * M_PI), CGFloat(M_PI), false)
         return pathRef
     }
 }

@@ -11,19 +11,19 @@ import UIKit
 class RRAddTagView: UIView, UITextViewDelegate {
 
     lazy var title: UILabel = {
-        let title = UILabel(frame: CGRectMake(10, 10, UIScreen.mainScreen().bounds.size.width - 20, 20))
-        title.font = UIFont.boldSystemFontOfSize(18)
-        title.textAlignment = NSTextAlignment.Center
+        let title = UILabel(frame: CGRect(x: 10, y: 10, width: UIScreen.main.bounds.size.width - 20, height: 20))
+        title.font = UIFont.boldSystemFont(ofSize: 18)
+        title.textAlignment = NSTextAlignment.center
         return title
     }()
 
     lazy var textEdit: UITextView = {
-        let textEdit = UITextView(frame: CGRectMake(10, 30, UIScreen.mainScreen().bounds.size.width - 20, 20))
+        let textEdit = UITextView(frame: CGRect(x: 10, y: 30, width: UIScreen.main.bounds.size.width - 20, height: 20))
         textEdit.delegate = self
         return textEdit
     }()
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if strlen(textView.text) + strlen(text) > 44 {
             return false
         }
@@ -35,7 +35,7 @@ class RRAddTagView: UIView, UITextViewDelegate {
         title.text = "创建一个标签"
         self.addSubview(title)
         self.addSubview(textEdit)
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
     }
 
     required init?(coder aDecoder: NSCoder) {

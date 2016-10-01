@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PieChartDataSource: class {
-    func percentForPieChartView(sneder: PieChartView) -> Double?
+    func percentForPieChartView(_ sneder: PieChartView) -> Double?
 }
 
 class PieChartView: UIView {
@@ -34,7 +34,7 @@ class PieChartView: UIView {
     var outGroundColor: UIColor = UIColor(red: 202.4 / 255, green: 217.9 / 255, blue: 244.7 / 255, alpha: 1.0)
     ///饼图中心坐标
     var pieChartCenter: CGPoint{
-        return convertPoint(center, fromView: superview)
+        return convert(center, from: superview)
     }
     ///饼图半径
     var pieChartRadius:CGFloat{
@@ -43,7 +43,7 @@ class PieChartView: UIView {
     ///是否需要圆角
     var isCorner = true
     ///画图
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         //清除所有空间
         for object in self.subviews{
             object.removeFromSuperview()
@@ -54,8 +54,8 @@ class PieChartView: UIView {
         let percent = dataSource?.percentForPieChartView(self) ?? 0.0
         let string = String(format: "%.1f%%", percent)
         percentLabel.text = string
-        percentLabel.textAlignment = .Center
-        percentLabel.font = UIFont.boldSystemFontOfSize(24)
+        percentLabel.textAlignment = .center
+        percentLabel.font = UIFont.boldSystemFont(ofSize: 24)
         self.addSubview(percentLabel)
         
         //画外圈园
@@ -77,9 +77,9 @@ class PieChartView: UIView {
 //        endPath.fill()
         
         //百分比园
-        let percentPath = UIBezierPath(arcCenter: pieChartCenter, radius: pieChartRadius, startAngle: CGFloat(2 * M_PI * 3 / 4), endAngle: CGFloat( 2 * M_PI * 3 / 4 + 2 * M_PI * percent / 100), clockwise: true)
-        percentPath.lineWidth = lineWidth
-        color.set()
-        percentPath.stroke()
+//        let percentPath = UIBezierPath(arcCenter: pieChartCenter, radius: pieChartRadius, startAngle: CGFloat(2 * M_PI * 3 / 4), endAngle: CGFloat( 2 * M_PI * 3 / 4 + 2 * M_PI * percent / 100), clockwise: true)
+//        percentPath.lineWidth = lineWidth
+//        color.set()
+//        percentPath.stroke()
     }
 }

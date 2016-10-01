@@ -7,15 +7,15 @@ import UIKit
 extension UIColor {
     
     // Convert a hex string to a UIColor object.
-    class func colorFromHex(hexString:String) -> UIColor {
+    class func colorFromHex(_ hexString:String) -> UIColor {
         
-        func cleanHexString(hexString: String) -> String {
+        func cleanHexString(_ hexString: String) -> String {
             
             var cleanedHexString = String()
             
             // Remove the leading "#"
             if(hexString[hexString.startIndex] == "#") {
-                cleanedHexString = hexString.substringFromIndex(hexString.startIndex.advancedBy(1))
+                cleanedHexString = hexString.substring(from: hexString.characters.index(hexString.startIndex, offsetBy: 1))
             }
             
             // TODO: Other cleanup. Allow for a "short" hex string, i.e., "#fff"
@@ -31,13 +31,13 @@ extension UIColor {
         }
         
         // Else create the color, store it in the cache and return.
-        let scanner = NSScanner(string: cleanedHexString)
+        let scanner = Scanner(string: cleanedHexString)
         
         var value:UInt32 = 0
         
         // We have the hex value, grab the red, green, blue and alpha values.
         // Have to pass value by reference, scanner modifies this directly as the result of scanning the hex string. The return value is the success or fail.
-        if(scanner.scanHexInt(&value)){
+        if(scanner.scanHexInt32(&value)){
             
             // intValue = 01010101 11110111 11101010    // binary
             // intValue = 55       F7       EA          // hexadecimal
@@ -81,12 +81,12 @@ extension UIColor {
             // We couldn't get a value from a valid hex string.
         else {
             print("Error: Couldn't convert the hex string to a number, returning UIColor.whiteColor() instead.")
-            return UIColor.whiteColor()
+            return UIColor.white
         }
     }
     
     // Takes an array of colours in the range of 0-255 and returns a value between 0 and 1.
-    private class func normaliseColors(colors: [UInt32]) -> [CGFloat]{
+    fileprivate class func normaliseColors(_ colors: [UInt32]) -> [CGFloat]{
         var normalisedVersions = [CGFloat]()
         
         for color in colors{
@@ -98,9 +98,9 @@ extension UIColor {
     
     // Caching
     // Store any colours we've gotten before. Colours don't change.
-    private static var hexColorCache = [String : UIColor]()
+    fileprivate static var hexColorCache = [String : UIColor]()
     
-    private class func getColorFromCache(hexString: String) -> UIColor? {
+    fileprivate class func getColorFromCache(_ hexString: String) -> UIColor? {
         guard let color = UIColor.hexColorCache[hexString] else {
             return nil
         }
@@ -108,7 +108,7 @@ extension UIColor {
         return color
     }
     
-    private class func storeColorInCache(hexString: String, color: UIColor) {
+    fileprivate class func storeColorInCache(_ hexString: String, color: UIColor) {
         
         if UIColor.hexColorCache.keys.contains(hexString) {
             return // No work to do if it is already there.
@@ -117,11 +117,11 @@ extension UIColor {
         UIColor.hexColorCache[hexString] = color
     }
     
-    private class func clearColorCache() {
+    fileprivate class func clearColorCache() {
         UIColor.hexColorCache.removeAll()
     }
     
-    class func colorWith(red: Int, green: Int, blue: Int, alpha: CGFloat) -> UIColor {
+    class func colorWith(_ red: Int, green: Int, blue: Int, alpha: CGFloat) -> UIColor {
         let color = UIColor(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
         return color
     }

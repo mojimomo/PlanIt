@@ -17,27 +17,27 @@ class WebviewController: UIViewController,UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(WebviewController.dismiss))
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(WebviewController.handleDismiss))
         self.navigationItem.leftBarButtonItem = backButtom
         
         webView.delegate = self
 
         
         //设置初始加载网页
-        let url = NSURL(string: "http://zoomyale.coding.me/markplan_tutorial/")
-        let request = NSURLRequest(URL: url!)
+        let url = URL(string: "http://zoomyale.coding.me/markplan_tutorial/")
+        let request = URLRequest(url: url!)
         webView.loadRequest(request)
     }
 
     //开始加载网页
-    func webViewDidStartLoad(webView: UIWebView) {
+    func webViewDidStartLoad(_ webView: UIWebView) {
         print("start")
         indicator = WIndicator.showIndicatorAddedTo(self.navigationController!.view, animation: true)
         
     }
     
     //完成加载网页
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         print("finish")
         if indicator != nil && self.navigationController != nil{
             WIndicator.removeIndicatorFrom(self.navigationController!.view, animation: true)
@@ -50,11 +50,11 @@ class WebviewController: UIViewController,UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func dismiss(){
-        self.navigationController?.popViewControllerAnimated(true)
+    func handleDismiss(){
+        self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if indicator != nil && self.navigationController != nil{
             WIndicator.removeIndicatorFrom(self.navigationController!.view, animation: true)
         }

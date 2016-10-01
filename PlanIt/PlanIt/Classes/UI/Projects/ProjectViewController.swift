@@ -8,6 +8,26 @@
 
 import UIKit
 import Popover
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate ,UIGestureRecognizerDelegate, EditProjectTableViewDelegate{
 
@@ -23,67 +43,67 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     @IBOutlet weak var projectName: UILabel!
     ///故事版id
-    private struct Storyboard{
+    fileprivate struct Storyboard{
         static let CellReusIdentifier = "ProjectCell"
     }
     ///表格标签
-    private struct tableViewTag {
+    fileprivate struct tableViewTag {
         static let MuneTable = 0
         static let TagsTable = 1
         static let ProjectsTable = 2
     }
     let addProcessButtonTag = 1000
     ///没有数据图像的路劲
-    private var noDataImageString = ["bike", "book2"]
+    fileprivate var noDataImageString = ["bike", "book2"]
     ///没有数据图像视图
-    private var notDataImageView : UIImageView!
+    fileprivate var notDataImageView : UIImageView!
     ///其他表格高度
     let tableViewHeight : CGFloat = 44
     ///菜单表格高度
     let MenuTableViewHeight : CGFloat = 60
     ///选择的标签
-    private var selectTag : Tag?
+    fileprivate var selectTag : Tag?
     ///菜单
-    private var popover: Popover!
+    fileprivate var popover: Popover!
     ///状态栏遮盖
-    private var statusView: UIView!
+    fileprivate var statusView: UIView!
     ///菜单文字
-    private var texts = ["显示未开始", "已完成", "设置"]
+    fileprivate var texts = ["显示未开始", "已完成", "设置"]
     ///菜单弹窗参数
-    private var popoverOptions: [PopoverOption] = [
-        .Type(.Down),
-        .CornerRadius(0.0),
-        .ArrowSize(CGSize(width: 0.0, height: 0.0)),
-        .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
+    fileprivate var popoverOptions: [PopoverOption] = [
+        .type(.down),
+        .cornerRadius(0.0),
+        .arrowSize(CGSize(width: 0.0, height: 0.0)),
+        .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
     //获取静态栏的高度
-    let rectStatusHeight = UIApplication.sharedApplication().statusBarFrame.height
+    let rectStatusHeight = UIApplication.shared.statusBarFrame.height
     //导航栏的高度
     let navBarHeight : CGFloat = 44.0
     ///提示弹窗参数
-    private var showPercentPopoverOptions: [PopoverOption] = [
-        .Type(.Down),
-        .CornerRadius(8.0),
-        .ArrowSize(CGSize(width: 0.0, height: 0.0)),
-        .BlackOverlayColor(UIColor(white: 0.0, alpha: 0.6)),
-        .Animation(.None)
+    fileprivate var showPercentPopoverOptions: [PopoverOption] = [
+        .type(.down),
+        .cornerRadius(8.0),
+        .arrowSize(CGSize(width: 0.0, height: 0.0)),
+        .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6)),
+        .animation(.none)
     ]
     ///显示未开始项目
     var isShowNotBegin : Bool{
         get{
-            return NSUserDefaults.standardUserDefaults().boolForKey("isShowNotBegin") as Bool!
+            return UserDefaults.standard.bool(forKey: "isShowNotBegin") as Bool!
         }
         set{
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowNotBegin")
+            UserDefaults.standard.set(newValue, forKey: "isShowNotBegin")
         }
     }
     ///显示未开始项目
     var isShowFinished : Bool{
         get{
-            return NSUserDefaults.standardUserDefaults().boolForKey("isShowFinished") as Bool!
+            return UserDefaults.standard.bool(forKey: "isShowFinished") as Bool!
         }
         set{
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowFinished")
+            UserDefaults.standard.set(newValue, forKey: "isShowFinished")
         }
     }
 
@@ -98,10 +118,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 //    var addProjectButtonSize : CGSize = CGSize(width: 0, height: 0)
     
     ///呼出标签栏
-    @IBAction func callTag(sender: UIBarButtonItem) {
-        let tagsViewControl = self.storyboard?.instantiateViewControllerWithIdentifier("ShowTags") as! TagsViewController
+    @IBAction func callTag(_ sender: UIBarButtonItem) {
+        let tagsViewControl = self.storyboard?.instantiateViewController(withIdentifier: "ShowTags") as! TagsViewController
         tagsViewControl.title = "标签"
-        tagsViewControl.view.backgroundColor = UIColor.whiteColor()
+        tagsViewControl.view.backgroundColor = UIColor.white
         tagsViewControl.delegate = self
         
         //设置加载动画
@@ -109,11 +129,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         transition.duration = 1.0
         transition.type = kCATransitionPush //推送类型
         transition.subtype = kCATransitionFromLeft //从左侧
-        tagsViewControl.view.layer.addAnimation(transition, forKey: "Reveal")
+        tagsViewControl.view.layer.add(transition, forKey: "Reveal")
         
         let navController = UINavigationController.init(rootViewController: tagsViewControl)
         //状态栏和导航栏不透明
-        navController.navigationBar.translucent = false
+        navController.navigationBar.isTranslucent = false
         //设置导航栏颜色
         navController.navigationBar.barTintColor = otherNavigationBackground
         //去除导航栏分栏线
@@ -123,14 +143,14 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         navController.navigationBar.tintColor = navigationTintColor
         navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
-        self.navigationController?.presentViewController(navController, animated: true, completion: nil)    }
+        self.navigationController?.present(navController, animated: true, completion: nil)    }
     
     ///点击点开抽屉菜单
-    @IBAction func callMenu(sender: AnyObject) {
+    @IBAction func callMenu(_ sender: AnyObject) {
         //获取此页面的抽屉菜单页
-        if let drawer = self.navigationController?.parentViewController as? KYDrawerController{
+        if let drawer = self.navigationController?.parent as? KYDrawerController{
             //设置菜单页状态
-            drawer.setDrawerState( .Opened, animated: true)
+            drawer.setDrawerState( .opened, animated: true)
         }
         let startPoint = CGPoint(x: self.view.frame.width / 2, y: 0)
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200 + rectStatusHeight))
@@ -138,36 +158,36 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         tableView.tag = tableViewTag.MuneTable
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.scrollEnabled = false
-        tableView.separatorStyle = .None
+        tableView.isScrollEnabled = false
+        tableView.separatorStyle = .none
         self.popover = Popover(options: self.popoverOptions, showHandler: nil, dismissHandler: nil)
         self.popover.show(tableView,  point: startPoint)
     }
 
     ///点击创建新项目
-    @IBAction func addNewProject(sender: UIButton) {
+    @IBAction func addNewProject(_ sender: UIButton) {
         addNewProject()
     }
     
     // MARK: - Func
     func toggle() {
-        UIView.animateWithDuration(2) {
-            self.navigationController?.navigationBarHidden = self.navigationController?.navigationBarHidden == false
-        }
+        UIView.animate(withDuration: 2, animations: {
+            self.navigationController?.isNavigationBarHidden = self.navigationController?.isNavigationBarHidden == false
+        }) 
     }
     
-    private func checkTableView(){
+    fileprivate func checkTableView(){
         //添加统计label
         notDataImageView?.removeFromSuperview()
         projectTableView?.tableFooterView = nil
         if projects.count != 0{
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100 + 100))
-            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 100))
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width , height: 100 + 100))
+            let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width , height: 100))
             countLabel.text = "\(projects.count)个项目"
             countLabel.font = projectCountsFont
             countLabel.textColor = projectCountsFontColor
-            countLabel.textAlignment = .Center
-            countLabel.backgroundColor = UIColor.clearColor()
+            countLabel.textAlignment = .center
+            countLabel.backgroundColor = UIColor.clear
             footerView.addSubview(countLabel)
             projectTableView?.tableFooterView = footerView
         }else{
@@ -175,7 +195,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             let index = Int(arc4random() % count)
             notDataImageView = UIImageView(image: UIImage(named: noDataImageString[index]))
             //获取导航栏高度
-            notDataImageView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: (UIScreen.mainScreen().bounds.height - navBarHeight - rectStatusHeight) / 2 - navBarHeight - rectStatusHeight)
+            notDataImageView.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height - navBarHeight - rectStatusHeight) / 2 - navBarHeight - rectStatusHeight)
             self.projectTableView?.addSubview(notDataImageView)
         }
     }
@@ -183,7 +203,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     ///打开菜单
     func handleCallOptions(){
         print("打开菜单页面")
-        let muneViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Options") as! OptionsTableViewController
+        let muneViewController = self.storyboard?.instantiateViewController(withIdentifier: "Options") as! OptionsTableViewController
         
         //压入导航栏
         self.navigationController?.pushViewController(muneViewController, animated: true)
@@ -197,7 +217,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             statusView.backgroundColor = allBackground
         }
         self.view.addSubview(statusView)
-        self.view.bringSubviewToFront(statusView)
+        self.view.bringSubview(toFront: statusView)
     }
     
     ///显示导航栏
@@ -216,22 +236,26 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     ///根据超时快速排序
-    func qsortProjectByOuttime(input: [Project]) -> [Project]{
+    func qsortProjectByOuttime(_ input: [Project]) -> [Project]{
         if let (pivot, rest) = input.decompose {
             let lesser = rest.filter { $0.outTime > pivot.outTime }
             let greater = rest.filter { $0.outTime <= pivot.outTime }
-            return qsortProjectByOuttime(lesser) + [pivot] + qsortProjectByOuttime(greater)
+            var output = qsortProjectByBeginTime(lesser) + [pivot]
+            output += qsortProjectByBeginTime(greater)
+            return output
         } else {
             return []
         }
     }
     
     ///根据超时快速排序
-    func qsortProjectByBeginTime(input: [Project]) -> [Project]{
+    func qsortProjectByBeginTime(_ input: [Project]) -> [Project]{
         if let (pivot, rest) = input.decompose {
             let lesser = rest.filter { $0.beginTimeDate.timeIntervalSince1970 < pivot.beginTimeDate.timeIntervalSince1970 }
             let greater = rest.filter { $0.beginTimeDate.timeIntervalSince1970 >= pivot.beginTimeDate.timeIntervalSince1970 }
-            return qsortProjectByBeginTime(lesser) + [pivot] + qsortProjectByBeginTime(greater)
+            var output = qsortProjectByBeginTime(lesser) + [pivot]
+            output += qsortProjectByBeginTime(greater)
+            return output
         } else {
             return []
         }
@@ -279,26 +303,26 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         var notBeginedProjects = [Project]()
         
         for project in projects {
-            if project.isFinished == .NotBegined {
-                projects.removeAtIndex(index)
+            if project.isFinished == .notBegined {
+                projects.remove(at: index)
                 notBeginedProjects.append(project)
                 continue
             }
 
             //显示结束
             if isShowFinished {
-                if project.isFinished != .Finished {
-                    projects.removeAtIndex(index)
+                if project.isFinished != .finished {
+                    projects.remove(at: index)
                     continue
                 }
             }else{
-                if project.isFinished == .Finished {
-                    if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchFinishedProject") as Bool!) == false){
+                if project.isFinished == .finished {
+                    if((UserDefaults.standard.bool(forKey: "IsFirstLaunchFinishedProject") as Bool!) == false){
                         let startPoint = CGPoint(x: self.view.frame.width - 32.5, y: 55)
-                        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchFinishedProject")
+                        UserDefaults.standard.set(true, forKey: "IsFirstLaunchFinishedProject")
                         callFirstRemain("查看已完成项目", startPoint: startPoint)
                     }
-                    projects.removeAtIndex(index)
+                    projects.remove(at: index)
                     continue
                 }
             }
@@ -316,38 +340,38 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     
     ///更新表格
     func updateTable(){
-        self.indicator.hidden = false
+        self.indicator.isHidden = false
         self.indicator.startAnimating()
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
             self.loadData()
-            dispatch_async(dispatch_get_main_queue()){
+            DispatchQueue.main.async{
                 self.indicator.stopAnimating()
                 self.projectTableView.reloadData()
                 self.checkTableView()
-                self.indicator.hidden = true
+                self.indicator.isHidden = true
             }
         }
     }
     
     ///长按响应函数
-    func handleLongPress(gesture: UILongPressGestureRecognizer){
-        if gesture.state ==  .Began{
-            let point = gesture.locationInView(self.projectTableView)
-            let indexPath = self.projectTableView.indexPathForRowAtPoint(point)
+    func handleLongPress(_ gesture: UILongPressGestureRecognizer){
+        if gesture.state ==  .began{
+            let point = gesture.location(in: self.projectTableView)
+            let indexPath = self.projectTableView.indexPathForRow(at: point)
             if indexPath != nil {
-                let cell = projectTableView.cellForRowAtIndexPath(indexPath!) as! ProjectTableViewCell
-                if cell.project.isFinished == .Finished{
+                let cell = projectTableView.cellForRow(at: indexPath!) as! ProjectTableViewCell
+                if cell.project.isFinished == .finished{
                     return
                 }
                 for subView in cell.subviews{
                     if subView.tag == addProcessButtonTag {
-                        if subView.pointInView(subView.convertPoint(point, fromView: self.projectTableView)) == false{
+                        if subView.pointInView(subView.convert(point, from: self.projectTableView)) == false{
                             cell.isShowState = true
                             //延迟消失
-                            let queue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
-                            dispatch_async(queue) { () -> Void in
-                                NSThread.sleepForTimeInterval(2.5)
-                                dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+                            let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+                            queue.async { () -> Void in
+                                Thread.sleep(forTimeInterval: 2.5)
+                                DispatchQueue.main.sync(execute: { () -> Void in
                                     cell.isShowState = false
                                 })
                             }
@@ -369,7 +393,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.navigationController?.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
         
         //不显示分割线
-        self.projectTableView.separatorStyle = .None
+        self.projectTableView.separatorStyle = .none
         //上下2个cell的边距
         self.projectTableView.sectionFooterHeight = 13
         self.projectTableView.sectionHeaderHeight = 13
@@ -393,7 +417,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 //            addProjectButton.center.x = UIScreen.mainScreen().bounds.width / 2
         
             //阴影 颜色#9C4E50
-            addProjectButton.layer.shadowColor = UIColor(red: 156/255, green: 78/255, blue: 80/255, alpha: 0.35).CGColor
+            addProjectButton.layer.shadowColor = UIColor(red: 156/255, green: 78/255, blue: 80/255, alpha: 0.35).cgColor
             addProjectButton.layer.shadowOffset = CGSize(width: 0, height: 2)
             addProjectButton.layer.shadowOpacity = 1
             addProjectButton.layer.shadowRadius = 2.0
@@ -410,31 +434,31 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         self.view.addGestureRecognizer(longPressGestureRecognizer)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //配置导航栏
         self.navigationController?.navigationBar.barTintColor = navigationBackground
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         //读取数据按照id顺序排序
         updateTable()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         setNavBarShown()
         super.viewWillDisappear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //checkTableView()
         //判断是否第一次打开此页面
-        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchProjectView") as Bool!) == false){
+        if((UserDefaults.standard.bool(forKey: "IsFirstLaunchProjectView") as Bool!) == false){
             print("第一次打开项目页面")
             //设置为非第一次打开此页面
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchProjectView")
+            UserDefaults.standard.set(true, forKey: "IsFirstLaunchProjectView")
             
             //创建引导项目
             let newTag = Tag(name: "生活")
@@ -446,18 +470,18 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             
             //updateTable()
             //设置引导弹窗
-            callFirstRemain("点击创建新项目", view: addProjectButton, type: .Up, showHandler: nil, dismissHandler: nil)
+            callFirstRemain("点击创建新项目", view: addProjectButton, type: .up, showHandler: nil, dismissHandler: nil)
         }else{
             //是否第一次创建普通项目
-            if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchNormalProject") as Bool!) == false){
+            if((UserDefaults.standard.bool(forKey: "IsFirstLaunchNormalProject") as Bool!) == false){
                 print("第一次添加进度项目")
                 var index = 0
                 for project in projects{
-                    if project.type == .Punch ||  project.type == .Normal{
-                        let indexPath = NSIndexPath(forRow: 0, inSection: index)
-                        if let cell = self.projectTableView.cellForRowAtIndexPath(indexPath){
-                            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchNormalProject")
-                            self.callFirstRemainMultiLine("◎ 点击查看详情\n◉ 长按查看进度提示", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                    if project.type == .punch ||  project.type == .normal{
+                        let indexPath = IndexPath(row: 0, section: index)
+                        if let cell = self.projectTableView.cellForRow(at: indexPath){
+                            UserDefaults.standard.set(true, forKey: "IsFirstLaunchNormalProject")
+                            self.callFirstRemainMultiLine("◎ 点击查看详情\n◉ 长按查看进度提示", view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
                                 for subView in cell.subviews{
                                     if subView.tag == self.addProcessButtonTag {
                                         self.callFirstRemain("点击添加进度", view: subView)
@@ -473,16 +497,16 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
             
             //是否第一次创建不记录项目
-            if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchNoRecordProject") as Bool!) == false){
+            if((UserDefaults.standard.bool(forKey: "IsFirstLaunchNoRecordProject") as Bool!) == false){
                 print("第一次添加非进度项目")
                 var index = 0
                 for project in projects{
-                    if project.type == .NoRecord{
-                        let indexPath = NSIndexPath(forRow: 0, inSection: index)
-                        if let cell = self.projectTableView.cellForRowAtIndexPath(indexPath){
-                            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchNoRecordProject")
+                    if project.type == .noRecord{
+                        let indexPath = IndexPath(row: 0, section: index)
+                        if let cell = self.projectTableView.cellForRow(at: indexPath){
+                            UserDefaults.standard.set(true, forKey: "IsFirstLaunchNoRecordProject")
                             updateTable()
-                            self.callFirstRemainMultiLine("◎ 点击编辑项目\n◉ 长按查看进度提示", view: cell, type: .Down, showHandler: nil, dismissHandler: { () -> () in
+                            self.callFirstRemainMultiLine("◎ 点击编辑项目\n◉ 长按查看进度提示", view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
                                 for subView in cell.subviews{
                                     if subView.tag == self.addProcessButtonTag {
                                         self.callFirstRemain("点击完成项目", view: subView)
@@ -499,7 +523,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         }
     }
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if (velocity.y > 0.0)
         {
 //            projectTableView.bounds = CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height-20);
@@ -516,16 +540,16 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     // MARK: - 跳转动作
     ///弹出完成百分比view    
-    func showProcessChange(oldPercent: Double, newPercent: Double, name: String){
+    func showProcessChange(_ oldPercent: Double, newPercent: Double, name: String){
         //整体通知
-        let rect = UIScreen.mainScreen().bounds
+        let rect = UIScreen.main.bounds
         let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 120)
         let showView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 240))
-        showView.backgroundColor = UIColor.whiteColor()
+        showView.backgroundColor = UIColor.white
         
         //波浪视图
         let waveLoadingIndicator = WaveLoadingIndicator(frame:CGRect(x: 20, y: 60, width: 160, height: 160))
-        waveLoadingIndicator.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        waveLoadingIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         waveLoadingIndicator.progress = oldPercent / 100
         showView.addSubview(waveLoadingIndicator)
 
@@ -536,7 +560,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //标题
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        titleLabel.textAlignment = .Center
+        titleLabel.textAlignment = .center
         titleLabel.text = name
         titleLabel.textColor = UIColor ( red: 0.2784, green: 0.2824, blue: 0.2902, alpha: 1.0 )
         showView.addSubview(titleLabel)
@@ -558,15 +582,15 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         let addEveryTime = 1.0
         //当前百分比
         var currentPercent = oldPercent
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-        let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
-        dispatch_source_set_timer(timer, dispatch_walltime(nil, 0), period * NSEC_PER_MSEC, 0)
-        dispatch_source_set_event_handler(timer, { () -> Void in
+        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
+        let timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: UInt(0)), queue: queue)
+        timer.scheduleRepeating(deadline: .now(), interval: Double(period * NSEC_PER_MSEC), leeway: .seconds(0))
+        timer.setEventHandler(handler: { () -> Void in
             //倒计时结束，关闭
             if (timeOut <= 0) {
                 //关闭定时器
-                dispatch_source_cancel(timer)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                timer.cancel()
+                DispatchQueue.main.async(execute: { () -> Void in
                     //关闭弹窗
                     if newPercent == 100.0{
                         //完成视图
@@ -579,21 +603,20 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                         let fillView = UIImageView(image: UIImage(named: "projectFinish"))
                         fillView.frame = CGRect(x: 20, y: 60, width: 160, height: 160)
                         showView.addSubview(fillView)
-                        fillView.transform = CGAffineTransformMakeScale(0.0, 0.0)
-                        UIView.animateWithDuration(1 , delay: 0,
+                        fillView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+                        UIView.animate(withDuration: 1 , delay: 0,
                             usingSpringWithDamping: 1,
                             initialSpringVelocity: 0,
-                            options: .CurveEaseInOut,
+                            options: UIViewAnimationOptions(),
                             animations: {
-                                fillView.transform = CGAffineTransformIdentity
+                                fillView.transform = CGAffineTransform.identity
                             }){ _ in
                                 
                         }
-                        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
-                        let queue = dispatch_get_global_queue(qos, 0)
-                        dispatch_async(queue) { () -> Void in
-                            NSThread.sleepForTimeInterval(1)
-                            dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+                        let queue = DispatchQueue.global(priority:DispatchQueue.GlobalQueuePriority.default)
+                        queue.async { () -> Void in
+                            Thread.sleep(forTimeInterval: 1)
+                            DispatchQueue.main.sync(execute: { () -> Void in
                                 popover.dismiss()
                             })
                         }
@@ -608,29 +631,29 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
             timeOut -= 1
         })
-        dispatch_resume(timer)
+        timer.resume()
     }
 
     
     ///弹出完成百分比view
-    func showProcessFinish(name: String){
+    func showProcessFinish(_ name: String){
         //整体通知
-        let rect = UIScreen.mainScreen().bounds
+        let rect = UIScreen.main.bounds
         let startPoint = CGPoint(x: rect.width / 2 , y: rect.height / 2 - 120)
         let showView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 240))
-        showView.backgroundColor = UIColor.whiteColor()
+        showView.backgroundColor = UIColor.white
         
         //完成视图
         let successView = UIImageView(image: UIImage(named: "projectFinish"))
         successView.frame = CGRect(x: 20, y: 60, width: 160, height: 160)
         showView.addSubview(successView)
-        successView.transform = CGAffineTransformMakeScale(0.0, 0.0)
-        UIView.animateWithDuration(1 , delay: 0,
+        successView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+        UIView.animate(withDuration: 1 , delay: 0,
             usingSpringWithDamping: 1,
             initialSpringVelocity: 0,
-            options: .CurveEaseInOut,
+            options: UIViewAnimationOptions(),
             animations: {
-                successView.transform = CGAffineTransformIdentity
+                successView.transform = CGAffineTransform.identity
             }){ _ in
                 
         }
@@ -641,7 +664,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         //标题
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        titleLabel.textAlignment = .Center
+        titleLabel.textAlignment = .center
         titleLabel.text = name
         titleLabel.textColor = UIColor ( red: 0.2784, green: 0.2824, blue: 0.2902, alpha: 1.0 )
         showView.addSubview(titleLabel)
@@ -654,11 +677,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
         popover.show(showView,  point: startPoint)
         
-        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
-        let queue = dispatch_get_global_queue(qos, 0)
-        dispatch_async(queue) { () -> Void in
-            NSThread.sleepForTimeInterval(1)
-            dispatch_sync( dispatch_get_main_queue(), { () -> Void in
+        let queue = DispatchQueue.global()
+        queue.async { () -> Void in
+            Thread.sleep(forTimeInterval: 1)
+            DispatchQueue.main.sync(execute: { () -> Void in
                 popover.dismiss()
             })
         }
@@ -666,68 +688,68 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
 
     ///新增进程
-    func addProcess(sender: UIButton){
-        if let indexPath = self.projectTableView.indexPathForCell(sender.superview as! ProjectTableViewCell){
+    func addProcess(_ sender: UIButton){
+        if let indexPath = self.projectTableView.indexPath(for: sender.superview as! ProjectTableViewCell){
             //是否是未完成项目
-            if projects[indexPath.section].isFinished == .NotFinished || projects[indexPath.section].isFinished == .OverTime{
-                 print("添加项目编号为\(indexPath.section)打卡进度")
+            if projects[(indexPath as NSIndexPath).section].isFinished == .notFinished || projects[(indexPath as NSIndexPath).section].isFinished == .overTime{
+                 print("添加项目编号为\((indexPath as NSIndexPath).section)打卡进度")
                 //打卡项目
-                if projects[indexPath.section].type == .Punch{
+                if projects[(indexPath as NSIndexPath).section].type == .punch{
                     let process = Process()
-                    process.projectID = projects[indexPath.section].id
-                    let name = projects[indexPath.section].name
-                    let currentTime = NSDate()
-                    let dateFormat = NSDateFormatter()
+                    process.projectID = projects[(indexPath as NSIndexPath).section].id
+                    let name = projects[(indexPath as NSIndexPath).section].name
+                    let currentTime = Date()
+                    let dateFormat = DateFormatter()
                     dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
-                    dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-                    let old = projects[indexPath.section].percent
-                    process.recordTime = dateFormat.stringFromDate(currentTime)
+                    dateFormat.locale = Locale(identifier: "zh_CN")
+                    let old = projects[(indexPath as NSIndexPath).section].percent
+                    process.recordTime = dateFormat.string(from: currentTime)
                     process.done = 1.0
                     process.insertProcess()
-                    ProcessDate().chengeData(projects[indexPath.section].id, timeDate: currentTime, changeValue: 1.0)
-                    projects[indexPath.section].increaseDone(1.0)
-                    let new = projects[indexPath.section].percent
+                    ProcessDate().chengeData(projects[(indexPath as NSIndexPath).section].id, timeDate: currentTime, changeValue: 1.0)
+                    projects[(indexPath as NSIndexPath).section].increaseDone(1.0)
+                    let new = projects[(indexPath as NSIndexPath).section].percent
                     showProcessChange(old, newPercent: new, name: name)                    
 
                     MobClick.event("2001")
                     //记录进度项目
-                }else if projects[indexPath.section].type == .Normal{
-                     print("打开项目编号为\(indexPath.section)进度页面")
-                    let addProcessViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addProcess") as! AddProcessTableViewController
+                }else if projects[(indexPath as NSIndexPath).section].type == .normal{
+                     print("打开项目编号为\((indexPath as NSIndexPath).section)进度页面")
+                    let addProcessViewController = self.storyboard?.instantiateViewController(withIdentifier: "addProcess") as! AddProcessTableViewController
                     //设置每个cell的项目
                     addProcessViewController.delegate = self
-                    addProcessViewController.project = projects[indexPath.section]
-                    addProcessViewController.title = "\(projects[indexPath.section].name)"
+                    addProcessViewController.project = projects[(indexPath as NSIndexPath).section]
+                    addProcessViewController.title = "\(projects[(indexPath as NSIndexPath).section].name)"
                     //压入导航栏
                     addProcessViewController.view.backgroundColor = allBackground
-                    addProcessViewController.modalTransitionStyle = .CoverVertical
+                    addProcessViewController.modalTransitionStyle = .coverVertical
                     let navController = UINavigationController.init(rootViewController: addProcessViewController)
                     //状态栏和导航栏不透明
-                    navController.navigationBar.translucent = false
+                    navController.navigationBar.isTranslucent = false
                     //设置导航栏颜色
                     navController.navigationBar.barTintColor = otherNavigationBackground
 
                     navController.navigationBar.tintColor = navigationTintColor
                     navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
-                    self.navigationController?.presentViewController(navController, animated: true, completion: nil)
+                    self.navigationController?.present(navController, animated: true, completion: nil)
                     //不记录项目
-                }else if projects[indexPath.section].type == .NoRecord{
-                    print("项目编号为\(indexPath.section)完成项目")
-                    let name = projects[indexPath.section].name
-                    projects[indexPath.section].finishDone()
+                }else if projects[(indexPath as NSIndexPath).section].type == .noRecord{
+                    print("项目编号为\((indexPath as NSIndexPath).section)完成项目")
+                    let name = projects[(indexPath as NSIndexPath).section].name
+                    projects[(indexPath as NSIndexPath).section].finishDone()
                     showProcessFinish(name)
                     
                     MobClick.event("2003")
                 }
             //项目完成
-            }else if projects[indexPath.section].isFinished == .Finished{
-                let alertController = UIAlertController(title: "确认删除", message: "无法撤销删除操作", preferredStyle: .Alert)
+            }else if projects[(indexPath as NSIndexPath).section].isFinished == .finished{
+                let alertController = UIAlertController(title: "确认删除", message: "无法撤销删除操作", preferredStyle: .alert)
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "取消", style: .Default, handler: nil)
+                let alerActionOK = UIAlertAction(title: "取消", style: .default, handler: nil)
                 //创建UIAlertAction 取消按钮
-                let alerActionCancel = UIAlertAction(title: "确定", style: .Destructive, handler:  {(UIAlertAction) -> Void in
+                let alerActionCancel = UIAlertAction(title: "确定", style: .destructive, handler:  {(UIAlertAction) -> Void in
                     weak var weakSelf = self
-                    weakSelf?.projects[indexPath.section].deleteProject()
+                    weakSelf?.projects[(indexPath as NSIndexPath).section].deleteProject()
                     weakSelf?.callAlertSuccess("删除成功!")
                     weakSelf?.updateTable()
                 })
@@ -737,19 +759,19 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 
                 if let popoverPresentationController = alertController.popoverPresentationController {
                     popoverPresentationController.sourceView = self.view
-                    popoverPresentationController.sourceRect =  CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+                    popoverPresentationController.sourceRect =  CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
                 }
                 //显示alert
-                self.presentViewController(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
 
-            }else if projects[indexPath.section].isFinished == .NotBegined{
+            }else if projects[(indexPath as NSIndexPath).section].isFinished == .notBegined{
                 var type = ""
-                switch projects[indexPath.section].type{
-                case .Normal:
+                switch projects[(indexPath as NSIndexPath).section].type{
+                case .normal:
                     type = "记录进度"
-                case .Punch:
+                case .punch:
                     type = "打卡"
-                case .NoRecord:
+                case .noRecord:
                     type = "标记完成"
                 default: break
                 }
@@ -763,16 +785,16 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //创建后返回不显示已完成项目
         isShowFinished = false
         selectTag = nil
-        let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
+        let addNewProjectViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditProject") as! EditProjectTableViewController
         addNewProjectViewController.title = "新增项目"
-        addNewProjectViewController.tableState = .Add
+        addNewProjectViewController.tableState = .add
         addNewProjectViewController.delegate = self
         //设置view颜色
         addNewProjectViewController.view.backgroundColor = allBackground
-        addNewProjectViewController.modalTransitionStyle = .CoverVertical
+        addNewProjectViewController.modalTransitionStyle = .coverVertical
         let navController = UINavigationController.init(rootViewController: addNewProjectViewController)
         //状态栏和导航栏不透明
-        navController.navigationBar.translucent = false
+        navController.navigationBar.isTranslucent = false
         //设置导航栏颜色
         navController.navigationBar.barTintColor = otherNavigationBackground
         //去除导航栏分栏线
@@ -783,41 +805,41 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 //        navController.navigationBar.layer.shadowColor = navigationShadowsColor.CGColor
         navController.navigationBar.tintColor = navigationTintColor
         navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
-        self.navigationController?.presentViewController(navController, animated: true, completion: nil)
+        self.navigationController?.present(navController, animated: true, completion: nil)
          //UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
     }
     
     ///单个项目页面
-    func getMoreInfor(sender: UIButton){
-        if let indexPath = self.projectTableView.indexPathForCell(sender.superview as! ProjectTableViewCell){
-            if projects[indexPath.section].type != .NoRecord {
-                print("打开项目编号为\(indexPath.section)统计页面")
-                let statisticsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Statistics") as! StatisticsViewController
+    func getMoreInfor(_ sender: UIButton){
+        if let indexPath = self.projectTableView.indexPath(for: sender.superview as! ProjectTableViewCell){
+            if projects[(indexPath as NSIndexPath).section].type != .noRecord {
+                print("打开项目编号为\((indexPath as NSIndexPath).section)统计页面")
+                let statisticsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Statistics") as! StatisticsViewController
                 //设置view背景色
                 statisticsViewController.view.backgroundColor = allBackground
                 //设置每个cell的项目
-                statisticsViewController.project = projects[indexPath.section]
+                statisticsViewController.project = projects[(indexPath as NSIndexPath).section]
 
                 
                 //压入导航栏
                 self.navigationController?.pushViewController(statisticsViewController, animated: true)
             }else{
-                print("打开项目编号为\(indexPath.section)编辑页面")
-                let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
-                addNewProjectViewController.title = projects[indexPath.section].name
-                addNewProjectViewController.tableState = .Edit
+                print("打开项目编号为\((indexPath as NSIndexPath).section)编辑页面")
+                let addNewProjectViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditProject") as! EditProjectTableViewController
+                addNewProjectViewController.title = projects[(indexPath as NSIndexPath).section].name
+                addNewProjectViewController.tableState = .edit
                 addNewProjectViewController.view.backgroundColor = allBackground
-                addNewProjectViewController.modalTransitionStyle = .CoverVertical
+                addNewProjectViewController.modalTransitionStyle = .coverVertical
                 let navController = UINavigationController.init(rootViewController: addNewProjectViewController)
                 //状态栏和导航栏不透明
-                navController.navigationBar.translucent = false
+                navController.navigationBar.isTranslucent = false
                 //设置导航栏颜色
                 navController.navigationBar.barTintColor = otherNavigationBackground
 
                 navController.navigationBar.tintColor = navigationTintColor
                 navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
-                self.navigationController?.presentViewController(navController, animated: true, completion: nil)
-                addNewProjectViewController.project = projects[indexPath.section]
+                self.navigationController?.present(navController, animated: true, completion: nil)
+                addNewProjectViewController.project = projects[(indexPath as NSIndexPath).section]
             }
 
         }
@@ -827,7 +849,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     
     // MARK: - UITableViewDataSource
     ///确认节数
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         //表格类型
         switch tableView.tag {
             //菜单表格
@@ -845,7 +867,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
 
     ///确定每行高度
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //表格类型
         switch tableView.tag {
             //菜单表格
@@ -863,7 +885,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     ///确定行数
-    func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int {
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int {
         //表格类型
         switch tableView.tag {
             //菜单表格
@@ -881,24 +903,24 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     
     ///配置cell内容
-    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->
+    func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->
         UITableViewCell {
         switch tableView.tag {
             //菜单表格
         case tableViewTag.MuneTable:
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
-            cell.textLabel?.text = self.texts[indexPath.row]
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.textLabel?.text = self.texts[(indexPath as NSIndexPath).row]
             cell.textLabel?.textColor = navigationFontColor
             cell.textLabel?.font = muneTableFont
-            if indexPath.row == 0{
+            if (indexPath as NSIndexPath).row == 0{
                 let isShowAllSwitch = UISwitch(frame: CGRect(x: self.view.bounds.width - 65, y: 14, width: 40, height: MenuTableViewHeight))
                 isShowAllSwitch.onTintColor = switchColor
-                isShowAllSwitch.on = !isShowNotBegin
-                isShowAllSwitch.addTarget(self, action: #selector(ProjectViewController.showNotBegin), forControlEvents: .ValueChanged)
+                isShowAllSwitch.isOn = !isShowNotBegin
+                isShowAllSwitch.addTarget(self, action: #selector(ProjectViewController.showNotBegin), for: .valueChanged)
                 cell.addSubview(isShowAllSwitch)
             }
-            if indexPath.row == 1{
-                cell.accessoryType = .DisclosureIndicator
+            if (indexPath as NSIndexPath).row == 1{
+                cell.accessoryType = .disclosureIndicator
                 if isShowFinished {
                     cell.textLabel?.text = "进行中"
                 }
@@ -907,7 +929,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             
             //项目表格
         case tableViewTag.ProjectsTable:
-                let cell = projectTableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! ProjectTableViewCell
+                let cell = projectTableView.dequeueReusableCell(withIdentifier: Storyboard.CellReusIdentifier, for: indexPath) as! ProjectTableViewCell
                 
                 //复用清除之前的按钮
                 for subView in cell.subviews{
@@ -917,40 +939,40 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }
                 
                 //配置cell
-                cell.project = projects[indexPath.section]
+                cell.project = projects[(indexPath as NSIndexPath).section]
                 cell.roundBackgroundColor = allBackground
                 cell.needPercent = true
-                cell.percent = projects[indexPath.section].percent
+                cell.percent = projects[(indexPath as NSIndexPath).section].percent
                 cell.isShowState = false
                 
                 //if projects[indexPath.section].isFinished == .NotFinished{
                 //新增进度按钮
-                let addProcessFrame = CGRectMake(cell.frame.width - cell.frame.height - self.cellMargin , 0, cell.frame.height , cell.frame.height)
+                let addProcessFrame = CGRect(x: cell.frame.width - cell.frame.height - self.cellMargin , y: 0, width: cell.frame.height , height: cell.frame.height)
                 let addProcessButton = UIButton(frame: addProcessFrame)
                 
                 
                 //根据不同任务类型使用不同的图标
                 var imageString = ""
                 var selectString = ""
-                switch(projects[indexPath.section].type){
-                case .NoRecord:
-                    if projects[indexPath.section].isFinished == .NotBegined{
+                switch(projects[(indexPath as NSIndexPath).section].type){
+                case .noRecord:
+                    if projects[(indexPath as NSIndexPath).section].isFinished == .notBegined{
                         imageString = "norecordno"
                         selectString = "norecordno"
                     }else{
                         imageString = "norecord"
                         selectString = "norecordclick"
                     }
-                case .Punch:
-                    if projects[indexPath.section].isFinished == .NotBegined{
+                case .punch:
+                    if projects[(indexPath as NSIndexPath).section].isFinished == .notBegined{
                         imageString = "punchno"
                         selectString = "punchno"
                     }else{
                         imageString = "punch"
                         selectString = "punchclick"
                     }
-                case .Normal:
-                    if projects[indexPath.section].isFinished == .NotBegined{
+                case .normal:
+                    if projects[(indexPath as NSIndexPath).section].isFinished == .notBegined{
                         imageString = "recordno"
                         selectString = "recordno"
                     }else{
@@ -960,7 +982,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 default:break
                 }
                 
-                if projects[indexPath.section].isFinished == .Finished{
+                if projects[(indexPath as NSIndexPath).section].isFinished == .finished{
                     imageString = "filedelete"
                     selectString = "filedeleteclick"
                 }
@@ -974,9 +996,9 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 let buttonImage = UIImage(named: imageString)
                 let buttonSelectedIamge = UIImage(named: selectString)
                 //进行缩
-                addProcessButton.setImage(buttonImage, forState: .Normal)
-                addProcessButton.setImage(buttonSelectedIamge, forState: .Highlighted)
-                addProcessButton.addTarget(self, action: #selector(ProjectViewController.addProcess(_:)), forControlEvents: .TouchUpInside)
+                addProcessButton.setImage(buttonImage, for: UIControlState())
+                addProcessButton.setImage(buttonSelectedIamge, for: .highlighted)
+                addProcessButton.addTarget(self, action: #selector(ProjectViewController.addProcess(_:)), for: .touchUpInside)
                 addProcessButton.tag = addProcessButtonTag
                 //添加按钮
                 cell.addSubview(addProcessButton)
@@ -985,60 +1007,60 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 return cell
             //标签表格
         case tableViewTag.TagsTable:
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
-            cell.textLabel?.text = self.texts[indexPath.row]
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.textLabel?.text = self.texts[(indexPath as NSIndexPath).row]
             
             return cell
         default:
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             return cell
         }
     }
   
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //表格类型
         switch tableView.tag {
             //菜单表格
         case tableViewTag.MuneTable:
-            if indexPath.row == 1 {
+            if (indexPath as NSIndexPath).row == 1 {
                 isShowFinished = !isShowFinished
                 selectTag = nil
                 updateTable()
-            }else if indexPath.row == 2{
+            }else if (indexPath as NSIndexPath).row == 2{
                 handleCallOptions()
             }
             popover.dismiss()
             //项目表格
         case tableViewTag.ProjectsTable:
-                if projects[indexPath.section].type != .NoRecord {
-                    print("打开项目编号为\(indexPath.section)统计页面")
-                    let statisticsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Statistics") as! StatisticsViewController
+                if projects[(indexPath as NSIndexPath).section].type != .noRecord {
+                    print("打开项目编号为\((indexPath as NSIndexPath).section)统计页面")
+                    let statisticsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Statistics") as! StatisticsViewController
                     //设置view背景色
                     statisticsViewController.view.backgroundColor = allBackground
                     //设置每个cell的项目
-                    statisticsViewController.project = projects[indexPath.section]
+                    statisticsViewController.project = projects[(indexPath as NSIndexPath).section]
                     
                     
                     //压入导航栏
                     self.navigationController?.pushViewController(statisticsViewController, animated: true)
                 }else{
-                    print("打开项目编号为\(indexPath.section)编辑页面")
-                    let addNewProjectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditProject") as! EditProjectTableViewController
-                    addNewProjectViewController.title = projects[indexPath.section].name
-                    addNewProjectViewController.tableState = .Edit
+                    print("打开项目编号为\((indexPath as NSIndexPath).section)编辑页面")
+                    let addNewProjectViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditProject") as! EditProjectTableViewController
+                    addNewProjectViewController.title = projects[(indexPath as NSIndexPath).section].name
+                    addNewProjectViewController.tableState = .edit
                     addNewProjectViewController.delegate = self
                     addNewProjectViewController.view.backgroundColor = allBackground
-                    addNewProjectViewController.modalTransitionStyle = .CoverVertical
+                    addNewProjectViewController.modalTransitionStyle = .coverVertical
                     let navController = UINavigationController.init(rootViewController: addNewProjectViewController)
                     //状态栏和导航栏不透明
-                    navController.navigationBar.translucent = false
+                    navController.navigationBar.isTranslucent = false
                     //设置导航栏颜色
                     navController.navigationBar.barTintColor = otherNavigationBackground
 
                     navController.navigationBar.tintColor = navigationTintColor
                     navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
-                    self.navigationController?.presentViewController(navController, animated: true, completion: nil)
-                    addNewProjectViewController.project = projects[indexPath.section]
+                    self.navigationController?.present(navController, animated: true, completion: nil)
+                    addNewProjectViewController.project = projects[(indexPath as NSIndexPath).section]
                 }
             return
             //标签表格
@@ -1051,17 +1073,17 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
     
     // MARK: - prepareForSegue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let ivc = segue.destinationViewController as? EditProjectTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let ivc = segue.destination as? EditProjectTableViewController {
             if let identifier = segue.identifier{
                 switch identifier{
                 case "addProject":
                     ivc.title = "新增项目"
-                    ivc.tableState = .Add
+                    ivc.tableState = .add
                 default: break
                 }
             }
-        }else if let ivc = segue.destinationViewController as? TagsViewController {
+        }else if let ivc = segue.destination as? TagsViewController {
             if let identifier = segue.identifier{
                 switch identifier{
                 case "showTags":
@@ -1074,40 +1096,40 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     // MARK: - Popover presentation delegate
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
     
-    func popoverPresentationController(popoverPresentationController: UIPopoverPresentationController, willRepositionPopoverToRect rect: UnsafeMutablePointer<CGRect>, inView view: AutoreleasingUnsafeMutablePointer<UIView?>) {
+    func popoverPresentationController(_ popoverPresentationController: UIPopoverPresentationController, willRepositionPopoverTo rect: UnsafeMutablePointer<CGRect>, in view: AutoreleasingUnsafeMutablePointer<UIView>) {
         print("Will reposition popover")
     }
     
-    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         print("Did Dismiss popover")
     }
     
-    func opoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+    func opoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         print("Should Dismiss popover")
         print(popoverPresentationController.popoverBackgroundViewClass)
         return true
     }
         
     // MARK: - TagsView delegate
-    func passSelectedTag(selectedTag: Tag?){
+    func passSelectedTag(_ selectedTag: Tag?){
         selectTag = selectedTag
         return
     }
     
     // MARK: - addProcess delegate
-    func addProcessTableViewAct(old: Double, new: Double, name: String){
+    func addProcessTableViewAct(_ old: Double, new: Double, name: String){
         showProcessChange(old, newPercent: new, name: name)
     }
     // MARK: - UIScrollViewDelegate
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //scrollView已经有拖拽手势，直接拿到scrollView的拖拽手势
         let pan = scrollView.panGestureRecognizer
         //获取到拖拽的速度 >0 向下拖动 <0 向上拖动
-        let velocity = pan.velocityInView(scrollView).y
+        let velocity = pan.velocity(in: scrollView).y
         
         if velocity < -5 {
             //向上拖动，隐藏导航栏
@@ -1125,20 +1147,20 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 
     
     // MARK: - UIGestureRecognizerDelegate
-    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if navigationController?.viewControllers.count >= 2 {
             return true
         }
         return false
     }
     // MARK: - EditProjectTableViewDelegate
-    func goBackAct(state: EditProjectBackState){
+    func goBackAct(_ state: EditProjectBackState){
         switch state{
-        case .AddSuccess:
+        case .addSuccess:
             callAlertSuccess("创建成功")
 //        case .DeleteSucceess:
 //            callAlertSuccess("删除成功!")
-        case .EditSucceess:
+        case .editSucceess:
             callAlertSuccess("编辑成功")
         default: break
         }

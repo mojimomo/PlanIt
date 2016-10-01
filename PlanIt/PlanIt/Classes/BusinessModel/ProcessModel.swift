@@ -18,14 +18,14 @@ class Process: NSObject {
     var recordTime = ""{
         didSet{
             if recordTime != ""{
-                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()!
+                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()! as Date
             }
         }
     }
     ///完成工作量
     var done: Double = -1
     ///记录时间
-    var recordTimeDate = NSDate()
+    var recordTimeDate = Date()
     //2016年11月
     var month = ""
     //5日11点12分
@@ -40,12 +40,12 @@ class Process: NSObject {
     init(dict : [String : AnyObject]) {
         super.init()
         //setValuesForKeysWithDictionary(dict)
-        id = dict["id"]!.integerValue
-        recordTime = String(dict["recordTime"]!)
-        projectID = dict["projectID"]!.integerValue
+        id = dict["id"]!.intValue
+        recordTime = String(describing: dict["recordTime"]!)
+        projectID = dict["projectID"]!.intValue
         done = dict["done"]!.doubleValue
-        remark = String(dict["remark"]!)
-        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()!
+        remark = String(describing: dict["remark"]!)
+        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()! as Date
         month = recordTimeDate.FormatToStringYYYYMM()
         day = recordTimeDate.FormatToStringDDHHMM()
     }
@@ -73,7 +73,7 @@ class Process: NSObject {
     }
     
     /// 加载关于某项目所有的数据
-    func loadData(projectID: Int) -> [Process]{
+    func loadData(_ projectID: Int) -> [Process]{
         var processes : [Process] = [Process]()
         
         // 1.获取查询语句

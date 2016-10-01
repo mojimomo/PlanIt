@@ -32,38 +32,38 @@ class ProjectTableViewCell: RoundTableviewCell{
             if !isShowState{
                 projectName = project.name
             }else{
-                if project.isFinished == .Finished{
+                if project.isFinished == .finished{
                     return
                 }
                 switch project.type{
                     //不记录进度
-                case .NoRecord:
-                    if project.isFinished == .OverTime{
+                case .noRecord:
+                    if project.isFinished == .overTime{
                         let days = project.endTimeDate.compareCurrentTime()
                         projectName = "项目已超出 " + days
-                    }else if project.isFinished == .NotBegined{
+                    }else if project.isFinished == .notBegined{
                         let days = project.beginTimeDate.compareCurrentTime()
                         projectName = "距项目开始还有 " + days
                     }else{
                         let days = project.endTimeDate.compareCurrentTime()
                         projectName = "项目剩余 " + days
                     }
-                case .Normal:
-                    if project.isFinished == .OverTime{
+                case .normal:
+                    if project.isFinished == .overTime{
                         let days = project.endTimeDate.compareCurrentTime()
                         projectName = "项目已超出 " + days
-                    }else if project.isFinished == .NotBegined{
+                    }else if project.isFinished == .notBegined{
                         let days = project.beginTimeDate.compareCurrentTime()
                         projectName = "距项目开始还有 " + days
                     }else{
-                        let days = NSDate().daysToEndDate(project.endTimeDate)
+                        let days = Date().daysToEndDate(project.endTimeDate)
                         projectName = "余下每天需完成 \((project.rest / Double(days)).toIntCarry()) " + project.unit
                     }
-                case .Punch:
-                    if project.isFinished == .OverTime{
+                case .punch:
+                    if project.isFinished == .overTime{
                         let days = project.endTimeDate.compareCurrentTime()
                         projectName = "项目已超出 " + days
-                    }else if project.isFinished == .NotBegined{
+                    }else if project.isFinished == .notBegined{
                         let days = project.beginTimeDate.compareCurrentTime()
                         projectName = "距项目开始还有 " + days
                     }else{
@@ -116,13 +116,13 @@ class ProjectTableViewCell: RoundTableviewCell{
         if let project = self.project{
             //根据不同状态更改项目名称颜色
             switch(project.isFinished){
-            case .NotBegined:
+            case .notBegined:
                 projectNameLabel?.textColor = notBeginFontColor
-            case .NotFinished:
+            case .notFinished:
                 projectNameLabel?.textColor = notFinishedFontColor
-            case .Finished:
+            case .finished:
                 projectNameLabel?.textColor = FinishedFontColor
-            case .OverTime:
+            case .overTime:
                 projectNameLabel?.textColor = overTimeFontColor
             default:break
             }

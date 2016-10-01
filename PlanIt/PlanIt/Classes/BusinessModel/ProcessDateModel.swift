@@ -17,14 +17,14 @@ class ProcessDate: NSObject {
     var recordTime = ""{
         didSet{
             if recordTime != ""{
-                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()!
+                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()! as Date
             }
         }
     }
     ///完成工作量
     var done: Double = -1
     ///记录时间
-    var recordTimeDate = NSDate()
+    var recordTimeDate = Date()
     //2016年11月
     var month = ""
     //2016年11月第1周
@@ -39,11 +39,11 @@ class ProcessDate: NSObject {
     init(dict : [String : AnyObject]) {
         super.init()
         //setValuesForKeysWithDictionary(dict)
-        id = dict["id"]!.integerValue
-        recordTime = String(dict["recordTime"]!)
-        projectID = dict["projectID"]!.integerValue
+        id = dict["id"]!.intValue
+        recordTime = String(describing: dict["recordTime"]!)
+        projectID = dict["projectID"]!.intValue
         done = dict["done"]!.doubleValue
-        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()!
+        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()! as Date
         month = recordTimeDate.FormatToStringYYYYMM()
         week = recordTimeDate.FormatToStringYYYY() + "第\(recordTimeDate.getWeekOfYear())周"
         day = recordTimeDate.FormatToStringMMMMDD()
@@ -51,7 +51,7 @@ class ProcessDate: NSObject {
     
     // MARK:- 和数据库之间的操作
     /// 加载关于某项目所有的数据
-    func loadData(projectID: Int) -> [ProcessDate]{
+    func loadData(_ projectID: Int) -> [ProcessDate]{
         var processDates : [ProcessDate] = [ProcessDate]()
         
         // 1.获取查询语句
@@ -72,7 +72,7 @@ class ProcessDate: NSObject {
     }
     
     ///检查记录是否存在
-    func checkIsExist(projectID: Int, timeString: String) -> ProcessDate?{
+    func checkIsExist(_ projectID: Int, timeString: String) -> ProcessDate?{
         // 1.获取查询语句
         let querySQL = "SELECT * FROM t_processdate WHERE projectID = '\(projectID)' AND recordTime = '\(timeString)';"
         
@@ -123,7 +123,7 @@ class ProcessDate: NSObject {
     }
     
     ///改变数据
-    func chengeData(projectID: Int, timeDate: NSDate, changeValue: Double){
+    func chengeData(_ projectID: Int, timeDate: Date, changeValue: Double){
         let timeString = timeDate.FormatToStringYYYYMMDD()
         if let processDate = checkIsExist(projectID, timeString: timeString){
             processDate.done += changeValue

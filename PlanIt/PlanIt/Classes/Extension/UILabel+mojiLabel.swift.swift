@@ -14,21 +14,22 @@ extension UILabel {
         self.init()
         
         textColor = fontColor
-        font = UIFont.systemFontOfSize(fontSize)
+        font = UIFont.systemFont(ofSize: fontSize)
   
     }
     
-    func changeTextAttributeByString(needChangeString: String, font: UIFont, color: UIColor){
+    func changeTextAttributeByString(_ needChangeString: String, font: UIFont, color: UIColor){
+        return
         let noteString = NSMutableAttributedString(string: self.text!)
-        if let index = noteString.string.rangeOfString(needChangeString){
-            let range = NSMakeRange(Int(String(index.startIndex))!, needChangeString.characters.count)
+        if let index = noteString.string.range(of: needChangeString){
+            let range = NSMakeRange(Int(String(describing: index.lowerBound))!, needChangeString.characters.count)
             noteString.addAttributes([NSForegroundColorAttributeName : color], range: range)
             noteString.addAttributes([NSFontAttributeName : font], range: range)
             self.attributedText = noteString
         }
     }
     
-    func changeTextAttributeByRange(range: NSRange, font: UIFont, color: UIColor){
+    func changeTextAttributeByRange(_ range: NSRange, font: UIFont, color: UIColor){
         let noteString = NSMutableAttributedString(string: self.text!)
         noteString.addAttributes([NSForegroundColorAttributeName : color], range: range)
         noteString.addAttributes([NSFontAttributeName : font], range: range)

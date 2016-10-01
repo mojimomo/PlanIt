@@ -33,8 +33,8 @@ class Tag: NSObject{
     init(dict : [String : AnyObject]) {
         super.init()
         //setValuesForKeysWithDictionary(dict)
-        id = dict["id"]!.integerValue
-        name = String(dict["name"]!)
+        id = dict["id"]!.intValue
+        name = String(describing: dict["name"]!)
         textContent = name
     }
     
@@ -61,7 +61,7 @@ class Tag: NSObject{
     }
     
     /// 加载所有的数据
-    func loadData(id: Int) -> Tag?{
+    func loadData(_ id: Int) -> Tag?{
        
         // 1.获取查询语句
         let querySQL = "SELECT * FROM t_tag WHERE id = '\(id)';"
@@ -81,7 +81,7 @@ class Tag: NSObject{
     }
     
     /// 加载所有的数据
-    class func loadDataFromName(name: String) -> Tag?{
+    class func loadDataFromName(_ name: String) -> Tag?{
         // 1.获取查询语句
         let querySQL = "SELECT * FROM t_tag WHERE name = '\(name)';"
         

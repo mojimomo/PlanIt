@@ -673,6 +673,7 @@
 					BEA5209B1CCF417F00FFE43E = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = CYTA756UDU;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -681,10 +682,12 @@
 					};
 					BEA520B21CCF417F00FFE43E = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = BEA5209B1CCF417F00FFE43E;
 					};
 					BEA520BD1CCF417F00FFE43E = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = BEA5209B1CCF417F00FFE43E;
 					};
 				};
@@ -999,6 +1002,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1023,6 +1027,7 @@
 				PRODUCT_NAME = Markplan;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1035,6 +1040,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItTests;
 				PRODUCT_NAME = Markplan;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Markplan.app/Markplan";
 			};
 			name = Debug;
@@ -1047,6 +1053,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItTests;
 				PRODUCT_NAME = Markplan;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Markplan.app/Markplan";
 			};
 			name = Release;
@@ -1058,6 +1065,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItUITests;
 				PRODUCT_NAME = Markplan;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PlanIt;
 				USES_XCTRUNNER = YES;
 			};
@@ -1070,6 +1078,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItUITests;
 				PRODUCT_NAME = Markplan;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PlanIt;
 				USES_XCTRUNNER = YES;
 			};
@@ -1133,6 +1142,7 @@
 				PRODUCT_NAME = Markplan;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Ad Hoc";
@@ -1145,6 +1155,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItTests;
 				PRODUCT_NAME = Markplan;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Markplan.app/Markplan";
 			};
 			name = "Ad Hoc";
@@ -1156,6 +1167,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Moji.PlanItUITests;
 				PRODUCT_NAME = Markplan;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PlanIt;
 				USES_XCTRUNNER = YES;
 			};

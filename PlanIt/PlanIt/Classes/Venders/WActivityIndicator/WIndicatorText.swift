@@ -13,30 +13,30 @@ let TagWIndicatorText       = 99999
 
 class WIndicatorText: UIView {
     
-    private let margin:CGFloat                  = 20.0
-    private let maxWidth:CGFloat                = UIScreen.mainScreen().bounds.size.width - 2 * 20
+    fileprivate let margin:CGFloat                  = 20.0
+    fileprivate let maxWidth:CGFloat                = UIScreen.main.bounds.size.width - 2 * 20
 
-    private let labelFontSize:CGFloat           = 16.0
+    fileprivate let labelFontSize:CGFloat           = 16.0
     
-    private var bgView                          = UIView()
-    private var label                           = UILabel()
+    fileprivate var bgView                          = UIView()
+    fileprivate var label                           = UILabel()
     
-    private var labelText: String = ""
+    fileprivate var labelText: String = ""
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    convenience init(view:UIView, text:String, timeOut interval:NSTimeInterval) {
+    convenience init(view:UIView, text:String, timeOut interval:TimeInterval) {
         
         self.init(frame: view.bounds)
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
 
         self.labelText = text
         self.tag = TagWIndicatorText
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserverForName(UIDeviceOrientationDidChangeNotification, object:nil, queue:NSOperationQueue.mainQueue(), usingBlock:{notification in
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIDeviceOrientationDidChange, object:nil, queue:OperationQueue.main, using:{notification in
             
             self.frame = self.superview!.bounds
             self.setNeedsDisplay()
@@ -44,11 +44,11 @@ class WIndicatorText: UIView {
         
 
         let time = UInt64(interval) * NSEC_PER_SEC
-        let popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(time));
+        let popTime:DispatchTime = DispatchTime.now() + Double(Int64(time)) / Double(NSEC_PER_SEC);
 
-        dispatch_after(popTime, dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.asyncAfter(deadline: popTime) { () -> Void in
             
-            UIView.animateWithDuration(interval, animations: { () -> Void in
+            UIView.animate(withDuration: interval, animations: { () -> Void in
                 self.alpha = 0.0
             }, completion: { (isFinish ) -> Void in
                 self.removeFromSuperview()
@@ -59,18 +59,18 @@ class WIndicatorText: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        bgView.backgroundColor      = UIColor.blackColor()
+        bgView.backgroundColor      = UIColor.black
         bgView.layer.cornerRadius   = 10.0
         bgView.layer.masksToBounds  = true
         
         self.addSubview(bgView)
         
-        label.font                      = UIFont.systemFontOfSize(labelFontSize)
+        label.font                      = UIFont.systemFont(ofSize: labelFontSize)
         label.adjustsFontSizeToFitWidth = false
-        label.textAlignment             = .Center
-        label.opaque                    = false
-        label.backgroundColor           = UIColor.clearColor()
-        label.textColor                 = UIColor.whiteColor()
+        label.textAlignment             = .center
+        label.isOpaque                    = false
+        label.backgroundColor           = UIColor.clear
+        label.textColor                 = UIColor.white
         label.numberOfLines             = 0
         
         bgView.addSubview(label)
@@ -83,9 +83,9 @@ class WIndicatorText: UIView {
 
         let maxLabelSize = CGSize(width: 200, height: Int.max)
 
-        let rect:CGRect = tempString.boundingRectWithSize(maxLabelSize,
-                                                          options: NSStringDrawingOptions.UsesLineFragmentOrigin,
-                                                          attributes: [NSFontAttributeName:UIFont.systemFontOfSize(labelFontSize)],
+        let rect:CGRect = tempString.boundingRect(with: maxLabelSize,
+                                                          options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                                          attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: labelFontSize)],
                                                           context: nil)
 
         let stringWidth     = rect.size.width

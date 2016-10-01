@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 let colorUnselectedTag = UIColor ( red: 0.9451, green: 0.9412, blue: 0.9294, alpha: 1.0 )
 let colorSelectedTag = UIColor.colorFromHex("#B4B2B0")
@@ -15,36 +35,36 @@ let colorTextUnSelectedTag = UIColor(red:0.2549, green:0.2667, blue:0.2784, alph
 let colorTextSelectedTag = UIColor(red:0.2549, green:0.2667, blue:0.2784, alpha:1.0)
 
 enum RRTagType{
-    case Normal
-    case Manage
+    case normal
+    case manage
 }
 
 class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    private var tags: Array<Tag>!
-    private var navigationBarItem: UINavigationItem!
-    private var leftButton: UIBarButtonItem!
-    private var rigthButton: UIBarButtonItem!
-    private var _totalTagsSelected = 0
-    private let addTagView = RRAddTagView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 64))
-    private var heightKeyboard: CGFloat = 0
-    var type : RRTagType = .Normal{
+    fileprivate var tags: Array<Tag>!
+    fileprivate var navigationBarItem: UINavigationItem!
+    fileprivate var leftButton: UIBarButtonItem!
+    fileprivate var rigthButton: UIBarButtonItem!
+    fileprivate var _totalTagsSelected = 0
+    fileprivate let addTagView = RRAddTagView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64))
+    fileprivate var heightKeyboard: CGFloat = 0
+    var type : RRTagType = .normal{
         didSet{
-            if type == .Normal{
+            if type == .normal{
                 self.navigationBarItem.title = "标签选择"
             }else{
                 self.navigationBarItem.title = "管理标签"
             }
         }
     }
-    var blockFinih: ((selectedTags: Array<Tag>, unSelectedTags: Array<Tag>) -> ())!
+    var blockFinih: (( Array<Tag>,  Array<Tag>) -> ())!
     var blockCancel: (() -> ())!
     var isEditMod = false{
         didSet{
             if isEditMod {
                 self.navigationBarItem.title = "编辑标签"
             }else{
-                if type == .Normal{
+                if type == .normal{
                     self.navigationBarItem.title = "标签选择"
                 }else{
                     self.navigationBarItem.title = "管理标签"
@@ -59,15 +79,15 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         //let layoutCollectionView = UICollectionViewFlowLayout()
         let layoutCollectionView =  UICollectionViewLeftAlignedLayout()
         layoutCollectionView.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        layoutCollectionView.itemSize = CGSizeMake(90, 20)
+        layoutCollectionView.itemSize = CGSize(width: 90, height: 20)
         layoutCollectionView.minimumLineSpacing = 10
         layoutCollectionView.minimumInteritemSpacing = 5
         let collectionTag = UICollectionView(frame: self.view.frame, collectionViewLayout: layoutCollectionView )
         collectionTag.contentInset = UIEdgeInsets(top: 84, left: 0, bottom: 20, right: 0)
         collectionTag.delegate = self
         collectionTag.dataSource = self
-        collectionTag.backgroundColor = UIColor.whiteColor()
-        collectionTag.registerClass(RRTagCollectionViewCell.self, forCellWithReuseIdentifier: RRTagCollectionViewCellIdentifier)
+        collectionTag.backgroundColor = UIColor.white
+        collectionTag.register(RRTagCollectionViewCell.self, forCellWithReuseIdentifier: RRTagCollectionViewCellIdentifier)
         return collectionTag
     }()
     
@@ -75,34 +95,34 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         let addNewTagCell = RRTagCollectionViewCell()
         addNewTagCell.contentView.addSubview(addNewTagCell.textContent)
         addNewTagCell.textContent.text = "+"
-        addNewTagCell.frame.size = CGSizeMake(40, 40)
+        addNewTagCell.frame.size = CGSize(width: 40, height: 40)
         addNewTagCell.backgroundColor = UIColor ( red: 0.949, green: 0.9451, blue: 0.9373, alpha: 1.0 )
         return addNewTagCell
     }()
     
     lazy var controlPanelEdition: UIView = {
-        let controlPanel = UIView(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height + 50, UIScreen.mainScreen().bounds.size.width, 50))
-        controlPanel.backgroundColor = UIColor.whiteColor()
+        let controlPanel = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height + 50, width: UIScreen.main.bounds.size.width, height: 50))
+        controlPanel.backgroundColor = UIColor.white
         
-        let buttonCancel = UIButton(frame: CGRectMake(10, 10, 100, 30))
-        buttonCancel.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).CGColor
+        let buttonCancel = UIButton(frame: CGRect(x: 10, y: 10, width: 100, height: 30))
+        buttonCancel.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).cgColor
         buttonCancel.layer.borderWidth = 2
-        buttonCancel.backgroundColor = UIColor.whiteColor()
-        buttonCancel.setTitle("取消", forState: UIControlState.Normal)
-        buttonCancel.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        buttonCancel.titleLabel?.font = UIFont.boldSystemFontOfSize(17)
+        buttonCancel.backgroundColor = UIColor.white
+        buttonCancel.setTitle("取消", for: UIControlState())
+        buttonCancel.setTitleColor(UIColor.black, for: UIControlState())
+        buttonCancel.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         buttonCancel.layer.cornerRadius = 15
-        buttonCancel.addTarget(self, action: #selector(RRTagController.cancelEditTag), forControlEvents: UIControlEvents.TouchUpInside)
+        buttonCancel.addTarget(self, action: #selector(RRTagController.cancelEditTag), for: UIControlEvents.touchUpInside)
 
-        let buttonAccept = UIButton(frame: CGRectMake(UIScreen.mainScreen().bounds.size.width - 110, 10, 100, 30))
-        buttonAccept.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).CGColor
+        let buttonAccept = UIButton(frame: CGRect(x: UIScreen.main.bounds.size.width - 110, y: 10, width: 100, height: 30))
+        buttonAccept.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).cgColor
         buttonAccept.layer.borderWidth = 2
-        buttonAccept.backgroundColor = UIColor.whiteColor()
-        buttonAccept.setTitle("创建", forState: UIControlState.Normal)
-        buttonAccept.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        buttonAccept.titleLabel?.font = UIFont.boldSystemFontOfSize(17)
+        buttonAccept.backgroundColor = UIColor.white
+        buttonAccept.setTitle("创建", for: UIControlState())
+        buttonAccept.setTitleColor(UIColor.black, for: UIControlState())
+        buttonAccept.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         buttonAccept.layer.cornerRadius = 15
-        buttonAccept.addTarget(self, action: #selector(RRTagController.createNewTag), forControlEvents: UIControlEvents.TouchUpInside)
+        buttonAccept.addTarget(self, action: #selector(RRTagController.createNewTag), for: UIControlEvents.touchUpInside)
         
         controlPanel.addSubview(buttonCancel)
         controlPanel.addSubview(buttonAccept)
@@ -110,20 +130,20 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     }()
     
     lazy var navigationBar: UINavigationBar = {
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 64))
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64))
         
         self.navigationBarItem = UINavigationItem(title: "标签选择")
         self.navigationBarItem.leftBarButtonItem = self.leftButton
         
         navigationBar.titleTextAttributes = {navigationTitleAttribute}()
-        navigationBar.pushNavigationItem(self.navigationBarItem, animated: true)
+        navigationBar.pushItem(self.navigationBarItem, animated: true)
         navigationBar.tintColor = navigationTintColor
         navigationBar.barTintColor = otherNavigationBackground
         return navigationBar
     }()
     
     func cancelTagController() {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.dismiss(animated: true, completion: { () -> Void in
             self.blockCancel()
         })
     }
@@ -146,17 +166,17 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             return
         }
         
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            self.blockFinih(selectedTags: selected, unSelectedTags: unSelected)
+        self.dismiss(animated: true, completion: { () -> Void in
+            self.blockFinih(selected,  unSelected)
         })
     }
     
     func cancelEditTag() {
         self.view.endEditing(true)
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.4,
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.4,
             initialSpringVelocity: 0.4, options: UIViewAnimationOptions(), animations: { () -> Void in
             self.addTagView.frame.origin.y = 0
-            self.controlPanelEdition.frame.origin.y = UIScreen.mainScreen().bounds.size.height
+            self.controlPanelEdition.frame.origin.y = UIScreen.main.bounds.size.height
             self.collectionTag.alpha = 1
             }) { (anim:Bool) -> Void in
             
@@ -164,18 +184,18 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     func createNewTag() {
-        let spaceSet = NSCharacterSet.whitespaceCharacterSet()
-        let contentTag = addTagView.textEdit.text.stringByTrimmingCharactersInSet(spaceSet)
+        let spaceSet = CharacterSet.whitespaces
+        let contentTag = addTagView.textEdit.text.trimmingCharacters(in: spaceSet)
         if strlen(contentTag) > 0 {
             let newTag = Tag(name: contentTag)
-            tags.insert(newTag, atIndex: tags.count)
+            tags.insert(newTag, at: tags.count)
             newTag.insertTag()
             collectionTag.reloadData()            
         }
         cancelEditTag()
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isEditMod{
             return editTags.count
         }else{
@@ -183,46 +203,46 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
             if isEditMod{
-                return RRTagCollectionViewCell.contentHeight(editTags[indexPath.row].textContent)
+                return RRTagCollectionViewCell.contentHeight(editTags[(indexPath as NSIndexPath).row].textContent)
             }else{
-                if indexPath.row < tags.count {
-                    return RRTagCollectionViewCell.contentHeight(tags[indexPath.row].textContent)
+                if (indexPath as NSIndexPath).row < tags.count {
+                    return RRTagCollectionViewCell.contentHeight(tags[(indexPath as NSIndexPath).row].textContent)
                 }
-                return CGSizeMake(40, 40)
+                return CGSize(width: 40, height: 40)
             }
 
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedCell: RRTagCollectionViewCell? = collectionView.cellForItemAtIndexPath(indexPath) as? RRTagCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCell: RRTagCollectionViewCell? = collectionView.cellForItem(at: indexPath) as? RRTagCollectionViewCell
         if isEditMod{
-            if editTags[indexPath.row].isSelected == false {
-                editTags[indexPath.row].isSelected = true
-                selectedCell?.animateSelection(editTags[indexPath.row].isSelected)
+            if editTags[(indexPath as NSIndexPath).row].isSelected == false {
+                editTags[(indexPath as NSIndexPath).row].isSelected = true
+                selectedCell?.animateSelection(editTags[(indexPath as NSIndexPath).row].isSelected)
             }
             else {
-                editTags[indexPath.row].isSelected = false
-                selectedCell?.animateSelection(editTags[indexPath.row].isSelected)
+                editTags[(indexPath as NSIndexPath).row].isSelected = false
+                selectedCell?.animateSelection(editTags[(indexPath as NSIndexPath).row].isSelected)
             }
         }else{
-            if indexPath.row < tags.count {
-                if tags[indexPath.row].isSelected == false && totalTagsSelected >= 3{
+            if (indexPath as NSIndexPath).row < tags.count {
+                if tags[(indexPath as NSIndexPath).row].isSelected == false && totalTagsSelected >= 3{
                     return
                 }
                 
-                if type != .Manage {
-                    _ = tags[indexPath.row]
-                    if tags[indexPath.row].isSelected == false {
-                        tags[indexPath.row].isSelected = true
-                        selectedCell?.animateSelection(tags[indexPath.row].isSelected)
+                if type != .manage {
+                    _ = tags[(indexPath as NSIndexPath).row]
+                    if tags[(indexPath as NSIndexPath).row].isSelected == false {
+                        tags[(indexPath as NSIndexPath).row].isSelected = true
+                        selectedCell?.animateSelection(tags[(indexPath as NSIndexPath).row].isSelected)
                         totalTagsSelected += 1
                     }
                     else {
-                        tags[indexPath.row].isSelected = false
-                        selectedCell?.animateSelection(tags[indexPath.row].isSelected)
+                        tags[(indexPath as NSIndexPath).row].isSelected = false
+                        selectedCell?.animateSelection(tags[(indexPath as NSIndexPath).row].isSelected)
                         totalTagsSelected -= 1
                     }
                 }
@@ -237,33 +257,33 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
 //                                    self.addTagView.textEdit.becomeFirstResponder()
 //                                    print("")
 //                            })
-                let alerController = UIAlertController(title: "创建标签", message: "请输入新的标签", preferredStyle: .Alert)
+                let alerController = UIAlertController(title: "创建标签", message: "请输入新的标签", preferredStyle: .alert)
                 
                 //创建TextField
-                alerController.addTextFieldWithConfigurationHandler({ (textField) -> Void in
-                    textField.textAlignment = .Center
+                alerController.addTextField(configurationHandler: { (textField) -> Void in
+                    textField.textAlignment = .center
                     textField.placeholder = "例如: 编程, 健身"
                 })
                 
                 //添加lebel观察者
-                NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(RRTagController.textFiledEditChanged(_:)),name: UITextFieldTextDidChangeNotification ,object: (alerController.textFields?.first)!)
+                NotificationCenter.default.addObserver(self,selector:  #selector(RRTagController.textFiledEditChanged(_:)),name: NSNotification.Name.UITextFieldTextDidChange ,object: (alerController.textFields?.first)!)
                 
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
+                let alerActionOK = UIAlertAction(title: "确定", style: .destructive, handler: { (UIAlertAction) -> Void in
                     if alerController.textFields?.count > 0 {
                         if let textField = (alerController.textFields?.first)! ?? nil{
                             if textField.text != "" && textField.text?.characters.count < 9{
-                                let spaceSet = NSCharacterSet.whitespaceCharacterSet()
-                                let contentTag = textField.text!.stringByTrimmingCharactersInSet(spaceSet)
+                                let spaceSet = CharacterSet.whitespaces
+                                let contentTag = textField.text!.trimmingCharacters(in: spaceSet)
                                 if strlen(contentTag) > 0 {
                                     if (Tag.loadDataFromName(contentTag) == nil){
                                         let newTag = Tag(name: contentTag)
                                         newTag.insertTag()
                                         if let tag = Tag.loadDataFromName(contentTag){
-                                            self.tags.insert(tag, atIndex: self.tags.count)
+                                            self.tags.insert(tag, at: self.tags.count)
                                             self.collectionTag.reloadData()
                                             //删除观察者
-                                            NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: (alerController.textFields?.first)!)
+                                            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: (alerController.textFields?.first)!)
                                         }
                                     }else{
                                         self.callAlert("创建失败", message: "该标签已存在！")
@@ -278,9 +298,9 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 })
                 
                 //创建UIAlertAction 取消按钮
-                let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler:{(UIAlertAction) -> Void in
+                let alerActionCancel = UIAlertAction(title: "取消", style: .default, handler:{(UIAlertAction) -> Void in
                     //删除观察者
-                    NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: (alerController.textFields?.first)!)
+                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: (alerController.textFields?.first)!)
                     })
 
                 //添加动作
@@ -290,13 +310,13 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 //解决collectlayout错误
                 alerController.view.setNeedsLayout()
                 //显示alert
-                self.presentViewController(alerController, animated: true, completion: nil)
+                self.present(alerController, animated: true, completion: nil)
             }
         }
      }
     
     ///观察是否超出字符
-    func textFiledEditChanged(sender: NSNotification){
+    func textFiledEditChanged(_ sender: Notification){
         let textField = sender.object as! UITextField
         let kMaxLength = 8
         let toBeString = textField.text!
@@ -305,35 +325,35 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if selectedRange == nil {
             if (toBeString.characters.count > kMaxLength){
-                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequenceAtIndex(kMaxLength)
+                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequence(at: kMaxLength)
                 if rangeIndex.length == 1
                 {
-                    textField.text = (toBeString as NSString).substringToIndex(kMaxLength)
+                    textField.text = (toBeString as NSString).substring(to: kMaxLength)
                 }
                 else
                 {
-                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequencesForRange(NSMakeRange(0, kMaxLength))
-                    textField.text = (toBeString as NSString).substringToIndex(rangeRange.length)
+                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequences(for: NSMakeRange(0, kMaxLength))
+                    textField.text = (toBeString as NSString).substring(to: rangeRange.length)
                 }
             }
         }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if isEditMod{
-            let cell: RRTagCollectionViewCell? = collectionView.dequeueReusableCellWithReuseIdentifier(RRTagCollectionViewCellIdentifier, forIndexPath: indexPath) as? RRTagCollectionViewCell
+            let cell: RRTagCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: RRTagCollectionViewCellIdentifier, for: indexPath) as? RRTagCollectionViewCell
 
-            let currentTag = editTags[indexPath.row]
+            let currentTag = editTags[(indexPath as NSIndexPath).row]
                 cell?.initContent(currentTag)
 
             return cell!
             
         }else{
-            let cell: RRTagCollectionViewCell? = collectionView.dequeueReusableCellWithReuseIdentifier(RRTagCollectionViewCellIdentifier, forIndexPath: indexPath) as? RRTagCollectionViewCell
+            let cell: RRTagCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: RRTagCollectionViewCellIdentifier, for: indexPath) as? RRTagCollectionViewCell
             
-            if indexPath.row < tags.count {
-                let currentTag = tags[indexPath.row]
+            if (indexPath as NSIndexPath).row < tags.count {
+                let currentTag = tags[(indexPath as NSIndexPath).row]
                 cell?.initContent(currentTag)
             }
             else {
@@ -343,12 +363,12 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         // TODO: change value
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        if let userInfo = (notification as NSNotification).userInfo {
+            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 heightKeyboard = keyboardSize.height
-                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4,
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4,
                     options: UIViewAnimationOptions(), animations: { () -> Void in
                     self.controlPanelEdition.frame.origin.y = self.view.frame.size.height - self.heightKeyboard - 50
                 }, completion: nil)
@@ -359,23 +379,23 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         heightKeyboard = 0
     }
     
     func handleCancelEditMod(){
         isEditMod = false
-        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.cancelTagController))
-        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.finishTagController))
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.done, target: self, action: #selector(RRTagController.cancelTagController))
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: UIBarButtonItemStyle.done, target: self, action: #selector(RRTagController.finishTagController))
         tags = Tag().loadAllData()
         collectionTag.reloadData()
     }
     
     func handleDelete(){
         if isEditMod{
-            let alerController = UIAlertController(title: "是否确定删除所选标签？", message: nil, preferredStyle: .ActionSheet)
+            let alerController = UIAlertController(title: "是否确定删除所选标签？", message: nil, preferredStyle: .actionSheet)
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .Destructive, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: "确定", style: .destructive, handler: { (UIAlertAction) -> Void in
                 for tag in self.editTags{
                     if tag.isSelected == true{
                         tag.deleteTag()
@@ -384,27 +404,27 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 self.handleCancelEditMod()
             })
             //创建UIAlertAction 取消按钮
-            let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+            let alerActionCancel = UIAlertAction(title: "取消", style: .default, handler: { (UIAlertAction) -> Void in
             })
             //添加动作
             alerController.addAction(alerActionOK)
             alerController.addAction(alerActionCancel)
             //显示alert
-            self.presentViewController(alerController, animated: true, completion: { () -> Void in
+            self.present(alerController, animated: true, completion: { () -> Void in
                 
             })
 
         }
     }
     
-    func handleLongPress(gesture: UILongPressGestureRecognizer){
-        if gesture.state ==  .Began{
-            let point = gesture.locationInView(self.collectionTag)
-            if let indexPath = self.collectionTag.indexPathForItemAtPoint(point){
-                if indexPath.row < tags.count{
+    func handleLongPress(_ gesture: UILongPressGestureRecognizer){
+        if gesture.state ==  .began{
+            let point = gesture.location(in: self.collectionTag)
+            if let indexPath = self.collectionTag.indexPathForItem(at: point){
+                if (indexPath as NSIndexPath).row < tags.count{
                     isEditMod = true
-                    self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.handleCancelEditMod))
-                    self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(RRTagController.handleDelete))
+                    self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: UIBarButtonItemStyle.done, target: self, action: #selector(RRTagController.handleCancelEditMod))
+                    self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: UIBarButtonItemStyle.done, target: self, action: #selector(RRTagController.handleDelete))
                     editTags = Tag().loadAllData()
                     collectionTag.reloadData()
                 }
@@ -429,28 +449,28 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         for tag in tags{
             if tag.isSelected == true{
                 totalTagsSelected += 1
             }
         }
-        self.view.backgroundColor = UIColor.whiteColor()
-        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(RRTagController.cancelTagController))
-        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(RRTagController.finishTagController))
+        self.view.backgroundColor = UIColor.white
+        self.navigationBarItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel"), style: .done, target: self, action: #selector(RRTagController.cancelTagController))
+        self.navigationBarItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ok"), style: .done, target: self, action: #selector(RRTagController.finishTagController))
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //判断是否第一次打开此页面
-        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchTagManagerView") as Bool!) == false){
+        if((UserDefaults.standard.bool(forKey: "IsFirstLaunchTagManagerView") as Bool!) == false){
             if tags.count > 0 {
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                if let cell = collectionTag.cellForItemAtIndexPath(indexPath){
+                let indexPath = IndexPath(row: 0, section: 0)
+                if let cell = collectionTag.cellForItem(at: indexPath){
                     print("第一次打开项目页面")
                     //设置为非第一次打开此页面
-                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagManagerView")
+                    UserDefaults.standard.set(true, forKey: "IsFirstLaunchTagManagerView")
                     //设置引导弹窗
                     self.callFirstRemain("长按进入编辑模式", view:  cell)
                 }
@@ -458,8 +478,8 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-    class func displayTagController(parentController parentController: UIViewController, tagsString: [String]?,
-        blockFinish: (selectedTags: Array<Tag>, unSelectedTags: Array<Tag>)->(), blockCancel: ()->()) {
+    class func displayTagController(parentController: UIViewController, tagsString: [String]?,
+        blockFinish: @escaping (_ selectedTags: Array<Tag>, _ unSelectedTags: Array<Tag>)->(), blockCancel: @escaping ()->()) {
         let tagController = RRTagController()
             tagController.tags = Array()
             if tagsString != nil {
@@ -469,25 +489,25 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
             tagController.blockCancel = blockCancel
             tagController.blockFinih = blockFinish
-            parentController.presentViewController(tagController, animated: true, completion: nil)
+            parentController.present(tagController, animated: true, completion: nil)
     }
 
-    class func displayTagController(parentController parentController: UIViewController, tags: [Tag]?,
-        blockFinish: (selectedTags: Array<Tag>, unSelectedTags: Array<Tag>)->(), blockCancel: ()->()) {
+    class func displayTagController(parentController: UIViewController, tags: [Tag]?,
+        blockFinish: @escaping (_ selectedTags: Array<Tag>, _ unSelectedTags: Array<Tag>)->(), blockCancel: @escaping ()->()) {
             let tagController = RRTagController()
             tagController.tags = tags
             tagController.blockCancel = blockCancel
             tagController.blockFinih = blockFinish
-            parentController.presentViewController(tagController, animated: true, completion: nil)
+            parentController.present(tagController, animated: true, completion: nil)
     }
     
-    class func displayTagController(parentController parentController: UIViewController, tags: [Tag]? , type: RRTagType,
-        blockFinish: (selectedTags: Array<Tag>, unSelectedTags: Array<Tag>)->(), blockCancel: ()->()) {
+    class func displayTagController(parentController: UIViewController, tags: [Tag]? , type: RRTagType,
+        blockFinish: @escaping (_ selectedTags: Array<Tag>, _ unSelectedTags: Array<Tag>)->(), blockCancel: @escaping ()->()) {
             let tagController = RRTagController()
             tagController.tags = tags
             tagController.blockCancel = blockCancel
             tagController.blockFinih = blockFinish
-            parentController.presentViewController(tagController, animated: true, completion: nil)
-            tagController.type = .Manage
+            parentController.present(tagController, animated: true, completion: nil)
+            tagController.type = .manage
     }
 }

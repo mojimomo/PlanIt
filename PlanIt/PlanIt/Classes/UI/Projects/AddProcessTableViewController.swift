@@ -7,15 +7,44 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 protocol AddProcessDelegate: class{
-    func addProcessTableViewAct(old: Double, new: Double, name: String)
+    func addProcessTableViewAct(_ old: Double, new: Double, name: String)
 }
 
 class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
     var project = Project()
     var delegate: AddProcessDelegate?
-    private var oldPercent = 0.0
-    private var newPercent = 0.0
+    fileprivate var oldPercent = 0.0
+    fileprivate var newPercent = 0.0
     @IBOutlet weak var doneTextField: UITextField!
     @IBOutlet weak var currentProcessTextField: UITextField!
     @IBOutlet weak var remarkTextField: UITextField!
@@ -26,7 +55,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         static let remarkTextField = 1005
     }
     
-    @IBAction func doneDidChanged(sender: UITextField) {
+    @IBAction func doneDidChanged(_ sender: UITextField) {
         if doneTextField.text != ""{
             if Double(doneTextField.text!)! > project.rest{
                 doneTextField.text = "\(Int(project.rest))"
@@ -41,12 +70,12 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
             oldPercent = project.percent
             let process = Process()
             process.projectID = project.id
-            let currentTime = NSDate()
-            let dateFormat = NSDateFormatter()
+            let currentTime = Date()
+            let dateFormat = DateFormatter()
             dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
-            dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
+            dateFormat.locale = Locale(identifier: "zh_CN")
             //dateFormat.dateStyle = .LongStyle
-             process.recordTime = dateFormat.stringFromDate(currentTime)
+             process.recordTime = dateFormat.string(from: currentTime)
             process.done = Double(doneTextField.text!)!
             process.remark = remarkTextField.text!
             process.insertProcess()
@@ -61,14 +90,14 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         }
     }
     
-    @IBAction func remarkDidChanged(sender: UITextField) {
+    @IBAction func remarkDidChanged(_ sender: UITextField) {
         if  sender.text?.characters.count > 20 {
-            sender.text = (sender.text! as NSString).substringToIndex(20)
+            sender.text = (sender.text! as NSString).substring(to: 20)
         }
     }
     
     func cancel(){
-        self.dismissViewControllerAnimated(true) { () -> Void in
+        self.dismiss(animated: true) { () -> Void in
             if self.newPercent != 0{
                self.delegate?.addProcessTableViewAct(self.oldPercent, new: self.newPercent, name: self.project.name)
             }
@@ -76,7 +105,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
     }
     
     ///观察是否超出字符
-    func textFiledEditChanged(sender: NSNotification){
+    func textFiledEditChanged(_ sender: Notification){
         let textField = sender.object as! UITextField
         let kMaxLength = maxLengthDict[textField.tag] ?? 0
         let toBeString = textField.text!
@@ -85,23 +114,23 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if selectedRange == nil {
             if (toBeString.characters.count > kMaxLength){
-                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequenceAtIndex(kMaxLength)
+                let rangeIndex = (toBeString as NSString).rangeOfComposedCharacterSequence(at: kMaxLength)
                 if rangeIndex.length == 1
                 {
-                    textField.text = (toBeString as NSString).substringToIndex(kMaxLength)
+                    textField.text = (toBeString as NSString).substring(to: kMaxLength)
                 }
                 else
                 {
-                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequencesForRange(NSMakeRange(0, kMaxLength))
-                    textField.text = (toBeString as NSString).substringToIndex(rangeRange.length)
+                    let rangeRange = (toBeString as NSString).rangeOfComposedCharacterSequences(for: NSMakeRange(0, kMaxLength))
+                    textField.text = (toBeString as NSString).substring(to: rangeRange.length)
                 }
             }
         }
     }
     
     // MARK: - TableView delegate
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - ViewContrl Lifecycle
@@ -112,31 +141,31 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         remarkTextField.tag = UITag.remarkTextField
         remarkTextField.delegate = self
         
-        let addBarButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .Done, target: self, action: #selector(AddProcessTableViewController.finishEdit))
+        let addBarButton = UIBarButtonItem(image: UIImage(named: "ok"), style: .done, target: self, action: #selector(AddProcessTableViewController.finishEdit))
         self.navigationItem.rightBarButtonItem = addBarButton
         
-        let cancelBarButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .Done, target: self, action: #selector(AddProcessTableViewController.cancel))
+        let cancelBarButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .done, target: self, action: #selector(AddProcessTableViewController.cancel))
         self.navigationItem.leftBarButtonItem = cancelBarButton
         doneTextField.placeholder = project.unit
         currentProcessLabel.text = "已记录总量:  \(Int(project.complete)) / \(Int(project.total))"
         
-        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 25))
         self.tableView.sectionFooterHeight = 0
         self.tableView.sectionHeaderHeight = 25
         
         //添加lebel观察者
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(AddProcessTableViewController.textFiledEditChanged(_:)),name: UITextFieldTextDidChangeNotification ,object: remarkTextField)
+        NotificationCenter.default.addObserver(self,selector:  #selector(AddProcessTableViewController.textFiledEditChanged(_:)),name: NSNotification.Name.UITextFieldTextDidChange ,object: remarkTextField)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         //删除观察者
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: remarkTextField)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: remarkTextField)
     }
     
     // MARK: - UITextFieldDelegate
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let oldText: NSString = textField.text!
-        let newText: NSString = oldText.stringByReplacingCharactersInRange(range, withString: string)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let oldText: NSString = textField.text! as NSString
+        let newText: NSString = oldText.replacingCharacters(in: range, with: string) as NSString
         
         switch textField.tag{
         case UITag.doneTextField:

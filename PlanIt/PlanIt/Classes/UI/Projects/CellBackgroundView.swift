@@ -8,7 +8,7 @@
 
 import UIKit
 protocol BackgroundViewDataSource: class {
-    func percentForCellBackgroundView(sender: CellBackgroundView) -> Double?
+    func percentForCellBackgroundView(_ sender: CellBackgroundView) -> Double?
 }
 
 class CellBackgroundView: UIView {
@@ -18,8 +18,8 @@ class CellBackgroundView: UIView {
     var color: UIColor = UIColor ( red: 0.7686, green: 0.7569, blue: 0.7216, alpha: 1.0 )
     
     ///画图
-    override func drawRect(rect: CGRect) {
-        backgroundColor = UIColor.whiteColor()
+    override func draw(_ rect: CGRect) {
+        backgroundColor = UIColor.white
         //清除所有空间
         for object in self.subviews{
             object.removeFromSuperview()

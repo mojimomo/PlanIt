@@ -10,21 +10,21 @@ import UIKit
 
 class WActivityIndicator: UIView {
 
-    private var indicator               = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    fileprivate var indicator               = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
-    private var contentView             = UIView()
-    private var bgView                  = UIView()
+    fileprivate var contentView             = UIView()
+    fileprivate var bgView                  = UIView()
     
-    private var label : UILabel         = UILabel()
+    fileprivate var label : UILabel         = UILabel()
     
-    private let margin:CGFloat          = 20.0
-    private let padding:CGFloat         = 4.0
+    fileprivate let margin:CGFloat          = 20.0
+    fileprivate let padding:CGFloat         = 4.0
     
-    private let labelFontSize:CGFloat   = 16.0
-    private var width : CGFloat         = 0.0
-    private var height : CGFloat        = 0.0
+    fileprivate let labelFontSize:CGFloat   = 16.0
+    fileprivate var width : CGFloat         = 0.0
+    fileprivate var height : CGFloat        = 0.0
     
-    private var text                    = ""
+    fileprivate var text                    = ""
     
     // ----------------------------------------------------------
     var title: String? {
@@ -52,10 +52,10 @@ class WActivityIndicator: UIView {
     convenience init(view:UIView) {
         
         self.init(frame: view.bounds)
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserverForName(UIDeviceOrientationDidChangeNotification, object:nil, queue:NSOperationQueue.mainQueue(), usingBlock:{notification in
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIDeviceOrientationDidChange, object:nil, queue:OperationQueue.main, using:{notification in
             
             if let superview  = self.superview {
                 self.frame = superview.bounds
@@ -69,25 +69,25 @@ class WActivityIndicator: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        bgView.backgroundColor = UIColor.clearColor()
+        bgView.backgroundColor = UIColor.clear
         bgView.alpha = 0.0
         bgView.layer.cornerRadius = 10.0
         bgView.layer.masksToBounds = true
         self.addSubview(bgView)
         
-        contentView.backgroundColor = UIColor.clearColor()
+        contentView.backgroundColor = UIColor.clear
         contentView.alpha = 0.0
         self.addSubview(contentView)
         
         indicator.startAnimating()
         contentView.addSubview(indicator)
         
-        label.font = UIFont.systemFontOfSize(labelFontSize)
+        label.font = UIFont.systemFont(ofSize: labelFontSize)
         label.adjustsFontSizeToFitWidth = false
-        label.textAlignment = NSTextAlignment.Center
-        label.opaque = false
-        label.backgroundColor = UIColor.clearColor()
-        label.textColor = UIColor.whiteColor()
+        label.textAlignment = NSTextAlignment.center
+        label.isOpaque = false
+        label.backgroundColor = UIColor.clear
+        label.textColor = UIColor.white
         
         contentView.addSubview(label)
     }
@@ -118,9 +118,9 @@ class WActivityIndicator: UIView {
             
             let tempString = NSString(string: self.text)
             
-            let dict = [NSFontAttributeName:UIFont.systemFontOfSize(labelFontSize)]
+            let dict = [NSFontAttributeName:UIFont.systemFont(ofSize: labelFontSize)]
             
-            let size:CGSize = tempString.sizeWithAttributes(dict)
+            let size:CGSize = tempString.size(attributes: dict)
             
             let stringHeight = size.height
             
@@ -168,10 +168,10 @@ class WActivityIndicator: UIView {
                               height: bgViewFrameHeight)
     }
     
-    func show (animation:Bool) {
+    func show (_ animation:Bool) {
         if animation == true {
             
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
                 self.contentView.alpha = 1.0
                 self.bgView.alpha = 0.8
             })
@@ -182,10 +182,10 @@ class WActivityIndicator: UIView {
         }
     }
     
-    func hideAndRemove (animation:Bool) {
+    func hideAndRemove (_ animation:Bool) {
         if animation == true {
             
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
                 self.contentView.alpha = 0.0
                 self.bgView.alpha = 0.0
                 }, completion: { (isFinish) -> Void in

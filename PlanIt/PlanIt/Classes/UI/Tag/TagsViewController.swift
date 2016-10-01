@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TagsViewDelegate: class {
-    func passSelectedTag(selectedTag: Tag?)
+    func passSelectedTag(_ selectedTag: Tag?)
 }
 
 class TagsViewController: UITableViewController {
@@ -20,22 +20,22 @@ class TagsViewController: UITableViewController {
     var isEditingMod = false
     var delegate:TagsViewDelegate?
     
-    private struct Storyboard{
+    fileprivate struct Storyboard{
         static let CellReusIdentifier = "TagCell"
     }
     @IBOutlet var tagsTableView: UITableView!
     
-    @IBAction func finishAction(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func finishAction(_ sender: AnyObject) {
+        self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func finishEdit(sender: AnyObject) {
+    @IBAction func finishEdit(_ sender: AnyObject) {
         isEditingMod = !isEditingMod
         self.tagsTableView.setEditing(isEditingMod, animated: true)
     }
     
     func handleBack(){
-        self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.navigationController?.dismiss(animated: true, completion: { () -> Void in
             
         })
     }
@@ -43,19 +43,19 @@ class TagsViewController: UITableViewController {
     ///显示未开始项目
     var isShowNotBegin : Bool{
         get{
-            return NSUserDefaults.standardUserDefaults().boolForKey("isShowNotBegin") as Bool!
+            return UserDefaults.standard.bool(forKey: "isShowNotBegin") as Bool!
         }
         set{
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowNotBegin")
+            UserDefaults.standard.set(newValue, forKey: "isShowNotBegin")
         }
     }
     ///显示未开始项目
     var isShowFinished : Bool{
         get{
-            return NSUserDefaults.standardUserDefaults().boolForKey("isShowFinished") as Bool!
+            return UserDefaults.standard.bool(forKey: "isShowFinished") as Bool!
         }
         set{
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isShowFinished")
+            UserDefaults.standard.set(newValue, forKey: "isShowFinished")
         }
     }
     // MARK: - View Lifecycle
@@ -72,11 +72,11 @@ class TagsViewController: UITableViewController {
         var counts = 0
         for project in projects {
             if isShowFinished{
-                 if project.isFinished == .Finished{
+                 if project.isFinished == .finished{
                     counts += 1
                 }
             }else{
-                if project.isFinished != .Finished{
+                if project.isFinished != .finished{
                     counts += 1
                 }
             }
@@ -88,7 +88,7 @@ class TagsViewController: UITableViewController {
         if tagMaps.count != 0{
             for project in projects{
                 if isShowFinished{
-                    if project.isFinished == .Finished{
+                    if project.isFinished == .finished{
                         for tagMap in tagMaps{
                             if tagMap.projectID == project.id{
                                 break
@@ -98,7 +98,7 @@ class TagsViewController: UITableViewController {
                         }
                     }
                 }else{
-                    if project.isFinished != .Finished{
+                    if project.isFinished != .finished{
                         for tagMap in tagMaps{
                             if tagMap.projectID == project.id{
                                 break
@@ -123,11 +123,11 @@ class TagsViewController: UITableViewController {
                     for project in projects{
                         if tagMap.projectID == project.id{
                             if isShowFinished{
-                                if project.isFinished == .Finished{
+                                if project.isFinished == .finished{
                                     tagCount += 1
                                 }
                             }else{
-                                if project.isFinished != .Finished{
+                                if project.isFinished != .finished{
                                     tagCount += 1
                                 }
                             }
@@ -140,11 +140,11 @@ class TagsViewController: UITableViewController {
             tagCounts.append(tagCount)
         }
         
-        selectTags = [Bool](count: tags.count, repeatedValue: false)
-        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Done, target: self, action: #selector(TagsViewController.handleBack))
+        selectTags = [Bool](repeating: false, count: tags.count)
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .done, target: self, action: #selector(TagsViewController.handleBack))
         self.navigationItem.leftBarButtonItem = backButton
         
-        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 1))
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
         self.tableView.sectionFooterHeight = 0
         self.tableView.sectionHeaderHeight = 0
 
@@ -155,16 +155,16 @@ class TagsViewController: UITableViewController {
 //
 //    }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //判断是否第一次打开此页面
-        if((NSUserDefaults.standardUserDefaults().boolForKey("IsFirstLaunchTagsView") as Bool!) == false){
+        if((UserDefaults.standard.bool(forKey: "IsFirstLaunchTagsView") as Bool!) == false){
             print("第一次打开标签页面")
             //设置为非第一次打开此页面
             if tags.count > 0 {
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "IsFirstLaunchTagsView")
-                let indexPath = NSIndexPath(forRow: tags.count + 1, inSection: 0)
-                if let cell = self.tableView.cellForRowAtIndexPath(indexPath){
+                UserDefaults.standard.set(true, forKey: "IsFirstLaunchTagsView")
+                let indexPath = IndexPath(row: tags.count + 1, section: 0)
+                if let cell = self.tableView.cellForRow(at: indexPath){
                     self.callFirstRemain("点击查看包含\(tags.last!.name)标签的项目", view: cell)
                 }
             }
@@ -175,14 +175,14 @@ class TagsViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     ///确定行数
-    override func tableView(tv:UITableView, numberOfRowsInSection section:Int) -> Int {
+    override func tableView(_ tv:UITableView, numberOfRowsInSection section:Int) -> Int {
         let cnt = tags.count + 2
         return cnt
     }
     
     ///配置cell内容
-    override func tableView(tv:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReusIdentifier, forIndexPath: indexPath) as! TagTableViewCell
+    override func tableView(_ tv:UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
+         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.CellReusIdentifier, for: indexPath) as! TagTableViewCell
         //配置cell
         //去除分割线
         for view in cell.subviews {
@@ -191,41 +191,41 @@ class TagsViewController: UITableViewController {
             }
         }
         //显示全部
-        if indexPath.row == 0{
+        if (indexPath as NSIndexPath).row == 0{
             cell.tagName = "显示全部"
-            cell.tagCounts = tagCounts[indexPath.row]
+            cell.tagCounts = tagCounts[(indexPath as NSIndexPath).row]
             let sepView = UIView(frame: CGRect(x: 15, y: 43.5, width: self.tableView.bounds.width - 30, height: 0.5))
             sepView.tag = 1025
             sepView.backgroundColor = UIColor.colorFromHex("#EFEFEF")
             cell.addSubview(sepView)
         //无标签
-        }else if indexPath.row == 1{
+        }else if (indexPath as NSIndexPath).row == 1{
             cell.tagName = "无标签"
-            cell.tagCounts = tagCounts[indexPath.row]
+            cell.tagCounts = tagCounts[(indexPath as NSIndexPath).row]
         //其他tag
         }else{
-            cell.tagName = tags[indexPath.row - 2].name
-            cell.tagCounts = tagCounts[indexPath.row]
+            cell.tagName = tags[(indexPath as NSIndexPath).row - 2].name
+            cell.tagCounts = tagCounts[(indexPath as NSIndexPath).row]
         }
         return cell
     }
     
     ///点击某个单元格触发的方法
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //全部
-        if indexPath.row == 0{
+        if (indexPath as NSIndexPath).row == 0{
             delegate?.passSelectedTag(nil)
         //无标签
-        }else if indexPath.row == 1{
+        }else if (indexPath as NSIndexPath).row == 1{
             let newTag = Tag()
             newTag.id = -1
             delegate?.passSelectedTag(newTag)
         //按标签
         }else{
-            delegate?.passSelectedTag(tags[indexPath.row - 2])
+            delegate?.passSelectedTag(tags[(indexPath as NSIndexPath).row - 2])
         }
         
-        self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.navigationController?.dismiss(animated: true, completion: { () -> Void in
             
         })
 //        //设置单元格打勾

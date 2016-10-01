@@ -20,14 +20,14 @@ class ChangeTagsViewControl: UIViewController, TagListViewDelegate{
 //        }
 //    }
     
-    var blockFinih: ((selectedTags: Array<Tag>, unSelectedTags: Array<Tag>) -> ())!
+    var blockFinih: ((_ selectedTags: Array<Tag>, _ unSelectedTags: Array<Tag>) -> ())!
     var blockCancel: (() -> ())!
     
-    private var tags: Array<Tag>!
-    private var navigationBarItem: UINavigationItem!
-    private var leftButton: UIBarButtonItem!
-    private var rigthButton: UIBarButtonItem!
-    private var _totalTagsSelected = 0
+    fileprivate var tags: Array<Tag>!
+    fileprivate var navigationBarItem: UINavigationItem!
+    fileprivate var leftButton: UIBarButtonItem!
+    fileprivate var rigthButton: UIBarButtonItem!
+    fileprivate var _totalTagsSelected = 0
     
     var totalTagsSelected: Int {
         get {
@@ -42,46 +42,46 @@ class ChangeTagsViewControl: UIViewController, TagListViewDelegate{
             self._totalTagsSelected = (self._totalTagsSelected < 0) ? 0 : self._totalTagsSelected
             self.navigationBarItem = UINavigationItem(title: "选择标签")
             self.navigationBarItem.leftBarButtonItem = self.leftButton
-            self.navigationBar.pushNavigationItem(self.navigationBarItem, animated: false)
+            self.navigationBar.pushItem(self.navigationBarItem, animated: false)
         }
     }
     
     
     lazy var navigationBar: UINavigationBar = {
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 64))
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64))
         
         self.navigationBarItem = UINavigationItem(title: "选择标签")
         self.navigationBarItem.leftBarButtonItem = self.leftButton
         
-        navigationBar.pushNavigationItem(self.navigationBarItem, animated: true)
+        navigationBar.pushItem(self.navigationBarItem, animated: true)
         navigationBar.tintColor = navigationTintColor
         navigationBar.backgroundColor = navigationBackground
         return navigationBar
     }()
 
     func cancelTagController() {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.dismiss(animated: true, completion: { () -> Void in
             self.blockCancel()
         })
     }
     
     // MARK: TagListView Delegate
-    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         print("Tag pressed: \(title), \(sender)")
-        tagView.selected = !tagView.selected
+        tagView.isSelected = !tagView.isSelected
     }
     
-    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         print("Tag Remove pressed: \(title), \(sender)")
         sender.removeTagView(tagView)
     }
     
-    class func displayTagController(parentController parentController: UIViewController, tags: [Tag]?,
-        blockFinish: (selectedTags: Array<Tag>, unSelectedTags: Array<Tag>)->(), blockCancel: ()->()) {
+    class func displayTagController(parentController: UIViewController, tags: [Tag]?,
+        blockFinish: @escaping (_ selectedTags: Array<Tag>, _ unSelectedTags: Array<Tag>)->(), blockCancel: @escaping ()->()) {
             let tagController = ChangeTagsViewControl()
             tagController.tags = tags
             tagController.blockCancel = blockCancel
             tagController.blockFinih = blockFinish
-            parentController.presentViewController(tagController, animated: true, completion: nil)
+            parentController.present(tagController, animated: true, completion: nil)
     }
 }

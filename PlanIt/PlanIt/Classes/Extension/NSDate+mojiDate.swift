@@ -8,19 +8,19 @@
 
 import Foundation
 
-extension NSDate{
+extension Date{
     ///计算此时间和结束百分比
-    func percentFromCurrentTime(endDate: NSDate) -> Double{
+    func percentFromCurrentTime(_ endDate: Date) -> Double{
         let timeEnd = endDate.timeIntervalSince1970
         let timeBegin = self.timeIntervalSince1970
-        let currentDate = NSDate()
+        let currentDate = Date()
         let timecurrent = currentDate.timeIntervalSince1970
         let percent = (timecurrent - timeBegin)/(timeEnd - timeBegin)
         return percent
     }
     
     ///计算此时间与结束时间相差几天
-    func daysToEndDate(endDate: NSDate) -> Int{
+    func daysToEndDate(_ endDate: Date) -> Int{
         let timeEnd = endDate.timeIntervalSince1970
         let timeBegin = self.timeIntervalSince1970
         let days = (timeEnd - timeBegin)/( 60 * 60 * 24)
@@ -28,7 +28,7 @@ extension NSDate{
     }
     
     ///计算此时间与结束时间相差几周
-    func weeksToEndDate(endDate: NSDate) -> Int{
+    func weeksToEndDate(_ endDate: Date) -> Int{
         let timeEnd = endDate.timeIntervalSince1970
         let timeBegin = self.timeIntervalSince1970
         let days = (timeEnd - timeBegin)/( 60 * 60 * 24 * 7)
@@ -69,181 +69,175 @@ extension NSDate{
     }
     
     ///增加一天
-    func increase1Day() -> NSDate? {
+    func increase1Day() -> Date? {
         let day = 1.0
-        let nextDate = self.dateByAddingTimeInterval(day * 24 * 60 * 60)
+        let nextDate = self.addingTimeInterval(day * 24 * 60 * 60)
         return nextDate
         
     }
     
     ///增加几天
-    func increaseDays(day: Double) -> NSDate? {
-        let nextDate = self.dateByAddingTimeInterval(day * 24 * 60 * 60)
+    func increaseDays(_ day: Double) -> Date? {
+        let nextDate = self.addingTimeInterval(day * 24 * 60 * 60)
         return nextDate
     }
     
     ///增加一月
-    func increase1Month() -> NSDate? {
-        let newDateComponents = NSDateComponents()
+    func increase1Month() -> Date? {
+        var newDateComponents = DateComponents()
         newDateComponents.month = 1
-        let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        let calculatedDate = (Calendar.current as NSCalendar).date(byAdding: newDateComponents, to: self, options: NSCalendar.Options.init(rawValue: 0))
         return calculatedDate
     }    
     
     ///增加几月
-    func increaseMonths(month: Int) -> NSDate? {
-        let newDateComponents = NSDateComponents()
+    func increaseMonths(_ month: Int) -> Date? {
+        var newDateComponents = DateComponents()
         newDateComponents.month = month
-        let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        let calculatedDate = (Calendar.current as NSCalendar).date(byAdding: newDateComponents, to: self, options: NSCalendar.Options.init(rawValue: 0))
         return calculatedDate
     }
     
     ///增加一年
-    func increase1Year() -> NSDate? {
-        let newDateComponents = NSDateComponents()
+    func increase1Year() -> Date? {
+        var newDateComponents = DateComponents()
         newDateComponents.year = 1
-        let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        let calculatedDate = (Calendar.current as NSCalendar).date(byAdding: newDateComponents, to: self, options: NSCalendar.Options.init(rawValue: 0))
         return calculatedDate
     }
     
     ///增加几年
-    func increaseYears(year: Int) -> NSDate? {
-        let newDateComponents = NSDateComponents()
+    func increaseYears(_ year: Int) -> Date? {
+        var newDateComponents = DateComponents()
         newDateComponents.year = year
-        let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: self, options: NSCalendarOptions.init(rawValue: 0))
+        let calculatedDate = (Calendar.current as NSCalendar).date(byAdding: newDateComponents, to: self, options: NSCalendar.Options.init(rawValue: 0))
         return calculatedDate
     }
     
     ///格式化日期到字符串 YYYY年MM月DD日
     func FormatToStringYYYYMMDD() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        dateFormat.dateStyle = .LongStyle
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        dateFormat.dateStyle = .long
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 MM月DD日
     func FormatToStringMMMMDD() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("MMMMdd")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 DD日
     func FormatToStringDD() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("dd")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 YYYY年MM月DD日HH小时MM分钟
     func FormatToStringYYYYMMMMDDHHMM() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 YYYY年MM月DD日HH小时MM分钟ss秒
     func FormatToStringYYYYMMMMDDHHMMSS() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmmss")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
      ///格式化日期到字符串 YYYY年MM月
     func FormatToStringYYYYMM() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMM")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 MM月
     func FormatToStringMMMM() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("MMMM")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 YYYY年
     func FormatToStringYYYY() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("yyyy")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 DD日HH小时MM分钟
     func FormatToStringDDHHMM() -> String{
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.setLocalizedDateFormatFromTemplate("ddhhmm")
-        dateFormat.locale = NSLocale(localeIdentifier: "zh_CN")
-        let strDate = dateFormat.stringFromDate(self)
+        dateFormat.locale = Locale(identifier: "zh_CN")
+        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///获取这是这个月的第几周
     func getWeekOfMonth() -> Int{
-        let calendar:NSCalendar = NSCalendar.currentCalendar()
-        let dateComp:NSDateComponents = calendar.components( .WeekOfMonth, fromDate: self)
-        return dateComp.weekOfMonth
+        let calendar:Calendar = Calendar.current
+        let dateComp:DateComponents = (calendar as NSCalendar).components( .weekOfMonth, from: self)
+        return dateComp.weekOfMonth!
     }
     
     ///获取这是这个年的第几月
     func getMonthkOfYear() -> Int{
-        let calendar:NSCalendar = NSCalendar.currentCalendar()
-        let dateComp:NSDateComponents = calendar.components( .Month, fromDate: self)
-        return dateComp.month
+        let calendar:Calendar = Calendar.current
+        let dateComp:DateComponents = (calendar as NSCalendar).components( .month, from: self)
+        return dateComp.month!
     }
     
     ///获取这是这个年的第几月
     func getWeekOfYear() -> Int{
-        let calendar:NSCalendar = NSCalendar.currentCalendar()
-        let dateComp:NSDateComponents = calendar.components( .WeekOfYear, fromDate: self)
-        return dateComp.weekOfYear
+        let calendar:Calendar = Calendar.current
+        let dateComp:DateComponents = (calendar as NSCalendar).components( .weekOfYear, from: self)
+        return dateComp.weekOfYear!
     }
     
     ///获取这个月的第一天和最后一天
-    func getMonthBeginAndEnd() -> (firstDay: NSDate?, lastDay: NSDate?){        
-        let calendar:NSCalendar = NSCalendar.currentCalendar()
-        var intervalCount: NSTimeInterval = 0
-        let newDateString = self.FormatToStringYYYYMM()
-        let newDate = newDateString.FormatToNSDateYYYYMMMM()!
-        var firstDay: NSDate?
-        var lastDay: NSDate?
-        if calendar.rangeOfUnit(.Month, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
-            firstDay = firstDay?.increase1Day()
-            lastDay = firstDay?.dateByAddingTimeInterval(intervalCount - 1)
-        }
-        return (firstDay, lastDay)
+    func getMonthBeginAndEnd() -> (firstDay: Date?, lastDay: Date?){        
+        let calendar:Calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month], from: self)
+        let startOfMonth = calendar.date(from: components)!
+        components.month = 1
+        components.day = -1
+        let endOfMonth =  calendar.date(byAdding:components,
+                                        to: startOfMonth)!
+        return (startOfMonth, endOfMonth)
     }
     
     ///获取这个年的第一月和最后一月
-    func getYearBeginAndEnd() -> (firstDay: NSDate?, lastDay: NSDate?){
-        let calendar:NSCalendar = NSCalendar.currentCalendar()
-        var intervalCount: NSTimeInterval = 0
-        let newDateString = self.FormatToStringYYYY()
-        let newDate = newDateString.FormatToNSDateYYYY()!
-        var firstDay: NSDate?
-        var lastDay: NSDate?
-        if calendar.rangeOfUnit(.Year, startDate: &firstDay, interval: &intervalCount, forDate: newDate){
-            firstDay = firstDay?.increase1Day()
-            lastDay = firstDay?.dateByAddingTimeInterval(intervalCount - 1)
-        }
-        return (firstDay, lastDay)
+    func getYearBeginAndEnd() -> (firstDay: Date?, lastDay: Date?){
+        let calendar:Calendar = Calendar.current
+        var components = calendar.dateComponents([.year], from: self)
+        let startOfYear = calendar.date(from: components)!
+        components.year = 1
+        components.day = -1
+        let endOfYear =  calendar.date(byAdding:components,
+                                        to: startOfYear)!
+        return (startOfYear, endOfYear)
     }
  }

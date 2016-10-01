@@ -14,7 +14,7 @@ class SQLiteManager: NSObject {
     let dbName = "db.sqlite3"
     
     /// 数据库句柄
-    var db : COpaquePointer = nil
+    var db : OpaquePointer? = nil
     
     override init() {
         super.init()
@@ -22,13 +22,13 @@ class SQLiteManager: NSObject {
     }
     
     /// 提供一个函数,让别人可以打开一个数据库
-    func openDB(dbName : String) {
+    func openDB(_ dbName : String) {
         // 1.获取数据库文件存放的路径
-        guard var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first else {
+        guard var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
             print("没有获取到路径")
             return
         }
-        path = (path as NSString).stringByAppendingPathComponent(dbName)
+        path = (path as NSString).appendingPathComponent(dbName)
         print("数据库路径: \(path)")
         
         // 2.打开数据库:如果有数据库则打开,如果没有则创建
@@ -117,7 +117,7 @@ class SQLiteManager: NSObject {
     }
     
     /// 执行SQL语句(创建表/添加/删除/修改)
-    func execSQL(sqlString : String) -> Bool {
+    func execSQL(_ sqlString : String) -> Bool {
         // 1.参数一:数据库句柄
         // 2.参数二:sql语句
         // 3.参数三:执行完语句会回调的闭包,一般传nil即可
@@ -128,10 +128,10 @@ class SQLiteManager: NSObject {
     
     
     /// 执行查询操作(将查询到的结果返回到一个字典数组中)
-    func querySQL(querySQL : String) -> [[String : AnyObject]]? {
+    func querySQL(_ querySQL : String) -> [[String : AnyObject]]? {
         
         // 1.定义游标指针
-        var stmt : COpaquePointer = nil
+        var stmt : OpaquePointer? = nil
         
         // 2.查询的准备工作(给stmt赋值)
         // 1.参数一:数据库句柄
@@ -147,34 +147,45 @@ class SQLiteManager: NSObject {
         var dictArray = [[String : AnyObject]]()
         while sqlite3_step(stmt) == SQLITE_ROW {
             // 有下一条语句,则将该语句转成字典,放入数组中
-            dictArray.append(getRecord(stmt))
+            dictArray.append(getRecord(stmt!))
         }
         
         return dictArray
     }
     
     /// 根据'游标指针'获取一条数据
-    func getRecord(stmt : COpaquePointer) -> [String : AnyObject] {
+    func getRecord(_ stmt : OpaquePointer) -> [String : AnyObject] {
         // 1.获取字段个数
         let count = sqlite3_column_count(stmt)
         var dict = [String : AnyObject]()
         for i in 0..<count {
             // 2.取出字典对应的key
             let cKey = sqlite3_column_name(stmt, i)
-            guard let key = String(CString: cKey, encoding: NSUTF8StringEncoding) else {
+            guard let key = String(validatingUTF8 : cKey!) else {
                 continue
             }
             
             // 3.取出字典对应的value
-            let cValue = UnsafePointer<Int8>(sqlite3_column_text(stmt, i))
-            guard let value = String(CString: cValue, encoding: NSUTF8StringEncoding) else {
+
+            let cValue = sqlite3_column_text(stmt, i)
+            guard let value = String(validatingUTF8 : cValue!) else {
                 continue
             }
             
             // 4.将键值放入字典中
-            dict[key] = value
+            dict[key] = value as AnyObject?
         }
         
         return dict
+    }
+}
+
+extension String {
+    public init?(validatingUTF8 cString: UnsafePointer<UInt8>) {
+        guard let (s, _) = String.decodeCString(cString, as: UTF8.self,
+                                                repairingInvalidCodeUnits: false) else {
+                                                    return nil
+        }
+        self = s
     }
 }

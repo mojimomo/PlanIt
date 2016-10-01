@@ -27,24 +27,24 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     var isNeedLocalNotifiication = false
     
     //是否安装支付宝
-    var isAliayInstalled = UIApplication.sharedApplication().canOpenURL(NSURL(string: "alipay://")!)
+    var isAliayInstalled = UIApplication.shared.canOpenURL(URL(string: "alipay://")!)
     
     //几天后推送
     var day : Int{
         get{
-            if NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int! == 0{
-                NSUserDefaults.standardUserDefaults().setInteger( 1 , forKey: "daysLocalNotifiication")
+            if UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int! == 0{
+                UserDefaults.standard.set( 1 , forKey: "daysLocalNotifiication")
             }
-            return NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int
+            return UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int
         }
         set{
-            NSUserDefaults.standardUserDefaults().setInteger( newValue , forKey: "daysLocalNotifiication")
+            UserDefaults.standard.set( newValue , forKey: "daysLocalNotifiication")
         }
     }
     
-    @IBAction func changeSwitchj(sender: UISwitch) {
-        if sender.on{
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isNeedLocalNotifiication")
+    @IBAction func changeSwitchj(_ sender: UISwitch) {
+        if sender.isOn{
+            UserDefaults.standard.set(true, forKey: "isNeedLocalNotifiication")
             //删除所有推送
             Project.deleteAllNotificication()
             //创建所有推送
@@ -53,7 +53,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 project.addNotification()
             }
         }else{
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isNeedLocalNotifiication")
+            UserDefaults.standard.set(false, forKey: "isNeedLocalNotifiication")
             //删除所有推送
             Project.deleteAllNotificication()
         }
@@ -66,7 +66,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     var isAllowedNotification: Bool {
         get{
             if IS_IOS8{
-                let setting = UIApplication.sharedApplication().currentUserNotificationSettings()
+                let setting = UIApplication.shared.currentUserNotificationSettings
                 if setting!.hashValue != 0 {
                     return true
                 }
@@ -78,20 +78,20 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 && indexPath.row == 0 {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 0 {
             print("跳转设置")
             //跳转设置g
             let url = UIApplicationOpenSettingsURLString
-            if UIApplication.sharedApplication().canOpenURL(NSURL(string: url)!){
-                UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            if UIApplication.shared.canOpenURL(URL(string: url)!){
+                UIApplication.shared.openURL(URL(string: url)!)
             }
         }
         
-        if indexPath.section == 0 && indexPath.row == 1 {
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 1 {
             if IS_IOS8{
                 //创建UIAlertController
-                let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+                let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
                 
                 //创建datepicker控件
                 let numberPicker = UIPickerView()
@@ -102,9 +102,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 alerController.view.addSubview(numberPicker)
                 
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "确定", style: .Cancel, handler: { (UIAlertAction) -> Void in
-                    self.daysLabel.text = self.labels[numberPicker.selectedRowInComponent(0)]
-                    self.day = self.days[numberPicker.selectedRowInComponent(0)]
+                let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
+                    self.daysLabel.text = self.labels[numberPicker.selectedRow(inComponent: 0)]
+                    self.day = self.days[numberPicker.selectedRow(inComponent: 0)]
                     
                     //if self.isNeedLocalNotifiicationSwitch.on{
                         //删除所有推送
@@ -131,75 +131,75 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 
                 if let popoverPresentationController = alerController.popoverPresentationController {
                     popoverPresentationController.sourceView = self.view
-                    let rect = tableView.rectForRowAtIndexPath(indexPath)
+                    let rect = tableView.rectForRow(at: indexPath)
                     popoverPresentationController.sourceRect = rect
                     
                     //配置位置
-                    numberPicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height )
-                    numberPicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                    numberPicker.frame = CGRect(x: 0, y: 0, width: alerController.view.bounds.width ,height: alerController.view.bounds.height )
+                    numberPicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 }else{
                     //配置位置
-                    numberPicker.frame = CGRectMake(0, 0, alerController.view.bounds.width ,alerController.view.bounds.height - 50 )
-                    numberPicker.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                    numberPicker.frame = CGRect(x: 0, y: 0, width: alerController.view.bounds.width ,height: alerController.view.bounds.height - 50 )
+                    numberPicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 }
                 
                 //显示alert
-                self.presentViewController(alerController, animated: true, completion: nil)
+                self.present(alerController, animated: true, completion: nil)
 
             }
         }
         
-        if indexPath.section == 0 && indexPath.row == 2 {
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 2 {
             let tags = Tag().loadAllData()
 
-            RRTagController.displayTagController(parentController: self, tags: tags,type: .Manage, blockFinish: { (selectedTags, unSelectedTags) -> () in
+            RRTagController.displayTagController(parentController: self, tags: tags,type: .manage, blockFinish: { (selectedTags, unSelectedTags) -> () in
                 }) { () -> () in
             }
         }
         
-        if indexPath.section == 1 && indexPath.row == 1 {
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 1 {
             print("意见反馈")
             //邮件视窗
             
             if MFMailComposeViewController.canSendMail() {
                 let mailComposeViewController = configuredMailComposeViewController()
-                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+                self.present(mailComposeViewController, animated: true, completion: nil)
             }else{
                 self.showSendMailErrorAlert()
             }
             
         }
         
-        if indexPath.section == 1 && indexPath.row == 2 {
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 2 {
             print("给应用评分")
             //跳转appID应用
             let url = "itms-apps://itunes.apple.com/app/id1141710914"
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
         
-        if indexPath.section == 1 && indexPath.row == 3 {
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 3 {
             print("推荐应用")
             //APP介绍页面
-            let link = NSURL(string: "http://www.markplan.info")
-            let rect = tableView.rectForRowAtIndexPath(indexPath)
+            let link = URL(string: "http://www.markplan.info")
+            let rect = tableView.rectForRow(at: indexPath)
             let shareVC = UIActivityViewController(activityItems: ["我正在使用马克计划，一款简洁好用的个人项目进度管理应用。快来下载试试：","http://www.markplan.info",link!,UIImage(named: "SharePic")!], applicationActivities: nil)
             if let popoverPresentationController = shareVC.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
             }
-            self.presentViewController(shareVC, animated: true, completion: nil)
+            self.present(shareVC, animated: true, completion: nil)
         }
         
-        if indexPath.section == 2 && indexPath.row == 1 {
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
             print("赞赏我们")
             //支付宝转账 url scheme
             let alipay = "alipayqr://platformapi/startapp?saId=10000007&qrcode=https://qr.alipay.com/apmiym1v5ya1dynlb5"
             if  isAliayInstalled {
                 print("已安装支付宝")
-                UIApplication.sharedApplication().openURL(NSURL(string: alipay)!)
+                UIApplication.shared.openURL(URL(string: alipay)!)
             }
         }
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //设置意见反馈的邮箱控件
@@ -223,63 +223,63 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     
     //未设置邮箱设备弹窗提示
     func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertController(title: "无法发送邮件", message: "您的设备尚未设置邮箱，请在“邮件”应用中设置后再尝试发送。", preferredStyle: .Alert)
-        sendMailErrorAlert.addAction(UIAlertAction(title: "好的", style: .Default) { _ in })
-        self.presentViewController(sendMailErrorAlert, animated: true){}
+        let sendMailErrorAlert = UIAlertController(title: "无法发送邮件", message: "您的设备尚未设置邮箱，请在“邮件”应用中设置后再尝试发送。", preferredStyle: .alert)
+        sendMailErrorAlert.addAction(UIAlertAction(title: "好的", style: .default) { _ in })
+        self.present(sendMailErrorAlert, animated: true){}
     }
     
     //邮件反馈取消或发送后dismiss
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
         switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        case MFMailComposeResult.cancelled.rawValue:
             print("取消发送")
-        case MFMailComposeResultSent.rawValue:
+        case MFMailComposeResult.sent.rawValue:
             print("发送成功")
         default:
             break
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     }
     
     //未安装支付宝弹窗提示
     func showNotFoundAlipayAlert() {
-        let notFoundAlipayAlert = UIAlertController(title: "未安装支付宝", message: "感谢您的赞赏!\n但目前我们仅支持支付宝打赏。", preferredStyle: .Alert)
-        notFoundAlipayAlert.addAction(UIAlertAction(title: "好的", style: .Default) { _ in })
-        self.presentViewController(notFoundAlipayAlert, animated: true){}
+        let notFoundAlipayAlert = UIAlertController(title: "未安装支付宝", message: "感谢您的赞赏!\n但目前我们仅支持支付宝打赏。", preferredStyle: .alert)
+        notFoundAlipayAlert.addAction(UIAlertAction(title: "好的", style: .default) { _ in })
+        self.present(notFoundAlipayAlert, animated: true){}
     }
 
     
     // MARK: - 设备信息（用于邮件反馈）
     
     //获取设备型号
-    let modelName = UIDevice.currentDevice().modelName
+    let modelName = UIDevice.current.modelName
 
     
     //获取系统版本
-    let systemVersion = UIDevice.currentDevice().systemVersion
+    let systemVersion = UIDevice.current.systemVersion
     
-    let infoDic = NSBundle.mainBundle().infoDictionary
+    let infoDic = Bundle.main.infoDictionary
     
-    func dismiss(){
-        self.navigationController?.popToRootViewControllerAnimated(true)
+    func handleDismiss(){
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         self.tableView.showsVerticalScrollIndicator = false
-        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(OptionsTableViewController.dismiss))
+        let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(OptionsTableViewController.handleDismiss))
         self.navigationItem.leftBarButtonItem = backButtom
         
-        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 25))
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 25))
         self.tableView.sectionFooterHeight = 25
         self.tableView.sectionHeaderHeight = 0
 
-    if((NSUserDefaults.standardUserDefaults().boolForKey("isNeedLocalNotifiication") as Bool!) == false){
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isNeedLocalNotifiication")
+    if((UserDefaults.standard.bool(forKey: "isNeedLocalNotifiication") as Bool!) == false){
+            UserDefaults.standard.set(false, forKey: "isNeedLocalNotifiication")
             isNeedLocalNotifiicationSwitch.setOn(false, animated: false)
         }else{
             isNeedLocalNotifiicationSwitch.setOn(true, animated: false)
@@ -287,11 +287,11 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         self.daysLabel.text = "\(labels[day - 1])"
         //对back to app进行观察
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:  #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)),name: UIApplicationDidBecomeActiveNotification,object: nil)
+        NotificationCenter.default.addObserver(self,selector:  #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)),name: NSNotification.Name.UIApplicationDidBecomeActive,object: nil)
     }
     
     //观察是否back to app进行刷新数据
-    func applicationDidBecomeActive(notification: NSNotification){
+    func applicationDidBecomeActive(_ notification: Notification){
         if isAllowedNotification{
             self.localNotifiicationLabel.text = "已开启"
         }else{
@@ -299,7 +299,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //设置view背景色
@@ -307,7 +307,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         //修改样式
         self.navigationController?.navigationBar.barTintColor = otherNavigationBackground
-        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.shadowImage = nil
         
         if isAllowedNotification{
@@ -317,34 +317,34 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
         
         if !isAliayInstalled{
-            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2)){
-                cell.hidden = true
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 2)){
+                cell.isHidden = true
             }
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         //删除观察者
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     
     // MARK: - UIPickerViewDataSource
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int)->Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int)->Int {
         return labels.count
     }
     
     // MARK: - UIPickerViewDelegate
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return labels[row]
     }
     
     // UIPickerView行高
-    func pickerView(pickerView: UIPickerView,rowHeightForComponent component: Int) -> CGFloat{
+    func pickerView(_ pickerView: UIPickerView,rowHeightForComponent component: Int) -> CGFloat{
         return 35
     }
 
@@ -434,7 +434,7 @@ public extension UIDevice {
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
         let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            guard let value = element.value as? Int8 , value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         

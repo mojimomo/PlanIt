@@ -12,27 +12,27 @@ import UIKit
 ///项目类别
 enum ProjectType: Int{
     ///未设置
-    case NoSet = -1
+    case noSet = -1
     ///正常类型
-    case Normal = 0
+    case normal = 0
     ///不记录类型
-    case NoRecord = 1
+    case noRecord = 1
     ///签到类型
-    case Punch = 2
+    case punch = 2
 }
 
 ///项目是否完成
 enum ProjectIsFinished: Int{
     ///未设置
-    case  NoSet = -1
+    case  noSet = -1
     ///未完成
-    case  NotFinished = 0
+    case  notFinished = 0
     ///已完成
-    case Finished = 1
+    case finished = 1
     ///未开始
-    case NotBegined = 2
+    case notBegined = 2
     ///超时
-    case OverTime = 3
+    case overTime = 3
 }
 
 ///项目model
@@ -42,12 +42,12 @@ class Project: NSObject {
     ///项目名称
     var name = ""
     ///项目类型
-    var type: ProjectType = .NoRecord
+    var type: ProjectType = .noRecord
     ///项目结束时间
     var endTime = ""{
         didSet{
             if endTime != ""{
-                endTimeDate = endTime.FormatToNSDateYYYYMMMMDD()!.increase1Day()!
+                endTimeDate = endTime.FormatToNSDateYYYYMMMMDD()!.increase1Day()! as Date
             }
         }
     }
@@ -55,7 +55,7 @@ class Project: NSObject {
     var beginTime = ""{
         didSet{
             if beginTime != ""{
-                beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDD()!
+                beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDD()! as Date
             }
         }
     }
@@ -67,7 +67,7 @@ class Project: NSObject {
     ///任务总量
     var total: Double = 0.0
     ///是否完成
-    var isFinished: ProjectIsFinished = .NoSet
+    var isFinished: ProjectIsFinished = .noSet
     ///完成量
     var complete: Double = 0.0
     ///剩余量
@@ -80,30 +80,30 @@ class Project: NSObject {
     var percent = 0.0
     ///备注
     //var remark: String?
-    var beginTimeDate = NSDate()
-    var endTimeDate = NSDate()
+    var beginTimeDate = Date()
+    var endTimeDate = Date()
     //几天后推送
     var day : Int{
         get{
-            if NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int! == 0{
-                NSUserDefaults.standardUserDefaults().setInteger( 3 , forKey: "daysLocalNotifiication")
+            if UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int! == 0{
+                UserDefaults.standard.set( 3 , forKey: "daysLocalNotifiication")
             }
-            return NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int
+            return UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int
         }
         set{
-            NSUserDefaults.standardUserDefaults().setInteger( newValue , forKey: "daysLocalNotifiication")
+            UserDefaults.standard.set( newValue , forKey: "daysLocalNotifiication")
         }
     }
     //几条推送
     var numNotife : Int{
         get{
-            if NSUserDefaults.standardUserDefaults().integerForKey("numsLocalNotifiication") as Int! == 0{
-                NSUserDefaults.standardUserDefaults().setInteger( 0 , forKey: "numsLocalNotifiication")
+            if UserDefaults.standard.integer(forKey: "numsLocalNotifiication") as Int! == 0{
+                UserDefaults.standard.set( 0 , forKey: "numsLocalNotifiication")
             }
-            return NSUserDefaults.standardUserDefaults().integerForKey("daysLocalNotifiication") as Int
+            return UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int
         }
         set{
-            NSUserDefaults.standardUserDefaults().setInteger( newValue , forKey: "numsLocalNotifiication")
+            UserDefaults.standard.set( newValue , forKey: "numsLocalNotifiication")
         }
     }
     
@@ -114,12 +114,12 @@ class Project: NSObject {
     init(dict : [String : AnyObject]) {
         super.init()        
         //setValuesForKeysWithDictionary(dict)
-        id = dict["id"]!.integerValue
-        name = String(dict["name"]!)
-        type = ProjectType(rawValue: dict["type"]!.integerValue)!
-        beginTime = String(dict["beginTime"]!)
-        endTime = String(dict["endTime"]!)
-        unit = String(dict["unit"]!)
+        id = dict["id"]!.intValue
+        name = String(describing: dict["name"]!)
+        type = ProjectType(rawValue: dict["type"]!.intValue)!
+        beginTime = String(describing: dict["beginTime"]!)
+        endTime = String(describing: dict["endTime"]!)
+        unit = String(describing: dict["unit"]!)
         total = dict["total"]!.doubleValue
         complete = dict["complete"]!.doubleValue
         rest = dict["rest"]!.doubleValue
@@ -131,7 +131,7 @@ class Project: NSObject {
         setNewProjectTime(beginTime, endTime: endTime)
         
         //计算百分比
-        if type != .NoRecord{
+        if type != .noRecord{
             if total != 0{
                 percent = complete * 100 / total
             }
@@ -149,12 +149,12 @@ class Project: NSObject {
 //            }
         }
         
-        if isFinished == .Finished{
+        if isFinished == .finished{
             percent = 0
         }
 
         //计算到结束的时间时间
-        let timeNow = NSDate().timeIntervalSince1970
+        let timeNow = Date().timeIntervalSince1970
         let timeEnd = endTimeDate.timeIntervalSince1970
         outTime = timeNow - timeEnd
 
@@ -164,13 +164,13 @@ class Project: NSObject {
     ///新增推送
     func addNotification() {
         //如果项目已经完成不添加7
-        if isFinished == .Finished{
+        if isFinished == .finished{
             return
         }
         // 初始化一个通知
         let localNoti = UILocalNotification()
         // 通知的触发时间
-        let fireDate = endTimeDate.dateByAddingTimeInterval(-Double(day)*24*60*60)
+        let fireDate = endTimeDate.addingTimeInterval(-Double(day)*24*60*60)
         //let fireDate = NSDate().dateByAddingTimeInterval(30)
         
         //过去的通知不触发
@@ -180,7 +180,7 @@ class Project: NSObject {
         
         localNoti.fireDate = fireDate
         // 设置时区
-        localNoti.timeZone = NSTimeZone.defaultTimeZone()
+        localNoti.timeZone = TimeZone.current
         // 通知上显示的主题内容
         if day == 1 {
             localNoti.alertBody = "\(name)项目今天到期"
@@ -197,19 +197,19 @@ class Project: NSObject {
         // 通知上绑定的其他信息，为键值对
         localNoti.userInfo = ["id": "\(id)",  "name": "\(name)"]
         // 添加通知到系统队列中，系统会在指定的时间触发
-        UIApplication.sharedApplication().scheduleLocalNotification(localNoti)
+        UIApplication.shared.scheduleLocalNotification(localNoti)
     }
     
     ///删除此条推送
     func deleteNotification() {
-        if let locals = UIApplication.sharedApplication().scheduledLocalNotifications {
+        if let locals = UIApplication.shared.scheduledLocalNotifications {
             for localNoti in locals {
                 if let dict = localNoti.userInfo {
                     print("\(dict)")
                     if dict.keys.contains("id") && dict["id"] is String && (dict["id"] as! String) == "\(id)" {
 
                         // 取消通知
-                        UIApplication.sharedApplication().cancelLocalNotification(localNoti)
+                        UIApplication.shared.cancelLocalNotification(localNoti)
                     }
                 }
             }
@@ -218,24 +218,24 @@ class Project: NSObject {
     
     ///删除所有推送
     class func deleteAllNotificication(){
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.shared.cancelAllLocalNotifications()
     }
     
     ///新建项目设置总量
-    func setNewProjectTotal(total: Double){
+    func setNewProjectTotal(_ total: Double){
         self.total = total
         self.complete = 0
         self.rest = total
     }
     
     ///修改项目总量
-    func editProjectTotal(total: Double) -> Bool{
+    func editProjectTotal(_ total: Double) -> Bool{
         if total < complete{
             return false
         }else if total == complete{
             self.total = total
             self.rest = 0
-            self.isFinished = .Finished
+            self.isFinished = .finished
             return true
         }else{
             self.total = total
@@ -245,8 +245,8 @@ class Project: NSObject {
     }
     
     ///变化完成量
-    func increaseDone(done: Double){
-        if type != .NoRecord{
+    func increaseDone(_ done: Double){
+        if type != .noRecord{
             complete += done
             rest -= done
             percent = complete * 100 / total
@@ -254,7 +254,7 @@ class Project: NSObject {
                 complete = total
                 rest = 0
                 percent = 100.0
-                self.isFinished = .Finished
+                self.isFinished = .finished
             }else if complete < 0{
                 complete = 0
                 rest = total
@@ -266,63 +266,63 @@ class Project: NSObject {
     
     ///不记录时间项目完成
     func finishDone(){
-        if type == .NoRecord{
+        if type == .noRecord{
             complete += 1
-            self.isFinished = .Finished
+            self.isFinished = .finished
             updateProject()
         }
     }
     
     ///新建项目设置时间
-    func setNewProjectTime(beginTime: String, endTime: String) -> Bool{
+    func setNewProjectTime(_ beginTime: String, endTime: String) -> Bool{
         if beginTime != "" && endTime != ""
         {
             self.beginTime = beginTime
             self.endTime = endTime
             //初始化项目状态
-            isFinished = .NoSet
+            isFinished = .noSet
             //开始时间<结束时间
-            if beginTimeDate.compare(endTimeDate) == NSComparisonResult.OrderedAscending{
+            if beginTimeDate.compare(endTimeDate) == ComparisonResult.orderedAscending{
                 //开始时间>现在时间
                 if beginTimeDate.timeIntervalSinceNow > 0{
-                    isFinished = .NotBegined
+                    isFinished = .notBegined
                     //结束时间<现在时间
                 }else if endTimeDate.timeIntervalSinceNow < 0{
                     //不记录时间项目
                     switch type{
-                    case .NoRecord:
+                    case .noRecord:
                         if complete == 1{
-                            isFinished = .Finished
+                            isFinished = .finished
                         }else{
-                            isFinished = .OverTime
+                            isFinished = .overTime
                         }
                     default:
                         if complete < total{
-                            isFinished = .OverTime
+                            isFinished = .overTime
                         }else{
-                           isFinished = .Finished
+                           isFinished = .finished
                         }
                     }
                     //结束时间>现在时间
                 }else if endTimeDate.timeIntervalSinceNow > 0{
                     switch type{
-                    case .NoRecord:
+                    case .noRecord:
                         if complete == 1{
-                            isFinished = .Finished
+                            isFinished = .finished
                         }else{
-                            isFinished = .NotFinished
+                            isFinished = .notFinished
                         }
                     default:
                         if complete < total{
-                            isFinished = .NotFinished
+                            isFinished = .notFinished
                         }else{
-                            isFinished = .Finished
+                            isFinished = .finished
                         }
                     }
                 }
             }
         }
-        if isFinished != .NoSet{
+        if isFinished != .noSet{
             return true
         }else{
             return false
@@ -333,12 +333,12 @@ class Project: NSObject {
     func check() -> Bool {
         //判断项目前面3个属性是否为空
         if  name != "" &&  beginTime !=  "" && endTime != "" {
-            if type == .Normal ||  type == .Punch {
-                if unit != "" && total != 0 && isFinished != .NoSet
+            if type == .normal ||  type == .punch {
+                if unit != "" && total != 0 && isFinished != .noSet
                     && total != 0{
                     return true
                 }
-            }else if type == .NoRecord{
+            }else if type == .noRecord{
                return true
             }
         }
@@ -381,7 +381,7 @@ class Project: NSObject {
     }
 
     /// 加载所有的数据
-    func loadData(id: Int) -> Project?{
+    func loadData(_ id: Int) -> Project?{
       
         // 1.获取查询语句
         let querySQL = "SELECT * FROM t_project WHERE id = '\(id)';"

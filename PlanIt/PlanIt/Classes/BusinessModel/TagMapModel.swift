@@ -30,14 +30,14 @@ class TagMap: NSObject{
     init(dict : [String : AnyObject]) {
         super.init()
         //setValuesForKeysWithDictionary(dict)
-        id = dict["id"]!.integerValue
-        tagID = dict["tagID"]!.integerValue
-        projectID = dict["projectID"]!.integerValue
+        id = dict["id"]!.intValue
+        tagID = dict["tagID"]!.intValue
+        projectID = dict["projectID"]!.intValue
     }
     
     //MARK:- 数据操作
     ///通过项目查找标签
-    func searchTagFromProject(project: Project) -> [Tag]{
+    func searchTagFromProject(_ project: Project) -> [Tag]{
         var tags = [Tag]()
         var tagMaps = [TagMap]()
         tagMaps = loadProjectData(project)
@@ -50,7 +50,7 @@ class TagMap: NSObject{
     }
     
     ///通过标签查找项目
-    func searchProjectFromTag(tag: Tag) -> [Project]{
+    func searchProjectFromTag(_ tag: Tag) -> [Project]{
         var projects = [Project]()
         var tagMaps = [TagMap]()
         tagMaps = loadTagData(tag)
@@ -84,7 +84,7 @@ class TagMap: NSObject{
     }
     
     /// 加载某tag所有的数据
-    func loadTagData(tag: Tag) -> [TagMap]{
+    func loadTagData(_ tag: Tag) -> [TagMap]{
         var tagMaps : [TagMap] = [TagMap]()
         
         // 1.获取查询语句
@@ -105,7 +105,7 @@ class TagMap: NSObject{
     }
     
     /// 加载某项目所有的数据
-    func loadProjectData(project: Project) -> [TagMap]{
+    func loadProjectData(_ project: Project) -> [TagMap]{
         var tagMaps : [TagMap] = [TagMap]()
         
         // 1.获取查询语句
@@ -156,7 +156,7 @@ class TagMap: NSObject{
     }
 
     ///更具tag和project删除进程
-    func deleteTagMap(tag: Tag, project: Project) -> Bool{
+    func deleteTagMap(_ tag: Tag, project: Project) -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_tagmap WHERE tagID = '\(tag.id)' and projectID = '\(project.id)';"
         
@@ -171,7 +171,7 @@ class TagMap: NSObject{
     }
     
     ///根据project删除进程
-    func deleteTagMapWithProject(project: Project) -> Bool{
+    func deleteTagMapWithProject(_ project: Project) -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_tagmap WHERE projectID = '\(project.id)';"
         
@@ -186,7 +186,7 @@ class TagMap: NSObject{
     }
     
     ///更具tag删除进程
-    func deleteTagMapWithTag(tag: Tag) -> Bool{
+    func deleteTagMapWithTag(_ tag: Tag) -> Bool{
         // 1.获取删除的SQL语句
         let deleteSQL = "DELETE FROM t_tagmap WHERE tagID = '\(tag.id)' ;"
         
