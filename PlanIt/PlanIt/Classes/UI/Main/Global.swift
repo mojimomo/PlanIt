@@ -63,4 +63,3 @@ let tagFontinstatistics = UIFont.systemFont(ofSize: 12, weight: UIFontWeightLigh
 let switchColor = UIColor.colorFromHex("#FE6158")
 
 
-

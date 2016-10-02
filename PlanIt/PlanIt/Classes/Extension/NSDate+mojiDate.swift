@@ -159,7 +159,7 @@ extension Date{
         let strDate = dateFormat.string(from: self)
         return strDate
     }
-    
+
      ///格式化日期到字符串 YYYY年MM月
     func FormatToStringYYYYMM() -> String{
         let dateFormat = DateFormatter()
@@ -220,11 +220,17 @@ extension Date{
     ///获取这个月的第一天和最后一天
     func getMonthBeginAndEnd() -> (firstDay: Date?, lastDay: Date?){        
         let calendar:Calendar = Calendar.current
-        var components = calendar.dateComponents([.year, .month], from: self)
-        let startOfMonth = calendar.date(from: components)!
-        components.month = 1
-        components.day = -1
-        let endOfMonth =  calendar.date(byAdding:components,
+        let components = calendar.dateComponents([.year, .month], from: self)
+        
+        var startOfMonth = calendar.date(from: components)!
+        var componentsNew = DateComponents()
+        componentsNew.day = 1
+        startOfMonth = calendar.date(byAdding:componentsNew,
+                                     to: startOfMonth)!
+
+        componentsNew.month = 1
+        componentsNew.day = -1
+        let endOfMonth =  calendar.date(byAdding:componentsNew,
                                         to: startOfMonth)!
         return (startOfMonth, endOfMonth)
     }
@@ -232,11 +238,16 @@ extension Date{
     ///获取这个年的第一月和最后一月
     func getYearBeginAndEnd() -> (firstDay: Date?, lastDay: Date?){
         let calendar:Calendar = Calendar.current
-        var components = calendar.dateComponents([.year], from: self)
-        let startOfYear = calendar.date(from: components)!
-        components.year = 1
-        components.day = -1
-        let endOfYear =  calendar.date(byAdding:components,
+        let components = calendar.dateComponents([.year], from: self)
+
+        var startOfYear = calendar.date(from: components)!
+        var componentsNew = DateComponents()
+        componentsNew.day = 1
+        startOfYear =  calendar.date(byAdding:componentsNew,
+                                       to: startOfYear)!
+        componentsNew.year = 1
+        componentsNew.day = -1
+        let endOfYear =  calendar.date(byAdding:componentsNew,
                                         to: startOfYear)!
         return (startOfYear, endOfYear)
     }
