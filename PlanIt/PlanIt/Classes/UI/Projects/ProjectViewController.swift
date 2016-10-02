@@ -577,14 +577,15 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //次数
         var timeOut = Int(newPercent -  oldPercent + 1)
         //周期
-        let period : UInt64 = UInt64( totalTime / timeOut)
+        let period : Int = Int( totalTime / timeOut)
         //增量
         let addEveryTime = 1.0
         //当前百分比
+        
         var currentPercent = oldPercent
-        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
-        let timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: UInt(0)), queue: queue)
-        timer.scheduleRepeating(deadline: .now(), interval: Double(period * NSEC_PER_MSEC), leeway: .seconds(0))
+        let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
+        let timer = DispatchSource.makeTimerSource(flags: [], queue: queue)
+        timer.scheduleRepeating(deadline: .now(), interval: .milliseconds(period), leeway: .seconds(0))
         timer.setEventHandler(handler: { () -> Void in
             //倒计时结束，关闭
             if (timeOut <= 0) {
@@ -613,7 +614,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                             }){ _ in
                                 
                         }
-                        let queue = DispatchQueue.global(priority:DispatchQueue.GlobalQueuePriority.default)
+
+                        let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
                         queue.async { () -> Void in
                             Thread.sleep(forTimeInterval: 1)
                             DispatchQueue.main.sync(execute: { () -> Void in
