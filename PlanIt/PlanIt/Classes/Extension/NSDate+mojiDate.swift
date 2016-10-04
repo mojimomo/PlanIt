@@ -116,83 +116,92 @@ extension Date{
     
     ///格式化日期到字符串 YYYY年MM月DD日
     func FormatToStringYYYYMMDD() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        dateFormat.dateStyle = .long
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringYYYYMMDD(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        dateFormat.dateStyle = .long
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 MM月DD日
     func FormatToStringMMMMDD() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("MMMMdd")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringMMMMDD(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("MMMMdd")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 DD日
     func FormatToStringDD() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("dd")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringDD(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("dd")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 YYYY年MM月DD日HH小时MM分钟
     func FormatToStringYYYYMMMMDDHHMM() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringYYYYMMMMDDHHMM(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 YYYY年MM月DD日HH小时MM分钟ss秒
     func FormatToStringYYYYMMMMDDHHMMSS() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmmss")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringYYYYMMMMDDHHMMSS(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmmss")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
 
      ///格式化日期到字符串 YYYY年MM月
     func FormatToStringYYYYMM() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMM")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringYYYYMM(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMM")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 MM月
     func FormatToStringMMMM() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("MMMM")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringMMMM(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("MMMM")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 YYYY年
     func FormatToStringYYYY() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyy")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringYYYY(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyy")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
     
     ///格式化日期到字符串 DD日HH小时MM分钟
     func FormatToStringDDHHMM() -> String{
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("ddhhmm")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let strDate = dateFormat.string(from: self)
+        let strDate = DateTool.shareIntance.FormatToStringDDHHMM(date: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("ddhhmm")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let strDate = dateFormat.string(from: self)
         return strDate
     }
     

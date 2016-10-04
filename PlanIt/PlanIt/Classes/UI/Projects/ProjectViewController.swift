@@ -291,11 +291,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
 
         }else{
+            title = "全部项目"
             projects = Project().loadAllData()
             if isShowFinished{
                title = "已完成项目"
-            }else{
-                title = "全部项目"
             }
         }
         

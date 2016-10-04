@@ -44,6 +44,7 @@
 		BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FC1CEC922000DB1CBB /* RRAddTagView.swift */; };
 		BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FD1CEC922000DB1CBB /* RRTagCollectionViewCell.swift */; };
 		BE7DF8011CEC922000DB1CBB /* RRTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */; };
+		BE8A3DE51DA3E25F00355461 /* DateTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A3DE41DA3E25F00355461 /* DateTool.swift */; };
 		BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */; };
 		BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE977A801D17B87200D6899C /* CellBackgroundView.swift */; };
 		BE9ACE781D0BE2420097A76F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9ACE771D0BE2420097A76F /* Global.swift */; };
@@ -137,6 +138,7 @@
 		BE7DF7FC1CEC922000DB1CBB /* RRAddTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRAddTagView.swift; sourceTree = "<group>"; };
 		BE7DF7FD1CEC922000DB1CBB /* RRTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE7DF7FE1CEC922000DB1CBB /* RRTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagController.swift; sourceTree = "<group>"; };
+		BE8A3DE41DA3E25F00355461 /* DateTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTool.swift; path = PlanIt/DateTool.swift; sourceTree = SOURCE_ROOT; };
 		BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
 		BE977A801D17B87200D6899C /* CellBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellBackgroundView.swift; sourceTree = "<group>"; };
 		BE9ACE771D0BE2420097A76F /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 		BE802AF11CCF4B2B0092F2DE /* Tools(工具) */ = {
 			isa = PBXGroup;
 			children = (
+				BE8A3DE41DA3E25F00355461 /* DateTool.swift */,
 			);
 			name = "Tools(工具)";
 			path = Tools;
@@ -818,6 +821,7 @@
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,
 				BEE477FE1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift in Sources */,
 				BE004A5F1D2A43A400556E85 /* TagTableViewCell.swift in Sources */,
+				BE8A3DE51DA3E25F00355461 /* DateTool.swift in Sources */,
 				BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */,
 				BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */,
 				BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */,

@@ -11,38 +11,42 @@ import Foundation
 extension String{
     ///字符串到格式化日期 YYYY年MM月DD日HH小时MM分钟
     func FormatToNSDateYYYYMMMMDDHHMM() -> Date? {
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let date = dateFormat.date(from: self)
+        let date = DateTool.shareIntance.FormatToNSDateYYYYMMMMDDHHMM(string: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let date = dateFormat.date(from: self)
         return date
     }
     
     ///字符串到格式化日期 YYYY年MM月DD日
     func FormatToNSDateYYYYMMMMDD() -> Date? {
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMdd")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        dateFormat.dateStyle = .long
-        let date = dateFormat.date(from: self)
+        let date = DateTool.shareIntance.FormatToNSDateYYYYMMMMDD(string: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMdd")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        dateFormat.dateStyle = .long
+//        let date = dateFormat.date(from: self)
         return date
     }
     
     ///字符串到格式化日期 YYYY年MM月
     func FormatToNSDateYYYYMMMM() -> Date? {
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMM")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let date = dateFormat.date(from: self)
+        let date = DateTool.shareIntance.FormatToNSDateYYYYMMMM(string: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMM")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let date = dateFormat.date(from: self)
         return date
     }
     
     ///字符串到格式化日期 YYYY年
     func FormatToNSDateYYYY() -> Date? {
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("yyyy")
-        dateFormat.locale = Locale(identifier: "zh_CN")
-        let date = dateFormat.date(from: self)
+        let date = DateTool.shareIntance.FormatToNSDateYYYY(string: self)
+//        let dateFormat = DateFormatter()
+//        dateFormat.setLocalizedDateFormatFromTemplate("yyyy")
+//        dateFormat.locale = Locale(identifier: "zh_CN")
+//        let date = dateFormat.date(from: self)
         return date
     }
     

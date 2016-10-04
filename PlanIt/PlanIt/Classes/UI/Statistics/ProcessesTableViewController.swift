@@ -160,6 +160,7 @@ class ProcessesTableViewController: UITableViewController {
                     }
                 }
             }
+            self.processes = self.processes.reversed()
             DispatchQueue.main.async(execute: {
                 weakSelf?.tableView.reloadData()
                 weakSelf?.checkTableView()
