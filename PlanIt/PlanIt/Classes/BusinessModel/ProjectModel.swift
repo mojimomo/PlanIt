@@ -82,30 +82,7 @@ class Project: NSObject {
     //var remark: String?
     var beginTimeDate = Date()
     var endTimeDate = Date()
-    //几天后推送
-    var day : Int{
-        get{
-            if UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int! == 0{
-                UserDefaults.standard.set( 3 , forKey: "daysLocalNotifiication")
-            }
-            return UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int
-        }
-        set{
-            UserDefaults.standard.set( newValue , forKey: "daysLocalNotifiication")
-        }
-    }
-    //几条推送
-    var numNotife : Int{
-        get{
-            if UserDefaults.standard.integer(forKey: "numsLocalNotifiication") as Int! == 0{
-                UserDefaults.standard.set( 0 , forKey: "numsLocalNotifiication")
-            }
-            return UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int
-        }
-        set{
-            UserDefaults.standard.set( newValue , forKey: "numsLocalNotifiication")
-        }
-    }
+
     
     override init() {
         super.init()
@@ -170,7 +147,7 @@ class Project: NSObject {
         // 初始化一个通知
         let localNoti = UILocalNotification()
         // 通知的触发时间
-        let fireDate = endTimeDate.addingTimeInterval(-Double(day)*24*60*60)
+        let fireDate = endTimeDate.addingTimeInterval(-Double(UserDefaultTool.shareIntance.daysLocalNotifiication)*24*60*60)
         //let fireDate = NSDate().dateByAddingTimeInterval(30)
         
         //过去的通知不触发
@@ -182,18 +159,18 @@ class Project: NSObject {
         // 设置时区
         localNoti.timeZone = TimeZone.current
         // 通知上显示的主题内容
-        if day == 1 {
+        if UserDefaultTool.shareIntance.daysLocalNotifiication == 1 {
             localNoti.alertBody = "\(name)项目今天到期"
         } else {
-            localNoti.alertBody = "\(name)项目还有\(day-1)天到期"
+            localNoti.alertBody = "\(name)项目还有\(UserDefaultTool.shareIntance.daysLocalNotifiication - 1)天到期"
         }
         // 收到通知时播放的声音，默认消息声音
         localNoti.soundName = UILocalNotificationDefaultSoundName
         //待机界面的滑动动作提示
         localNoti.alertAction = "打开应用"
         // 应用程序图标右上角显示的消息数
-        numNotife += 1
-        localNoti.applicationIconBadgeNumber = numNotife
+        UserDefaultTool.shareIntance.numsLocalNotifiication += 1
+        localNoti.applicationIconBadgeNumber = UserDefaultTool.shareIntance.numsLocalNotifiication
         // 通知上绑定的其他信息，为键值对
         localNoti.userInfo = ["id": "\(id)",  "name": "\(name)"]
         // 添加通知到系统队列中，系统会在指定的时间触发

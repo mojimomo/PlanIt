@@ -28,20 +28,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     
     //是否安装支付宝
     var isAliayInstalled = UIApplication.shared.canOpenURL(URL(string: "alipay://")!)
-    
-    //几天后推送
-    var day : Int{
-        get{
-            if UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int! == 0{
-                UserDefaults.standard.set( 1 , forKey: "daysLocalNotifiication")
-            }
-            return UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int
-        }
-        set{
-            UserDefaults.standard.set( newValue , forKey: "daysLocalNotifiication")
-        }
-    }
-    
+
     @IBAction func changeSwitchj(_ sender: UISwitch) {
         if sender.isOn{
             UserDefaults.standard.set(true, forKey: "isNeedLocalNotifiication")
@@ -98,13 +85,13 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 numberPicker.dataSource = self
                 numberPicker.delegate = self
                 //设置默认值
-                numberPicker.selectRow(day - 1, inComponent: 0, animated: true)
+                numberPicker.selectRow(UserDefaultTool.shareIntance.daysLocalNotifiication - 1, inComponent: 0, animated: true)
                 alerController.view.addSubview(numberPicker)
                 
                 //创建UIAlertAction 确定按钮
                 let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
                     self.daysLabel.text = self.labels[numberPicker.selectedRow(inComponent: 0)]
-                    self.day = self.days[numberPicker.selectedRow(inComponent: 0)]
+                    UserDefaultTool.shareIntance.daysLocalNotifiication = self.days[numberPicker.selectedRow(inComponent: 0)]
                     
                     //if self.isNeedLocalNotifiicationSwitch.on{
                         //删除所有推送
@@ -208,14 +195,10 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         let mailComposeVC = MFMailComposeViewController()
         mailComposeVC.mailComposeDelegate = self
         
-        //app版本记录
-        let ver = appVer!
-        let buildVer = appBuildVer!
-        
         //设置反馈邮件地址、主题及内容
         mailComposeVC.setToRecipients(["markplan@foxmail.com"])
         mailComposeVC.setSubject("马克计划 - 意见反馈")
-        mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(modelName)\n应用版本：\(ver)(\(buildVer))", isHTML: false)
+        mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(modelName)\n应用版本：\(kVer)(\(kBuildVer))", isHTML: false)
         
         return mailComposeVC
     
@@ -285,7 +268,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             isNeedLocalNotifiicationSwitch.setOn(true, animated: false)
         }
         
-        self.daysLabel.text = "\(labels[day - 1])"
+        self.daysLabel.text = "\(labels[UserDefaultTool.shareIntance.daysLocalNotifiication - 1])"
         //对back to app进行观察
         NotificationCenter.default.addObserver(self,selector:  #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)),name: NSNotification.Name.UIApplicationDidBecomeActive,object: nil)
     }

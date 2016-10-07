@@ -62,4 +62,23 @@ let tagFontinstatistics = UIFont.systemFont(ofSize: 12, weight: UIFontWeightLigh
 ///未开始字体颜色
 let switchColor = UIColor.colorFromHex("#FE6158")
 
+/// 获取app信息
+let infoDic = Bundle.main.infoDictionary!
 
+/// 获取 App 的版本号
+let kVer = infoDic["CFBundleShortVersionString"]!
+
+/// 获取 App 的 build 版本
+let kBuildVer = infoDic["CFBundleVersion"]!
+
+///屏幕尺寸
+let kScreenBounds = UIScreen.main.bounds
+
+///屏幕高度
+let kScreenHeight = UIScreen.main.bounds.size.height
+
+///屏幕宽度
+let kScreenWidth = UIScreen.main.bounds.size.width
+
+//创建UDID
+let uuid = UIDevice.current.identifierForVendor!.uuidString

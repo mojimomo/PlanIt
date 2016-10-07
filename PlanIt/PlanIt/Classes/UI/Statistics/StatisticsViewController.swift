@@ -219,20 +219,21 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
                 let days = Date().daysToEndDate(project.endTimeDate)
                 let times = (project.rest / Double(days)).toIntCarry()
                 needFinishLabel.text = "\(times) " + project.unit
-                needFinishLabel.changeTextAttributeByString(project.unit, font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
+                needFinishLabel.changeTextAttributeByRange(NSMakeRange(needFinishLabel.text!.characters.count - project.unit.characters.count, project.unit.characters.count), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
             }else if project.type == .punch && project.isFinished == .notFinished{
                 needLabel.text = "余下每天需打卡"
                 let days = Date().daysToEndDate(project.endTimeDate)
                 let times = (project.rest / Double(days)).toIntCarry()
                 needFinishLabel.text = "\(times) 次"
-                needFinishLabel.changeTextAttributeByString(" 次", font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
+                needFinishLabel.changeTextAttributeByRange(NSMakeRange(needFinishLabel.text!.characters.count - 2, 2), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
             }else{
                 needLabel.isHidden = true
                 needFinishLabel.isHidden = true
             }
             //已完成
             doneLabel.text = "\(Int(project.complete)) / \(Int(project.total)) " + project.unit
-            doneLabel.changeTextAttributeByString(" / \(Int(project.total)) " + project.unit, font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
+            let cutString = " / \(Int(project.total)) " + project.unit
+            doneLabel.changeTextAttributeByRange(NSMakeRange(doneLabel.text!.characters.count - cutString.characters.count, cutString.characters.count), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
             //百分比
             pieChartView.angle = Double(project.percent) / 100 * 360            
             percentLabel.text = "\(Int(project.percent))%"

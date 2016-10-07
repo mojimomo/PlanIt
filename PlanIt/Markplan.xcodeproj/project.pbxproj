@@ -49,6 +49,7 @@
 		BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE977A801D17B87200D6899C /* CellBackgroundView.swift */; };
 		BE9ACE781D0BE2420097A76F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9ACE771D0BE2420097A76F /* Global.swift */; };
 		BE9ACE7A1D0C03B30097A76F /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9ACE791D0C03B30097A76F /* PieChartView.swift */; };
+		BEA025221DA5D77500175B2B /* UserDefaultTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA025211DA5D77500175B2B /* UserDefaultTool.swift */; };
 		BEA520A01CCF417F00FFE43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */; };
 		BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA520A31CCF417F00FFE43E /* Main.storyboard */; };
 		BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEA520A61CCF417F00FFE43E /* PlanIt.xcdatamodeld */; };
@@ -141,8 +142,9 @@
 		BE8A3DE41DA3E25F00355461 /* DateTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTool.swift; path = PlanIt/DateTool.swift; sourceTree = SOURCE_ROOT; };
 		BE93C1051CE84F1700766DD4 /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
 		BE977A801D17B87200D6899C /* CellBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellBackgroundView.swift; sourceTree = "<group>"; };
-		BE9ACE771D0BE2420097A76F /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		BE9ACE771D0BE2420097A76F /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Global.swift; path = Classes/UI/Main/Global.swift; sourceTree = "<group>"; };
 		BE9ACE791D0C03B30097A76F /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = PlanIt/Classes/UI/Projects/PieChartView.swift; sourceTree = SOURCE_ROOT; };
+		BEA025211DA5D77500175B2B /* UserDefaultTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultTool.swift; path = PlanIt/UserDefaultTool.swift; sourceTree = SOURCE_ROOT; };
 		BEA5209C1CCF417F00FFE43E /* Markplan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Markplan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEA520A41CCF417F00FFE43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				BE8A3DE41DA3E25F00355461 /* DateTool.swift */,
+				BEA025211DA5D77500175B2B /* UserDefaultTool.swift */,
 			);
 			name = "Tools(工具)";
 			path = Tools;
@@ -457,7 +460,6 @@
 			isa = PBXGroup;
 			children = (
 				BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */,
-				BE9ACE771D0BE2420097A76F /* Global.swift */,
 				BEACC90C1D5F7FF70093FB94 /* GuideViewController.swift */,
 			);
 			name = "Main(公共)";
@@ -556,6 +558,7 @@
 		BEA520D01CCF418B00FFE43E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE9ACE771D0BE2420097A76F /* Global.swift */,
 				BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */,
 				BEA520A91CCF417F00FFE43E /* Assets.xcassets */,
 				BEA520AE1CCF417F00FFE43E /* Info.plist */,
@@ -816,6 +819,7 @@
 				BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */,
 				BE24E5C11D6820E1007CB5D6 /* DynamicBlurView.swift in Sources */,
 				BEACC90D1D5F7FF70093FB94 /* GuideViewController.swift in Sources */,
+				BEA025221DA5D77500175B2B /* UserDefaultTool.swift in Sources */,
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
 				BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */,
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,

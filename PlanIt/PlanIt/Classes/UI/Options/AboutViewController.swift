@@ -21,9 +21,7 @@ class AboutViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = backButtom
         
         //app版本label
-        let ver = appVer!
-        let buildVer = appBuildVer!
-        appVersion.text = "版本 \(ver) (\(buildVer))"
+        appVersion.text = "版本 \(kVer) (\(kBuildVer))"
         
         //设置介绍字体颜色大小
         let string = NSMutableAttributedString(string: memberIntro.text!)
@@ -73,12 +71,4 @@ class AboutViewController: UIViewController {
 
 
     
-// MARK: 获取app版本号
 
-let infoDic = Bundle.main.infoDictionary
-
-// 获取 App 的版本号
-let appVer = infoDic?["CFBundleShortVersionString"]
-
-// 获取 App 的 build 版本
-let appBuildVer = infoDic?["CFBundleVersion"]

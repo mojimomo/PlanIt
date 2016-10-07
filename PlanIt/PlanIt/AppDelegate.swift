@@ -21,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMAnalyticsConfig.sharedInstance().eSType = .E_UM_NORMAL
         MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
 
-        //创建id
-        //let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
+
 
         
         //判断是否第一次启动   
@@ -155,7 +154,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
+    /// 判断是不是新版本
+    func judgeNewVersion() -> Bool {
+        let newVersion = (Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject).doubleValue
+        let oldVersionKey = "oldVersionKey"
+        let oldVersion = UserDefaults.standard.double(forKey: oldVersionKey)
+        UserDefaults.standard.set(newVersion!, forKey: oldVersionKey)
+        return newVersion != oldVersion
+    }
 
 }
 
