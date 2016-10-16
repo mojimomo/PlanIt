@@ -21,7 +21,7 @@ class AboutViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = backButtom
         
         //app版本label
-        appVersion.text = "版本 \(kVer) (\(kBuildVer))"
+        appVersion.text = "Version \(kVer) (\(kBuildVer))"
         
         //设置介绍字体颜色大小
         let string = NSMutableAttributedString(string: memberIntro.text!)
