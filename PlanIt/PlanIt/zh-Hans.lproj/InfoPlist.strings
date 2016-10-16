@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Markplan
+
+  Created by Yale on 2016/10/16.
+  Copyright © 2016年 Ken. All rights reserved.
+*/
+
+// 配置简体应用名
+CFBundleDisplayName = "马克计划";

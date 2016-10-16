@@ -1,0 +1,180 @@
+
+/* Class = "UILabel"; text = "截止几天前通知"; ObjectID = "0wa-dX-wUy"; */
+"0wa-dX-wUy.text" = "截止几天前通知";
+
+/* Class = "UILabel"; text = "Copyright © 2016 Markplan"; ObjectID = "1RJ-xU-Dpf"; */
+"1RJ-xU-Dpf.text" = "Copyright © 2016 Markplan";
+
+/* Class = "UILabel"; text = "已完成项目"; ObjectID = "2DN-0F-99D"; */
+"2DN-0F-99D.text" = "已完成项目";
+
+/* Class = "UILabel"; text = "打卡项目每次打卡进度量+1。不填写进度单位及进度总量时开启，将自动填充天数为进度总量。"; ObjectID = "60g-Df-Yyl"; */
+"60g-Df-Yyl.text" = "打卡项目每次打卡进度量+1。不填写进度单位及进度总量时开启，将自动填充天数为进度总量。";
+
+/* Class = "UILabel"; text = "2 小时"; ObjectID = "6w7-Cy-H0w"; */
+"6w7-Cy-H0w.text" = "2 小时";
+
+/* Class = "UILabel"; text = "备注：洛杉矶来得及立法是经典款"; ObjectID = "7i3-Zu-ZKb"; */
+"7i3-Zu-ZKb.text" = "备注：洛杉矶来得及立法是经典款";
+
+/* Class = "UILabel"; text = "马克计划"; ObjectID = "7mS-Ku-qAM"; */
+"7mS-Ku-qAM.text" = "马克计划";
+
+/* Class = "UILabel"; text = "结束时间"; ObjectID = "8gl-eq-TqD"; */
+"8gl-eq-TqD.text" = "结束时间";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Akt-ae-FQD"; */
+"Akt-ae-FQD.text" = "Label";
+
+/* Class = "UILabel"; text = "已开启"; ObjectID = "DBH-ag-ytd"; */
+"DBH-ag-ytd.text" = "已开启";
+
+/* Class = "UINavigationItem"; title = "设置"; ObjectID = "DS8-W0-jLZ"; */
+"DS8-W0-jLZ.title" = "设置";
+
+/* Class = "UILabel"; text = "平凡之路"; ObjectID = "DiQ-RG-UBS"; */
+"DiQ-RG-UBS.text" = "平凡之路";
+
+/* Class = "UITextField"; placeholder = "课"; ObjectID = "F3p-Qh-xKE"; */
+"F3p-Qh-xKE.placeholder" = "课";
+
+/* Class = "UITextField"; placeholder = "例如：读完《自制力》"; ObjectID = "IdS-En-F3b"; */
+"IdS-En-F3b.placeholder" = "例如：读完《自制力》";
+
+/* Class = "UILabel"; text = "3天"; ObjectID = "Is3-FY-yKH"; */
+"Is3-FY-yKH.text" = "3天";
+
+/* Class = "UITableViewController"; title = "Drawer"; ObjectID = "IzO-Sd-gUy"; */
+"IzO-Sd-gUy.title" = "Drawer";
+
+/* Class = "UILabel"; text = "标签"; ObjectID = "JfE-0v-2k7"; */
+"JfE-0v-2k7.text" = "标签";
+
+/* Class = "UILabel"; text = "打卡项目"; ObjectID = "K3A-wn-FtI"; */
+"K3A-wn-FtI.text" = "打卡项目";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "KHb-Um-z69"; */
+"KHb-Um-z69.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "使用帮助"; ObjectID = "Lx3-yW-WcQ"; */
+"Lx3-yW-WcQ.title" = "使用帮助";
+
+/* Class = "UINavigationItem"; title = "菜单"; ObjectID = "Mm5-Q9-9dE"; */
+"Mm5-Q9-9dE.title" = "菜单";
+
+/* Class = "UILabel"; text = "备注"; ObjectID = "PZc-BW-eoX"; */
+"PZc-BW-eoX.text" = "备注";
+
+/* Class = "UILabel"; text = "未完成项目"; ObjectID = "Pzo-cr-ZVu"; */
+"Pzo-cr-ZVu.text" = "未完成项目";
+
+/* Class = "UILabel"; text = "截止2016年12月12日"; ObjectID = "RAP-cj-VgG"; */
+"RAP-cj-VgG.text" = "截止2016年12月12日";
+
+/* Class = "UILabel"; text = "4课"; ObjectID = "RKh-Z2-dzd"; */
+"RKh-Z2-dzd.text" = "4课";
+
+/* Class = "UILabel"; text = "关于"; ObjectID = "RxI-0G-YaC"; */
+"RxI-0G-YaC.text" = "关于";
+
+/* Class = "UILabel"; text = "20%"; ObjectID = "Tau-Cq-hUb"; */
+"Tau-Cq-hUb.text" = "20%";
+
+/* Class = "UILabel"; text = "标签管理"; ObjectID = "WVk-0h-oZR"; */
+"WVk-0h-oZR.text" = "标签管理";
+
+/* Class = "UILabel"; text = "标签"; ObjectID = "ZdU-tm-FDZ"; */
+"ZdU-tm-FDZ.text" = "标签";
+
+/* Class = "UILabel"; text = "给应用评分"; ObjectID = "aNf-Uh-FGR"; */
+"aNf-Uh-FGR.text" = "给应用评分";
+
+/* Class = "UILabel"; text = "推荐给朋友"; ObjectID = "akK-Jx-QZg"; */
+"akK-Jx-QZg.text" = "推荐给朋友";
+
+/* Class = "UILabel"; text = "余下每天需完成"; ObjectID = "bEq-00-jlK"; */
+"bEq-00-jlK.text" = "余下每天需完成";
+
+/* Class = "UITextField"; placeholder = "点击添加备注"; ObjectID = "dYg-he-xNs"; */
+"dYg-he-xNs.placeholder" = "点击添加备注";
+
+/* Class = "UILabel"; text = "50 / 100 小时"; ObjectID = "eeK-dJ-Ul2"; */
+"eeK-dJ-Ul2.text" = "50 / 100 小时";
+
+/* Class = "UILabel"; text = "距离截止"; ObjectID = "exL-J4-Unb"; */
+"exL-J4-Unb.text" = "距离截止";
+
+/* Class = "UILabel"; text = "15天"; ObjectID = "gYA-jv-LwE"; */
+"gYA-jv-LwE.text" = "15天";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gok-Nc-RGs"; */
+"gok-Nc-RGs.text" = "Label";
+
+/* Class = "UILabel"; text = "设置"; ObjectID = "hd7-m1-6ZW"; */
+"hd7-m1-6ZW.text" = "设置";
+
+/* Class = "UILabel"; text = "项目名称"; ObjectID = "hz8-Nm-u7d"; */
+"hz8-Nm-u7d.text" = "项目名称";
+
+/* Class = "UILabel"; text = "已经记录总量: 20/200"; ObjectID = "iDp-gR-KI2"; */
+"iDp-gR-KI2.text" = "已经记录总量: 20/200";
+
+/* Class = "UINavigationItem"; title = "项目"; ObjectID = "kK9-Xh-z2k"; */
+"kK9-Xh-z2k.title" = "项目";
+
+/* Class = "UIButton"; normalTitle = "2016年8月"; ObjectID = "msf-B6-Jca"; */
+"msf-B6-Jca.normalTitle" = "2016年8月";
+
+/* Class = "UILabel"; text = "开始时间"; ObjectID = "nIl-Hd-mKk"; */
+"nIl-Hd-mKk.text" = "开始时间";
+
+/* Class = "UILabel"; text = "版本"; ObjectID = "oWL-86-drm"; */
+"oWL-86-drm.text" = "版本";
+
+/* Class = "UITextField"; placeholder = "必填"; ObjectID = "oj8-3p-9B7"; */
+"oj8-3p-9B7.placeholder" = "必填";
+
+/* Class = "UILabel"; text = "记录进度"; ObjectID = "pOC-Na-mvj"; */
+"pOC-Na-mvj.text" = "记录进度";
+
+/* Class = "UINavigationItem"; title = "关于"; ObjectID = "qYl-L8-gr4"; */
+"qYl-L8-gr4.title" = "关于";
+
+/* Class = "UILabel"; text = "完成量"; ObjectID = "sCX-C2-Ihy"; */
+"sCX-C2-Ihy.text" = "完成量";
+
+/* Class = "UILabel"; text = "标签"; ObjectID = "sZE-Xp-KFN"; */
+"sZE-Xp-KFN.text" = "标签";
+
+/* Class = "UILabel"; text = "产品/也而  设计/STEVEN  开发/墨迹"; ObjectID = "sfm-kW-bKZ"; */
+"sfm-kW-bKZ.text" = "产品/也而  设计/STEVEN  开发/墨迹";
+
+/* Class = "UILabel"; text = "开启通知"; ObjectID = "soK-HM-B2d"; */
+"soK-HM-B2d.text" = "开启通知";
+
+/* Class = "UILabel"; text = "全部项目"; ObjectID = "tEq-Of-9dY"; */
+"tEq-Of-9dY.text" = "全部项目";
+
+/* Class = "UITextField"; placeholder = "例如：章、课、小时等"; ObjectID = "tMs-3G-JeZ"; */
+"tMs-3G-JeZ.placeholder" = "例如：章、课、小时等";
+
+/* Class = "UILabel"; text = "2016年5月26日"; ObjectID = "wAo-Ys-7pp"; */
+"wAo-Ys-7pp.text" = "2016年5月26日";
+
+/* Class = "UILabel"; text = "已完成"; ObjectID = "wQu-W1-a0q"; */
+"wQu-W1-a0q.text" = "已完成";
+
+/* Class = "UILabel"; text = "进度单位"; ObjectID = "wfn-br-jxA"; */
+"wfn-br-jxA.text" = "进度单位";
+
+/* Class = "UILabel"; text = "打赏我们"; ObjectID = "x0f-IM-Eed"; */
+"x0f-IM-Eed.text" = "打赏我们";
+
+/* Class = "UILabel"; text = "进度总量"; ObjectID = "yTt-aC-Bad"; */
+"yTt-aC-Bad.text" = "进度总量";
+
+/* Class = "UILabel"; text = "使用帮助"; ObjectID = "z70-Hz-CRe"; */
+"z70-Hz-CRe.text" = "使用帮助";
+
+/* Class = "UILabel"; text = "意见反馈"; ObjectID = "zY5-B2-P3F"; */
+"zY5-B2-P3F.text" = "意见反馈";
