@@ -1041,7 +1041,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LauchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = CYTA756UDU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PlanIt/Frameworks",
@@ -1051,7 +1052,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = info.markplan.markplan;
 				PRODUCT_NAME = Markplan;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1c7abbd2-2812-4c12-8819-845e281a2e47";
+				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: *";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1068,6 +1070,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ji Mo (CYTA756UDU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ji Mo (CYTA756UDU)";
+				DEVELOPMENT_TEAM = CYTA756UDU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PlanIt/Frameworks",
@@ -1077,7 +1080,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = info.markplan.markplan;
 				PRODUCT_NAME = Markplan;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1c7abbd2-2812-4c12-8819-845e281a2e47";
+				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: *";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1183,7 +1187,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LauchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = CYTA756UDU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PlanIt/Frameworks",
@@ -1193,7 +1198,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = info.markplan.markplan;
 				PRODUCT_NAME = Markplan;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1c7abbd2-2812-4c12-8819-845e281a2e47";
+				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: *";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlanIt-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
