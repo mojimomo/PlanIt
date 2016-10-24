@@ -49,7 +49,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
     @IBOutlet weak var currentProcessTextField: UITextField!
     @IBOutlet weak var remarkTextField: UITextField!
     @IBOutlet weak var currentProcessLabel: UILabel!
-    let maxLengthDict  = [UITag.doneTextField : 6, UITag.remarkTextField : 20]
+    let maxLengthDict  = [UITag.doneTextField : 12, UITag.remarkTextField : 40]
     struct UITag {
         static let doneTextField = 1004
         static let remarkTextField = 1005

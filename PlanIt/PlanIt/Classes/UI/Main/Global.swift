@@ -10,6 +10,8 @@ import UIKit
 let IS_IPHONE = UIDevice.current.userInterfaceIdiom == .phone
 ///判断系统是否iOS8.0以上
 let IS_IOS8 = (UIDevice.current.systemVersion as NSString).doubleValue >= 8.0
+///判断系统是否iOS9.0以上
+let IS_IOS9 = (UIDevice.current.systemVersion as NSString).doubleValue >= 9.0
 ///导航栏背景色
 let navigationBackground = UIColor.colorFromHex("#F5F4F2")
 ///其他导航栏背景色

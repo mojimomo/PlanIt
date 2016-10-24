@@ -53,21 +53,44 @@ extension UIViewController{
     
     ///发起系统提示
     func callAlert(_ title:String, message: String, completion: (() -> Void)? = nil){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "好的", style: .default,
-                    handler: nil)
-        alertController.addAction(okAction)
-        
-        if let popoverPresentationController = alertController.popoverPresentationController {
-            popoverPresentationController.sourceView = self.view
-            popoverPresentationController.sourceRect =  CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+        if !IS_IOS9{
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "好的", style: .default,
+                                         handler: nil)
+            alertController.addAction(okAction)
+            
+            if let popoverPresentationController = alertController.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.sourceRect =  CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+            }
+            
+            self.present(alertController, animated: true, completion: completion)
+
+        }else{
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message, buttonAlignment: .horizontal, transitionStyle: .zoomIn, gestureDismissal: true) {
+                print("Completed")
+                completion?()
+                
+            }
+            
+            // Create first button
+            // Create second button
+            let buttonTwo = DefaultButton(title: "好的") {
+                
+            }
+            
+            // Add buttons to dialog
+            popup.addButtons([buttonTwo])
+            
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
         }
-        
-        self.present(alertController, animated: true, completion: completion)
     }
     
     ///发起询问提示
     func callAlertAsk(_ title:String, okHandler: ((UIAlertAction) -> Void)?, cancelandler: ((UIAlertAction) -> Void)?, completion: (() -> Void)?){
+        if !IS_IOS9{
             let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: "确定", style: .destructive, handler: okHandler)
@@ -76,14 +99,38 @@ extension UIViewController{
             //添加动作
             alertController.addAction(alerActionOK)
             alertController.addAction(alerActionCancel)
-        
+            
             if let popoverPresentationController = alertController.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect =  CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
             }
-        
+            
             //显示alert
             self.present(alertController, animated: true, completion: completion)
+
+        }else{
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: nil, buttonAlignment: .horizontal, transitionStyle: .zoomIn, gestureDismissal: true) {
+                print("Completed")
+                completion?()
+            }
+            
+            // Create first button
+            let buttonOne = CancelButton(title: "取消") {
+                cancelandler?(UIAlertAction())
+            }
+            
+            // Create second button
+            let buttonTwo = DefaultButton(title: "确定") {
+                okHandler?(UIAlertAction())
+            }
+            
+            // Add buttons to dialog
+            popup.addButtons([buttonTwo, buttonOne])
+            
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
+        }
     }
     
     ///用户引导页面

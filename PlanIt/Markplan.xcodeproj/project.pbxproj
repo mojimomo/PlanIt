@@ -64,6 +64,24 @@
 		BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3221CF57870002A20FE /* CloseButton.swift */; };
 		BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3251CF57870002A20FE /* TagListView.swift */; };
 		BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8B3261CF57870002A20FE /* TagView.swift */; };
+		BECBB80A1DBDEAA900736904 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = BECBB7F61DBDEAA900736904 /* .gitkeep */; };
+		BECBB80B1DBDEAA900736904 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = BECBB7F81DBDEAA900736904 /* .gitkeep */; };
+		BECBB80C1DBDEAA900736904 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = BECBB7FA1DBDEAA900736904 /* FXBlurView.m */; };
+		BECBB80D1DBDEAA900736904 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB7FB1DBDEAA900736904 /* InteractiveTransition.swift */; };
+		BECBB80E1DBDEAA900736904 /* PopupDialog+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB7FC1DBDEAA900736904 /* PopupDialog+Keyboard.swift */; };
+		BECBB80F1DBDEAA900736904 /* PopupDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB7FD1DBDEAA900736904 /* PopupDialog.swift */; };
+		BECBB8101DBDEAA900736904 /* PopupDialogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB7FE1DBDEAA900736904 /* PopupDialogButton.swift */; };
+		BECBB8111DBDEAA900736904 /* PopupDialogContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB7FF1DBDEAA900736904 /* PopupDialogContainerView.swift */; };
+		BECBB8121DBDEAA900736904 /* PopupDialogDefaultButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8001DBDEAA900736904 /* PopupDialogDefaultButtons.swift */; };
+		BECBB8131DBDEAA900736904 /* PopupDialogDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8011DBDEAA900736904 /* PopupDialogDefaultView.swift */; };
+		BECBB8141DBDEAA900736904 /* PopupDialogDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8021DBDEAA900736904 /* PopupDialogDefaultViewController.swift */; };
+		BECBB8151DBDEAA900736904 /* PopupDialogOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8031DBDEAA900736904 /* PopupDialogOverlayView.swift */; };
+		BECBB8161DBDEAA900736904 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8041DBDEAA900736904 /* PresentationController.swift */; };
+		BECBB8171DBDEAA900736904 /* PresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8051DBDEAA900736904 /* PresentationManager.swift */; };
+		BECBB8181DBDEAA900736904 /* TransitionAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8061DBDEAA900736904 /* TransitionAnimations.swift */; };
+		BECBB8191DBDEAA900736904 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8071DBDEAA900736904 /* TransitionAnimator.swift */; };
+		BECBB81A1DBDEAA900736904 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8081DBDEAA900736904 /* UIView+Animations.swift */; };
+		BECBB81B1DBDEAA900736904 /* UIViewController+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8091DBDEAA900736904 /* UIViewController+Visibility.swift */; };
 		BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC3061CFABE2400D8C4C8 /* ScrollableGraphView.swift */; };
 		BECFC30B1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */; };
 		BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */; };
@@ -177,6 +195,25 @@
 		BEB8B3241CF57870002A20FE /* TagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagListView.h; sourceTree = "<group>"; };
 		BEB8B3251CF57870002A20FE /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		BEB8B3261CF57870002A20FE /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		BECBB7F61DBDEAA900736904 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		BECBB7F81DBDEAA900736904 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		BECBB7F91DBDEAA900736904 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		BECBB7FA1DBDEAA900736904 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		BECBB7FB1DBDEAA900736904 /* InteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
+		BECBB7FC1DBDEAA900736904 /* PopupDialog+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PopupDialog+Keyboard.swift"; sourceTree = "<group>"; };
+		BECBB7FD1DBDEAA900736904 /* PopupDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDialog.swift; sourceTree = "<group>"; };
+		BECBB7FE1DBDEAA900736904 /* PopupDialogButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDialogButton.swift; sourceTree = "<group>"; };
+		BECBB7FF1DBDEAA900736904 /* PopupDialogContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDialogContainerView.swift; sourceTree = "<group>"; };
+		BECBB8001DBDEAA900736904 /* PopupDialogDefaultButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDialogDefaultButtons.swift; sourceTree = "<group>"; };
+		BECBB8011DBDEAA900736904 /* PopupDialogDefaultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDialogDefaultView.swift; sourceTree = "<group>"; };
+		BECBB8021DBDEAA900736904 /* PopupDialogDefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDialogDefaultViewController.swift; sourceTree = "<group>"; };
+		BECBB8031DBDEAA900736904 /* PopupDialogOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDialogOverlayView.swift; sourceTree = "<group>"; };
+		BECBB8041DBDEAA900736904 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		BECBB8051DBDEAA900736904 /* PresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationManager.swift; sourceTree = "<group>"; };
+		BECBB8061DBDEAA900736904 /* TransitionAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnimations.swift; sourceTree = "<group>"; };
+		BECBB8071DBDEAA900736904 /* TransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
+		BECBB8081DBDEAA900736904 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
+		BECBB8091DBDEAA900736904 /* UIViewController+Visibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Visibility.swift"; sourceTree = "<group>"; };
 		BECFC3061CFABE2400D8C4C8 /* ScrollableGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableGraphView.swift; sourceTree = "<group>"; };
 		BECFC30A1CFAD43B00D8C4C8 /* ProcessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessTableViewCell.swift; sourceTree = "<group>"; };
 		BECFC30C1CFADBCD00D8C4C8 /* ProcessDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessDateModel.swift; sourceTree = "<group>"; };
@@ -441,6 +478,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BECBB7F41DBDEAA900736904 /* PopupDialog */,
 				BE24E5BF1D6820E1007CB5D6 /* DynamicBlurView */,
 				BE3F86F21D67826D002FACA2 /* UICollectionViewLeftAlignedLayout */,
 				BEFD580A1D4DDF0300CAD595 /* MobClick */,
@@ -595,6 +633,48 @@
 			path = TagListView;
 			sourceTree = "<group>";
 		};
+		BECBB7F41DBDEAA900736904 /* PopupDialog */ = {
+			isa = PBXGroup;
+			children = (
+				BECBB7F51DBDEAA900736904 /* Assets */,
+				BECBB7F71DBDEAA900736904 /* Classes */,
+			);
+			path = PopupDialog;
+			sourceTree = "<group>";
+		};
+		BECBB7F51DBDEAA900736904 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				BECBB7F61DBDEAA900736904 /* .gitkeep */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		BECBB7F71DBDEAA900736904 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BECBB7F81DBDEAA900736904 /* .gitkeep */,
+				BECBB7F91DBDEAA900736904 /* FXBlurView.h */,
+				BECBB7FA1DBDEAA900736904 /* FXBlurView.m */,
+				BECBB7FB1DBDEAA900736904 /* InteractiveTransition.swift */,
+				BECBB7FC1DBDEAA900736904 /* PopupDialog+Keyboard.swift */,
+				BECBB7FD1DBDEAA900736904 /* PopupDialog.swift */,
+				BECBB7FE1DBDEAA900736904 /* PopupDialogButton.swift */,
+				BECBB7FF1DBDEAA900736904 /* PopupDialogContainerView.swift */,
+				BECBB8001DBDEAA900736904 /* PopupDialogDefaultButtons.swift */,
+				BECBB8011DBDEAA900736904 /* PopupDialogDefaultView.swift */,
+				BECBB8021DBDEAA900736904 /* PopupDialogDefaultViewController.swift */,
+				BECBB8031DBDEAA900736904 /* PopupDialogOverlayView.swift */,
+				BECBB8041DBDEAA900736904 /* PresentationController.swift */,
+				BECBB8051DBDEAA900736904 /* PresentationManager.swift */,
+				BECBB8061DBDEAA900736904 /* TransitionAnimations.swift */,
+				BECBB8071DBDEAA900736904 /* TransitionAnimator.swift */,
+				BECBB8081DBDEAA900736904 /* UIView+Animations.swift */,
+				BECBB8091DBDEAA900736904 /* UIViewController+Visibility.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		BECFC3051CFABE2400D8C4C8 /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,6 +825,8 @@
 				BEA520AA1CCF417F00FFE43E /* Assets.xcassets in Resources */,
 				BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */,
 				36AD31941DB35D7400183458 /* InfoPlist.strings in Resources */,
+				BECBB80A1DBDEAA900736904 /* .gitkeep in Resources */,
+				BECBB80B1DBDEAA900736904 /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,15 +902,19 @@
 				BE9ACE7A1D0C03B30097A76F /* PieChartView.swift in Sources */,
 				BE7DF7FF1CEC922000DB1CBB /* RRAddTagView.swift in Sources */,
 				BE4F023A1CEF365F00126237 /* RoundTableviewCell.swift in Sources */,
+				BECBB8191DBDEAA900736904 /* TransitionAnimator.swift in Sources */,
 				BE3F86EE1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift in Sources */,
 				BE1C16081D2CCC4200A4B4A5 /* WebviewController.swift in Sources */,
 				BEB8B3291CF57870002A20FE /* TagListView.swift in Sources */,
 				BE6EEBB71CF4220E0085A9E7 /* StatisticsViewController.swift in Sources */,
+				BECBB80D1DBDEAA900736904 /* InteractiveTransition.swift in Sources */,
 				BE9ACE781D0BE2420097A76F /* Global.swift in Sources */,
 				BE4EDFFF1D41F7D2003EA7A0 /* MBProgressHUD.m in Sources */,
+				BECBB80F1DBDEAA900736904 /* PopupDialog.swift in Sources */,
 				BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */,
 				BE79BCC91D2D38B2001512D6 /* UIViewController+mojiView.swift in Sources */,
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
+				BECBB80E1DBDEAA900736904 /* PopupDialog+Keyboard.swift in Sources */,
 				BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */,
 				BE79BCC81D2D38B2001512D6 /* UIColor+colorFromHex.swift in Sources */,
 				BE68E5491CE9B658006A1750 /* TagsViewController.swift in Sources */,
@@ -837,9 +923,13 @@
 				BE6E09351CD9D45E008AABCD /* ProjectViewController.swift in Sources */,
 				BE24E5C11D6820E1007CB5D6 /* DynamicBlurView.swift in Sources */,
 				BEACC90D1D5F7FF70093FB94 /* GuideViewController.swift in Sources */,
+				BECBB8161DBDEAA900736904 /* PresentationController.swift in Sources */,
 				BEA025221DA5D77500175B2B /* UserDefaultTool.swift in Sources */,
 				BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */,
 				BECFC3071CFABE2400D8C4C8 /* ScrollableGraphView.swift in Sources */,
+				BECBB8131DBDEAA900736904 /* PopupDialogDefaultView.swift in Sources */,
+				BECBB8121DBDEAA900736904 /* PopupDialogDefaultButtons.swift in Sources */,
+				BECBB8111DBDEAA900736904 /* PopupDialogContainerView.swift in Sources */,
 				BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */,
 				BEE477FE1D1FC8CA00EF8C44 /* ChangeTagsViewControl.swift in Sources */,
 				BE004A5F1D2A43A400556E85 /* TagTableViewCell.swift in Sources */,
@@ -848,7 +938,9 @@
 				BEB8B32A1CF57870002A20FE /* TagView.swift in Sources */,
 				BE1C16061D2CCC3800A4B4A5 /* OptionsTableViewController.swift in Sources */,
 				367B7B3D1D4675C80035B099 /* AboutViewController.swift in Sources */,
+				BECBB8151DBDEAA900736904 /* PopupDialogOverlayView.swift in Sources */,
 				BEA520A81CCF417F00FFE43E /* PlanIt.xcdatamodeld in Sources */,
+				BECBB81A1DBDEAA900736904 /* UIView+Animations.swift in Sources */,
 				BE6E09331CD9C373008AABCD /* ProcessModel.swift in Sources */,
 				BE5FE7A91CCF8A0E00BC5F86 /* TagModel.swift in Sources */,
 				BE279CF61CDF1D4D00D4FCFB /* KYDrawerController.swift in Sources */,
@@ -857,19 +949,25 @@
 				BE79BCC71D2D38B2001512D6 /* String+mojiString.swift in Sources */,
 				BE6A1A691D3CC83200E39B7B /* WIndicator.swift in Sources */,
 				BE79BCCB1D2D38E6001512D6 /* UIImage+mojiImage.swift in Sources */,
+				BECBB8171DBDEAA900736904 /* PresentationManager.swift in Sources */,
+				BECBB8181DBDEAA900736904 /* TransitionAnimations.swift in Sources */,
 				BED76F601D167AFB00C8B521 /* AddProcessTableViewController.swift in Sources */,
 				BEB033ED1CE058B4001128D3 /* EditProjectTableViewController.swift in Sources */,
 				BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */,
 				BE6A1A681D3CC83200E39B7B /* WActivityIndicator.swift in Sources */,
 				BE5FE7A71CCF5C5400BC5F86 /* ProjectModel.swift in Sources */,
+				BECBB8101DBDEAA900736904 /* PopupDialogButton.swift in Sources */,
 				BE7DF8001CEC922000DB1CBB /* RRTagCollectionViewCell.swift in Sources */,
 				BE6E09371CD9D6FF008AABCD /* ProjectTableViewCell.swift in Sources */,
 				BE93C1061CE84F1700766DD4 /* SQLiteManager.swift in Sources */,
 				BECFC30D1CFADBCD00D8C4C8 /* ProcessDateModel.swift in Sources */,
+				BECBB81B1DBDEAA900736904 /* UIViewController+Visibility.swift in Sources */,
 				BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */,
 				BEB8B3271CF57870002A20FE /* CloseButton.swift in Sources */,
 				BE79BCC61D2D38B2001512D6 /* NSDate+mojiDate.swift in Sources */,
 				BE6E09311CD9C2B5008AABCD /* TagMapModel.swift in Sources */,
+				BECBB80C1DBDEAA900736904 /* FXBlurView.m in Sources */,
+				BECBB8141DBDEAA900736904 /* PopupDialogDefaultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,7 +1083,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1025,7 +1123,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1171,7 +1269,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

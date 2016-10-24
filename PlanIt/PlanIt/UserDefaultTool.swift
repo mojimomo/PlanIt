@@ -39,4 +39,17 @@ class UserDefaultTool: NSObject {
             UserDefaults.standard.set( newValue , forKey: "numsLocalNotifiication")
         }
     }
+    
+    //打开次数
+    var numsOfOpenTimes : Int{
+        get{
+            if UserDefaults.standard.integer(forKey: "numsOfOpenTimes") as Int! == 0{
+                UserDefaults.standard.set( 0 , forKey: "numsOfOpenTimes")
+            }
+            return UserDefaults.standard.integer(forKey: "numsOfOpenTimes") as Int
+        }
+        set{
+            UserDefaults.standard.set( newValue , forKey: "numsOfOpenTimes")
+        }
+    }
 }

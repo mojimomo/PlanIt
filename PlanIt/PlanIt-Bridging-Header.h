@@ -7,3 +7,4 @@
 #import "MobClick.h"
 #import "UICollectionViewLeftAlignedLayout.h"
 #import <time.h>
+#import "FXBlurView.h"

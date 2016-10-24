@@ -55,7 +55,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     @IBOutlet weak var finishEditButton: UIButton!
     @IBOutlet weak var punchCell: UITableViewCell!
     
-    let maxLengthDict  = [UITag.projectNameLabel : 10, UITag.unitTextField : 5, UITag.totalTextField : 6]
+    let maxLengthDict  = [UITag.projectNameLabel : 25, UITag.unitTextField : 12, UITag.totalTextField : 12]
     
     struct UITag {
         static let projectNameLabel = 1001

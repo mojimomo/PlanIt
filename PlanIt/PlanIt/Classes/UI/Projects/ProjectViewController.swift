@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import Popover
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -520,7 +521,81 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }
             }
         }
+        
+        if UserDefaultTool.shareIntance.numsOfOpenTimes == 15{
+            if !IS_IOS9{
+                let alertController = UIAlertController(title: "你已经使用马克计划一段时间了，感觉怎样？", message: nil, preferredStyle: .alert)
+                //创建UIAlertAction 确定按钮
+                let alerActionOK = UIAlertAction(title: "赏个好评", style: .default, handler: {(UIAlertAction) -> () in
+                        let url = "itms-apps://itunes.apple.com/app/id1141710914"
+                        UIApplication.shared.openURL(URL(string: url)!)
+                    })
+                //创建UIAlertAction 取消按钮
+                let alerActionMore = UIAlertAction(title: "我要吐槽", style: .default, handler: {(UIAlertAction) -> () in
+                    print("打开菜单页面")
+                    let muneViewController = self.storyboard?.instantiateViewController(withIdentifier: "Options") as! OptionsTableViewController
+                    
+                    //压入导航栏
+                    self.navigationController?.pushViewController(muneViewController, animated: true)
+                    muneViewController.feedBack()
+                    })
+                //创建UIAlertAction 取消按钮
+                let alerActionCancel = UIAlertAction(title: "再用用看", style: .destructive, handler: {(UIAlertAction) -> () in
+                    
+                })
+                
+                //添加动作
+                alertController.addAction(alerActionOK)
+                alertController.addAction(alerActionMore)
+                alertController.addAction(alerActionCancel)
+                
+                if let popoverPresentationController = alertController.popoverPresentationController {
+                    popoverPresentationController.sourceView = self.view
+                    popoverPresentationController.sourceRect =  CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+                }
+                
+                //显示alert
+                self.present(alertController, animated: true, completion: nil)
+                
+            }else{
+                UserDefaultTool.shareIntance.numsOfOpenTimes = UserDefaultTool.shareIntance.numsOfOpenTimes + 1;
+                
+                // Create the dialog
+                let popup = PopupDialog(title: "你已经使用马克计划一段时间了，感觉怎样？", message: nil, buttonAlignment: .vertical, transitionStyle: .zoomIn, gestureDismissal: true) {
+                    print("Completed")
+                }
+                
+                // Create first button
+                let buttonOne = DefaultButton(title: "赏个好评") {
+                    let url = "itms-apps://itunes.apple.com/app/id1141710914"
+                    UIApplication.shared.openURL(URL(string: url)!)
+                }
+                
+                // Create second button
+                let buttonTwo = DefaultButton(title: "我要吐槽") {
+                    print("打开菜单页面")
+                    let muneViewController = self.storyboard?.instantiateViewController(withIdentifier: "Options") as! OptionsTableViewController
+                    
+                    //压入导航栏
+                    self.navigationController?.pushViewController(muneViewController, animated: true)
+                    muneViewController.feedBack()
+                }
+                
+                // Create second button
+                let buttonThree = CancelButton(title: "再用用看") {
+                    
+                }
+                // Add buttons to dialog
+                popup.addButtons([buttonTwo, buttonOne, buttonThree])
+                
+                // Present dialog
+                self.present(popup, animated: true, completion: nil)
+            }
+        }else{
+            UserDefaultTool.shareIntance.numsOfOpenTimes = UserDefaultTool.shareIntance.numsOfOpenTimes + 1;
+        }
     }
+    
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if (velocity.y > 0.0)

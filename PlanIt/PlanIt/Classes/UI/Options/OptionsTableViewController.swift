@@ -147,14 +147,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 1 {
             print("意见反馈")
             //邮件视窗
-            
-            if MFMailComposeViewController.canSendMail() {
-                let mailComposeViewController = configuredMailComposeViewController()
-                self.present(mailComposeViewController, animated: true, completion: nil)
-            }else{
-                self.showSendMailErrorAlert()
-            }
-            
+            feedBack()
         }
         
         if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 2 {
@@ -187,6 +180,15 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             }
         }
         self.tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func feedBack(){
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposeViewController = configuredMailComposeViewController()
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        }else{
+            self.showSendMailErrorAlert()
+        }
     }
     
     //设置意见反馈的邮箱控件
