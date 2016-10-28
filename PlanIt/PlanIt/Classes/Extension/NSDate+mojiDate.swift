@@ -165,7 +165,17 @@ extension Date{
         return strDate
     }
 
-     ///格式化日期到字符串 YYYY年MM月
+ 
+    ///格式化日期到字符串 HH小时MM分钟
+    func FormatToStringHHMM() -> String{
+        let strDate = DateTool.shareIntance.FormatToStringHHMM(date: self)
+        //        let dateFormat = DateFormatter()
+        //        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmmss")
+        //        dateFormat.locale = Locale(identifier: "zh_CN")
+        //        let strDate = dateFormat.string(from: self)
+        return strDate
+    }
+    ///格式化日期到字符串 YYYY年MM月
     func FormatToStringYYYYMM() -> String{
         let strDate = DateTool.shareIntance.FormatToStringYYYYMM(date: self)
 //        let dateFormat = DateFormatter()

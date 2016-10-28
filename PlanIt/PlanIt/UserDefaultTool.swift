@@ -18,13 +18,14 @@ class UserDefaultTool: NSObject {
     //几天后推送
     var daysLocalNotifiication : Int{
         get{
-            if UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int! == 0{
-                UserDefaults.standard.set( 3 , forKey: "daysLocalNotifiication")
-            }
-            return UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int
+//            if UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int! == 0{
+//                UserDefaults.standard.set( 3 , forKey: "daysLocalNotifiication")
+//            }
+//            return UserDefaults.standard.integer(forKey: "daysLocalNotifiication") as Int
+            return 1;
         }
         set{
-            UserDefaults.standard.set( newValue , forKey: "daysLocalNotifiication")
+            //UserDefaults.standard.set( newValue , forKey: "daysLocalNotifiication")
         }
     }
     //几条推送
@@ -40,6 +41,32 @@ class UserDefaultTool: NSObject {
         }
     }
     
+    //是否每天推送
+    var isEveryDayLocalNotifiication : Bool{
+        get{
+            if UserDefaults.standard.bool(forKey: "isEveryDayLocalNotifiication") as Bool! != true{
+                UserDefaults.standard.set( false , forKey: "isEveryDayLocalNotifiication")
+            }
+            return UserDefaults.standard.bool(forKey: "isEveryDayLocalNotifiication") as Bool
+        }
+        set{
+            UserDefaults.standard.set( newValue , forKey: "isEveryDayLocalNotifiication")
+        }
+    }
+    
+    //是否开启结束推送
+    var isEOverLocalNotifiication : Bool{
+        get{
+            if UserDefaults.standard.bool(forKey: "isOverLocalNotifiication") as Bool! != true{
+                UserDefaults.standard.set( false , forKey: "isOverLocalNotifiication")
+            }
+            return UserDefaults.standard.bool(forKey: "isOverLocalNotifiication") as Bool
+        }
+        set{
+            UserDefaults.standard.set( newValue , forKey: "isOverLocalNotifiication")
+        }
+    }
+    
     //打开次数
     var numsOfOpenTimes : Int{
         get{
@@ -50,6 +77,20 @@ class UserDefaultTool: NSObject {
         }
         set{
             UserDefaults.standard.set( newValue , forKey: "numsOfOpenTimes")
+        }
+    }
+    
+    //每日推送的时间
+    var timeOfEveryday : Date{
+        get{
+            if UserDefaults.standard.object(forKey: "timeOfEveryday") as! Date? == nil{
+                let date = "21:00".FormatToNSDateHHMM()
+                UserDefaults.standard.set( Date() , forKey: "timeOfEveryday")
+            }
+            return UserDefaults.standard.object(forKey: "timeOfEveryday") as! Date
+        }
+        set{
+            UserDefaults.standard.set( newValue , forKey: "timeOfEveryday")
         }
     }
 }

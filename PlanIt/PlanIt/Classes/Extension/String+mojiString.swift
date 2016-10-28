@@ -50,6 +50,16 @@ extension String{
         return date
     }
     
+    ///字符串到格式化日期 YYYY年
+    func FormatToNSDateHHMM() -> Date? {
+        let date = DateTool.shareIntance.FormatToNSDateHHMM(string: self)
+        //        let dateFormat = DateFormatter()
+        //        dateFormat.setLocalizedDateFormatFromTemplate("yyyy")
+        //        dateFormat.locale = Locale(identifier: "zh_CN")
+        //        let date = dateFormat.date(from: self)
+        return date
+    }
+    
     /// 判断是否是邮箱
     func validateEmail() -> Bool {
         let emailRegex: String = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"

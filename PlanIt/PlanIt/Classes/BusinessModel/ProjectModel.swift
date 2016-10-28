@@ -195,7 +195,18 @@ class Project: NSObject {
     
     ///删除所有推送
     class func deleteAllNotificication(){
-        UIApplication.shared.cancelAllLocalNotifications()
+        //UIApplication.shared.cancelAllLocalNotifications()
+        if let locals = UIApplication.shared.scheduledLocalNotifications {
+            for localNoti in locals {
+                if let dict = localNoti.userInfo {
+                    print("\(dict)")
+                    if dict.keys.contains("id") && dict["id"] is String{
+                        // 取消通知
+                        UIApplication.shared.cancelLocalNotification(localNoti)
+                    }
+                }
+            }
+        }
     }
     
     ///新建项目设置总量

@@ -29,6 +29,9 @@ class DateTool: NSObject {
         dateFormatYYYYMMMMDDHHMMSS.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmmss")
         dateFormatYYYYMMMMDDHHMMSS.locale = Locale(identifier: "zh_CN")
         
+        dateFormatHHMM.setLocalizedDateFormatFromTemplate("HH:mm")
+
+        
         dateFormatYYYYMM.setLocalizedDateFormatFromTemplate("yyyyMMMM")
         dateFormatYYYYMM.locale = Locale(identifier: "zh_CN")
         
@@ -49,6 +52,8 @@ class DateTool: NSObject {
     var dateFormatMMMMDD = DateFormatter()
     
     var dateFormatDD = DateFormatter()
+    
+    var dateFormatHHMM = DateFormatter()
     
     var dateFormatYYYYMMMMDDHHMM = DateFormatter()
     
@@ -92,6 +97,12 @@ class DateTool: NSObject {
         return strDate
     }
     
+    ///格式化日期到字符串 HH小时MM分钟
+    func FormatToStringHHMM(date: Date) -> String{
+        let strDate = dateFormatHHMM.string(from: date)
+        return strDate
+    }
+    
     ///格式化日期到字符串 YYYY年MM月
     func FormatToStringYYYYMM(date: Date) -> String{
         let strDate = dateFormatYYYYMM.string(from: date)
@@ -131,6 +142,12 @@ class DateTool: NSObject {
     ///字符串到格式化日期 YYYY年MM月
     func FormatToNSDateYYYYMMMM(string: String) -> Date? {
         let date = dateFormatYYYYMM.date(from: string)
+        return date
+    }
+    
+    ///字符串到格式化日期 YYYY年MM月
+    func FormatToNSDateHHMM(string: String) -> Date? {
+        let date = dateFormatHHMM.date(from: string)
         return date
     }
     

@@ -21,6 +21,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
 //        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 //        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 //    }
+    @IBOutlet var isNeedRemindsEveryDay: UISwitch!
     @IBOutlet weak var localNotifiicationLabel: UILabel!
     @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet var isNeedLocalNotifiicationSwitch: UISwitch!
@@ -31,7 +32,19 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
 
     @IBAction func changeSwitchj(_ sender: UISwitch) {
         if sender.isOn{
-            UserDefaults.standard.set(true, forKey: "isNeedLocalNotifiication")
+            UserDefaultTool.shareIntance.isEveryDayLocalNotifiication = true
+            addEveryday()
+        }else{
+            UserDefaultTool.shareIntance.isEveryDayLocalNotifiication = false
+            //删除所有推送
+            removeEveryday()
+        }
+
+    }
+
+    @IBAction func changeSwitchEveryDay(_ sender: UISwitch) {
+        if sender.isOn{
+            UserDefaultTool.shareIntance.isEOverLocalNotifiication = true
             //删除所有推送
             Project.deleteAllNotificication()
             //创建所有推送
@@ -40,12 +53,13 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 project.addNotification()
             }
         }else{
-            UserDefaults.standard.set(false, forKey: "isNeedLocalNotifiication")
+            UserDefaultTool.shareIntance.isEOverLocalNotifiication = false
             //删除所有推送
             Project.deleteAllNotificication()
         }
     }
-
+    
+    
     var labels = ["当天", "1天", "2天", "3天", "4天", "5天", "6天"]
     var days = [1, 2, 3, 4, 5, 6, 7]
     
@@ -65,7 +79,47 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
+    func addEveryday(){
+        // 初始化一个通知
+        let localNoti = UILocalNotification()
+        
+        // 通知的触发时间
+        localNoti.fireDate = UserDefaultTool.shareIntance.timeOfEveryday
+        localNoti.repeatInterval = .day
+        
+        // 设置时区
+        localNoti.timeZone = TimeZone.current
+        // 通知上显示的主题内容
+        localNoti.alertBody = "是时候添加今日的进度了..."
+        // 收到通知时播放的声音，默认消息声音
+        localNoti.soundName = UILocalNotificationDefaultSoundName
+        //待机界面的滑动动作提示
+        localNoti.alertAction = "打开应用"
+        // 应用程序图标右上角显示的消息数
+        UserDefaultTool.shareIntance.numsLocalNotifiication += 1
+        localNoti.applicationIconBadgeNumber = UserDefaultTool.shareIntance.numsLocalNotifiication
+        // 通知上绑定的其他信息，为键值对
+        localNoti.userInfo = ["type": "Everyday"]
+        // 添加通知到系统队列中，系统会在指定的时间触发
+        UIApplication.shared.scheduleLocalNotification(localNoti)
+    }
+    
+    func removeEveryday(){
+        if let locals = UIApplication.shared.scheduledLocalNotifications {
+            for localNoti in locals {
+                if let dict = localNoti.userInfo {
+                    print("\(dict)")
+                    if dict.keys.contains("type") && (dict["type"] as! String) == "Everyday" {
+                        // 取消通知
+                        UIApplication.shared.cancelLocalNotification(localNoti)
+                    }
+                }
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ///打开通知
         if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 0 {
             print("跳转设置")
             //跳转设置g
@@ -75,6 +129,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             }
         }
         
+        ///项目结束前通知
         if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 1 {
             if IS_IOS8{
                 //创建UIAlertController
@@ -136,28 +191,44 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             }
         }
         
+        ///每日提醒
         if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 2 {
-            let tags = Tag().loadAllData()
 
-            RRTagController.displayTagController(parentController: self, tags: tags,type: .manage, blockFinish: { (selectedTags, unSelectedTags) -> () in
-                }) { () -> () in
+        }
+        
+        ///每日时间
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 3 {
+            if let cell = tableView.cellForRow(at: indexPath){
+                editEveryTime(cell.frame)
             }
         }
         
+        ///管理tag
         if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 1 {
+            let tags = Tag().loadAllData()
+            
+            RRTagController.displayTagController(parentController: self, tags: tags,type: .manage, blockFinish: { (selectedTags, unSelectedTags) -> () in
+            }) { () -> () in
+            }
+        }
+        
+        ///意见反馈
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
             print("意见反馈")
             //邮件视窗
             feedBack()
         }
         
-        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 2 {
+        ///给应用评分
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 2 {
             print("给应用评分")
             //跳转appID应用
             let url = "itms-apps://itunes.apple.com/app/id1141710914"
             UIApplication.shared.openURL(URL(string: url)!)
         }
         
-        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 3 {
+        ///给应用评分
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 3 {
             print("推荐应用")
             //APP介绍页面
             let link = URL(string: "http://www.markplan.info")
@@ -170,7 +241,8 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             self.present(shareVC, animated: true, completion: nil)
         }
         
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
+        ///赞赏我们
+        if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 1 {
             print("赞赏我们")
             //支付宝转账 url scheme
             let alipay = "alipayqr://platformapi/startapp?saId=10000007&qrcode=https://qr.alipay.com/apmiym1v5ya1dynlb5"
@@ -263,14 +335,18 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         self.tableView.sectionFooterHeight = 25
         self.tableView.sectionHeaderHeight = 0
 
-    if((UserDefaults.standard.bool(forKey: "isNeedLocalNotifiication") as Bool!) == false){
-            UserDefaults.standard.set(false, forKey: "isNeedLocalNotifiication")
-            isNeedLocalNotifiicationSwitch.setOn(false, animated: false)
-        }else{
+        if UserDefaultTool.shareIntance.isEOverLocalNotifiication{
             isNeedLocalNotifiicationSwitch.setOn(true, animated: false)
+        }else{
+            isNeedLocalNotifiicationSwitch.setOn(false, animated: false)
         }
         
-        self.daysLabel.text = "\(labels[UserDefaultTool.shareIntance.daysLocalNotifiication - 1])"
+        if UserDefaultTool.shareIntance.isEveryDayLocalNotifiication{
+            isNeedRemindsEveryDay.setOn(true, animated: false)
+        }else{
+            isNeedRemindsEveryDay.setOn(false, animated: false)
+        }
+        self.daysLabel.text = UserDefaultTool.shareIntance.timeOfEveryday.FormatToStringHHMM()
         //对back to app进行观察
         NotificationCenter.default.addObserver(self,selector:  #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)),name: NSNotification.Name.UIApplicationDidBecomeActive,object: nil)
     }
@@ -302,7 +378,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
         
         if !isAliayInstalled{
-            if let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 2)){
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 3)){
                 cell.isHidden = true
             }
         }
@@ -333,6 +409,58 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         return 35
     }
 
+    
+    //是否改变开始时间
+    func editEveryTime(_ rect: CGRect) {
+        if IS_IOS8{
+            //创建datepicker控件
+            let datePicker = UIDatePicker()
+            //设置模式为日期模式
+            datePicker.datePickerMode = .time
+            //设置日期
+            datePicker.setDate(Date(), animated: false)
+            //创建UIAlertController
+            let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
+            alerController.view.addSubview(datePicker)
+            
+            //创建UIAlertAction 确定按钮
+            weak var weakSelf = self
+            let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
+                            let dateString = datePicker.date.FormatToStringHHMM()
+                            UserDefaultTool.shareIntance.timeOfEveryday = dateString.FormatToNSDateHHMM()!
+                            weakSelf?.daysLabel.text = dateString
+            })
+            
+            //            //创建UIAlertAction 取消按钮
+            //            let alerActionCancel = UIAlertAction(title: "取消", style: .Default, handler: { (UIAlertAction) -> Void in
+            //
+            //            })
+            
+            //添加动作
+            alerController.addAction(alerActionOK)
+            //alerController.addAction(alerActionCancel)
+            
+            if let popoverPresentationController = alerController.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.sourceRect = rect
+                //配置位置
+                datePicker.frame = CGRect(x: 0, y: 0, width: alerController.view.bounds.width ,height: alerController.view.bounds.height)
+                datePicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                
+            }else{
+                //配置位置
+                datePicker.frame = CGRect(x: 0, y: 0, width: alerController.view.bounds.width ,height: alerController.view.bounds.height - 50)
+                datePicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            }
+            
+            //显示alert
+            self.present(alerController, animated: true, completion: { () -> Void in
+                
+            })
+            
+            
+        }
+    }
 
     /*
     override func didReceiveMemoryWarning() {
