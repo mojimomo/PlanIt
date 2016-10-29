@@ -651,7 +651,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="44" id="T2Y-J2-EI0" customClass="ProjectTableViewCell" customModule="Markplan" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T2Y-J2-EI0" id="g86-Q4-uHt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1315,7 +1315,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="accessoryView" destination="EKY-Da-ZZm" id="mxd-9R-8p0"/>
+                                            <outlet property="accessoryView" destination="P8C-SV-i3X" id="6jE-Mt-yfa"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="WVk-0h-oZR" imageView="WVt-oE-gnO" style="IBUITableViewCellStyleDefault" id="FNw-hu-FmV">
@@ -1339,7 +1339,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="accessoryView" destination="P8C-SV-i3X" id="BL6-4l-A8N"/>
+                                            <outlet property="accessoryView" destination="EKY-Da-ZZm" id="eRO-ex-qmX"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="iZY-bz-VJ7" imageView="8Az-A7-8s9" style="IBUITableViewCellStyleDefault" id="sM5-P0-gF5">
@@ -1542,8 +1542,8 @@
                     <navigationItem key="navigationItem" title="设置" id="DS8-W0-jLZ"/>
                     <connections>
                         <outlet property="daysLabel" destination="Is3-FY-yKH" id="BaO-sE-Qk7"/>
-                        <outlet property="isNeedLocalNotifiicationSwitch" destination="P8C-SV-i3X" id="uzy-LK-A6U"/>
-                        <outlet property="isNeedRemindsEveryDay" destination="EKY-Da-ZZm" id="tMt-61-gd5"/>
+                        <outlet property="isNeedRemindsBeforeDueSwitch" destination="P8C-SV-i3X" id="WIL-Zh-ChD"/>
+                        <outlet property="isNeedRemindsEveryDaySwitch" destination="EKY-Da-ZZm" id="kS7-XK-0GM"/>
                         <outlet property="localNotifiicationLabel" destination="DBH-ag-ytd" id="mJA-nC-yyo"/>
                     </connections>
                 </tableViewController>
@@ -1553,7 +1553,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="onTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <action selector="changeSwitchEveryDay:" destination="k9u-I8-gwM" eventType="valueChanged" id="su6-pQ-ZoF"/>
+                        <action selector="changeSwitchEveryDay:" destination="k9u-I8-gwM" eventType="valueChanged" id="wq5-vd-xfK"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="P8C-SV-i3X">
@@ -1562,11 +1562,11 @@
                     <rect key="contentStretch" x="0.0" y="0.0" width="0.84999999999999998" height="0.84999999999999998"/>
                     <color key="onTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <action selector="changeSwitchj:" destination="k9u-I8-gwM" eventType="valueChanged" id="poo-xc-D1y"/>
+                        <action selector="changeSwitchBeforeDue:" destination="k9u-I8-gwM" eventType="valueChanged" id="Bhc-iw-mCl"/>
                     </connections>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Is3-FY-yKH">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                     <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="0.70140086206896557" colorSpace="custom" customColorSpace="sRGB"/>

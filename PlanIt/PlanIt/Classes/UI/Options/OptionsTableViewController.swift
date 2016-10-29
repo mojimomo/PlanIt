@@ -21,16 +21,16 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
 //        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 //        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 //    }
-    @IBOutlet var isNeedRemindsEveryDay: UISwitch!
+    @IBOutlet var isNeedRemindsEveryDaySwitch: UISwitch!
     @IBOutlet weak var localNotifiicationLabel: UILabel!
     @IBOutlet weak var daysLabel: UILabel!
-    @IBOutlet var isNeedLocalNotifiicationSwitch: UISwitch!
+    @IBOutlet var isNeedRemindsBeforeDueSwitch: UISwitch!
     var isNeedLocalNotifiication = false
     
     //是否安装支付宝
     var isAliayInstalled = UIApplication.shared.canOpenURL(URL(string: "alipay://")!)
 
-    @IBAction func changeSwitchj(_ sender: UISwitch) {
+    @IBAction func changeSwitchEveryDay(_ sender: UISwitch) {
         if sender.isOn{
             UserDefaultTool.shareIntance.isEveryDayLocalNotifiication = true
             addEveryday()
@@ -42,9 +42,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
 
     }
 
-    @IBAction func changeSwitchEveryDay(_ sender: UISwitch) {
+    @IBAction func changeSwitchBeforeDue(_ sender: UISwitch) {
         if sender.isOn{
-            UserDefaultTool.shareIntance.isEOverLocalNotifiication = true
+            UserDefaultTool.shareIntance.isBeforeDueNotifiication = true
             //删除所有推送
             Project.deleteAllNotificication()
             //创建所有推送
@@ -53,7 +53,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 project.addNotification()
             }
         }else{
-            UserDefaultTool.shareIntance.isEOverLocalNotifiication = false
+            UserDefaultTool.shareIntance.isBeforeDueNotifiication = false
             //删除所有推送
             Project.deleteAllNotificication()
         }
@@ -80,28 +80,31 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     }
 
     func addEveryday(){
-        // 初始化一个通知
-        let localNoti = UILocalNotification()
-        
-        // 通知的触发时间
-        localNoti.fireDate = UserDefaultTool.shareIntance.timeOfEveryday
-        localNoti.repeatInterval = .day
-        
-        // 设置时区
-        localNoti.timeZone = TimeZone.current
-        // 通知上显示的主题内容
-        localNoti.alertBody = "是时候添加今日的进度了..."
-        // 收到通知时播放的声音，默认消息声音
-        localNoti.soundName = UILocalNotificationDefaultSoundName
-        //待机界面的滑动动作提示
-        localNoti.alertAction = "打开应用"
-        // 应用程序图标右上角显示的消息数
-        UserDefaultTool.shareIntance.numsLocalNotifiication += 1
-        localNoti.applicationIconBadgeNumber = UserDefaultTool.shareIntance.numsLocalNotifiication
-        // 通知上绑定的其他信息，为键值对
-        localNoti.userInfo = ["type": "Everyday"]
-        // 添加通知到系统队列中，系统会在指定的时间触发
-        UIApplication.shared.scheduleLocalNotification(localNoti)
+        if UserDefaultTool.shareIntance.isEveryDayLocalNotifiication{
+            // 初始化一个通知
+            let localNoti = UILocalNotification()
+            
+            // 通知的触发时间
+            let data = UserDefaultTool.shareIntance.timeOfEveryday
+            localNoti.fireDate = data
+            localNoti.repeatInterval = .day
+            
+            // 设置时区
+            localNoti.timeZone = TimeZone.current
+            // 通知上显示的主题内容
+            localNoti.alertBody = "是时候添加今日的进度了..."
+            // 收到通知时播放的声音，默认消息声音
+            localNoti.soundName = UILocalNotificationDefaultSoundName
+            //待机界面的滑动动作提示
+            localNoti.alertAction = "打开应用"
+            // 应用程序图标右上角显示的消息数
+            UserDefaultTool.shareIntance.numsLocalNotifiication += 1
+            localNoti.applicationIconBadgeNumber = UserDefaultTool.shareIntance.numsLocalNotifiication
+            // 通知上绑定的其他信息，为键值对
+            localNoti.userInfo = ["type": "Everyday"]
+            // 添加通知到系统队列中，系统会在指定的时间触发
+            UIApplication.shared.scheduleLocalNotification(localNoti)
+        }
     }
     
     func removeEveryday(){
@@ -335,16 +338,16 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         self.tableView.sectionFooterHeight = 25
         self.tableView.sectionHeaderHeight = 0
 
-        if UserDefaultTool.shareIntance.isEOverLocalNotifiication{
-            isNeedLocalNotifiicationSwitch.setOn(true, animated: false)
+        if UserDefaultTool.shareIntance.isBeforeDueNotifiication{
+            isNeedRemindsBeforeDueSwitch.setOn(true, animated: false)
         }else{
-            isNeedLocalNotifiicationSwitch.setOn(false, animated: false)
+            isNeedRemindsBeforeDueSwitch.setOn(false, animated: false)
         }
         
         if UserDefaultTool.shareIntance.isEveryDayLocalNotifiication{
-            isNeedRemindsEveryDay.setOn(true, animated: false)
+            isNeedRemindsEveryDaySwitch.setOn(true, animated: false)
         }else{
-            isNeedRemindsEveryDay.setOn(false, animated: false)
+            isNeedRemindsEveryDaySwitch.setOn(false, animated: false)
         }
         self.daysLabel.text = UserDefaultTool.shareIntance.timeOfEveryday.FormatToStringHHMM()
         //对back to app进行观察
@@ -418,7 +421,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             //设置模式为日期模式
             datePicker.datePickerMode = .time
             //设置日期
-            datePicker.setDate(Date(), animated: false)
+            datePicker.setDate(UserDefaultTool.shareIntance.timeOfEveryday, animated: false)
             //创建UIAlertController
             let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
             alerController.view.addSubview(datePicker)
@@ -429,6 +432,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                             let dateString = datePicker.date.FormatToStringHHMM()
                             UserDefaultTool.shareIntance.timeOfEveryday = dateString.FormatToNSDateHHMM()!
                             weakSelf?.daysLabel.text = dateString
+                            weakSelf?.removeEveryday()
+                            weakSelf?.addEveryday()
+                
             })
             
             //            //创建UIAlertAction 取消按钮
