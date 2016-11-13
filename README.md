@@ -1,10 +1,32 @@
-# 马克计划
-![](http://7xrasx.com1.z0.glb.clouddn.com/icon.png)  
-##安排和记录你的个人计划<br> 
+## 马克计划 (Markplan)
 
-###内容提要
-马克计划是一款 iOS 平台上的个人项目（目标）进度管理应用，旨在帮助你完成个人项目的计划安排和进度管理，以便更好地管理个人时间和完成预期目标。马克计划适用于个人项目的安排和记录——计划一个有明确开始和结束时间的项目，在每完成一定进度后进行记录，并根据记录情况安排今后的项目进度。你可以使用马克计划来安排记录短期个人生活、学习的项目——如读完某本书、学完某门公开课，也可以用于长期目标或习惯养成——如每天读书半小时、学习编程 1 万小时。<br>
-![](./PlanIt/Artboard.png)<br>
+马克计划是一款个人项目进度管理工具，帮助你实现个人项目的计划安排和进度管理。
 
-###下载马克计划
-<a href="https://itunes.apple.com/cn/app/ma-ke-ji-hua/id1141710914"  ><img src="http://7xrasx.com1.z0.glb.clouddn.com/appdownload1.png" width = "150" alt="AppStore" align=center /> </a>
+![](http://ww1.sinaimg.cn/large/65e4f1e6gw1f9qyx0xjk3j213g0p4tc3.jpg)
+
+**Download:  [App Store](https://itunes.apple.com/cn/app/ma-ke-ji-hua/id1141710914)**
+
+### 简单直观
+
+告别用计算器 + 日历 / GTD 应用来管理项目进度的方式，使用「马克计划」，只需简单地制定计划、记录进度，即可方便直观地实现个人项目的管理。
+
+### 场景多样
+
+个人目标分散在各类健身、阅读、习惯养成应用中？「马克计划」提供一种泛用式的解决办法，使你可以围绕目标统一管理你的项目。
+
+### 功能介绍
+
+· 安排短期个人生活、学习的项目
+· 计划长期目标或习惯养成
+· 用标签管理同一目标下的多个项目
+· 记录项目的每一点进展
+· 根据已完成进度安排今后进度
+
+### 链接
+
+- [项目页面](www.markplan.info)
+- [使用说明](http://zoomyale.coding.me/markplan_tutorial)
+- [建议反馈](mailto: markplan@foxmail.com)
+- [找我们聊天](https://static.meiqia.com/dist/standalone.html?eid=39440)
+
+
