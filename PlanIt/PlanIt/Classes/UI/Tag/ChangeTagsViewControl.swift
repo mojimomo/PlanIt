@@ -40,7 +40,7 @@ class ChangeTagsViewControl: UIViewController, TagListViewDelegate{
             }
             self._totalTagsSelected += newValue
             self._totalTagsSelected = (self._totalTagsSelected < 0) ? 0 : self._totalTagsSelected
-            self.navigationBarItem = UINavigationItem(title: "选择标签")
+            self.navigationBarItem = UINavigationItem(title: NSLocalizedString("Select Tags", comment: "选择标签"))
             self.navigationBarItem.leftBarButtonItem = self.leftButton
             self.navigationBar.pushItem(self.navigationBarItem, animated: false)
         }
@@ -50,7 +50,7 @@ class ChangeTagsViewControl: UIViewController, TagListViewDelegate{
     lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64))
         
-        self.navigationBarItem = UINavigationItem(title: "选择标签")
+        self.navigationBarItem = UINavigationItem(title: NSLocalizedString("Select Tags", comment: "选择标签"))
         self.navigationBarItem.leftBarButtonItem = self.leftButton
         
         navigationBar.pushItem(self.navigationBarItem, animated: true)

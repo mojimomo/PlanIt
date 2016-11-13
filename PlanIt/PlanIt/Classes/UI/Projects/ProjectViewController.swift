@@ -69,7 +69,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     ///状态栏遮盖
     fileprivate var statusView: UIView!
     ///菜单文字
-    fileprivate var texts = ["显示未开始", "已完成", "设置"]
+    fileprivate var texts = [NSLocalizedString("Show Scheduled", comment: ""), NSLocalizedString("Completed", comment: ""), NSLocalizedString("Settings", comment: "")]
     ///菜单弹窗参数
     fileprivate var popoverOptions: [PopoverOption] = [
         .type(.down),
@@ -121,7 +121,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     ///呼出标签栏
     @IBAction func callTag(_ sender: UIBarButtonItem) {
         let tagsViewControl = self.storyboard?.instantiateViewController(withIdentifier: "ShowTags") as! TagsViewController
-        tagsViewControl.title = "标签"
+        tagsViewControl.title = NSLocalizedString("Tags", comment: "")
         tagsViewControl.view.backgroundColor = UIColor.white
         tagsViewControl.delegate = self
         
@@ -184,7 +184,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         if projects.count != 0{
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width , height: 100 + 100))
             let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width , height: 100))
-            countLabel.text = "\(projects.count)个项目"
+            countLabel.text = "\(projects.count) " + NSLocalizedString("projects", comment: "项目列表底端计数")
             countLabel.font = projectCountsFont
             countLabel.textColor = projectCountsFontColor
             countLabel.textAlignment = .center
@@ -267,7 +267,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         //读取原始数据
         if selectTag != nil{
             if selectTag!.id == -1{
-                title = "无标签"
+                title = NSLocalizedString("Untagged", comment: "")
                 projects.removeAll()
                 let tagMaps = TagMap().loadAllData()
                 let allProjects = Project().loadAllData()
@@ -292,10 +292,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
 
         }else{
-            title = "全部项目"
+            title = NSLocalizedString("All", comment: "首页导航栏标题")
             projects = Project().loadAllData()
             if isShowFinished{
-               title = "已完成项目"
+               title = NSLocalizedString("Completed", comment: "首页导航栏标题")
             }
         }
         
@@ -320,7 +320,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     if((UserDefaults.standard.bool(forKey: "IsFirstLaunchFinishedProject") as Bool!) == false){
                         let startPoint = CGPoint(x: self.view.frame.width - 32.5, y: 55)
                         UserDefaults.standard.set(true, forKey: "IsFirstLaunchFinishedProject")
-                        callFirstRemain("查看已完成项目", startPoint: startPoint)
+                        callFirstRemain(NSLocalizedString("Check completed projects", comment: ""), startPoint: startPoint)
                     }
                     projects.remove(at: index)
                     continue
@@ -461,16 +461,16 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             UserDefaults.standard.set(true, forKey: "IsFirstLaunchProjectView")
             
             //创建引导项目
-            let newTag = Tag(name: "生活")
+            let newTag = Tag(name: NSLocalizedString("Life", comment: ""))
             newTag.insertTag()
-            let newTag2 = Tag(name: "锻炼")
+            let newTag2 = Tag(name: NSLocalizedString("Workout", comment: ""))
             newTag2.insertTag()
-            let newTag3 = Tag(name: "学习")
+            let newTag3 = Tag(name: NSLocalizedString("Study", comment: ""))
             newTag3.insertTag()
             
             //updateTable()
             //设置引导弹窗
-            callFirstRemain("点击创建新项目", view: addProjectButton, type: .up, showHandler: nil, dismissHandler: nil)
+            callFirstRemain(NSLocalizedString("Create a new project", comment: ""), view: addProjectButton, type: .up, showHandler: nil, dismissHandler: nil)
         }else{
             //是否第一次创建普通项目
             if((UserDefaults.standard.bool(forKey: "IsFirstLaunchNormalProject") as Bool!) == false){
@@ -481,10 +481,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                         let indexPath = IndexPath(row: 0, section: index)
                         if let cell = self.projectTableView.cellForRow(at: indexPath){
                             UserDefaults.standard.set(true, forKey: "IsFirstLaunchNormalProject")
-                            self.callFirstRemainMultiLine("◎ 点击查看详情\n◉ 长按查看进度提示", view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
+                            self.callFirstRemainMultiLine(NSLocalizedString("◎ Tap to check details\n◉ Press to glance process tips", comment: ""), view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
                                 for subView in cell.subviews{
                                     if subView.tag == self.addProcessButtonTag {
-                                        self.callFirstRemain("点击添加进度", view: subView)
+                                        self.callFirstRemain(NSLocalizedString("Add process", comment: ""), view: subView)
                                         break
                                     }
                                 }
@@ -506,10 +506,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                         if let cell = self.projectTableView.cellForRow(at: indexPath){
                             UserDefaults.standard.set(true, forKey: "IsFirstLaunchNoRecordProject")
                             updateTable()
-                            self.callFirstRemainMultiLine("◎ 点击编辑项目\n◉ 长按查看进度提示", view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
+                            self.callFirstRemainMultiLine(NSLocalizedString("◎ Tap to check details\n◉ Press to glance process tips", comment: ""), view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
                                 for subView in cell.subviews{
                                     if subView.tag == self.addProcessButtonTag {
-                                        self.callFirstRemain("点击完成项目", view: subView)
+                                        self.callFirstRemain(NSLocalizedString("Mark completed", comment: ""), view: subView)
                                         break
                                     }
                                 }
@@ -524,14 +524,14 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         
         if UserDefaultTool.shareIntance.numsOfOpenTimes == 15{
             if !IS_IOS9{
-                let alertController = UIAlertController(title: "你已经使用马克计划一段时间了，感觉怎样？", message: nil, preferredStyle: .alert)
+                let alertController = UIAlertController(title: NSLocalizedString("You have been using Markplan for a while. How do you feel?", comment: ""), message: nil, preferredStyle: .alert)
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "赏个好评", style: .default, handler: {(UIAlertAction) -> () in
+                let alerActionOK = UIAlertAction(title: NSLocalizedString("Rate Markplan", comment: ""), style: .default, handler: {(UIAlertAction) -> () in
                         let url = "itms-apps://itunes.apple.com/app/id1141710914"
                         UIApplication.shared.openURL(URL(string: url)!)
                     })
                 //创建UIAlertAction 取消按钮
-                let alerActionMore = UIAlertAction(title: "我要吐槽", style: .default, handler: {(UIAlertAction) -> () in
+                let alerActionMore = UIAlertAction(title: NSLocalizedString("Send Feeback", comment: ""), style: .default, handler: {(UIAlertAction) -> () in
                     print("打开菜单页面")
                     let muneViewController = self.storyboard?.instantiateViewController(withIdentifier: "Options") as! OptionsTableViewController
                     
@@ -540,7 +540,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     muneViewController.feedBack()
                     })
                 //创建UIAlertAction 取消按钮
-                let alerActionCancel = UIAlertAction(title: "再用用看", style: .destructive, handler: {(UIAlertAction) -> () in
+                let alerActionCancel = UIAlertAction(title: NSLocalizedString("Remind Me Later", comment: ""), style: .destructive, handler: {(UIAlertAction) -> () in
                     
                 })
                 
@@ -561,18 +561,18 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 UserDefaultTool.shareIntance.numsOfOpenTimes = UserDefaultTool.shareIntance.numsOfOpenTimes + 1;
                 
                 // Create the dialog
-                let popup = PopupDialog(title: "你已经使用马克计划一段时间了，感觉怎样？", message: nil, buttonAlignment: .vertical, transitionStyle: .zoomIn, gestureDismissal: true) {
+                let popup = PopupDialog(title: NSLocalizedString("You have been using Markplan for a while. How do you feel?", comment: ""), message: nil, buttonAlignment: .vertical, transitionStyle: .zoomIn, gestureDismissal: true) {
                     print("Completed")
                 }
                 
                 // Create first button
-                let buttonOne = DefaultButton(title: "赏个好评") {
+                let buttonOne = DefaultButton(title: NSLocalizedString("Rate Markplan", comment: "")) {
                     let url = "itms-apps://itunes.apple.com/app/id1141710914"
                     UIApplication.shared.openURL(URL(string: url)!)
                 }
                 
                 // Create second button
-                let buttonTwo = DefaultButton(title: "我要吐槽") {
+                let buttonTwo = DefaultButton(title: NSLocalizedString("Send Feeback", comment: "")) {
                     print("打开菜单页面")
                     let muneViewController = self.storyboard?.instantiateViewController(withIdentifier: "Options") as! OptionsTableViewController
                     
@@ -582,7 +582,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }
                 
                 // Create second button
-                let buttonThree = CancelButton(title: "再用用看") {
+                let buttonThree = CancelButton(title: NSLocalizedString("Remind Me Later", comment: "")) {
                     
                 }
                 // Add buttons to dialog
@@ -819,14 +819,14 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }
             //项目完成
             }else if projects[(indexPath as NSIndexPath).section].isFinished == .finished{
-                let alertController = UIAlertController(title: "确认删除", message: "无法撤销删除操作", preferredStyle: .alert)
+                let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: ""), message: NSLocalizedString("The operation is not reversible.", comment: ""), preferredStyle: .alert)
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "取消", style: .default, handler: nil)
+                let alerActionOK = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: nil)
                 //创建UIAlertAction 取消按钮
-                let alerActionCancel = UIAlertAction(title: "确定", style: .destructive, handler:  {(UIAlertAction) -> Void in
+                let alerActionCancel = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler:  {(UIAlertAction) -> Void in
                     weak var weakSelf = self
                     weakSelf?.projects[(indexPath as NSIndexPath).section].deleteProject()
-                    weakSelf?.callAlertSuccess("删除成功!")
+                    weakSelf?.callAlertSuccess(NSLocalizedString("Deleted", comment: ""))
                     weakSelf?.updateTable()
                 })
                 //添加动作
@@ -844,14 +844,14 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 var type = ""
                 switch projects[(indexPath as NSIndexPath).section].type{
                 case .normal:
-                    type = "记录进度"
+                    type = NSLocalizedString("add process", comment: "")
                 case .punch:
-                    type = "打卡"
+                    type = NSLocalizedString("mark", comment: "")
                 case .noRecord:
-                    type = "标记完成"
+                    type = NSLocalizedString("mark completed", comment: "")
                 default: break
                 }
-                callAlert("项目未开始",message: "修改项目开始时间以\(type)")
+                callAlert(NSLocalizedString("Not Started", comment: ""),message: String(format: NSLocalizedString("Change start time to %@.", comment: ""), type))
             }
         }
     }
@@ -862,7 +862,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
         isShowFinished = false
         selectTag = nil
         let addNewProjectViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditProject") as! EditProjectTableViewController
-        addNewProjectViewController.title = "新增项目"
+        addNewProjectViewController.title = NSLocalizedString("New Project", comment: "")
         addNewProjectViewController.tableState = .add
         addNewProjectViewController.delegate = self
         //设置view颜色
@@ -998,7 +998,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             if (indexPath as NSIndexPath).row == 1{
                 cell.accessoryType = .disclosureIndicator
                 if isShowFinished {
-                    cell.textLabel?.text = "进行中"
+                    cell.textLabel?.text = NSLocalizedString("In Progress", comment: "")
                 }
             }
             return cell
@@ -1154,7 +1154,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             if let identifier = segue.identifier{
                 switch identifier{
                 case "addProject":
-                    ivc.title = "新增项目"
+                    ivc.title = NSLocalizedString("New Project", comment: "")
                     ivc.tableState = .add
                 default: break
                 }
@@ -1163,7 +1163,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             if let identifier = segue.identifier{
                 switch identifier{
                 case "showTags":
-                    ivc.title = "标签"
+                    ivc.title = NSLocalizedString("Tags", comment: "")
                     ivc.delegate = self
                   default: break
                 }
@@ -1233,11 +1233,11 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     func goBackAct(_ state: EditProjectBackState){
         switch state{
         case .addSuccess:
-            callAlertSuccess("创建成功")
+            callAlertSuccess(NSLocalizedString("Done", comment: "创建成功"))
 //        case .DeleteSucceess:
 //            callAlertSuccess("删除成功!")
         case .editSucceess:
-            callAlertSuccess("编辑成功")
+            callAlertSuccess(NSLocalizedString("Done!", comment: "编辑成功"))
         default: break
         }
     }

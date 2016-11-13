@@ -64,7 +64,7 @@ class TagsViewController: UITableViewController {
         self.tableView.showsVerticalScrollIndicator = false
         //self.view.tintColor = UIColor.blackColor()
         self.view.backgroundColor = allBackground
-        self.title = "标签选择"
+        self.title = NSLocalizedString("Select Tags", comment: "")
         tags = Tag().loadAllData()
         tagMaps = TagMap().loadAllData()
         let projects = Project().loadAllData()
@@ -165,7 +165,7 @@ class TagsViewController: UITableViewController {
                 UserDefaults.standard.set(true, forKey: "IsFirstLaunchTagsView")
                 let indexPath = IndexPath(row: tags.count + 1, section: 0)
                 if let cell = self.tableView.cellForRow(at: indexPath){
-                    self.callFirstRemain("点击查看包含\(tags.last!.name)标签的项目", view: cell)
+                    self.callFirstRemain(String(format: NSLocalizedString("Tap to check all projects with tag %@", comment: ""), tags.last!.name), view: cell)
                 }
             }
         }else{
@@ -192,7 +192,7 @@ class TagsViewController: UITableViewController {
         }
         //显示全部
         if (indexPath as NSIndexPath).row == 0{
-            cell.tagName = "显示全部"
+            cell.tagName = NSLocalizedString("Show All", comment: "")
             cell.tagCounts = tagCounts[(indexPath as NSIndexPath).row]
             let sepView = UIView(frame: CGRect(x: 15, y: 43.5, width: self.tableView.bounds.width - 30, height: 0.5))
             sepView.tag = 1025
@@ -200,7 +200,7 @@ class TagsViewController: UITableViewController {
             cell.addSubview(sepView)
         //无标签
         }else if (indexPath as NSIndexPath).row == 1{
-            cell.tagName = "无标签"
+            cell.tagName = NSLocalizedString("Untagged", comment: "")
             cell.tagCounts = tagCounts[(indexPath as NSIndexPath).row]
         //其他tag
         }else{

@@ -92,11 +92,11 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             // 设置时区
             localNoti.timeZone = TimeZone.current
             // 通知上显示的主题内容
-            localNoti.alertBody = "是时候添加今日的进度了..."
+            localNoti.alertBody = NSLocalizedString("It's time to check your process...", comment: "每日提醒通知")
             // 收到通知时播放的声音，默认消息声音
             localNoti.soundName = UILocalNotificationDefaultSoundName
             //待机界面的滑动动作提示
-            localNoti.alertAction = "打开应用"
+            localNoti.alertAction = NSLocalizedString("Open Markplan", comment: "每日提醒通知操作")
             // 应用程序图标右上角显示的消息数
             UserDefaultTool.shareIntance.numsLocalNotifiication += 1
             localNoti.applicationIconBadgeNumber = UserDefaultTool.shareIntance.numsLocalNotifiication
@@ -147,7 +147,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
                 alerController.view.addSubview(numberPicker)
                 
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
+                let alerActionOK = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .cancel, handler: { (UIAlertAction) -> Void in
                     self.daysLabel.text = self.labels[numberPicker.selectedRow(inComponent: 0)]
                     UserDefaultTool.shareIntance.daysLocalNotifiication = self.days[numberPicker.selectedRow(inComponent: 0)]
                     
@@ -244,7 +244,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             //APP介绍页面
             let link = URL(string: "http://www.markplan.info")
             let rect = tableView.rectForRow(at: indexPath)
-            let shareVC = UIActivityViewController(activityItems: ["我正在使用马克计划，一款简洁好用的个人项目进度管理应用。快来下载试试：","http://www.markplan.info",link!,UIImage(named: "SharePic")!], applicationActivities: nil)
+            let shareVC = UIActivityViewController(activityItems: [NSLocalizedString("I'm using Markplan, a simple & efficient app which helps to manage personal projects. Join Markplan: ", comment: "分享应用"),"http://www.markplan.info",link!,UIImage(named: "SharePic")!], applicationActivities: nil)
             if let popoverPresentationController = shareVC.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
@@ -282,7 +282,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         //设置反馈邮件地址、主题及内容
         mailComposeVC.setToRecipients(["markplan@foxmail.com"])
-        mailComposeVC.setSubject("马克计划 - 意见反馈")
+        mailComposeVC.setSubject(NSLocalizedString("Feedback of Markplan", comment: "反馈邮件主题"))
         mailComposeVC.setMessageBody("\n\n\n\n\n\n\n\n系统版本：\(systemVersion)\n设备型号：\(modelName)\n应用版本：\(kVer)(\(kBuildVer))", isHTML: false)
         
         return mailComposeVC
@@ -291,8 +291,8 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     
     //未设置邮箱设备弹窗提示
     func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertController(title: "无法发送邮件", message: "您的设备尚未设置邮箱，请在“邮件”应用中设置后再尝试发送。", preferredStyle: .alert)
-        sendMailErrorAlert.addAction(UIAlertAction(title: "好的", style: .default) { _ in })
+        let sendMailErrorAlert = UIAlertController(title: NSLocalizedString("Email Not Set", comment: ""), message: NSLocalizedString("You have not set up your Email yet. Please try again after it done.", comment: ""), preferredStyle: .alert)
+        sendMailErrorAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { _ in })
         self.present(sendMailErrorAlert, animated: true){}
     }
     
@@ -314,8 +314,8 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     
     //未安装支付宝弹窗提示
     func showNotFoundAlipayAlert() {
-        let notFoundAlipayAlert = UIAlertController(title: "未安装支付宝", message: "感谢您的赞赏!\n但目前我们仅支持支付宝打赏。", preferredStyle: .alert)
-        notFoundAlipayAlert.addAction(UIAlertAction(title: "好的", style: .default) { _ in })
+        let notFoundAlipayAlert = UIAlertController(title: NSLocalizedString("Missing Alipay", comment: ""), message: NSLocalizedString("We appreicate your generation, but for now we only support Alipay.", comment: ""), preferredStyle: .alert)
+        notFoundAlipayAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { _ in })
         self.present(notFoundAlipayAlert, animated: true){}
     }
 
@@ -365,9 +365,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     //观察是否back to app进行刷新数据
     func applicationDidBecomeActive(_ notification: Notification){
         if isAllowedNotification{
-            self.localNotifiicationLabel.text = "已开启"
+            self.localNotifiicationLabel.text = NSLocalizedString("Enabled", comment: "通知权限")
         }else{
-            self.localNotifiicationLabel.text = "已停用"
+            self.localNotifiicationLabel.text = NSLocalizedString("Disabled", comment: "通知权限")
         }
     }
 
@@ -383,9 +383,9 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         self.navigationController?.navigationBar.shadowImage = nil
         
         if isAllowedNotification{
-            self.localNotifiicationLabel.text = "已开启"
+            self.localNotifiicationLabel.text = NSLocalizedString("Enabled", comment: "通知权限")
         }else{
-            self.localNotifiicationLabel.text = "已停用"
+            self.localNotifiicationLabel.text = NSLocalizedString("Disabled", comment: "通知权限")
         }
         
         if !isAliayInstalled{
@@ -436,7 +436,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             
             //创建UIAlertAction 确定按钮
             weak var weakSelf = self
-            let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .cancel, handler: { (UIAlertAction) -> Void in
                             let dateString = datePicker.date.FormatToStringHHMM()
                             UserDefaultTool.shareIntance.timeOfEveryday = dateString.FormatToNSDateHHMM()!
                             weakSelf?.daysLabel.text = dateString

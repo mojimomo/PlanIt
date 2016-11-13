@@ -194,7 +194,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         if sender.isOn{
             projectType = .punch
             if unitTextField.text == "" && totalTextField.text == ""{
-                unitTextField.text = "次"
+                unitTextField.text = NSLocalizedString("times",comment: "")
+                //unitTextField.text = "次" (没能本地化)
                 let days = projectBeginTime.FormatToNSDateYYYYMMMMDD()!.daysToEndDate(projectEndTime.FormatToNSDateYYYYMMMMDD()!)
                 totalTextField.text = "\(days + 1)"
             }            
@@ -241,7 +242,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             alerController.view.addSubview(datePicker)
             
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
                 self.projectBeginTime = dateString
             })
@@ -291,7 +292,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             alerController.view.addSubview(datePicker)
         
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .cancel, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .cancel, handler: { (UIAlertAction) -> Void in
                 let dateString = datePicker.date.FormatToStringYYYYMMDD()
                 weak var weakSelf = self
                 weakSelf?.projectEndTime = dateString
@@ -348,11 +349,11 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     
     ///删除项目
     func deleteProject(){
-        let alertController = UIAlertController(title: "确认删除", message: "无法撤销删除操作", preferredStyle: .alert)
-        //创建UIAlertAction 确定按钮
-        let alerActionOK = UIAlertAction(title: "取消", style: .default, handler: nil)
+        let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: ""), message: NSLocalizedString("The operation is not reversible.", comment: ""), preferredStyle: .alert)
         //创建UIAlertAction 取消按钮
-        let alerActionCancel = UIAlertAction(title: "确定", style: .destructive, handler:  {(UIAlertAction) -> Void in
+        let alerActionOK = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: nil)
+        //创建UIAlertAction 确定按钮
+        let alerActionCancel = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler:  {(UIAlertAction) -> Void in
             weak var weakSelf = self
             weakSelf?.project.deleteProject()
             weakSelf?.dismiss(animated: true) { () -> Void in
@@ -375,23 +376,23 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     ///完成新增项目
     fileprivate func addNewProject(){
         if projectName == "" {
-            callAlert("提交错误",message: "项目名称不能为空")
+            callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Project must have a name.", comment: ""))
             return
         }else{
             project.name = projectName
             if !project.nameIsVailed(){
-                callAlert("提交错误",message: "项目名称不能重复")
+                callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Project with the name already exists.", comment: ""))
                 return
             }
         }
             
         if projectBeginTime != "" && projectEndTime != ""{
             if self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime) == false{
-                self.callAlert("修改错误",message: "开始结束时间不正确")
+                self.callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Start and end time are not set correctly.", comment: ""))
                 return
             }
         }else{
-            callAlert("提交错误",message: "时间不能为空")
+            callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Project must have start and end time.", comment: ""))
             return
         }
         
@@ -400,7 +401,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         case .noRecord: break
         default:
             if projectUnit == ""{
-                callAlert("提交错误",message: "项目任务单位不能为空")
+                callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Process Units cannot be empty.", comment: ""))
                 return
             }else{
                 project.unit = projectUnit
@@ -409,7 +410,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             if  projectTotal != 0 {
                 project.setNewProjectTotal(projectTotal)
             }else{
-                callAlert("提交错误",message: "项目任务总量不能为空或0")
+                callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Process Totals cannot be empty or 0.", comment: ""))
                 return
             }
         }
@@ -430,13 +431,13 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 return
             }
         }
-        callAlert("提交失败",message: "新建项目失败")
+        callAlert(NSLocalizedString("Failed", comment: "提交失败"),message: "")
     }
    
     ///完成修改项目
     fileprivate func finishEditProject(){
         if projectName == "" {
-            callAlert("修改错误",message: "项目名称不能为空")
+            callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Project must have a name.", comment: ""))
             return
         }else{
             project.name = projectName
@@ -444,11 +445,11 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         
         if projectBeginTime != "" && projectEndTime != ""{
             if self.project.setNewProjectTime(self.projectBeginTime, endTime: self.projectEndTime) == false{
-                self.callAlert("修改错误",message: "开始结束时间不正确")
+                self.callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Start and end time are not set correctly.", comment: ""))
                 return
             }
         }else{
-            callAlert("修改错误",message: "时间不能为空")
+            callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Project must have start and end time.", comment: ""))
             return
         }
         project.type = projectType
@@ -456,19 +457,19 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         case .noRecord: break
         default:
             if projectUnit == ""{
-                callAlert("修改错误",message: "项目任务单位不能为空")
+                callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Process Units cannot be empty.", comment: ""))
                 return
             }else{
                 project.unit = projectUnit
             }
             if  projectTotal != 0{
                 if !project.editProjectTotal(projectTotal) {
-                    callAlert("修改错误",message: "项目任务总量不能小于已完成量")
+                    callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Process Totals must be greater than you've completed.", comment: ""))
                     return
                 }
                 project.setNewProjectTime(projectBeginTime, endTime: projectEndTime)
             }else{
-                callAlert("修改错误",message: "项目任务总量不能为0")
+                callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Process Totals cannot be empty or 0.", comment: ""))
                 return
             }
         }
@@ -481,7 +482,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                 return
             }
         }
-        callAlert("修改失败",message: "新建项目失败")
+        callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: "")
     }
 
     
@@ -527,7 +528,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                     let rect = tableView.rectForRow(at: indexPath)
                     editBeginTime(rect)
                 }else{
-                    callAlert("无法修改", message: "项目已添加进度")
+                    callAlert(NSLocalizedString("EditFailed", comment: "无法修改"), message: NSLocalizedString("Process exists", comment: ""))
                 }
             }else if tableState == .add{
                 let rect = tableView.rectForRow(at: indexPath)
@@ -655,7 +656,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             if let identifier = segue.identifier{
                 switch identifier{
                 case "showTags":
-                    ivc.title = "选择标签"
+                    ivc.title = NSLocalizedString("Select Tags", comment: "选择标签")
                 default: break
                 }
             }

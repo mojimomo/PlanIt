@@ -5,3 +5,217 @@
   Created by Yale on 2016/10/16.
   Copyright © 2016年 Ken. All rights reserved.
 */
+
+
+/*新增进度页面*/
+"Have completed: " = "已记录总量：";
+
+"times" = "次";
+
+"Confirm" = "确定";
+
+"Cancel" = "取消";
+
+"Delete" = "删除";
+
+"The operation is not reversible." = "无法撤销删除操作";
+
+/*提交错误*/
+"Submit Failed" = "提交错误";
+
+/*修改错误*/
+"Eidt Failed" = "修改错误";
+
+/*提交失败*/
+"Failed" = "提交失败";
+
+/*无法修改*/
+"EditFailed" = "无法修改";
+
+"Project must have a name." = "项目名称不能为空";
+
+"Project with the name already exists." = "项目名称不能重复";
+
+"Start and end time are not set correctly." = "开始和结束时间设置不正确";
+
+"Project must have start and end time." = "时间不能为空";
+
+"Process Units cannot be empty." = "进度单位不能为空";
+
+"Process Totals cannot be empty or 0." = "进度总量不能为空或0";
+
+"Process Totals must be greater than you've completed." = "进度总量不能小于已完成量";
+
+"Process exists" = "项目已添加进度";
+
+/*选择标签*/
+"Select Tags" = "选择标签";
+
+/*引导页*/
+"Continue" = "开始体验";
+
+"min" = " 分";
+
+"hr" = " 小时";
+
+"d" = " 天";
+
+/*每日提醒通知*/
+"It's time to check your process..." = "是时候添加今天完成的进度了...";
+
+/*每日提醒通知操作*/
+"Open Markplan" = "打开应用";
+
+/*分享应用*/
+"I'm using Markplan, a simple & efficient app which helps to manage personal projects. Join Markplan: " = "我正在使用马克计划，一款简洁好用的个人项目进度管理应用。快来下载试试：";
+
+/*反馈邮件主题*/
+"Feedback of Markplan" = "马克计划 - 意见反馈";
+
+"Email Not Set" = "无法发送邮件";
+
+"You have not set up your Email yet. Please try again after it done." = "您的设备尚未设置邮箱，请在“邮件”应用中设置后再尝试发送。";
+
+"OK" = "好的";
+
+/*通知权限*/
+"Enabled" = "已开启";
+
+/*通知权限*/
+"Disabled" = "已停用";
+
+"Missing Alipay" = "未安装支付宝";
+
+"We appreicate your generation, but for now we only support Alipay." = "感谢您的赞赏!\n但目前我们仅支持支付宝打赏。";
+
+"Add Now" = "去添加";
+
+/*进度详情页条目下备注*/
+"Notes: " = "备注：";
+
+"is due today." = "项目今天到期";
+
+"Overdue by " = "项目已超出 ";
+
+"Starts in " = "距项目开始还有 ";
+
+"Due in " = "项目剩余 ";
+
+"%d %@/d need to be done" = "余下每天需完成 %d %@";
+
+"Need to mark in %@ %d times" = "剩余 %@需打卡 %d 次";
+
+"Show Scheduled" = "显示未开始";
+
+"Completed" = "已完成";
+
+"Settings" = "设置";
+
+"Tags" = "标签";
+
+/*项目列表底端计数*/
+"projects" = "个项目";
+
+"Untagged" = "无标签";
+
+/*首页导航栏标题*/
+"All" = "全部项目";
+
+///*首页导航栏标题*/
+//"Completed" = "已完成项目";
+
+"Life" = "生活";
+
+"Workout" = "锻炼";
+
+"Study" = "学习";
+
+"Check completed projects" = "查看已完成项目";
+
+"Create a new project" = "创建新项目";
+
+"◎ Tap to check details\n◉ Press to glance process tips" = "◎ 点击查看详情\n◉ 长按查看进度提示";
+
+"Add process" = "添加进度";
+
+"Mark completed" = "标记完成";
+
+"You have been using Markplan for a while. How do you feel?" = "你已经使用马克计划一段时间了，感觉怎样？";
+
+"Rate Markplan" = "赏个好评";
+
+"Send Feedback" = "我要吐槽";
+
+"Remind Me Later" = "再用用看";
+
+"Deleted" = "删除成功";
+
+"add process" = "记录进度";
+
+"mark" = "打卡";
+
+"mark completed" = "标记完成";
+
+"Not Started" = "项目未开始";
+
+"Change start time to %@." = "修改项目开始时间以%@";
+
+"New Project" = "新增项目";
+
+"In Progress" = "进行中";
+
+/*创建成功*/
+"Done" = "创建成功";
+
+/*编辑成功*/
+"Done!" = "编辑成功";
+
+"New Tag" = "新标签";
+
+"Manage Tags" = "管理标签";
+
+"Edit Tags" = "编辑标签";
+
+"Create" = "创建";
+
+"Too Many Tags" = "提交错误";
+
+"The number of Tags should less than 3." = "所选标签不能超过3个";
+
+"E.g. Coding, Reading..." = "例如: 编程、健身";
+
+"Created Failed" = "创建失败";
+
+"Tag already exists." = "该标签已存在";
+
+"Tag cannot be empty or have >8 characters" = "标签不能为空且不能超过8个字符";
+
+"Press to edit" = "长按进入编辑模式";
+
+"Monthly View" = "按月查看";
+
+"Daily View" = "按日查看";
+
+// 统计页面
+
+"Overdue by" = "超出期限
+
+"Starts in" = "距离开始";
+
+"Due in" = "距离截止";
+
+"Planned Daily Work" = "余下每天需完成";
+
+"Planned Daily Mark" = "余下每天需打卡";
+
+"Due on" = "截止";
+
+"  Not Started" = " 项目还未开始";
+
+"History" = "添加记录";
+
+"Edit Project" = "修改项目";
+
+"Tap to check all projects with tag %@" = "点击查看包含%@标签的项目";
+
+"Show All" = "显示全部";

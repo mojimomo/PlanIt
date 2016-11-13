@@ -160,14 +160,14 @@ class Project: NSObject {
         localNoti.timeZone = TimeZone.current
         // 通知上显示的主题内容
         if UserDefaultTool.shareIntance.daysLocalNotifiication == 1 {
-            localNoti.alertBody = "\(name)项目今天到期"
+            localNoti.alertBody = "\(name)" + NSLocalizedString("is due today.", comment: "")
         } else {
             localNoti.alertBody = "\(name)项目还有\(UserDefaultTool.shareIntance.daysLocalNotifiication - 1)天到期"
         }
         // 收到通知时播放的声音，默认消息声音
         localNoti.soundName = UILocalNotificationDefaultSoundName
         //待机界面的滑动动作提示
-        localNoti.alertAction = "打开应用"
+        localNoti.alertAction = NSLocalizedString("Open Markplan", comment: "每日提醒通知操作")
         // 应用程序图标右上角显示的消息数
         UserDefaultTool.shareIntance.numsLocalNotifiication += 1
         localNoti.applicationIconBadgeNumber = UserDefaultTool.shareIntance.numsLocalNotifiication

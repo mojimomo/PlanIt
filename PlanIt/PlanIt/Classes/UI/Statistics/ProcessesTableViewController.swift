@@ -126,7 +126,7 @@ class ProcessesTableViewController: UITableViewController {
     
     ///自定义删除按钮文字
     override func tableView(_ tableView:UITableView, titleForDeleteConfirmationButtonForRowAt indexPath:IndexPath) ->String?{
-        return "删除"
+        return NSLocalizedString("Delete", comment: "")
     }
     
     // MARK: - Func
@@ -192,7 +192,7 @@ class ProcessesTableViewController: UITableViewController {
             
             //添加去添加按钮
             noDataButton = UIButton(type: .system)
-            noDataButton.setTitle("去添加", for: UIControlState())
+            noDataButton.setTitle(NSLocalizedString("Add Now", comment: ""), for: UIControlState())
             noDataButton.setTitleColor(UIColor.colorFromHex("#85b4ea"), for: UIControlState())
             noDataButton.sizeToFit()
             let margin:CGFloat = 10

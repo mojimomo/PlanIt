@@ -35,7 +35,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     ///菜单
     fileprivate var popover: Popover!
     ///菜单文字
-    fileprivate var texts = ["按月查看", "按日查看"]
+    fileprivate var texts = [NSLocalizedString("Monthly View", comment: ""), NSLocalizedString("Daily View", comment: "")]
     
     fileprivate var effectView :DynamicBlurView!
     ///菜单弹窗参数
@@ -178,24 +178,24 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             //根据不同项目完成度
             switch project.isFinished {
             case .notBegined:
-                prompLabel?.text = "距离开始"
+                prompLabel?.text = NSLocalizedString("Starts in", comment: "")
                 let restString = project.beginTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
                 surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
                 progressView.setProgress(0 , animated: false)
             case .notFinished:
-                prompLabel?.text = "距离截止"
+                prompLabel?.text = NSLocalizedString("Due in", comment: "")
                 let restString = project.endTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
                 surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
                 let timePercent = project.beginTimeDate.percentFromCurrentTime(project.endTimeDate)
                 progressView.setProgress(Float(timePercent), animated: false)
             case .finished:
-                surplusLabel?.text = "已完成"
+                surplusLabel?.text = NSLocalizedString("Completed", comment: "")
                 progressView.setProgress(1 , animated: false)
                 project.percent = 100
             case .overTime:
-                prompLabel?.text = "超出期限"
+                prompLabel?.text = NSLocalizedString("Overdue by", comment: "")
                 let restString = project.endTimeDate.compareCurrentTime()
                 surplusLabel?.text = restString
                 surplusLabel.changeTextAttributeByRange(NSMakeRange(restString.characters.count - 2, 2), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
@@ -215,16 +215,16 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             needLabel.isHidden = false
             needFinishLabel.isHidden = false
             if project.type == .normal && project.isFinished == .notFinished{
-                needLabel.text = "余下每天需完成"
+                needLabel.text = NSLocalizedString("Planned Daily Work", comment: "")
                 let days = Date().daysToEndDate(project.endTimeDate)
                 let times = (project.rest / Double(days)).toIntCarry()
                 needFinishLabel.text = "\(times) " + project.unit
                 needFinishLabel.changeTextAttributeByRange(NSMakeRange(needFinishLabel.text!.characters.count - project.unit.characters.count, project.unit.characters.count), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
             }else if project.type == .punch && project.isFinished == .notFinished{
-                needLabel.text = "余下每天需打卡"
+                needLabel.text = NSLocalizedString("Planned Daily Mark", comment: "")
                 let days = Date().daysToEndDate(project.endTimeDate)
                 let times = (project.rest / Double(days)).toIntCarry()
-                needFinishLabel.text = "\(times) 次"
+                needFinishLabel.text = "\(times) " + NSLocalizedString("times", comment: "")
                 needFinishLabel.changeTextAttributeByRange(NSMakeRange(needFinishLabel.text!.characters.count - 2, 2), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
             }else{
                 needLabel.isHidden = true
@@ -239,7 +239,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             percentLabel.text = "\(Int(project.percent))%"
             //距离截止
             percentLabel.sizeToFit()
-            endTimeLabel.text = project.endTime + "截止"
+            endTimeLabel.text = project.endTime + NSLocalizedString("Due on", comment: "")
             //设置表格标题
             chartTitle = searchDate.FormatToStringYYYYMM()
             
@@ -408,7 +408,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 
                 let button = UIButton(type: .custom)
                 button.setImage( UIImage(named: "timer"), for: UIControlState())
-                button.setTitle(" 项目还未开始", for: UIControlState())
+                button.setTitle(NSLocalizedString("  Not Started", comment: ""), for: UIControlState())
                 button.setTitleColor(UIColor.colorFromHex("#AFAFAF"), for: UIControlState())
                 button.titleLabel!.font = UIFont.systemFont(ofSize: 19)
                 button.sizeToFit()
@@ -612,14 +612,14 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         let historyViewController = self.storyboard?.instantiateViewController(withIdentifier: "Processes") as!
             ProcessesTableViewController
         historyViewController.project = project
-        historyViewController.title = "添加记录"
+        historyViewController.title = NSLocalizedString("History", comment: "")
         historyViewController.view.backgroundColor = self.view.backgroundColor
         self.navigationController?.pushViewController(historyViewController, animated: true)
     }
     
     func editProject(){
         let editProjectViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditProject") as! EditProjectTableViewController
-        editProjectViewController.title = "修改项目"
+        editProjectViewController.title = NSLocalizedString("Edit Project", comment: "")
         editProjectViewController.delegate  = self
         editProjectViewController.tableState = .edit
         editProjectViewController.view.backgroundColor = allBackground
@@ -850,7 +850,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     func goBackAct(_ state: EditProjectBackState){
         switch state {
         case .editSucceess:
-            callAlertSuccess("编辑成功")
+            callAlertSuccess(NSLocalizedString("Successfully Edited", comment: ""))
         case .deleteSucceess:
             self.navigationController?.popToRootViewController(animated: true)
         default:break

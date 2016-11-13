@@ -55,7 +55,7 @@ extension UIViewController{
     func callAlert(_ title:String, message: String, completion: (() -> Void)? = nil){
         if !IS_IOS9{
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "好的", style: .default,
+            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default,
                                          handler: nil)
             alertController.addAction(okAction)
             
@@ -76,7 +76,7 @@ extension UIViewController{
             
             // Create first button
             // Create second button
-            let buttonTwo = DefaultButton(title: "好的") {
+            let buttonTwo = DefaultButton(title: NSLocalizedString("OK", comment: "")) {
                 
             }
             
@@ -93,9 +93,9 @@ extension UIViewController{
         if !IS_IOS9{
             let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .destructive, handler: okHandler)
+            let alerActionOK = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .destructive, handler: okHandler)
             //创建UIAlertAction 取消按钮
-            let alerActionCancel = UIAlertAction(title: "取消", style: .default, handler: cancelandler)
+            let alerActionCancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: cancelandler)
             //添加动作
             alertController.addAction(alerActionOK)
             alertController.addAction(alerActionCancel)
@@ -116,12 +116,12 @@ extension UIViewController{
             }
             
             // Create first button
-            let buttonOne = CancelButton(title: "取消") {
+            let buttonOne = CancelButton(title: NSLocalizedString("Cancel", comment: "")) {
                 cancelandler?(UIAlertAction())
             }
             
             // Create second button
-            let buttonTwo = DefaultButton(title: "确定") {
+            let buttonTwo = DefaultButton(title: NSLocalizedString("Confirm", comment: "")) {
                 okHandler?(UIAlertAction())
             }
             

@@ -48,16 +48,16 @@ extension Date{
         
         //判断时间
         if timeInterval < 60{
-            result += "1 分"
+            result += "1" + NSLocalizedString("min", comment: "")
         }else if timeInterval / 60 < 60 {
             tmp = (timeInterval / 60 ).toIntCarry()
-            result += "\(tmp) 分"
+            result += "\(tmp)" + NSLocalizedString("min", comment: "")
         }else if timeInterval / 60 / 60 < 24 {
             tmp = (timeInterval / 60 / 60).toIntCarry()
-            result += "\(tmp) 小时"
+            result += "\(tmp)" + NSLocalizedString("hr", comment: "")
         }else {
             tmp = (timeInterval / 60 / 60 / 24 ).toIntCarry()
-            result += "\(tmp) 天"
+            result += "\(tmp)" + NSLocalizedString("d", comment: "")
 //        }else if timeInterval / 60 / 60 / 24 / 30 < 12 {
 //            tmp = (timeInterval / 60 / 60 / 24 / 30 ).toIntCarry()
 //            result += "\(tmp) 月"

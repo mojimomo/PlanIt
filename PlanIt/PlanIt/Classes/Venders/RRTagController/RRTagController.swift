@@ -51,9 +51,9 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     var type : RRTagType = .normal{
         didSet{
             if type == .normal{
-                self.navigationBarItem.title = "标签选择"
+                self.navigationBarItem.title = NSLocalizedString("Select Tags", comment: "选择标签")
             }else{
-                self.navigationBarItem.title = "管理标签"
+                self.navigationBarItem.title = NSLocalizedString("Manage Tags", comment: "")
             }
         }
     }
@@ -62,12 +62,12 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     var isEditMod = false{
         didSet{
             if isEditMod {
-                self.navigationBarItem.title = "编辑标签"
+                self.navigationBarItem.title = NSLocalizedString("Edit Tags", comment: "")
             }else{
                 if type == .normal{
-                    self.navigationBarItem.title = "标签选择"
+                    self.navigationBarItem.title = NSLocalizedString("Select Tags", comment: "选择标签")
                 }else{
-                    self.navigationBarItem.title = "管理标签"
+                    self.navigationBarItem.title = NSLocalizedString("Manage Tags", comment: "")
                 }
 
             }
@@ -108,7 +108,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         buttonCancel.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).cgColor
         buttonCancel.layer.borderWidth = 2
         buttonCancel.backgroundColor = UIColor.white
-        buttonCancel.setTitle("取消", for: UIControlState())
+        buttonCancel.setTitle(NSLocalizedString("Cancel", comment: ""), for: UIControlState())
         buttonCancel.setTitleColor(UIColor.black, for: UIControlState())
         buttonCancel.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         buttonCancel.layer.cornerRadius = 15
@@ -118,7 +118,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         buttonAccept.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1).cgColor
         buttonAccept.layer.borderWidth = 2
         buttonAccept.backgroundColor = UIColor.white
-        buttonAccept.setTitle("创建", for: UIControlState())
+        buttonAccept.setTitle(NSLocalizedString("Create", comment: ""), for: UIControlState())
         buttonAccept.setTitleColor(UIColor.black, for: UIControlState())
         buttonAccept.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         buttonAccept.layer.cornerRadius = 15
@@ -132,7 +132,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64))
         
-        self.navigationBarItem = UINavigationItem(title: "标签选择")
+        self.navigationBarItem = UINavigationItem(title: NSLocalizedString("Select Tags", comment: "选择标签"))
         self.navigationBarItem.leftBarButtonItem = self.leftButton
         
         navigationBar.titleTextAttributes = {navigationTitleAttribute}()
@@ -162,7 +162,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
         
         if selected.count > 3{
-            callAlert("提交错误", message: "所选标签不能超过3个")
+            callAlert(NSLocalizedString("Too Many Tags", comment: ""), message: NSLocalizedString("The number of Tags should less than 3.", comment: ""))
             return
         }
         
@@ -257,19 +257,19 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
 //                                    self.addTagView.textEdit.becomeFirstResponder()
 //                                    print("")
 //                            })
-                let alerController = UIAlertController(title: "创建标签", message: "请输入新的标签", preferredStyle: .alert)
+                let alerController = UIAlertController(title: NSLocalizedString("New Tag", comment: ""), message: "", preferredStyle: .alert)
                 
                 //创建TextField
                 alerController.addTextField(configurationHandler: { (textField) -> Void in
                     textField.textAlignment = .center
-                    textField.placeholder = "例如: 编程, 健身"
+                    textField.placeholder = NSLocalizedString("E.g. Coding, Reading...", comment: "")
                 })
                 
                 //添加lebel观察者
                 NotificationCenter.default.addObserver(self,selector:  #selector(RRTagController.textFiledEditChanged(_:)),name: NSNotification.Name.UITextFieldTextDidChange ,object: (alerController.textFields?.first)!)
                 
                 //创建UIAlertAction 确定按钮
-                let alerActionOK = UIAlertAction(title: "确定", style: .destructive, handler: { (UIAlertAction) -> Void in
+                let alerActionOK = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .destructive, handler: { (UIAlertAction) -> Void in
                     if alerController.textFields?.count > 0 {
                         if let textField = (alerController.textFields?.first)! ?? nil{
                             if textField.text != "" && textField.text?.characters.count < 9{
@@ -286,11 +286,11 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                                             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: (alerController.textFields?.first)!)
                                         }
                                     }else{
-                                        self.callAlert("创建失败", message: "该标签已存在！")
+                                        self.callAlert(NSLocalizedString("Created Failed", comment: ""), message: NSLocalizedString("Tag already exists.", comment: ""))
                                     }
                                 }
                             }else{
-                                self.callAlert("创建失败", message: "标签不能为空且不能超过8个字符！")
+                                self.callAlert(NSLocalizedString("Created Failed", comment: ""), message: NSLocalizedString("Tag cannot be empty or have >8 characters", comment: ""))
                             }
                         }
                     }
@@ -298,7 +298,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 })
                 
                 //创建UIAlertAction 取消按钮
-                let alerActionCancel = UIAlertAction(title: "取消", style: .default, handler:{(UIAlertAction) -> Void in
+                let alerActionCancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler:{(UIAlertAction) -> Void in
                     //删除观察者
                     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: (alerController.textFields?.first)!)
                     })
@@ -393,9 +393,9 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     func handleDelete(){
         if isEditMod{
-            let alerController = UIAlertController(title: "是否确定删除所选标签？", message: nil, preferredStyle: .actionSheet)
+            let alerController = UIAlertController(title: NSLocalizedString("Delete", comment: ""), message: nil, preferredStyle: .actionSheet)
             //创建UIAlertAction 确定按钮
-            let alerActionOK = UIAlertAction(title: "确定", style: .destructive, handler: { (UIAlertAction) -> Void in
+            let alerActionOK = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: { (UIAlertAction) -> Void in
                 for tag in self.editTags{
                     if tag.isSelected == true{
                         tag.deleteTag()
@@ -404,7 +404,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                 self.handleCancelEditMod()
             })
             //创建UIAlertAction 取消按钮
-            let alerActionCancel = UIAlertAction(title: "取消", style: .default, handler: { (UIAlertAction) -> Void in
+            let alerActionCancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: { (UIAlertAction) -> Void in
             })
             //添加动作
             alerController.addAction(alerActionOK)
@@ -472,7 +472,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                     //设置为非第一次打开此页面
                     UserDefaults.standard.set(true, forKey: "IsFirstLaunchTagManagerView")
                     //设置引导弹窗
-                    self.callFirstRemain("长按进入编辑模式", view:  cell)
+                    self.callFirstRemain(NSLocalizedString("Press to edit", comment: ""), view:  cell)
                 }
             }
         }

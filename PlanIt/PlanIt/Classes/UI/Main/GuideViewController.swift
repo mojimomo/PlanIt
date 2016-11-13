@@ -55,7 +55,7 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
         goButton.center.x = self.view.center.x + width * 3
         goButton.setBackgroundImage(UIImage.imageWithColor(UIColor.colorFromHex("#FE6158"), size: CGSize( width: width, height: 60)), for: UIControlState())
         goButton.setBackgroundImage(UIImage.imageWithColor(UIColor.colorFromHex("#FF928C"), size: CGSize( width: width, height: 60)), for: .highlighted)
-        goButton.setTitle("开始体验", for: UIControlState())
+        goButton.setTitle(NSLocalizedString("Continue", comment: "引导页"), for: UIControlState())
         goButton.setTitleColor(UIColor.white,for: UIControlState()) //普通状态下文字的颜色
         goButton.setTitleColor(UIColor.white,for: .highlighted) //触摸状态下文字的颜色
         goButton.titleLabel?.font = goButtonFont

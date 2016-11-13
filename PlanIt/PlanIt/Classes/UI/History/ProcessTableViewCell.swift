@@ -22,7 +22,7 @@ class ProcessTableViewCell: UITableViewCell {
                 remarksLabel?.text = " "
                 remarksLabel.font = UIFont.systemFont(ofSize: 1, weight: UIFontWeightUltraLight)
             }else{
-                remarksLabel?.text = "备注: " + process.remark
+                remarksLabel?.text = NSLocalizedString("Notes: ", comment: "进度详情页条目下备注") + process.remark
                 remarksLabel.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightThin)
             }
         }

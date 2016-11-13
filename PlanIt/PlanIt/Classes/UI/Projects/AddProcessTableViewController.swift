@@ -60,7 +60,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
             if Double(doneTextField.text!)! > project.rest{
                 doneTextField.text = "\(Int(project.rest))"
             }
-            currentProcessLabel.text = "已记录总量:  \(Int(project.complete) +  Int(doneTextField.text!)!) / \(Int(project.total))"
+            currentProcessLabel.text = NSLocalizedString("Have completed: ", comment: "新增进度页面") + "\(Int(project.complete) +  Int(doneTextField.text!)!) / \(Int(project.total))"
         }
     }
     
@@ -147,7 +147,7 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         let cancelBarButton = UIBarButtonItem(image: UIImage(named: "cancel"), style: .done, target: self, action: #selector(AddProcessTableViewController.cancel))
         self.navigationItem.leftBarButtonItem = cancelBarButton
         doneTextField.placeholder = project.unit
-        currentProcessLabel.text = "已记录总量:  \(Int(project.complete)) / \(Int(project.total))"
+        currentProcessLabel.text = NSLocalizedString("Have completed: ", comment: "新增进度页面") + "\(Int(project.complete)) / \(Int(project.total))"
         
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 25))
         self.tableView.sectionFooterHeight = 0

@@ -40,35 +40,37 @@ class ProjectTableViewCell: RoundTableviewCell{
                 case .noRecord:
                     if project.isFinished == .overTime{
                         let days = project.endTimeDate.compareCurrentTime()
-                        projectName = "项目已超出 " + days
+                        projectName = NSLocalizedString("Overdue by ", comment: "") + days
                     }else if project.isFinished == .notBegined{
                         let days = project.beginTimeDate.compareCurrentTime()
-                        projectName = "距项目开始还有 " + days
+                        projectName = NSLocalizedString("Starts in ", comment: "") + days
                     }else{
                         let days = project.endTimeDate.compareCurrentTime()
-                        projectName = "项目剩余 " + days
+                        projectName = NSLocalizedString("Due in ", comment: "") + days
                     }
                 case .normal:
                     if project.isFinished == .overTime{
                         let days = project.endTimeDate.compareCurrentTime()
-                        projectName = "项目已超出 " + days
+                        projectName = NSLocalizedString("Overdue by ", comment: "") + days
                     }else if project.isFinished == .notBegined{
                         let days = project.beginTimeDate.compareCurrentTime()
-                        projectName = "距项目开始还有 " + days
+                        projectName = NSLocalizedString("Starts in ", comment: "") + days
                     }else{
                         let days = Date().daysToEndDate(project.endTimeDate)
-                        projectName = "余下每天需完成 \((project.rest / Double(days)).toIntCarry()) " + project.unit
+                        let dailyTask = (project.rest / Double(days)).toIntCarry()
+                        projectName = String(format: NSLocalizedString("%d %@/d need to be done", comment: ""), dailyTask, project.unit)
                     }
                 case .punch:
                     if project.isFinished == .overTime{
                         let days = project.endTimeDate.compareCurrentTime()
-                        projectName = "项目已超出 " + days
+                        projectName = NSLocalizedString("Overdue by ", comment: "") + days
                     }else if project.isFinished == .notBegined{
                         let days = project.beginTimeDate.compareCurrentTime()
-                        projectName = "距项目开始还有 " + days
+                        projectName = NSLocalizedString("Starts in ", comment: "") + days
                     }else{
                         let days = project.endTimeDate.compareCurrentTime()
-                        projectName = "剩余 " + days + " 需打卡 \(Int(project.rest)) 次"
+                        let restTimes = Int(project.rest)
+                        projectName = String(format: NSLocalizedString("Need to mark in %@ %d times", comment: ""), days, restTimes)
                     }
                 default:break
                 }
