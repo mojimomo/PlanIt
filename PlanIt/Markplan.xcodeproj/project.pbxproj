@@ -119,6 +119,7 @@
 		36006BDE1D3BC84E00E08324 /* WIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicator.swift"; sourceTree = "<group>"; };
 		36006BDF1D3BC84E00E08324 /* WIndicatorText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicatorText.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicatorText.swift"; sourceTree = "<group>"; };
 		367B7B3C1D4675C80035B099 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		369698A71DD831F80080CEC9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		36AD318E1DB35BB500183458 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		36AD318F1DB35BB500183458 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		36AD31901DB35BFC00183458 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1029,6 +1030,7 @@
 				BEA520A41CCF417F00FFE43E /* Base */,
 				36AD318F1DB35BB500183458 /* zh-Hans */,
 				36AD31911DB35BFC00183458 /* zh-Hant */,
+				369698A71DD831F80080CEC9 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

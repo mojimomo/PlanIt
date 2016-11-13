@@ -1256,7 +1256,7 @@
             </objects>
             <point key="canvasLocation" x="784" y="57"/>
         </scene>
-        <!--设置-->
+        <!--Options-->
         <scene sceneID="PPL-oC-p6t">
             <objects>
                 <tableViewController storyboardIdentifier="Options" id="k9u-I8-gwM" customClass="OptionsTableViewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
@@ -1308,7 +1308,7 @@
                                                     <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="deadline" id="PqA-K4-cWe">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="due" id="PqA-K4-cWe">
                                                     <rect key="frame" x="15" y="10" width="23" height="23"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -1325,14 +1325,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Reminds Every Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WVk-0h-oZR">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Daily Reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WVk-0h-oZR">
                                                     <rect key="frame" x="53" y="0.0" width="307" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="options-tag" id="WVt-oE-gnO">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="deadline" id="WVt-oE-gnO">
                                                     <rect key="frame" x="15" y="10" width="23" height="23"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -1349,14 +1349,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Time of Reminds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZY-bz-VJ7">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Time of Reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZY-bz-VJ7">
                                                     <rect key="frame" x="53" y="0.0" width="307" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="options-tag" id="8Az-A7-8s9">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="clock" id="8Az-A7-8s9">
                                                     <rect key="frame" x="15" y="10" width="23" height="23"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -1378,14 +1378,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Manage Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xlG-Sm-2rl">
-                                                    <rect key="frame" x="52" y="0.0" width="308" height="43"/>
+                                                    <rect key="frame" x="53" y="0.0" width="307" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="about" id="pmf-j9-JJM">
-                                                    <rect key="frame" x="15" y="10" width="22" height="22"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="options-tag" id="pmf-j9-JJM">
+                                                    <rect key="frame" x="15" y="10" width="23" height="23"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -1433,7 +1433,28 @@
                                                     <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="feedback" id="Y04-We-0M3">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="mail" id="Y04-We-0M3">
+                                                    <rect key="frame" x="15" y="10" width="23" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="xZM-zM-SGw" imageView="Tro-JR-cqh" style="IBUITableViewCellStyleDefault" id="pxm-ie-PhF">
+                                        <rect key="frame" x="0.0" y="393" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pxm-ie-PhF" id="UxA-L4-LRm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Chat with Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xZM-zM-SGw">
+                                                    <rect key="frame" x="53" y="0.0" width="307" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                    <color key="textColor" red="0.32156862749999998" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="feedback" id="Tro-JR-cqh">
                                                     <rect key="frame" x="15" y="10" width="23" height="23"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -1441,7 +1462,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="aNf-Uh-FGR" imageView="AqA-FN-L8I" style="IBUITableViewCellStyleDefault" id="dSd-up-JEc">
-                                        <rect key="frame" x="0.0" y="393" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="437" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dSd-up-JEc" id="JNV-Tm-xIw">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -1462,7 +1483,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="akK-Jx-QZg" imageView="MCG-JC-hfP" style="IBUITableViewCellStyleDefault" id="oYA-4E-mph">
-                                        <rect key="frame" x="0.0" y="437" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="481" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oYA-4E-mph" id="j3W-80-ell">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -1487,7 +1508,7 @@
                             <tableViewSection headerTitle="" id="zjl-va-OH9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="RxI-0G-YaC" imageView="ZHM-S4-beJ" style="IBUITableViewCellStyleDefault" id="cqp-LC-hTo">
-                                        <rect key="frame" x="0.0" y="506" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="550" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cqp-LC-hTo" id="9XC-lt-z2c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -1511,7 +1532,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="x0f-IM-Eed" imageView="pqw-0H-p1a" style="IBUITableViewCellStyleDefault" id="Eo8-Uc-qyO">
-                                        <rect key="frame" x="0.0" y="550" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="594" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eo8-Uc-qyO" id="6i0-Y8-AMH">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -1539,7 +1560,7 @@
                             <outlet property="delegate" destination="k9u-I8-gwM" id="BG6-99-yNk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="设置" id="DS8-W0-jLZ"/>
+                    <navigationItem key="navigationItem" title="Options" id="DS8-W0-jLZ"/>
                     <connections>
                         <outlet property="daysLabel" destination="Is3-FY-yKH" id="BaO-sE-Qk7"/>
                         <outlet property="isNeedRemindsBeforeDueSwitch" destination="P8C-SV-i3X" id="WIL-Zh-ChD"/>
@@ -1654,7 +1675,7 @@
                             <constraint firstItem="gKZ-LW-EoG" firstAttribute="centerX" secondItem="7mS-Ku-qAM" secondAttribute="centerX" id="vxK-GE-WcH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="关于" id="qYl-L8-gr4" userLabel="关于"/>
+                    <navigationItem key="navigationItem" title="About" id="qYl-L8-gr4" userLabel="关于"/>
                     <connections>
                         <outlet property="appVersion" destination="oWL-86-drm" id="Vlh-O2-axL"/>
                         <outlet property="memberIntro" destination="sfm-kW-bKZ" id="LrQ-Qb-t4K"/>
@@ -1664,7 +1685,7 @@
             </objects>
             <point key="canvasLocation" x="-139.5" y="2647.5"/>
         </scene>
-        <!--使用帮助-->
+        <!--Tutorial-->
         <scene sceneID="0LW-pT-9kL">
             <objects>
                 <viewController id="do2-Km-bFM" customClass="WebviewController" customModule="Markplan" customModuleProvider="target" sceneMemberID="viewController">
@@ -1673,7 +1694,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </webView>
-                    <navigationItem key="navigationItem" title="使用帮助" id="Lx3-yW-WcQ"/>
+                    <navigationItem key="navigationItem" title="Tutorial" id="Lx3-yW-WcQ"/>
                     <connections>
                         <outlet property="webView" destination="2rW-oi-zBV" id="tlg-dI-JJB"/>
                     </connections>
@@ -1686,11 +1707,14 @@
     <resources>
         <image name="about" width="22" height="22"/>
         <image name="add" width="55" height="55"/>
+        <image name="clock" width="23" height="23"/>
         <image name="deadline" width="23" height="23"/>
+        <image name="due" width="23" height="23"/>
         <image name="feedback" width="23" height="23"/>
         <image name="grade" width="23" height="23"/>
         <image name="inform" width="23" height="23"/>
         <image name="left" width="9" height="16"/>
+        <image name="mail" width="23" height="23"/>
         <image name="more" width="21" height="7"/>
         <image name="optionAppIcon" width="100" height="100"/>
         <image name="options-tag" width="23" height="23"/>

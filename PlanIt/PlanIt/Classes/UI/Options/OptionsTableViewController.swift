@@ -207,7 +207,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
         
         ///管理tag
-        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 1 {
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 0 {
             let tags = Tag().loadAllData()
             
             RRTagController.displayTagController(parentController: self, tags: tags,type: .manage, blockFinish: { (selectedTags, unSelectedTags) -> () in
@@ -222,16 +222,24 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             feedBack()
         }
         
-        ///给应用评分
+        ///美洽聊天
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 2 {
+            print("跳转美洽聊天")
+            //跳转美洽聊天
+            let url = "https://static.meiqia.com/dist/standalone.html?eid=39440"
+            UIApplication.shared.openURL(URL(string: url)!)
+        }
+        
+        ///给应用评分
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 3 {
             print("给应用评分")
             //跳转appID应用
             let url = "itms-apps://itunes.apple.com/app/id1141710914"
             UIApplication.shared.openURL(URL(string: url)!)
         }
         
-        ///给应用评分
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 3 {
+        ///推荐应用
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 4 {
             print("推荐应用")
             //APP介绍页面
             let link = URL(string: "http://www.markplan.info")

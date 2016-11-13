@@ -1,0 +1,189 @@
+
+/* Class = "UILabel"; text = "Reminds Before Due"; ObjectID = "0wa-dX-wUy"; */
+"0wa-dX-wUy.text" = "Reminds Before Due";
+
+/* Class = "UILabel"; text = "Copyright © 2016 Markplan"; ObjectID = "1RJ-xU-Dpf"; */
+"1RJ-xU-Dpf.text" = "Copyright © 2016 Markplan";
+
+/* Class = "UILabel"; text = "Completed"; ObjectID = "2DN-0F-99D"; */
+"2DN-0F-99D.text" = "Completed";
+
+/* Class = "UILabel"; text = "If enabled, progress always +1 every time you mark. You can fill Totals with days by leaving Units & Totals blank."; ObjectID = "60g-Df-Yyl"; */
+"60g-Df-Yyl.text" = "If enabled, progress always +1 every time you mark. You can fill Totals with days by leaving Units & Totals blank.";
+
+/* Class = "UILabel"; text = "2 小时"; ObjectID = "6w7-Cy-H0w"; */
+"6w7-Cy-H0w.text" = "2 小时";
+
+/* Class = "UILabel"; text = "备注：洛杉矶来得及立法是经典款"; ObjectID = "7i3-Zu-ZKb"; */
+"7i3-Zu-ZKb.text" = "备注：洛杉矶来得及立法是经典款";
+
+/* Class = "UILabel"; text = "Markplan"; ObjectID = "7mS-Ku-qAM"; */
+"7mS-Ku-qAM.text" = "Markplan";
+
+/* Class = "UILabel"; text = "Ends"; ObjectID = "8gl-eq-TqD"; */
+"8gl-eq-TqD.text" = "Ends";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Akt-ae-FQD"; */
+"Akt-ae-FQD.text" = "Label";
+
+/* Class = "UILabel"; text = "已开启"; ObjectID = "DBH-ag-ytd"; */
+"DBH-ag-ytd.text" = "已开启";
+
+/* Class = "UINavigationItem"; title = "设置"; ObjectID = "DS8-W0-jLZ"; */
+"DS8-W0-jLZ.title" = "设置";
+
+/* Class = "UILabel"; text = "平凡之路"; ObjectID = "DiQ-RG-UBS"; */
+"DiQ-RG-UBS.text" = "平凡之路";
+
+/* Class = "UITextField"; placeholder = "课"; ObjectID = "F3p-Qh-xKE"; */
+"F3p-Qh-xKE.placeholder" = "课";
+
+/* Class = "UITextField"; placeholder = "Project Name"; ObjectID = "IdS-En-F3b"; */
+"IdS-En-F3b.placeholder" = "Project Name";
+
+/* Class = "UILabel"; text = "3天"; ObjectID = "Is3-FY-yKH"; */
+"Is3-FY-yKH.text" = "3天";
+
+/* Class = "UITableViewController"; title = "Drawer"; ObjectID = "IzO-Sd-gUy"; */
+"IzO-Sd-gUy.title" = "Drawer";
+
+/* Class = "UILabel"; text = "Tags"; ObjectID = "JfE-0v-2k7"; */
+"JfE-0v-2k7.text" = "Tags";
+
+/* Class = "UILabel"; text = "Easy-Mark"; ObjectID = "K3A-wn-FtI"; */
+"K3A-wn-FtI.text" = "Easy-Mark";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "KHb-Um-z69"; */
+"KHb-Um-z69.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "使用帮助"; ObjectID = "Lx3-yW-WcQ"; */
+"Lx3-yW-WcQ.title" = "使用帮助";
+
+/* Class = "UINavigationItem"; title = "菜单"; ObjectID = "Mm5-Q9-9dE"; */
+"Mm5-Q9-9dE.title" = "菜单";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "PZc-BW-eoX"; */
+"PZc-BW-eoX.text" = "Notes";
+
+/* Class = "UILabel"; text = "In Progress"; ObjectID = "Pzo-cr-ZVu"; */
+"Pzo-cr-ZVu.text" = "In Progress";
+
+/* Class = "UILabel"; text = "截止2016年12月12日"; ObjectID = "RAP-cj-VgG"; */
+"RAP-cj-VgG.text" = "截止2016年12月12日";
+
+/* Class = "UILabel"; text = "4课"; ObjectID = "RKh-Z2-dzd"; */
+"RKh-Z2-dzd.text" = "4课";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "RxI-0G-YaC"; */
+"RxI-0G-YaC.text" = "About";
+
+/* Class = "UILabel"; text = "20%"; ObjectID = "Tau-Cq-hUb"; */
+"Tau-Cq-hUb.text" = "20%";
+
+/* Class = "UILabel"; text = "Daily Reminder"; ObjectID = "WVk-0h-oZR"; */
+"WVk-0h-oZR.text" = "Daily Reminder";
+
+/* Class = "UILabel"; text = "标签"; ObjectID = "ZdU-tm-FDZ"; */
+"ZdU-tm-FDZ.text" = "标签";
+
+/* Class = "UILabel"; text = "Rate Us"; ObjectID = "aNf-Uh-FGR"; */
+"aNf-Uh-FGR.text" = "Rate Us";
+
+/* Class = "UILabel"; text = "Share with Friends"; ObjectID = "akK-Jx-QZg"; */
+"akK-Jx-QZg.text" = "Share with Friends";
+
+/* Class = "UILabel"; text = "Future Daily Task"; ObjectID = "bEq-00-jlK"; */
+"bEq-00-jlK.text" = "Future Daily Task";
+
+/* Class = "UITextField"; placeholder = "tap to add a note"; ObjectID = "dYg-he-xNs"; */
+"dYg-he-xNs.placeholder" = "tap to add a note";
+
+/* Class = "UILabel"; text = "50 / 100 小时"; ObjectID = "eeK-dJ-Ul2"; */
+"eeK-dJ-Ul2.text" = "50 / 100 小时";
+
+/* Class = "UILabel"; text = "Due in"; ObjectID = "exL-J4-Unb"; */
+"exL-J4-Unb.text" = "Due in";
+
+/* Class = "UILabel"; text = "15天"; ObjectID = "gYA-jv-LwE"; */
+"gYA-jv-LwE.text" = "15天";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gok-Nc-RGs"; */
+"gok-Nc-RGs.text" = "Label";
+
+/* Class = "UILabel"; text = "设置"; ObjectID = "hd7-m1-6ZW"; */
+"hd7-m1-6ZW.text" = "设置";
+
+/* Class = "UILabel"; text = "Project"; ObjectID = "hz8-Nm-u7d"; */
+"hz8-Nm-u7d.text" = "Project";
+
+/* Class = "UILabel"; text = "Have completed: 20/200"; ObjectID = "iDp-gR-KI2"; */
+"iDp-gR-KI2.text" = "Have completed: 20/200";
+
+/* Class = "UILabel"; text = "Time of Reminder"; ObjectID = "iZY-bz-VJ7"; */
+"iZY-bz-VJ7.text" = "Time of Reminder";
+
+/* Class = "UINavigationItem"; title = "项目"; ObjectID = "kK9-Xh-z2k"; */
+"kK9-Xh-z2k.title" = "项目";
+
+/* Class = "UIButton"; normalTitle = "2016年8月"; ObjectID = "msf-B6-Jca"; */
+"msf-B6-Jca.normalTitle" = "2016年8月";
+
+/* Class = "UILabel"; text = "Starts"; ObjectID = "nIl-Hd-mKk"; */
+"nIl-Hd-mKk.text" = "Starts";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "oWL-86-drm"; */
+"oWL-86-drm.text" = "Version";
+
+/* Class = "UITextField"; placeholder = "Required"; ObjectID = "oj8-3p-9B7"; */
+"oj8-3p-9B7.placeholder" = "Required";
+
+/* Class = "UILabel"; text = "Track Progress"; ObjectID = "pOC-Na-mvj"; */
+"pOC-Na-mvj.text" = "Track Progress";
+
+/* Class = "UINavigationItem"; title = "关于"; ObjectID = "qYl-L8-gr4"; */
+"qYl-L8-gr4.title" = "关于";
+
+/* Class = "UILabel"; text = "Complete"; ObjectID = "sCX-C2-Ihy"; */
+"sCX-C2-Ihy.text" = "Complete";
+
+/* Class = "UILabel"; text = "Tags"; ObjectID = "sZE-Xp-KFN"; */
+"sZE-Xp-KFN.text" = "Tags";
+
+/* Class = "UILabel"; text = "产品/也而  设计/STEVEN  开发/墨迹"; ObjectID = "sfm-kW-bKZ"; */
+"sfm-kW-bKZ.text" = "产品/也而  设计/STEVEN  开发/墨迹";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "soK-HM-B2d"; */
+"soK-HM-B2d.text" = "Notifications";
+
+/* Class = "UILabel"; text = "All"; ObjectID = "tEq-Of-9dY"; */
+"tEq-Of-9dY.text" = "All";
+
+/* Class = "UITextField"; placeholder = "Chapters, hours, etc."; ObjectID = "tMs-3G-JeZ"; */
+"tMs-3G-JeZ.placeholder" = "Chapters, hours, etc.";
+
+/* Class = "UILabel"; text = "2016年5月26日"; ObjectID = "wAo-Ys-7pp"; */
+"wAo-Ys-7pp.text" = "2016年5月26日";
+
+/* Class = "UILabel"; text = "Completed"; ObjectID = "wQu-W1-a0q"; */
+"wQu-W1-a0q.text" = "Completed";
+
+/* Class = "UILabel"; text = "Units"; ObjectID = "wfn-br-jxA"; */
+"wfn-br-jxA.text" = "Units";
+
+/* Class = "UILabel"; text = "Donate"; ObjectID = "x0f-IM-Eed"; */
+"x0f-IM-Eed.text" = "Donate";
+
+/* Class = "UILabel"; text = "Chat with Us"; ObjectID = "xZM-zM-SGw"; */
+"xZM-zM-SGw.text" = "Chat with Us";
+
+/* Class = "UILabel"; text = "Manage Tags"; ObjectID = "xlG-Sm-2rl"; */
+"xlG-Sm-2rl.text" = "Manage Tags";
+
+/* Class = "UILabel"; text = "Totals"; ObjectID = "yTt-aC-Bad"; */
+"yTt-aC-Bad.text" = "Totals";
+
+/* Class = "UILabel"; text = "Tutorial"; ObjectID = "z70-Hz-CRe"; */
+"z70-Hz-CRe.text" = "Tutorial";
+
+/* Class = "UILabel"; text = "Send Feedback"; ObjectID = "zY5-B2-P3F"; */
+"zY5-B2-P3F.text" = "Send Feedback";
