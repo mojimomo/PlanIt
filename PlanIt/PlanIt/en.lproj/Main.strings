@@ -57,7 +57,7 @@
 "KHb-Um-z69.text" = "Label";
 
 /* Class = "UINavigationItem"; title = "使用帮助"; ObjectID = "Lx3-yW-WcQ"; */
-"Lx3-yW-WcQ.title" = "使用帮助";
+"Lx3-yW-WcQ.title" = "Tutorial";
 
 /* Class = "UINavigationItem"; title = "菜单"; ObjectID = "Mm5-Q9-9dE"; */
 "Mm5-Q9-9dE.title" = "菜单";
@@ -84,7 +84,7 @@
 "WVk-0h-oZR.text" = "Daily Reminder";
 
 /* Class = "UILabel"; text = "标签"; ObjectID = "ZdU-tm-FDZ"; */
-"ZdU-tm-FDZ.text" = "标签";
+"ZdU-tm-FDZ.text" = "Tags";
 
 /* Class = "UILabel"; text = "Rate Us"; ObjectID = "aNf-Uh-FGR"; */
 "aNf-Uh-FGR.text" = "Rate Us";
@@ -111,7 +111,7 @@
 "gok-Nc-RGs.text" = "Label";
 
 /* Class = "UILabel"; text = "设置"; ObjectID = "hd7-m1-6ZW"; */
-"hd7-m1-6ZW.text" = "设置";
+"hd7-m1-6ZW.text" = "Settings";
 
 /* Class = "UILabel"; text = "Project"; ObjectID = "hz8-Nm-u7d"; */
 "hz8-Nm-u7d.text" = "Project";
@@ -123,7 +123,7 @@
 "iZY-bz-VJ7.text" = "Time of Reminder";
 
 /* Class = "UINavigationItem"; title = "项目"; ObjectID = "kK9-Xh-z2k"; */
-"kK9-Xh-z2k.title" = "项目";
+"kK9-Xh-z2k.title" = "Project";
 
 /* Class = "UIButton"; normalTitle = "2016年8月"; ObjectID = "msf-B6-Jca"; */
 "msf-B6-Jca.normalTitle" = "2016年8月";
@@ -141,7 +141,7 @@
 "pOC-Na-mvj.text" = "Track Progress";
 
 /* Class = "UINavigationItem"; title = "关于"; ObjectID = "qYl-L8-gr4"; */
-"qYl-L8-gr4.title" = "关于";
+"qYl-L8-gr4.title" = "About";
 
 /* Class = "UILabel"; text = "Complete"; ObjectID = "sCX-C2-Ihy"; */
 "sCX-C2-Ihy.text" = "Complete";

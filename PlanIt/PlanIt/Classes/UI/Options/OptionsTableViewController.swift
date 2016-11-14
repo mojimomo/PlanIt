@@ -367,7 +367,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         if isAllowedNotification{
             self.localNotifiicationLabel.text = NSLocalizedString("Enabled", comment: "通知权限")
         }else{
-            self.localNotifiicationLabel.text = NSLocalizedString("Disabled", comment: "通知权限")
+            self.localNotifiicationLabel.text = NSLocalizedString("Off", comment: "通知权限")
         }
     }
 
@@ -385,7 +385,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         if isAllowedNotification{
             self.localNotifiicationLabel.text = NSLocalizedString("Enabled", comment: "通知权限")
         }else{
-            self.localNotifiicationLabel.text = NSLocalizedString("Disabled", comment: "通知权限")
+            self.localNotifiicationLabel.text = NSLocalizedString("Off", comment: "通知权限")
         }
         
         if !isAliayInstalled{

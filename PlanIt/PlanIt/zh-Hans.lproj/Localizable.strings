@@ -54,11 +54,11 @@
 /*引导页*/
 "Continue" = "开始体验";
 
-"min" = " 分";
+//"min" = " 分";
+//
+//"hr" = " 小时";
 
-"hr" = " 小时";
-
-"d" = " 天";
+"d " = " 天";
 
 /*每日提醒通知*/
 "It's time to check your process..." = "是时候添加今天完成的进度了...";
@@ -82,7 +82,7 @@
 "Enabled" = "已开启";
 
 /*通知权限*/
-"Disabled" = "已停用";
+"Off" = "已停用";
 
 "Missing Alipay" = "未安装支付宝";
 
@@ -198,7 +198,7 @@
 
 // 统计页面
 
-"Overdue by" = "超出期限
+"Overdue by" = "超出期限";
 
 "Starts in" = "距离开始";
 
@@ -208,7 +208,7 @@
 
 "Planned Daily Mark" = "余下每天需打卡";
 
-"Due on" = "截止";
+"Due on " = "截止:";
 
 "  Not Started" = " 项目还未开始";
 

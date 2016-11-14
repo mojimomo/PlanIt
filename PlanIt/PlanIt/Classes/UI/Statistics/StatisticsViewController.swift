@@ -239,7 +239,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             percentLabel.text = "\(Int(project.percent))%"
             //距离截止
             percentLabel.sizeToFit()
-            endTimeLabel.text = project.endTime + NSLocalizedString("Due on", comment: "")
+            endTimeLabel.text = NSLocalizedString("Due on ", comment: "") + project.endTime
             //设置表格标题
             chartTitle = searchDate.FormatToStringYYYYMM()
             
@@ -850,7 +850,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     func goBackAct(_ state: EditProjectBackState){
         switch state {
         case .editSucceess:
-            callAlertSuccess(NSLocalizedString("Successfully Edited", comment: ""))
+            callAlertSuccess(NSLocalizedString("Done!", comment: ""))
         case .deleteSucceess:
             self.navigationController?.popToRootViewController(animated: true)
         default:break

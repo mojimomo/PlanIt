@@ -54,11 +54,11 @@
 /*引导页*/
 "Continue" = "開始體驗";
 
-"min" = " 分";
+//"min" = " 分";
+//
+//"hr" = " 小時";
 
-"hr" = " 小時";
-
-"d" = " 天";
+"d " = " 天";
 
 /*每日提醒通知*/
 "It's time to check your process..." = "是时候添加今天完成的進度了...";
@@ -82,7 +82,7 @@
 "Enabled" = "已開啓";
 
 /*通知权限*/
-"Disabled" = "已停用";
+"Off" = "已停用";
 
 "Missing Alipay" = "未安裝支付寶";
 
@@ -103,7 +103,7 @@
 
 "%d %@/d need to be done" = "餘下每天需完成 %d %@";
 
-"Need to mark in %@ %d times" = "剩餘 %@需打卡%d 次";
+"Need to mark in %@ %d times" = "剩餘 %@需打卡 %d 次";
 
 "Show Scheduled" = "顯示未開始";
 
@@ -208,7 +208,7 @@
 
 "Planned Daily Mark" = "餘下每天需打卡";
 
-"Due on" = "截止";
+"Due on " = "截止:";
 
 "  Not Started" = " 項目還未開始";
 
