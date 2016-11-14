@@ -19,6 +19,8 @@ class AboutViewController: UIViewController {
         //返回button
         let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(AboutViewController.handleDismiss))
         self.navigationItem.leftBarButtonItem = backButtom
+        self.title = NSLocalizedString("About",comment: "")
+        
         
         //app版本label
         appVersion.text = "Version \(kVer) (\(kBuildVer))"

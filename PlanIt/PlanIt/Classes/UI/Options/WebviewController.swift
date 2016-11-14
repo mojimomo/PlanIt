@@ -19,6 +19,7 @@ class WebviewController: UIViewController,UIWebViewDelegate {
 
         let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(WebviewController.handleDismiss))
         self.navigationItem.leftBarButtonItem = backButtom
+        self.title = NSLocalizedString("Tutorial",comment:"")
         
         webView.delegate = self
 

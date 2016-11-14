@@ -338,6 +338,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
+        self.title = NSLocalizedString("Settings",comment: "")
         self.tableView.showsVerticalScrollIndicator = false
         let backButtom = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(OptionsTableViewController.handleDismiss))
         self.navigationItem.leftBarButtonItem = backButtom
