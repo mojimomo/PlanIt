@@ -55,7 +55,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
     }
     let addProcessButtonTag = 1000
     ///没有数据图像的路劲
-    fileprivate var noDataImageString = ["bike", "book2"]
+    fileprivate var noDataImageString = [NSLocalizedString("bike", comment: ""), NSLocalizedString("book", comment: "")]
     ///没有数据图像视图
     fileprivate var notDataImageView : UIImageView!
     ///其他表格高度

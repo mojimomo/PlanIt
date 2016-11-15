@@ -37,12 +37,12 @@ class GuideViewController: UIViewController , UIScrollViewDelegate{
             let imageView = UIImageView(frame: CGRect(x: width * CGFloat(i - 1), y: 0, width: width, height: height))
             if IS_IPHONE{
                 if width == 320 && height == 480 {
-                    imageView.image = UIImage(named: "guide\(i)IP4")
+                    imageView.image = UIImage(named: String(format: NSLocalizedString("guide%dIP4", comment: ""), i))
                 }else{
-                    imageView.image = UIImage(named: "guide\(i)")
+                    imageView.image = UIImage(named: String(format: NSLocalizedString("guide%d", comment: ""), i))
                 }
             }else{
-                imageView.image = UIImage(named: "guide\(i)iPad")
+                imageView.image = UIImage(named: String(format: NSLocalizedString("guide%diPad", comment: ""), i))
             }
             
             guideSocrollView.addSubview(imageView)

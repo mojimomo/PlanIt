@@ -244,7 +244,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             //APP介绍页面
             let link = URL(string: "http://www.markplan.info")
             let rect = tableView.rectForRow(at: indexPath)
-            let shareVC = UIActivityViewController(activityItems: [NSLocalizedString("I'm using Markplan, a simple & efficient app which helps to manage personal projects. Join Markplan: ", comment: "分享应用"),"http://www.markplan.info",link!,UIImage(named: "SharePic")!], applicationActivities: nil)
+            let shareVC = UIActivityViewController(activityItems: [NSLocalizedString("I'm using Markplan, a simple & efficient app which helps to manage personal projects. Join Markplan: ", comment: "分享应用"),"http://www.markplan.info",link!,UIImage(named: NSLocalizedString("SharePicEn", comment: ""))!], applicationActivities: nil)
             if let popoverPresentationController = shareVC.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect

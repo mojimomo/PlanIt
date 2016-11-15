@@ -174,9 +174,9 @@ class ProcessesTableViewController: UITableViewController {
             var noDataImageString = ""
             switch project.type {
             case .normal:
-                noDataImageString = "recordnodata"
+                noDataImageString = NSLocalizedString("noRecords", comment: "")
             case .punch:
-                noDataImageString = "punchnodata"
+                noDataImageString = NSLocalizedString("noMarks", comment: "")
             default:break
             }
             

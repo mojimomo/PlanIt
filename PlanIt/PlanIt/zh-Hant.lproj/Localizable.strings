@@ -223,3 +223,21 @@
 "Tutorial" = "使用幫助";
 
 "About" = "關於";
+
+//图片
+
+"SharePicEn" = "SharePic";
+
+"noRecords" = "noRecordsCn";
+
+"noMarks" = "noMarksCn";
+
+"bike" = "bikeCn";
+
+"book" = "bookCn";
+
+"guide%dIP4" = "guide%dIP4cn";
+
+"guide%d" = "guide%dcn";
+
+"guide%diPad" = "guide%diPad";
