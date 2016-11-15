@@ -40,13 +40,13 @@
 
 "Project must have start and end time." = "時間不能爲空";
 
-"Process Units cannot be empty." = "進度單位不能爲空";
+"Progress Units cannot be empty." = "進度單位不能爲空";
 
-"Process Totals cannot be empty or 0." = "進度總量不能爲空或0";
+"Progress Totals cannot be empty or 0." = "進度總量不能爲空或0";
 
-"Process Totals must be greater than you've completed." = "進度總量不能小於已完成量";
+"Progress Totals must be greater than you've completed." = "進度總量不能小於已完成量";
 
-"Process exists" = "項目已添加進度";
+"Progress exists" = "項目已添加進度";
 
 /*选择标签*/
 "Select Tags" = "選擇標籤";
@@ -58,10 +58,10 @@
 //
 //"hr" = " 小時";
 
-"d " = " 天";
+" d" = " 天";
 
 /*每日提醒通知*/
-"It's time to check your process..." = "是时候添加今天完成的進度了...";
+"It's time to record your progress..." = "是时候添加今天完成的進度了...";
 
 /*每日提醒通知操作*/
 "Open Markplan" = "打開應用";
@@ -134,9 +134,9 @@
 
 "Create a new project" = "創建新項目";
 
-"◎ Tap to check details\n◉ Press to glance process tips" = "◎ 點擊查看詳情\n◉ 長按查看進度提示";
+"◎ Click to check details\n◉ LongPress to glance process tips" = "◎ 點擊查看詳情\n◉ 長按查看進度提示";
 
-"Add process" = "添加進度";
+"Record progress" = "添加進度";
 
 "Mark completed" = "標記完成";
 
@@ -150,7 +150,7 @@
 
 "Deleted" = "删除成功";
 
-"add process" = "記錄進度";
+"record progress" = "記錄進度";
 
 "mark" = "打卡";
 
@@ -184,13 +184,13 @@
 
 "E.g. Coding, Reading..." = "例如：編程、健身";
 
-"Created Failed" = "創建失敗";
+"Create Failed" = "創建失敗";
 
 "Tag already exists." = "該標籤已存在";
 
 "Tag cannot be empty or have >8 characters" = "標籤不能爲空且不能超過8個字符";
 
-"Press to edit" = "長按進入編輯模式";
+"LongPress to edit" = "長按進入編輯模式";
 
 "Monthly View" = "按月查看";
 
@@ -216,7 +216,7 @@
 
 "Edit Project" = "修改項目";
 
-"Tap to check all projects with tag %@" = "點擊查看包含%@標籤的項目";
+"Click to check all projects with tag %@" = "點擊查看包含%@標籤的項目";
 
 "Show All" = "顯示全部";
 

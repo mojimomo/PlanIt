@@ -286,11 +286,11 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                                             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: (alerController.textFields?.first)!)
                                         }
                                     }else{
-                                        self.callAlert(NSLocalizedString("Created Failed", comment: ""), message: NSLocalizedString("Tag already exists.", comment: ""))
+                                        self.callAlert(NSLocalizedString("Create Failed", comment: ""), message: NSLocalizedString("Tag already exists.", comment: ""))
                                     }
                                 }
                             }else{
-                                self.callAlert(NSLocalizedString("Created Failed", comment: ""), message: NSLocalizedString("Tag cannot be empty or have >8 characters", comment: ""))
+                                self.callAlert(NSLocalizedString("Create Failed", comment: ""), message: NSLocalizedString("Tag cannot be empty or have >8 characters", comment: ""))
                             }
                         }
                     }
@@ -472,7 +472,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
                     //设置为非第一次打开此页面
                     UserDefaults.standard.set(true, forKey: "IsFirstLaunchTagManagerView")
                     //设置引导弹窗
-                    self.callFirstRemain(NSLocalizedString("Press to edit", comment: ""), view:  cell)
+                    self.callFirstRemain(NSLocalizedString("LongPress to edit", comment: ""), view:  cell)
                 }
             }
         }

@@ -401,7 +401,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         case .noRecord: break
         default:
             if projectUnit == ""{
-                callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Process Units cannot be empty.", comment: ""))
+                callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Progress Units cannot be empty.", comment: ""))
                 return
             }else{
                 project.unit = projectUnit
@@ -410,7 +410,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             if  projectTotal != 0 {
                 project.setNewProjectTotal(projectTotal)
             }else{
-                callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Process Totals cannot be empty or 0.", comment: ""))
+                callAlert(NSLocalizedString("Submit Failed", comment: "提交错误"),message: NSLocalizedString("Progress Totals cannot be empty or 0.", comment: ""))
                 return
             }
         }
@@ -457,19 +457,19 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         case .noRecord: break
         default:
             if projectUnit == ""{
-                callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Process Units cannot be empty.", comment: ""))
+                callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Progress Units cannot be empty.", comment: ""))
                 return
             }else{
                 project.unit = projectUnit
             }
             if  projectTotal != 0{
                 if !project.editProjectTotal(projectTotal) {
-                    callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Process Totals must be greater than you've completed.", comment: ""))
+                    callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Progress Totals must be greater than you've completed.", comment: ""))
                     return
                 }
                 project.setNewProjectTime(projectBeginTime, endTime: projectEndTime)
             }else{
-                callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Process Totals cannot be empty or 0.", comment: ""))
+                callAlert(NSLocalizedString("Edit Failed", comment: "修改错误"),message: NSLocalizedString("Progress Totals cannot be empty or 0.", comment: ""))
                 return
             }
         }
@@ -528,7 +528,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
                     let rect = tableView.rectForRow(at: indexPath)
                     editBeginTime(rect)
                 }else{
-                    callAlert(NSLocalizedString("EditFailed", comment: "无法修改"), message: NSLocalizedString("Process exists", comment: ""))
+                    callAlert(NSLocalizedString("EditFailed", comment: "无法修改"), message: NSLocalizedString("Progress exists", comment: ""))
                 }
             }else if tableState == .add{
                 let rect = tableView.rectForRow(at: indexPath)

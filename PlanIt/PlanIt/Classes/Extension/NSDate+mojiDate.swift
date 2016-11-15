@@ -48,7 +48,7 @@ extension Date{
         
         //判断时间
         if timeInterval / 60 / 60 < 24 {
-            result += "1" + NSLocalizedString("d ", comment: "")
+            result += "1" + NSLocalizedString(" d", comment: "")
 //        if timeInterval < 60{
 //            result += "1" + NSLocalizedString(" min", comment: "")
 //        }else if timeInterval / 60 < 60 {
@@ -59,7 +59,7 @@ extension Date{
 //            result += "\(tmp)" + NSLocalizedString(" hr", comment: "")
         }else {
             tmp = (timeInterval / 60 / 60 / 24 ).toIntCarry()
-            result += "\(tmp)" + NSLocalizedString("d ", comment: "")
+            result += "\(tmp)" + NSLocalizedString(" d", comment: "")
 //        }else if timeInterval / 60 / 60 / 24 / 30 < 12 {
 //            tmp = (timeInterval / 60 / 60 / 24 / 30 ).toIntCarry()
 //            result += "\(tmp) 月"

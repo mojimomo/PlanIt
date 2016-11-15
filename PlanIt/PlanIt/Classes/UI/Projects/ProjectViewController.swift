@@ -481,10 +481,10 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                         let indexPath = IndexPath(row: 0, section: index)
                         if let cell = self.projectTableView.cellForRow(at: indexPath){
                             UserDefaults.standard.set(true, forKey: "IsFirstLaunchNormalProject")
-                            self.callFirstRemainMultiLine(NSLocalizedString("◎ Tap to check details\n◉ Press to glance process tips", comment: ""), view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
+                            self.callFirstRemainMultiLine(NSLocalizedString("◎ Click to check details\n◉ LongPress to glance process tips", comment: ""), view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
                                 for subView in cell.subviews{
                                     if subView.tag == self.addProcessButtonTag {
-                                        self.callFirstRemain(NSLocalizedString("Add process", comment: ""), view: subView)
+                                        self.callFirstRemain(NSLocalizedString("Record progress", comment: ""), view: subView)
                                         break
                                     }
                                 }
@@ -506,7 +506,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                         if let cell = self.projectTableView.cellForRow(at: indexPath){
                             UserDefaults.standard.set(true, forKey: "IsFirstLaunchNoRecordProject")
                             updateTable()
-                            self.callFirstRemainMultiLine(NSLocalizedString("◎ Tap to check details\n◉ Press to glance process tips", comment: ""), view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
+                            self.callFirstRemainMultiLine(NSLocalizedString("◎ Click to check details\n◉ LongPress to glance process tips", comment: ""), view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
                                 for subView in cell.subviews{
                                     if subView.tag == self.addProcessButtonTag {
                                         self.callFirstRemain(NSLocalizedString("Mark completed", comment: ""), view: subView)
@@ -844,7 +844,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 var type = ""
                 switch projects[(indexPath as NSIndexPath).section].type{
                 case .normal:
-                    type = NSLocalizedString("add process", comment: "")
+                    type = NSLocalizedString("record progress", comment: "")
                 case .punch:
                     type = NSLocalizedString("mark", comment: "")
                 case .noRecord:

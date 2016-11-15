@@ -165,7 +165,7 @@ class TagsViewController: UITableViewController {
                 UserDefaults.standard.set(true, forKey: "IsFirstLaunchTagsView")
                 let indexPath = IndexPath(row: tags.count + 1, section: 0)
                 if let cell = self.tableView.cellForRow(at: indexPath){
-                    self.callFirstRemain(String(format: NSLocalizedString("Tap to check all projects with tag %@", comment: ""), tags.last!.name), view: cell)
+                    self.callFirstRemain(String(format: NSLocalizedString("Click to check all projects with tag %@", comment: ""), tags.last!.name), view: cell)
                 }
             }
         }else{
