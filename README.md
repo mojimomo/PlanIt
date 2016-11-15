@@ -24,7 +24,7 @@
 
 ### 链接
 
-- [项目页面](www.markplan.info)
+- [项目页面](http://www.markplan.info)
 - [使用说明](http://zoomyale.coding.me/markplan_tutorial)
 - [建议反馈](mailto: markplan@foxmail.com)
 - [找我们聊天](https://static.meiqia.com/dist/standalone.html?eid=39440)
