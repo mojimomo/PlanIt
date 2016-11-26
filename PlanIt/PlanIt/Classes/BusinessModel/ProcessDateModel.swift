@@ -11,24 +11,28 @@ import Foundation
 class ProcessDate: NSObject {
     ///进度序号
     var id: Int = -1
+    
     ///项目序号
     var projectID: Int = -1
+    
     ///记录时间
-    var recordTime = ""{
-        didSet{
-            if recordTime != ""{
-                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()! as Date
-            }
-        }
-    }
+    var recordTime = ""
+    
+    ///显示记录时间
+    var recordTimeShow = ""
+    
     ///完成工作量
     var done: Double = -1
+    
     ///记录时间
     var recordTimeDate = Date()
+    
     //2016年11月
     var month = ""
+    
     //2016年11月第1周
     var week = ""
+    
     //5日11点12分
     var day = ""
     
@@ -43,7 +47,7 @@ class ProcessDate: NSObject {
         recordTime = String(describing: dict["recordTime"]!)
         projectID = dict["projectID"]!.intValue
         done = dict["done"]!.doubleValue
-        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDD()! as Date
+        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDCN()! as Date
         month = recordTimeDate.FormatToStringYYYYMM()
         week = recordTimeDate.FormatToStringYYYY() + "第\(recordTimeDate.getWeekOfYear())周"
         day = recordTimeDate.FormatToStringMMMMDD()

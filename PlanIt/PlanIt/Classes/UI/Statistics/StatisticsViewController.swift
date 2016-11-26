@@ -239,7 +239,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             percentLabel.text = "\(Int(project.percent))%"
             //距离截止
             percentLabel.sizeToFit()
-            endTimeLabel.text = NSLocalizedString("Due on ", comment: "") + project.endTime
+            endTimeLabel.text = NSLocalizedString("Due on ", comment: "") + project.endTimeShow
             //设置表格标题
             chartTitle = searchDate.FormatToStringYYYYMM()
             

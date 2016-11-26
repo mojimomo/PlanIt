@@ -47,7 +47,8 @@ class Project: NSObject {
     var endTime = ""{
         didSet{
             if endTime != ""{
-                endTimeDate = endTime.FormatToNSDateYYYYMMMMDD()!.increase1Day()! as Date
+                endTimeDate = endTime.FormatToNSDateYYYYMMMMDDCN()!.increase1Day()! as Date
+                endTimeShow = endTimeDate.FormatToStringYYYYMMDD()
             }
         }
     }
@@ -55,11 +56,17 @@ class Project: NSObject {
     var beginTime = ""{
         didSet{
             if beginTime != ""{
-                beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDD()! as Date
+                beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDDCN()! as Date
+                beginTimeShow = beginTimeDate.FormatToStringYYYYMMDD()
             }
         }
     }
- 
+    ///显示的项目结速时间
+    var endTimeShow = ""
+    
+    ///显示的项目开始时间
+    var beginTimeShow = ""
+    
     ///距离结束时间 越大超时越久
     var outTime = 0.0
     ///任务单位
@@ -101,11 +108,13 @@ class Project: NSObject {
         complete = dict["complete"]!.doubleValue
         rest = dict["rest"]!.doubleValue
         
+        endTimeShow = endTimeDate.FormatToStringYYYYMMDD()
+        beginTimeShow = beginTimeDate.FormatToStringYYYYMMDD()
         //刷新tag
         freshenTags()
         
         //计算是否完成
-        setNewProjectTime(beginTime, endTime: endTime)
+        isFinishProject();
         
         //计算百分比
         if type != .noRecord{
@@ -265,8 +274,8 @@ class Project: NSObject {
     func setNewProjectTime(_ beginTime: String, endTime: String) -> Bool{
         if beginTime != "" && endTime != ""
         {
-            self.beginTime = beginTime
-            self.endTime = endTime
+            self.beginTime = (beginTime.FormatToNSDateYYYYMMMMDD()?.FormatToStringYYYYMMDD())!
+            self.endTime = (endTime.FormatToNSDateYYYYMMMMDD()?.FormatToStringYYYYMMDD())!
             //初始化项目状态
             isFinished = .noSet
             //开始时间<结束时间
@@ -289,6 +298,60 @@ class Project: NSObject {
                             isFinished = .overTime
                         }else{
                            isFinished = .finished
+                        }
+                    }
+                    //结束时间>现在时间
+                }else if endTimeDate.timeIntervalSinceNow > 0{
+                    switch type{
+                    case .noRecord:
+                        if complete == 1{
+                            isFinished = .finished
+                        }else{
+                            isFinished = .notFinished
+                        }
+                    default:
+                        if complete < total{
+                            isFinished = .notFinished
+                        }else{
+                            isFinished = .finished
+                        }
+                    }
+                }
+            }
+        }
+        if isFinished != .noSet{
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    ///计算项目是否完成
+    func isFinishProject() -> Bool{
+        if beginTime != "" && endTime != ""
+        {
+            //初始化项目状态
+            isFinished = .noSet
+            //开始时间<结束时间
+            if beginTimeDate.compare(endTimeDate) == ComparisonResult.orderedAscending{
+                //开始时间>现在时间
+                if beginTimeDate.timeIntervalSinceNow > 0{
+                    isFinished = .notBegined
+                    //结束时间<现在时间
+                }else if endTimeDate.timeIntervalSinceNow < 0{
+                    //不记录时间项目
+                    switch type{
+                    case .noRecord:
+                        if complete == 1{
+                            isFinished = .finished
+                        }else{
+                            isFinished = .overTime
+                        }
+                    default:
+                        if complete < total{
+                            isFinished = .overTime
+                        }else{
+                            isFinished = .finished
                         }
                     }
                     //结束时间>现在时间

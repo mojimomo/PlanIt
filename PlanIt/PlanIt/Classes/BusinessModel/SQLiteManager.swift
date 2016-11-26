@@ -33,8 +33,7 @@ class SQLiteManager: NSObject {
         
         // 2.打开数据库:如果有数据库则打开,如果没有则创建
         // 参数三:数据库句柄(类似于游戏手柄).
-        // COpaquePointer : Swift中是没有指针,但是在Swift和OC/C开发过程中使用指针再所难免
-        SQLITE_OK
+        // COpaquePointer : Swift中是没有指针,但是在Swift和OC/C开发过程中使用指针再所难免SQLITE_OK
         if sqlite3_open(path, &db) != SQLITE_OK {
             print("打开或者创建数据库失败")
             return

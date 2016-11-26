@@ -127,6 +127,17 @@ extension Date{
         return strDate
     }
     
+    ///格式化日期到字符串 YYYY年MM月DD日
+    func FormatToStringYYYYMMDDCN() -> String{
+        let strDate = DateTool.shareIntance.FormatToStringYYYYMMDDCN(date: self)
+        //        let dateFormat = DateFormatter()
+        //        dateFormat.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+        //        dateFormat.locale = Locale(identifier: "zh_CN")
+        //        dateFormat.dateStyle = .long
+        //        let strDate = dateFormat.string(from: self)
+        return strDate
+    }
+    
     ///格式化日期到字符串 MM月DD日
     func FormatToStringMMMMDD() -> String{
         let strDate = DateTool.shareIntance.FormatToStringMMMMDD(date: self)

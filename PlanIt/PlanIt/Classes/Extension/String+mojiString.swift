@@ -19,6 +19,16 @@ extension String{
         return date
     }
     
+    ///字符串到格式化日期 YYYY年MM月DD日HH小时MM分钟
+    func FormatToNSDateYYYYMMMMDDHHMMCN() -> Date? {
+        let date = DateTool.shareIntance.FormatToNSDateYYYYMMMMDDHHMMCN(string: self)
+        //        let dateFormat = DateFormatter()
+        //        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
+        //        dateFormat.locale = Locale(identifier: "zh_CN")
+        //        let date = dateFormat.date(from: self)
+        return date
+    }
+    
     ///字符串到格式化日期 YYYY年MM月DD日
     func FormatToNSDateYYYYMMMMDD() -> Date? {
         let date = DateTool.shareIntance.FormatToNSDateYYYYMMMMDD(string: self)
@@ -27,6 +37,17 @@ extension String{
 //        dateFormat.locale = Locale(identifier: "zh_CN")
 //        dateFormat.dateStyle = .long
 //        let date = dateFormat.date(from: self)
+        return date
+    }
+    
+    ///字符串到格式化日期 YYYY年MM月DD日
+    func FormatToNSDateYYYYMMMMDDCN() -> Date? {
+        let date = DateTool.shareIntance.FormatToNSDateYYYYMMMMDDCN(string: self)
+        //        let dateFormat = DateFormatter()
+        //        dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMdd")
+        //        dateFormat.locale = Locale(identifier: "zh_CN")
+        //        dateFormat.dateStyle = .long
+        //        let date = dateFormat.date(from: self)
         return date
     }
     

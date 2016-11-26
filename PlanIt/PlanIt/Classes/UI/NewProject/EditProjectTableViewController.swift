@@ -85,6 +85,10 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             beginTimeLabel?.text = newValue
         }
     }
+    
+    ///项目开始时间
+    var projectBeginTimeDate = NSDate()
+    
     ///项目结束时间
     var projectEndTime:String{
         get{
@@ -94,6 +98,10 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             endTimeLabel?.text = newValue
         }
     }
+    
+    ///项目结束时间
+    var projectEndTimeDate = NSDate()
+    
     ///项目单位
     var projectUnit:String{
         get{
@@ -128,8 +136,8 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     var project = Project(){
         didSet{
             projectName = project.name
-            projectBeginTime = project.beginTime
-            projectEndTime = project.endTime
+            projectBeginTime = project.beginTimeShow
+            projectEndTime = project.endTimeShow
             projectType = project.type
             projectUnit = project.unit
             projectTotal = project.total
@@ -619,10 +627,10 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
         //初始化代码
         let nowDate = Date()
         let nextDate = nowDate.increaseDays(7)!
-        project.beginTime = nowDate.FormatToStringYYYYMMDD()
-        project.endTime = nextDate.FormatToStringYYYYMMDD()
-        beginTimeLabel?.text = project.beginTime
-        endTimeLabel?.text = project.endTime
+        project.beginTime = nowDate.FormatToStringYYYYMMDDCN()
+        project.endTime = nextDate.FormatToStringYYYYMMDDCN()
+        beginTimeLabel?.text = project.beginTimeShow
+        endTimeLabel?.text = project.endTimeShow
         projectType = .normal
         
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 25))

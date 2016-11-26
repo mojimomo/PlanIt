@@ -12,24 +12,34 @@ import Foundation
 class Process: NSObject {
     ///进度序号
     var id: Int = -1
+    
     ///项目序号
     var projectID: Int = -1
+    
     ///记录时间
     var recordTime = ""{
         didSet{
             if recordTime != ""{
-                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()! as Date
+                recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMMCN()! as Date
             }
         }
     }
+    
+    ///显示记录时间
+    var recordTimeShow = ""
+    
     ///完成工作量
     var done: Double = -1
+    
     ///记录时间
     var recordTimeDate = Date()
+    
     //2016年11月
     var month = ""
+    
     //5日11点12分
     var day = ""
+    
     ///备注
     var remark = ""
     
@@ -45,7 +55,7 @@ class Process: NSObject {
         projectID = dict["projectID"]!.intValue
         done = dict["done"]!.doubleValue
         remark = String(describing: dict["remark"]!)
-        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMM()! as Date
+        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMMCN()! as Date
         month = recordTimeDate.FormatToStringYYYYMM()
         day = recordTimeDate.FormatToStringDDHHMM()
     }
