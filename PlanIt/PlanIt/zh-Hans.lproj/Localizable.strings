@@ -138,7 +138,7 @@
 
 "Record progress" = "添加进度";
 
-"Mark completed" = "标记完成";
+"Mark as completed" = "标记完成";
 
 "You have been using Markplan for a while. How do you feel?" = "你已经使用马克计划一段时间了，感觉怎样？";
 
@@ -154,7 +154,7 @@
 
 "mark" = "打卡";
 
-"mark completed" = "标记完成";
+"mark as completed" = "标记完成";
 
 "Not Started" = "项目未开始";
 

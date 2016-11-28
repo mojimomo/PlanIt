@@ -274,8 +274,8 @@ class Project: NSObject {
     func setNewProjectTime(_ beginTime: String, endTime: String) -> Bool{
         if beginTime != "" && endTime != ""
         {
-            self.beginTime = (beginTime.FormatToNSDateYYYYMMMMDD()?.FormatToStringYYYYMMDD())!
-            self.endTime = (endTime.FormatToNSDateYYYYMMMMDD()?.FormatToStringYYYYMMDD())!
+            self.beginTime = (beginTime.FormatToNSDateYYYYMMMMDD()?.FormatToStringYYYYMMDDCN())!
+            self.endTime = (endTime.FormatToNSDateYYYYMMMMDD()?.FormatToStringYYYYMMDDCN())!
             //初始化项目状态
             isFinished = .noSet
             //开始时间<结束时间

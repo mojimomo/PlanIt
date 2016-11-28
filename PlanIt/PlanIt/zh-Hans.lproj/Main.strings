@@ -104,8 +104,8 @@
 /* Class = "UILabel"; text = "Due in"; ObjectID = "exL-J4-Unb"; */
 "exL-J4-Unb.text" = "距离截止";
 
-/* Class = "UILabel"; text = "15天"; ObjectID = "gYA-jv-LwE"; */
-"gYA-jv-LwE.text" = "15天";
+/* Class = "UILabel"; text = "15 d"; ObjectID = "gYA-jv-LwE"; */
+"gYA-jv-LwE.text" = "15 天";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "gok-Nc-RGs"; */
 "gok-Nc-RGs.text" = "Label";
@@ -121,6 +121,9 @@
 
 /* Class = "UILabel"; text = "Time of Reminder"; ObjectID = "iZY-bz-VJ7"; */
 "iZY-bz-VJ7.text" = "提醒时间";
+
+/* Class = "UITableViewController"; title = "Settings"; ObjectID = "k9u-I8-gwM"; */
+"k9u-I8-gwM.title" = "设置";
 
 /* Class = "UINavigationItem"; title = "项目"; ObjectID = "kK9-Xh-z2k"; */
 "kK9-Xh-z2k.title" = "项目";
@@ -170,13 +173,13 @@
 /* Class = "UILabel"; text = "Units"; ObjectID = "wfn-br-jxA"; */
 "wfn-br-jxA.text" = "进度单位";
 
-/* Class = "UILabel"; text = "Donate"; ObjectID = "x0f-IM-Eed"; */
+/* Class = "UILabel"; text = "Sponsor"; ObjectID = "x0f-IM-Eed"; */
 "x0f-IM-Eed.text" = "打赏我们";
 
 /* Class = "UILabel"; text = "Chat with Us"; ObjectID = "xZM-zM-SGw"; */
 "xZM-zM-SGw.text" = "留言反馈";
 
-/* Class = "UILabel"; text = "Manage å"; ObjectID = "xlG-Sm-2rl"; */
+/* Class = "UILabel"; text = "Manage Tags"; ObjectID = "xlG-Sm-2rl"; */
 "xlG-Sm-2rl.text" = "标签管理";
 
 /* Class = "UILabel"; text = "Totals"; ObjectID = "yTt-aC-Bad"; */

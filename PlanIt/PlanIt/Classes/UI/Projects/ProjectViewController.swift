@@ -509,7 +509,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                             self.callFirstRemainMultiLine(NSLocalizedString("◎ Click to check details\n◉ LongPress to glance process tips", comment: ""), view: cell, type: .down, showHandler: nil, dismissHandler: { () -> () in
                                 for subView in cell.subviews{
                                     if subView.tag == self.addProcessButtonTag {
-                                        self.callFirstRemain(NSLocalizedString("Mark completed", comment: ""), view: subView)
+                                        self.callFirstRemain(NSLocalizedString("Mark as completed", comment: ""), view: subView)
                                         break
                                     }
                                 }
@@ -848,7 +848,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 case .punch:
                     type = NSLocalizedString("mark", comment: "")
                 case .noRecord:
-                    type = NSLocalizedString("mark completed", comment: "")
+                    type = NSLocalizedString("mark as completed", comment: "")
                 default: break
                 }
                 callAlert(NSLocalizedString("Not Started", comment: ""),message: String(format: NSLocalizedString("Change start time to %@.", comment: ""), type))
