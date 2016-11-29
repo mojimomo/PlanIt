@@ -35,7 +35,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     ///菜单
     fileprivate var popover: Popover!
     ///菜单文字
-    fileprivate var texts = [NSLocalizedString("Monthly View", comment: ""), NSLocalizedString("Daily View", comment: "")]
+    fileprivate var texts = [NSLocalizedString("Month", comment: ""), NSLocalizedString("Day", comment: "")]
     
     fileprivate var effectView :DynamicBlurView!
     ///菜单弹窗参数
@@ -215,16 +215,16 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
             needLabel.isHidden = false
             needFinishLabel.isHidden = false
             if project.type == .normal && project.isFinished == .notFinished{
-                needLabel.text = NSLocalizedString("Planned Daily Work", comment: "")
+                needLabel.text = NSLocalizedString("Left Daily Work", comment: "")
                 let days = Date().daysToEndDate(project.endTimeDate)
                 let times = (project.rest / Double(days)).toIntCarry()
                 needFinishLabel.text = "\(times) " + project.unit
                 needFinishLabel.changeTextAttributeByRange(NSMakeRange(needFinishLabel.text!.characters.count - project.unit.characters.count, project.unit.characters.count), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
             }else if project.type == .punch && project.isFinished == .notFinished{
-                needLabel.text = NSLocalizedString("Planned Daily Mark", comment: "")
+                needLabel.text = NSLocalizedString("Left Daily Mark", comment: "")
                 let days = Date().daysToEndDate(project.endTimeDate)
                 let times = (project.rest / Double(days)).toIntCarry()
-                needFinishLabel.text = "\(times) " + NSLocalizedString("times", comment: "")
+                needFinishLabel.text = "\(times) " + "✓"
                 needFinishLabel.changeTextAttributeByRange(NSMakeRange(needFinishLabel.text!.characters.count - 2, 2), font: UIFont.systemFont(ofSize: 17), color: UIColor.colorFromHex("#9D9D9D"))
             }else{
                 needLabel.isHidden = true

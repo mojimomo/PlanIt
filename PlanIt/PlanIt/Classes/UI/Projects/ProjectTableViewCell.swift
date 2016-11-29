@@ -57,7 +57,10 @@ class ProjectTableViewCell: RoundTableviewCell{
                         projectName = NSLocalizedString("Starts in ", comment: "") + days
                     }else{
                         let days = Date().daysToEndDate(project.endTimeDate)
-                        let dailyTask = (project.rest / Double(days)).toIntCarry()
+                        var dailyTask = 0
+                        if days != 0{
+                            dailyTask = (project.rest / Double(days)).toIntCarry()
+                        }
                         projectName = String(format: NSLocalizedString("%d %@/d need to be done", comment: ""), dailyTask, project.unit)
                     }
                 case .punch:

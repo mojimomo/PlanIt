@@ -108,8 +108,14 @@ class Project: NSObject {
         complete = dict["complete"]!.doubleValue
         rest = dict["rest"]!.doubleValue
         
-        endTimeShow = endTimeDate.FormatToStringYYYYMMDD()
-        beginTimeShow = beginTimeDate.FormatToStringYYYYMMDD()
+        if endTime != ""{
+            endTimeDate = endTime.FormatToNSDateYYYYMMMMDDCN()!.increase1Day()! as Date
+            endTimeShow = endTimeDate.FormatToStringYYYYMMDD()
+        }
+        if beginTime != ""{
+            beginTimeDate = beginTime.FormatToNSDateYYYYMMMMDDCN()! as Date
+            beginTimeShow = beginTimeDate.FormatToStringYYYYMMDD()
+        }
         //刷新tag
         freshenTags()
         

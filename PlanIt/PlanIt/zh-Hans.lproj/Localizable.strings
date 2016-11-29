@@ -10,8 +10,6 @@
 /*新增进度页面*/
 "Have completed: " = "已记录总量：";
 
-"times" = "次";
-
 "Confirm" = "确定";
 
 "Cancel" = "取消";
@@ -192,9 +190,9 @@
 
 "LongPress to edit" = "长按进入编辑模式";
 
-"Monthly View" = "按月查看";
+"Month" = "按月查看";
 
-"Daily View" = "按日查看";
+"Day" = "按日查看";
 
 // 统计页面
 
@@ -204,9 +202,9 @@
 
 "Due in" = "距离截止";
 
-"Planned Daily Work" = "余下每天需完成";
+"Left Daily Work" = "余下每天需完成";
 
-"Planned Daily Mark" = "余下每天需打卡";
+"Left Daily Mark" = "余下每天需打卡";
 
 "Due on " = "截止:";
 
