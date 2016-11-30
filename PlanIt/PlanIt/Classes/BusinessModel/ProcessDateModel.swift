@@ -47,6 +47,7 @@ class ProcessDate: NSObject {
         recordTime = String(describing: dict["recordTime"]!)
         projectID = dict["projectID"]!.intValue
         done = dict["done"]!.doubleValue
+        //TODO: bug found
         recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDCN()! as Date
         month = recordTimeDate.FormatToStringYYYYMM()
         week = recordTimeDate.FormatToStringYYYY() + "第\(recordTimeDate.getWeekOfYear())周"
