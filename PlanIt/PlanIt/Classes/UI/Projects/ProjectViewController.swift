@@ -775,9 +775,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                     process.projectID = projects[(indexPath as NSIndexPath).section].id
                     let name = projects[(indexPath as NSIndexPath).section].name
                     let currentTime = Date()
-                    let dateFormat = DateFormatter()
-                    dateFormat.setLocalizedDateFormatFromTemplate("yyyyMMMMddhhmm")
-                    dateFormat.locale = Locale(identifier: "zh_CN")
+                    let dateFormat = DateTool.shareIntance.dateFormatYYYYMMMMDDHHMMCN
                     let old = projects[(indexPath as NSIndexPath).section].percent
                     process.recordTime = dateFormat.string(from: currentTime)
                     process.done = 1.0

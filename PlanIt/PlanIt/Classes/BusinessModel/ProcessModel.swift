@@ -55,7 +55,9 @@ class Process: NSObject {
         projectID = dict["projectID"]!.intValue
         done = dict["done"]!.doubleValue
         remark = String(describing: dict["remark"]!)
-        recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMMCN()! as Date
+        if recordTime != ""{
+            recordTimeDate = recordTime.FormatToNSDateYYYYMMMMDDHHMMCN()! as Date
+        }
         month = recordTimeDate.FormatToStringYYYYMM()
         day = recordTimeDate.FormatToStringDDHHMM()
     }
