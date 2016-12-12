@@ -531,7 +531,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                         UIApplication.shared.openURL(URL(string: url)!)
                     })
                 //创建UIAlertAction 取消按钮
-                let alerActionMore = UIAlertAction(title: NSLocalizedString("Send Feeback", comment: ""), style: .default, handler: {(UIAlertAction) -> () in
+                let alerActionMore = UIAlertAction(title: NSLocalizedString("Send Feedback", comment: ""), style: .default, handler: {(UIAlertAction) -> () in
                     print("打开菜单页面")
                     let muneViewController = self.storyboard?.instantiateViewController(withIdentifier: "Options") as! OptionsTableViewController
                     
