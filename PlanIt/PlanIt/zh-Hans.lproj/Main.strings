@@ -1,5 +1,5 @@
 
-/* Class = "UILabel"; text = "Reminds Before Due"; ObjectID = "0wa-dX-wUy"; */
+/* Class = "UILabel"; text = "Due Day Alert"; ObjectID = "0wa-dX-wUy"; */
 "0wa-dX-wUy.text" = "项目截止通知";
 
 /* Class = "UILabel"; text = "Copyright © 2016 Markplan"; ObjectID = "1RJ-xU-Dpf"; */
@@ -8,8 +8,8 @@
 /* Class = "UILabel"; text = "Completed"; ObjectID = "2DN-0F-99D"; */
 "2DN-0F-99D.text" = "已完成";
 
-/* Class = "UILabel"; text = "If enabled, progress always +1 every time you mark. You can fill Totals with days by leaving Units & Totals blank."; ObjectID = "60g-Df-Yyl"; */
-"60g-Df-Yyl.text" = "打卡项目每次打卡进度量+1。不填写进度单位及进度总量时开启，将自动填充天数为进度总量。";
+/* Class = "UILabel"; text = "If enabled, progress always +1 every time you mark it. You can fill Totals with days by leaving Units & Totals blank."; ObjectID = "60g-Df-Yyl"; */
+"60g-Df-Yyl.text" = "打卡项目每次打卡进度量 + 1。不填写进度单位及进度总量时开启，将自动填充天数为进度总量。";
 
 /* Class = "UILabel"; text = "2 小时"; ObjectID = "6w7-Cy-H0w"; */
 "6w7-Cy-H0w.text" = "2 小时";
@@ -50,7 +50,7 @@
 /* Class = "UILabel"; text = "Tags"; ObjectID = "JfE-0v-2k7"; */
 "JfE-0v-2k7.text" = "标签";
 
-/* Class = "UILabel"; text = "Easy-Mark"; ObjectID = "K3A-wn-FtI"; */
+/* Class = "UILabel"; text = "Punch Mode"; ObjectID = "K3A-wn-FtI"; */
 "K3A-wn-FtI.text" = "打卡项目";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "KHb-Um-z69"; */
@@ -58,6 +58,9 @@
 
 /* Class = "UINavigationItem"; title = "Tutorial"; ObjectID = "Lx3-yW-WcQ"; */
 "Lx3-yW-WcQ.title" = "使用帮助";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "MXV-vz-5kT"; */
+"MXV-vz-5kT.text" = "关于";
 
 /* Class = "UINavigationItem"; title = "Menu"; ObjectID = "Mm5-Q9-9dE"; */
 "Mm5-Q9-9dE.title" = "菜单";
@@ -74,11 +77,14 @@
 /* Class = "UILabel"; text = "4课"; ObjectID = "RKh-Z2-dzd"; */
 "RKh-Z2-dzd.text" = "4课";
 
-/* Class = "UILabel"; text = "About"; ObjectID = "RxI-0G-YaC"; */
-"RxI-0G-YaC.text" = "关于";
+/* Class = "UILabel"; text = "Backup to iCloud"; ObjectID = "RxI-0G-YaC"; */
+"RxI-0G-YaC.text" = "iCloud 备份";
 
 /* Class = "UILabel"; text = "20%"; ObjectID = "Tau-Cq-hUb"; */
 "Tau-Cq-hUb.text" = "20%";
+
+/* Class = "UILabel"; text = "Sponsor Us"; ObjectID = "U4o-Gq-iKO"; */
+"U4o-Gq-iKO.text" = "打赏我们";
 
 /* Class = "UILabel"; text = "Daily Reminder"; ObjectID = "WVk-0h-oZR"; */
 "WVk-0h-oZR.text" = "每日提醒";
@@ -117,9 +123,9 @@
 "hz8-Nm-u7d.text" = "项目名称";
 
 /* Class = "UILabel"; text = "Have completed: 20/200"; ObjectID = "iDp-gR-KI2"; */
-"iDp-gR-KI2.text" = "已完成总量：20/200";
+"iDp-gR-KI2.text" = "已完成总量: 20/200";
 
-/* Class = "UILabel"; text = "Time of Reminder"; ObjectID = "iZY-bz-VJ7"; */
+/* Class = "UILabel"; text = "Reminder Time"; ObjectID = "iZY-bz-VJ7"; */
 "iZY-bz-VJ7.text" = "提醒时间";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "k9u-I8-gwM"; */
@@ -173,14 +179,14 @@
 /* Class = "UILabel"; text = "Units"; ObjectID = "wfn-br-jxA"; */
 "wfn-br-jxA.text" = "进度单位";
 
-/* Class = "UILabel"; text = "Sponsor"; ObjectID = "x0f-IM-Eed"; */
-"x0f-IM-Eed.text" = "打赏我们";
+/* Class = "UILabel"; text = "Restore from iCloud"; ObjectID = "x0f-IM-Eed"; */
+"x0f-IM-Eed.text" = "iCloud 恢复";
 
 /* Class = "UILabel"; text = "Chat with Us"; ObjectID = "xZM-zM-SGw"; */
 "xZM-zM-SGw.text" = "留言反馈";
 
 /* Class = "UILabel"; text = "Manage Tags"; ObjectID = "xlG-Sm-2rl"; */
-"xlG-Sm-2rl.text" = "标签管理";
+"xlG-Sm-2rl.text" = "管理标签";
 
 /* Class = "UILabel"; text = "Totals"; ObjectID = "yTt-aC-Bad"; */
 "yTt-aC-Bad.text" = "进度总量";

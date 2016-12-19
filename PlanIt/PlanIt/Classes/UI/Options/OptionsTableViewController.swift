@@ -28,7 +28,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
     var isNeedLocalNotifiication = false
     
     //是否安装支付宝
-    var isAliayInstalled = UIApplication.shared.canOpenURL(URL(string: "alipay://")!)
+    var isAlipayInstalled = UIApplication.shared.canOpenURL(URL(string: "alipay://")!)
 
     @IBAction func changeSwitchEveryDay(_ sender: UISwitch) {
         if sender.isOn{
@@ -215,15 +215,25 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             }
         }
         
+        //TODO: iCloud备份
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
+            
+        }
+        
+        //TODO: iCloud恢复
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
+            
+        }
+        
         ///意见反馈
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
+        if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 1 {
             print("意见反馈")
             //邮件视窗
             feedBack()
         }
         
         ///美洽聊天
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 2 {
+        if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 2 {
             print("跳转美洽聊天")
             //跳转美洽聊天
             let url = "https://static.meiqia.com/dist/standalone.html?eid=39440"
@@ -231,7 +241,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
         
         ///给应用评分
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 3 {
+        if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 3 {
             print("给应用评分")
             //跳转appID应用
             let url = "itms-apps://itunes.apple.com/app/id1141710914"
@@ -239,7 +249,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
         
         ///推荐应用
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 4 {
+        if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 4 {
             print("推荐应用")
             //APP介绍页面
             let link = URL(string: "http://www.markplan.info")
@@ -253,11 +263,11 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         }
         
         ///赞赏我们
-        if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 1 {
+        if (indexPath as NSIndexPath).section == 4 && (indexPath as NSIndexPath).row == 1 {
             print("赞赏我们")
             //支付宝转账 url scheme
             let alipay = "alipayqr://platformapi/startapp?saId=10000007&qrcode=https://qr.alipay.com/apmiym1v5ya1dynlb5"
-            if  isAliayInstalled {
+            if  isAlipayInstalled {
                 print("已安装支付宝")
                 UIApplication.shared.openURL(URL(string: alipay)!)
             }
@@ -389,8 +399,8 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             self.localNotifiicationLabel.text = NSLocalizedString("Off", comment: "通知权限")
         }
         
-        if !isAliayInstalled{
-            if let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 3)){
+        if !isAlipayInstalled{
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 4)){
                 cell.isHidden = true
             }
         }

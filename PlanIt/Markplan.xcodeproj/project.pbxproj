@@ -118,9 +118,9 @@
 		36006BDD1D3BC84E00E08324 /* WActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WActivityIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WActivityIndicator.swift"; sourceTree = "<group>"; };
 		36006BDE1D3BC84E00E08324 /* WIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicator.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicator.swift"; sourceTree = "<group>"; };
 		36006BDF1D3BC84E00E08324 /* WIndicatorText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WIndicatorText.swift; path = "Pods/../../../../Desktop/WIndicator-master/indicatorDemo/WIndicatorText.swift"; sourceTree = "<group>"; };
+		3673984D1E07C21900B0490F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		3673984F1E07C22100B0490F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		367B7B3C1D4675C80035B099 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		36913EF11DEC753A00938623 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		36913EF31DEC754600938623 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		36AD318E1DB35BB500183458 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		36AD31901DB35BFC00183458 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		36AD31951DB35D7400183458 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1028,8 +1028,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				BEA520A41CCF417F00FFE43E /* Base */,
-				36913EF11DEC753A00938623 /* zh-Hans */,
-				36913EF31DEC754600938623 /* zh-Hant */,
+				3673984D1E07C21900B0490F /* zh-Hans */,
+				3673984F1E07C22100B0490F /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
