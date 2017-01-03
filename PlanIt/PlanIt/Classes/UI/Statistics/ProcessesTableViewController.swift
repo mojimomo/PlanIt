@@ -71,8 +71,9 @@ class ProcessesTableViewController: UITableViewController {
             index += records[group]
         }
         index += (indexPath as NSIndexPath).row
-        //TODO: bug found
-        cell.process = processes[index]
+        if processes.count >= index{
+            cell.process = processes[index]
+        }
         return cell
     }
     

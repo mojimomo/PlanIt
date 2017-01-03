@@ -174,6 +174,7 @@
 		BE977A801D17B87200D6899C /* CellBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellBackgroundView.swift; sourceTree = "<group>"; };
 		BE9ACE771D0BE2420097A76F /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Global.swift; path = Classes/UI/Main/Global.swift; sourceTree = "<group>"; };
 		BE9ACE791D0C03B30097A76F /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = PlanIt/Classes/UI/Projects/PieChartView.swift; sourceTree = SOURCE_ROOT; };
+		BE9B42FF1E09547700FCA49C /* Markplan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Markplan.entitlements; sourceTree = "<group>"; };
 		BEA025211DA5D77500175B2B /* UserDefaultTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultTool.swift; path = PlanIt/UserDefaultTool.swift; sourceTree = SOURCE_ROOT; };
 		BEA5209C1CCF417F00FFE43E /* Markplan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Markplan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5209F1CCF417F00FFE43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -558,6 +559,7 @@
 		BEA520931CCF417F00FFE43E = {
 			isa = PBXGroup;
 			children = (
+				BE9B42FF1E09547700FCA49C /* Markplan.entitlements */,
 				BEA5209E1CCF417F00FFE43E /* PlanIt */,
 				BEA520B61CCF417F00FFE43E /* PlanItTests */,
 				BEA520C11CCF417F00FFE43E /* PlanItUITests */,
@@ -778,6 +780,9 @@
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
 							};
 						};
 					};
@@ -1139,6 +1144,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LauchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Markplan.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
@@ -1167,6 +1173,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LauchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Markplan.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ji Mo (CYTA756UDU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
@@ -1285,6 +1292,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LauchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Markplan.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";

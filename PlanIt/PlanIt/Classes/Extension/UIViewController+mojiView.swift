@@ -89,9 +89,9 @@ extension UIViewController{
     }
     
     ///发起询问提示
-    func callAlertAsk(_ title:String, okHandler: ((UIAlertAction) -> Void)?, cancelandler: ((UIAlertAction) -> Void)?, completion: (() -> Void)?){
+    func callAlertAsk(_ title:String, message:String = "" ,okHandler: ((UIAlertAction) -> Void)?, cancelandler: ((UIAlertAction) -> Void)?, completion: (() -> Void)?){
         if !IS_IOS9{
-            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             //创建UIAlertAction 确定按钮
             let alerActionOK = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .destructive, handler: okHandler)
             //创建UIAlertAction 取消按钮
@@ -110,7 +110,7 @@ extension UIViewController{
 
         }else{
             // Create the dialog
-            let popup = PopupDialog(title: title, message: nil, buttonAlignment: .horizontal, transitionStyle: .zoomIn, gestureDismissal: true) {
+            let popup = PopupDialog(title: title, message: message, buttonAlignment: .horizontal, transitionStyle: .zoomIn, gestureDismissal: true) {
                 print("Completed")
                 completion?()
             }
