@@ -1,3 +1,4 @@
+
 //
 //  ProcessDateModel.swift
 //  PlanIt
@@ -129,7 +130,7 @@ class ProcessDate: NSObject {
     
     ///改变数据
     func chengeData(_ projectID: Int, timeDate: Date, changeValue: Double){
-        let timeString = timeDate.FormatToStringYYYYMMDD()
+        let timeString = timeDate.FormatToStringYYYYMMDDCN()
         if let processDate = checkIsExist(projectID, timeString: timeString){
             processDate.done += changeValue
             processDate.updateProcessDate()

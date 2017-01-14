@@ -217,17 +217,55 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         //TODO: iCloud备份
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
-            callAlertAsk("即将开始备份", message: "已有的iCould备份将会被覆盖",okHandler: { (UIAlertAction) in
-                
-            }, cancelandler: { (UIAlertAction) in
-                
-            }, completion: nil);
+            let path = SQLiteManager.shareIntance.dbPath
+            if (path == ""){
+                return
+            }
+            let filemanager = FileManager.default
+            if let content = filemanager.contents(atPath: path){
+                callAlertAsk("即将开始备份", message: "已有的iCould备份将会被覆盖",okHandler: { (UIAlertAction) in
+                    
+                    if ( iCloud.shared().checkAvailability()) {
+                        iCloud.shared().saveAndCloseDocument(withName: "db.sqlite3", withContent:  content, completion: { (doc: UIDocument?,data: Data?, error: Error?) in
+                            if(error == nil){
+                                self.callAlertSuccess("备份成功");
+                            }else{
+                                self.callAlertFailed("备份失败");
+                            }
+                        })
+                        
+                    }
+                    
+                }, cancelandler: { (UIAlertAction) in
+                    
+                }, completion: nil);
+            }
+
         }
         
         //TODO: iCloud恢复
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
             callAlertAsk("即将开始恢复", message: "所有本地记录都会被云端数据覆盖",okHandler: { (UIAlertAction) in
-                
+                if ( iCloud.shared().checkAvailability()) {
+                    iCloud.shared().retrieveCloudDocument(withName: "db.sqlite3", completion:  { (doc: UIDocument?,data: Data?, error: Error?) in
+                        if(error == nil){
+                            let path = SQLiteManager.shareIntance.dbPath
+                            if (data != nil && path != ""){
+                                let url = URL(fileURLWithPath: path)
+                                do{
+                                    try data?.write(to: url)
+                                }catch{
+
+                                }
+                                
+                                self.callAlertSuccess("恢复成功");
+                                return
+                            }
+                        }
+                        self.callAlertFailed("恢复失败");
+                        
+                    })
+                }
             }, cancelandler: { (UIAlertAction) in
                 
             }, completion: nil);

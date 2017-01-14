@@ -12,7 +12,7 @@ class SQLiteManager: NSObject {
     /// let修饰常量是线程安全
     static let shareIntance : SQLiteManager = SQLiteManager()
     let dbName = "db.sqlite3"
-    
+    var dbPath = ""
     /// 数据库句柄
     var db : OpaquePointer? = nil
     
@@ -29,6 +29,7 @@ class SQLiteManager: NSObject {
             return
         }
         path = (path as NSString).appendingPathComponent(dbName)
+        dbPath = path
         print("数据库路径: \(path)")
         
         // 2.打开数据库:如果有数据库则打开,如果没有则创建

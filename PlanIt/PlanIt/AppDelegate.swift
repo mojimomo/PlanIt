@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMAnalyticsConfig.sharedInstance().eSType = .E_UM_NORMAL
         MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
 
-
-
+        //Bugly
+        Bugly.start(withAppId: "67d878986c")
         
         //判断是否第一次启动   
         if((UserDefaults.standard.bool(forKey: "IsFirstLaunch") as Bool!) == false){
@@ -51,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                }
 //            }
         }
+        
+        iCloud.shared().setupiCloudDocumentSync(withUbiquityContainer: nil)
+        
         return true
     }
 
