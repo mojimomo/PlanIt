@@ -219,23 +219,25 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
             // 检测网络连接状态
             let reachability = Reachability();
-            if (reachability?.isReachable)! {
-                self.callAlertFailed("访问网络失败");
-            }
             let path = SQLiteManager.shareIntance.dbPath
             if (path == ""){
                 return
             }
             let filemanager = FileManager.default
             if let content = filemanager.contents(atPath: path){
-                callAlertAsk("即将开始备份", message: "已有的iCould备份将会被覆盖",okHandler: { (UIAlertAction) in
+                callAlertAsk(NSLocalizedString("Ready to Backup", comment: "backup"), message: NSLocalizedString("Previous backups will be overwritten", comment: ""),okHandler: { (UIAlertAction) in
+                    
+                    if !((reachability?.isReachable)!) {
+                        self.callAlertFailed(NSLocalizedString("No Internet", comment: ""));
+                        return
+                    }
                     
                     if ( iCloud.shared().checkAvailability()) {
                         iCloud.shared().saveAndCloseDocument(withName: "db.sqlite3", withContent:  content, completion: { (doc: UIDocument?,data: Data?, error: Error?) in
                             if(error == nil){
-                                self.callAlertSuccess("备份成功");
+                                self.callAlertSuccess(NSLocalizedString("Created", comment: ""));
                             }else{
-                                self.callAlertFailed("备份失败");
+                                self.callAlertFailed(NSLocalizedString("Failed", comment: ""));
                             }
                         })
                         
@@ -251,10 +253,14 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         //TODO: iCloud恢复
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
             let reachability = Reachability();
-            if (reachability?.isReachable)! {
-                self.callAlertFailed("访问网络失败");
-            }
-            callAlertAsk("即将开始恢复", message: "所有本地记录都会被云端数据覆盖",okHandler: { (UIAlertAction) in
+            
+            callAlertAsk(NSLocalizedString("Ready to Restore", comment: ""), message: NSLocalizedString("All local data will be overwritten", comment: ""),okHandler: { (UIAlertAction) in
+                
+                if !((reachability?.isReachable)!) {
+                    self.callAlertFailed(NSLocalizedString("No Internet", comment: ""));
+                    return
+                }
+                
                 if ( iCloud.shared().checkAvailability()) {
                     iCloud.shared().retrieveCloudDocument(withName: "db.sqlite3", completion:  { (doc: UIDocument?,data: Data?, error: Error?) in
                         if(error == nil){
@@ -267,11 +273,11 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
 
                                 }
                                 
-                                self.callAlertSuccess("恢复成功");
+                                self.callAlertSuccess(NSLocalizedString("Restored", comment: ""));
                                 return
                             }
                         }
-                        self.callAlertFailed("恢复失败");
+                        self.callAlertFailed(NSLocalizedString("Failed", comment: ""));
                         
                     })
                 }

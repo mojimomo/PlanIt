@@ -45,7 +45,7 @@ extension UIViewController{
         }
         let hud = MBProgressHUD.showAdded(to: showView!, animated: true)
         hud.mode = MBProgressHUDMode.customView
-        hud.customView = UIImageView(image: UIImage(named: "Checkmark")!)
+        hud.customView = UIImageView(image: UIImage(named: "failmark")!)
         hud.label.text = title
         //延迟隐藏
         hud.hide(animated: true, afterDelay: 1)

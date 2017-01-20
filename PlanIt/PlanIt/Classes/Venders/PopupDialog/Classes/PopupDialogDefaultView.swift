@@ -84,7 +84,7 @@ final public class PopupDialogDefaultView: UIView {
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.textColor = UIColor(white: 0.4, alpha: 1)
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
         return titleLabel
     }()
 
@@ -95,7 +95,7 @@ final public class PopupDialogDefaultView: UIView {
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         messageLabel.textColor = UIColor(white: 0.6, alpha: 1)
-        messageLabel.font = UIFont.systemFont(ofSize: 14)
+        messageLabel.font = UIFont.systemFont(ofSize: 15)
         return messageLabel
     }()
 

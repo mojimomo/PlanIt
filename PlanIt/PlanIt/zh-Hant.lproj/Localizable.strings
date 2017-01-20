@@ -222,6 +222,20 @@
 
 "About" = "關於";
 
+"No Internet" = "訪問網絡失敗";
+
+"Created" = "備份成功";
+
+"Ready to Backup" = "即將開始備份";
+
+"Ready to Restore" = "即將開始恢復";
+
+"Previous backups will be overwritten" = "已有的 iCould 備份將會被覆蓋";
+
+"All local data will be overwritten" = "所有本地記錄都會被雲端數據覆蓋";
+
+"Restored" = "恢复成功";
+
 //图片
 
 "SharePicEn" = "SharePic";
