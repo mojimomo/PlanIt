@@ -217,6 +217,11 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         //TODO: iCloud备份
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
+            // 检测网络连接状态
+            let reachability = Reachability();
+            if (reachability?.isReachable)! {
+                self.callAlertFailed("访问网络失败");
+            }
             let path = SQLiteManager.shareIntance.dbPath
             if (path == ""){
                 return
@@ -245,6 +250,10 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
         
         //TODO: iCloud恢复
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
+            let reachability = Reachability();
+            if (reachability?.isReachable)! {
+                self.callAlertFailed("访问网络失败");
+            }
             callAlertAsk("即将开始恢复", message: "所有本地记录都会被云端数据覆盖",okHandler: { (UIAlertAction) in
                 if ( iCloud.shared().checkAvailability()) {
                     iCloud.shared().retrieveCloudDocument(withName: "db.sqlite3", completion:  { (doc: UIDocument?,data: Data?, error: Error?) in

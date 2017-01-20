@@ -19,6 +19,8 @@
 		BE279CF71CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */; };
 		BE279CF81CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */; };
 		BE279CFA1CDF1E1C00D4FCFB /* MenuTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */; };
+		BE2F876F1E320E85001212D6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE2F876C1E320E85001212D6 /* Info.plist */; };
+		BE2F87701E320E85001212D6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2F876E1E320E85001212D6 /* Reachability.swift */; };
 		BE31C12E1D21168800A1A47B /* WaveLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */; };
 		BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */; };
 		BE3F86EE1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F86ED1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift */; };
@@ -143,6 +145,9 @@
 		BE279CF41CDF1D4D00D4FCFB /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF51CDF1D4D00D4FCFB /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
 		BE279CF91CDF1E1C00D4FCFB /* MenuTableViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewControl.swift; sourceTree = "<group>"; };
+		BE2F876C1E320E85001212D6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE2F876D1E320E85001212D6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		BE2F876E1E320E85001212D6 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		BE31C12D1D21168800A1A47B /* WaveLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveLoadingIndicator.swift; sourceTree = "<group>"; };
 		BE3B754C1D278B3900F7AEC3 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		BE3F86ED1D676F94002FACA2 /* UILabel+mojiLabel.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+mojiLabel.swift.swift"; sourceTree = "<group>"; };
@@ -336,6 +341,16 @@
 			name = KYDrawerController;
 			sourceTree = "<group>";
 		};
+		BE2F876B1E320E85001212D6 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				BE2F876C1E320E85001212D6 /* Info.plist */,
+				BE2F876D1E320E85001212D6 /* Reachability.h */,
+				BE2F876E1E320E85001212D6 /* Reachability.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		BE31C12C1D21168800A1A47B /* WaveLoadingIndicator */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,6 +515,7 @@
 		BE802AF31CCF4B2B0092F2DE /* Venders(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				BE2F876B1E320E85001212D6 /* Reachability */,
 				BE6CA7391E2A1A42001975FA /* iCloud */,
 				BECBB7F41DBDEAA900736904 /* PopupDialog */,
 				BE24E5BF1D6820E1007CB5D6 /* DynamicBlurView */,
@@ -840,6 +856,7 @@
 			files = (
 				BE3F86F61D67826D002FACA2 /* Info.plist in Resources */,
 				36AD319B1DB3636E00183458 /* Localizable.strings in Resources */,
+				BE2F876F1E320E85001212D6 /* Info.plist in Resources */,
 				BEA520AD1CCF417F00FFE43E /* LaunchScreen.storyboard in Resources */,
 				BEA520AA1CCF417F00FFE43E /* Assets.xcassets in Resources */,
 				BEA520A51CCF417F00FFE43E /* Main.storyboard in Resources */,
@@ -945,6 +962,7 @@
 				BECBB80F1DBDEAA900736904 /* PopupDialog.swift in Sources */,
 				BE3B754D1D278B3900F7AEC3 /* KDCircularProgress.swift in Sources */,
 				BE79BCC91D2D38B2001512D6 /* UIViewController+mojiView.swift in Sources */,
+				BE2F87701E320E85001212D6 /* Reachability.swift in Sources */,
 				BE45A9F91CF98845007FD5DE /* ProcessesTableViewController.swift in Sources */,
 				BECBB80E1DBDEAA900736904 /* PopupDialog+Keyboard.swift in Sources */,
 				BE977A811D17B87200D6899C /* CellBackgroundView.swift in Sources */,

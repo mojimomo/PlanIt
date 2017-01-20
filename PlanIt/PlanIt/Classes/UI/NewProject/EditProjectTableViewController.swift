@@ -55,7 +55,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
     @IBOutlet weak var finishEditButton: UIButton!
     @IBOutlet weak var punchCell: UITableViewCell!
     
-    let maxLengthDict  = [UITag.projectNameLabel : 25, UITag.unitTextField : 12, UITag.totalTextField : 12]
+    let maxLengthDict  = [UITag.projectNameLabel : 50, UITag.unitTextField : 30, UITag.totalTextField : 30]
     
     struct UITag {
         static let projectNameLabel = 1001
@@ -243,7 +243,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //设置模式为日期模式
             datePicker.datePickerMode = .date
             //设置日期
-            datePicker.setDate(self.project.beginTimeDate as Date, animated: false)
+            datePicker.setDate(self.projectBeginTime.FormatToNSDateYYYYMMMMDD()!, animated: false)
             //创建UIAlertController
             let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
             alerController.view.addSubview(datePicker)
@@ -293,7 +293,7 @@ class EditProjectTableViewController: UITableViewController ,UITextFieldDelegate
             //设置模式为日期模式
             datePicker.datePickerMode = .date
             //设置日期
-            datePicker.setDate(self.project.endTimeDate.increaseDays(-1)!, animated: false)
+            datePicker.setDate(self.projectEndTime.FormatToNSDateYYYYMMMMDD()!, animated: false)
             //创建UIAlertController
             let alerController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
             alerController.view.addSubview(datePicker)
