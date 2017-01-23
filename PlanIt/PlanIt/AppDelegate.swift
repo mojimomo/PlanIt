@@ -30,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("第一次启动")
             //设置为非第一次启动
             UserDefaults.standard.set(true, forKey: "IsFirstLaunch")
+            //设置每天提醒
+            OptionsTableViewController().addEveryday()
             //进入引导页面
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainPageVC = storyboard.instantiateViewController(withIdentifier: "guide")
@@ -42,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //
     // 获取通知上绑定的信息后作相应处理...
+        UserDefaultTool.shareIntance.numsLocalNotifiication = 0
         UIApplication.shared.applicationIconBadgeNumber = 0
-        UserDefaults.standard.set( 0 , forKey: "numsLocalNotifiication")
         if launchOptions != nil {
 //            if let localNotification = launchOptions!["UIApplicationLaunchOptionsLocalNotificationKey"] as? UILocalNotification {
 //                if let dict = localNotification.userInfo {
@@ -66,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 后面作相应处理...
         UIApplication.shared.applicationIconBadgeNumber = 0
-        UserDefaults.standard.set( 0 , forKey: "numsLocalNotifiication")
+        UserDefaultTool.shareIntance.numsLocalNotifiication = 0
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

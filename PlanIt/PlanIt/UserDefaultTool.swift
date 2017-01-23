@@ -45,7 +45,7 @@ class UserDefaultTool: NSObject {
     var isEveryDayLocalNotifiication : Bool{
         get{
             if UserDefaults.standard.value(forKey: "isEveryDayLocalNotifiication") == nil{
-                UserDefaults.standard.set( false , forKey: "isEveryDayLocalNotifiication")
+                UserDefaults.standard.set( true , forKey: "isEveryDayLocalNotifiication")
             }
             return UserDefaults.standard.bool(forKey: "isEveryDayLocalNotifiication") as Bool
         }
@@ -58,7 +58,7 @@ class UserDefaultTool: NSObject {
     var isBeforeDueNotifiication : Bool{
         get{
             if UserDefaults.standard.value(forKey: "isBeforeDueNotifiication") == nil{
-                UserDefaults.standard.set( false , forKey: "isBeforeDueNotifiication")
+                UserDefaults.standard.set( true , forKey: "isBeforeDueNotifiication")
             }
             return UserDefaults.standard.bool(forKey: "isBeforeDueNotifiication") as Bool
         }
