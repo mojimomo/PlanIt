@@ -281,7 +281,7 @@ class Project: NSObject {
         if beginTime != "" && endTime != ""
         {
             self.beginTime = (beginTime.FormatToNSDateYYYYMMMMDD()?.FormatToStringYYYYMMDDCN())!
-            self.endTime = (endTime.FormatToNSDateYYYYMMMMDD()?.FormatToStringYYYYMMDDCN())!
+            self.endTime = (endTime.FormatToNSDateYYYYMMMMDD()?.increaseDays(-1)?.FormatToStringYYYYMMDDCN())!
             //初始化项目状态
             isFinished = .noSet
             //开始时间<结束时间
