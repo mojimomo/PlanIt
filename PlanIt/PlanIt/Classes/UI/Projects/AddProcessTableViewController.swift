@@ -157,6 +157,10 @@ class AddProcessTableViewController: UITableViewController ,UITextFieldDelegate{
         NotificationCenter.default.addObserver(self,selector:  #selector(AddProcessTableViewController.textFiledEditChanged(_:)),name: NSNotification.Name.UITextFieldTextDidChange ,object: remarkTextField)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        doneTextField.becomeFirstResponder()
+    }
     override func viewDidDisappear(_ animated: Bool) {
         //删除观察者
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: remarkTextField)
