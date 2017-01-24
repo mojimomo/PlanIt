@@ -59,7 +59,7 @@
 " d" = " 天";
 
 /*每日提醒通知*/
-"It's time to record your progress..." = "是时候添加今天完成的進度了...";
+"It's time to record your progress" = "是时候添加今天完成的進度了";
 
 /*每日提醒通知操作*/
 "Open Markplan" = "打開應用";
@@ -142,7 +142,7 @@
 
 "Rate Markplan" = "賞個好評";
 
-"Send Feedback" = "我要吐槽";
+"Give Feedback" = "我要吐槽";
 
 "Remind Me Later" = "再用用看";
 

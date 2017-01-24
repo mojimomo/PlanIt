@@ -92,7 +92,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             // 设置时区
             localNoti.timeZone = TimeZone.current
             // 通知上显示的主题内容
-            localNoti.alertBody = NSLocalizedString("It's time to record your progress...", comment: "每日提醒通知")
+            localNoti.alertBody = NSLocalizedString("It's time to record your progress", comment: "每日提醒通知")
             // 收到通知时播放的声音，默认消息声音
             localNoti.soundName = UILocalNotificationDefaultSoundName
             //待机界面的滑动动作提示
