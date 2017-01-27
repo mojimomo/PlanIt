@@ -695,9 +695,9 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         graphView.numberOfIntermediateReferenceLines = 3
         graphView.dataPointLabelColor = UIColor ( red: 0.6549, green: 0.7137, blue: 0.7725, alpha: 1.0 )
         
-        graphView.shouldAnimateOnStartup = true
+        graphView.shouldAnimateOnStartup = false
         graphView.shouldAdaptRange = true
-        graphView.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
+        graphView.adaptAnimationType = ScrollableGraphViewAnimationType.easeOut
         graphView.animationDuration = 1.5
         graphView.rangeMax = 50
         graphView.referenceLineNumberOfDecimalPlaces = 1

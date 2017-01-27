@@ -522,7 +522,8 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             }
         }
         
-        if UserDefaultTool.shareIntance.numsOfOpenTimes == 15{
+        if UserDefaultTool.shareIntance.numsOfOpenTimes == 30{
+            UserDefaultTool.shareIntance.numsOfOpenTimes = UserDefaultTool.shareIntance.numsOfOpenTimes + 1;
             if !IS_IOS9{
                 let alertController = UIAlertController(title: NSLocalizedString("You have been using Markplan for a while. How do you feel?", comment: ""), message: nil, preferredStyle: .alert)
                 //创建UIAlertAction 确定按钮
@@ -558,8 +559,6 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 self.present(alertController, animated: true, completion: nil)
                 
             }else{
-                UserDefaultTool.shareIntance.numsOfOpenTimes = UserDefaultTool.shareIntance.numsOfOpenTimes + 1;
-                
                 // Create the dialog
                 let popup = PopupDialog(title: NSLocalizedString("You have been using Markplan for a while. How do you feel?", comment: ""), message: nil, buttonAlignment: .vertical, transitionStyle: .zoomIn, gestureDismissal: true) {
                     print("Completed")

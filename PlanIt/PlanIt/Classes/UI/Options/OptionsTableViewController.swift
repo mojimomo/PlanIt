@@ -98,8 +98,7 @@ class OptionsTableViewController: UITableViewController, MFMailComposeViewContro
             //待机界面的滑动动作提示
             localNoti.alertAction = NSLocalizedString("Open Markplan", comment: "每日提醒通知操作")
             // 应用程序图标右上角显示的消息数
-            UserDefaultTool.shareIntance.numsLocalNotifiication += 1
-            localNoti.applicationIconBadgeNumber = UserDefaultTool.shareIntance.numsLocalNotifiication
+            localNoti.applicationIconBadgeNumber = 1
             // 通知上绑定的其他信息，为键值对
             localNoti.userInfo = ["type": "Everyday"]
             // 添加通知到系统队列中，系统会在指定的时间触发
