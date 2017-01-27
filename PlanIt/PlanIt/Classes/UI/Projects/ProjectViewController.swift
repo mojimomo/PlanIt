@@ -571,7 +571,7 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
                 }
                 
                 // Create second button
-                let buttonTwo = DefaultButton(title: NSLocalizedString("Send Feeback", comment: "")) {
+                let buttonTwo = DefaultButton(title: NSLocalizedString("Give Feedback", comment: "")) {
                     print("打开菜单页面")
                     let muneViewController = self.storyboard?.instantiateViewController(withIdentifier: "Options") as! OptionsTableViewController
                     
