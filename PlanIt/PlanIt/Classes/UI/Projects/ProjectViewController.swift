@@ -29,8 +29,9 @@ fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
+let  RefresuNotificationName = "RefresuNotification"
 
-class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate ,UIGestureRecognizerDelegate, EditProjectTableViewDelegate{
+class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource ,AddProcessDelegate, UIScrollViewDelegate ,UIGestureRecognizerDelegate, EditProjectTableViewDelegate, UIViewControllerPreviewingDelegate {
 
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var addProjectButton: UIButton!
@@ -427,11 +428,17 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
 //            self.view.bringSubviewToFront(addProjectButton)
 //        addProjectButton.addConstraint(NSLayoutConstraint(item: addProjectButton, attribute: .Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.bottomLayoutGuide, attribute: .Bottom, multiplier: 1.0, constant: 20.0))
 //        }
+        //创建3dtouch
+        if self.traitCollection.forceTouchCapability == .available {
+            self.registerForPreviewing(with: self, sourceView: self.projectTableView)
+        }
         
         //创建长按选项
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ProjectViewController.handleLongPress(_:)))
         longPressGestureRecognizer.minimumPressDuration = 0.5
         self.view.addGestureRecognizer(longPressGestureRecognizer)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ProjectViewController.updateTable), name: NSNotification.Name(rawValue: RefresuNotificationName), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -1237,6 +1244,29 @@ class ProjectViewController: UIViewController, TagsViewDelegate, UIPopoverPresen
             callAlertSuccess(NSLocalizedString("Done!", comment: "编辑成功"))
         default: break
         }
+    }
+    
+    // MARK: - UIViewControllerPreviewingDelegate
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+    
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = self.projectTableView.indexPathForRow(at: location){
+            let cell = self.projectTableView.cellForRow(at: indexPath) as! ProjectTableViewCell
+            if cell.project.type != .noRecord{
+                let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "Statistics") as! StatisticsViewController
+                //设置view背景色
+                detailViewController.view.backgroundColor = allBackground
+                detailViewController.project = cell.project
+                detailViewController.preferredContentSize = CGSize(width: 0, height: 0)
+                previewingContext.sourceRect = cell.frame
+                return detailViewController
+            }
+
+        }
+        return nil
     }
 }
 

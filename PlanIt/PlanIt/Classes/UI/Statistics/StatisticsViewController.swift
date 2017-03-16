@@ -264,7 +264,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        moveToToday()
+        //moveToToday()
     }
     
     
@@ -636,7 +636,7 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
 //        navController.navigationBar.shadowImage = UIImage()
         navController.navigationBar.tintColor = navigationTintColor
         navController.navigationBar.titleTextAttributes = {navigationTitleAttribute}()
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        self.navigationController?.visibleViewController?.present(navController, animated: true, completion: nil)
         editProjectViewController.project = self.project
     }
     
@@ -912,10 +912,47 @@ class StatisticsViewController: UIViewController, PieChartDataSource ,TagListVie
         
         //关闭谭传
         self.popover.dismiss()
-        //更改表格
+        //更改表格/Users/Ken/Project/Git/PlanIt/PlanIt/PlanIt/Classes
         changeButtonEnabled()
         loadProcessData()
     }
+    
+    // MARK: - UIPreviewActionItem
+    lazy var previewActions: [UIPreviewActionItem] = {
+        
+        let deleteAction =  UIPreviewAction(title: "删除",
+                                            style: .destructive,
+                                            handler: {
+                                                (previewAction,viewController) in
+                                                ///删除项目
+                                                    weak var weakSelf = self
+                                                    let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: ""), message: NSLocalizedString("The operation is not reversible.", comment: ""), preferredStyle: .alert)
+                                                    //创建UIAlertAction 取消按钮
+                                                    let alerActionOK = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: nil)
+                                                    //创建UIAlertAction 确定按钮
+                                                    let alerActionCancel = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler:  {(UIAlertAction) -> Void in
+                                                        weakSelf?.project.deleteProject()
+                                                        NotificationCenter.default.post(name:NSNotification.Name(rawValue: RefresuNotificationName), object: nil, userInfo: nil)
+                                                    })
+                                                    //添加动作
+                                                    alertController.addAction(alerActionOK)
+                                                    alertController.addAction(alerActionCancel)
+                                                    
+                                                    if let popoverPresentationController = alertController.popoverPresentationController {
+                                                        popoverPresentationController.sourceView = self.view
+                                                        popoverPresentationController.sourceRect =  CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+                                                    }
+                                                    //显示alert
+                                                    weakSelf?.getCurrentVC().present(alertController, animated: true, completion: nil)
+                                                
+
+                                        
+                                                
+        })
+        
+        return [deleteAction]
+    }()
+
 }
 
     

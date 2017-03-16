@@ -217,6 +217,42 @@ extension UIViewController{
         popover.popoverColor = UIColor(red:0.35, green:0.64, blue:1.00, alpha:1.00)
         popover.show(aView, point: startPoint)
     }
+    
+    func getCurrentVC()->UIViewController{
+        
+        var window = UIApplication.shared.keyWindow
+        if window?.windowLevel != UIWindowLevelNormal{
+            let windows = UIApplication.shared.windows
+            for  tempwin in windows{
+                if tempwin.windowLevel == UIWindowLevelNormal{
+                    window = tempwin
+                    break
+                }
+            }
+        }
+        let frontView = (window?.subviews)![0]
+        let nextResponder = frontView.next
+
+        if nextResponder?.isKind(of: UIViewController.classForCoder()) == true{
+            
+            return nextResponder as! UIViewController
+        }else if nextResponder?.isKind(of: UINavigationController.classForCoder()) == true{
+            
+            return (nextResponder as! UINavigationController).visibleViewController!
+        }
+        else {
+            
+            if (window?.rootViewController) is UINavigationController{
+                return ((window?.rootViewController) as! UINavigationController).visibleViewController!//只有这个是显示的controller 是可以的必须有nav才行
+            }else if (window?.rootViewController) is UITabBarController{
+                return ((window?.rootViewController) as! UITabBarController).selectedViewController! //不行只是最三个开始的页面
+            }
+            
+            return (window?.rootViewController)!
+            
+        }
+        
+    }
 }
 
 extension UIView{
