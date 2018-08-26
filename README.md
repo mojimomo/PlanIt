@@ -4,7 +4,7 @@
 
 ![](http://ww2.sinaimg.cn/large/65e4f1e6gw1f9qz36o7bfj20hs0bbq3k.jpg)
 
-**Download:  [App Store](https://itunes.apple.com/cn/app/ma-ke-ji-hua/id1141710914)**
+~~**Download:  [App Store](https://itunes.apple.com/cn/app/ma-ke-ji-hua/id1141710914)**~~
 
 ### 简单直观
 
@@ -24,9 +24,10 @@
 
 ### 链接
 
-- [项目页面](http://www.markplan.info)
+- ~~[项目页面](http://www.markplan.info)~~
 - [使用说明](http://zoomyale.coding.me/markplan_tutorial)
-- [建议反馈](mailto: markplan@foxmail.com)
 - [找我们聊天](https://static.meiqia.com/dist/standalone.html?eid=39440)
+
+
 
 
