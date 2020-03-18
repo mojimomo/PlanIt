@@ -23,4 +23,4 @@
 - 根据已完成进度安排今后进度
 
 ### FYI
-[App 上架版 by Liang Yuan](https://apps.apple.com/cn/app/%E9%A9%AC%E5%85%8B%E8%AE%A1%E5%88%92-%E4%B8%AD%E9%95%BF%E6%9C%9F%E8%A7%84%E5%88%92%E5%8A%A9%E6%89%8B/id1484436749)
+[App Store 上架版 by Liang Yuan](https://apps.apple.com/cn/app/%E9%A9%AC%E5%85%8B%E8%AE%A1%E5%88%92-%E4%B8%AD%E9%95%BF%E6%9C%9F%E8%A7%84%E5%88%92%E5%8A%A9%E6%89%8B/id1484436749)
